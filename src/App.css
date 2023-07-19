@@ -1,38 +1,555 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600|Inter:400,700,800");
+
+
+body{
+    padding: 0 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1, h2, h3, h4, h5{
+    font-family: "Poppins", Helvetica;
+}
+h1{
+    font-size: 85px;
+    font-weight: 500;
+    letter-spacing: 2.88px;
+    line-height: normal;
+    margin: 40px;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2{
+    color:gray;
+    font-size: 27px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+h2:hover{
+    color: black;
+}
+.focused-title{
+    color:black;
+    font-size: 22px;
+}
+h3{
+    font-size: 44px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 40px;
+    margin-left: 20px;
+    margin-bottom:0;
+}
+h4{
+    margin: 0 10px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+h5{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 2px;
+    margin-top: 10px;
+}
+p{
+    font-family: "Inter", Consolas;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+table, tr, td, th{
+}
+table{
+    width: 100%;
+    border-spacing: 0;
+    margin-right: 20px;
+}
+td, th{
+    padding: 0px 10px;
+}
+th{
+    border: 3px black solid;
+    border-width: 0 0 3px 0;
+}
+td{
+    border: 1px gray solid;
+    border-width: 0 0 1px 0;
+}
+th > p{
+    font-weight: bold;
+}
+.secdiv{
+    width: 100%;
+    height: 35%;
+}
+.sbtn{
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 7px;
+    background-color: #00000000;
+    width: fit-content;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: "Poppins";
+    display: inline-block;
+    text-underline: none;
+    color: black;
+    outline: none;
+    text-decoration: none;
+}
+.sbtn:hover{
+    /*todo uncommment the line below*/
+/*    box-shadow: 4px 4px 4px lightgray;*/
+    animation: border 3s ease-in-out infinite;
+}
+.darkmode--activated .sbtn:hover{
+    filter: invert(0);
+    color: white;
+    border-color: white;
+    animation: border-dark 3s ease-in-out infinite;
+}
+.sbtn_with_h4{
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 7px 20px;
+    background-color: #00000000;
+    width: fit-content;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: "Poppins";
+    display: inline-block;
+    text-underline: none;
+    color: black;
+    outline: none;
+    text-decoration: none;
+
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.sbtn_with_h4:hover{
+    box-shadow: 4px 4px 4px lightgray;
+}
+.usertag{
+    background-color:gray;
+    border: 0px;
+    border-radius: 50px;
+    display: inline-block;
+    margin: 2px 2px;
+    padding: 3px 10px;
+    font-family: "Poppins", Helvetica;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}
+.darkmode--activated  .usertag{
+    filter: invert(0);
+    color:black;
+    background:none;
+}
+.darkmode--activated  .usertag .anim {
+    animation: appear 1s linear;
+}
+.usertag:hover{
+    box-shadow: 4px 4px 4px lightgray;
+}
+.darkmode--activated  .usertag:hover{
+    box-shadow: 4px 4px 4px #383838;
+}
+.hideonhover{
+    transition-duration: 1s;
+}
+.showonhover{
+    display : none;
+    opacity: 0;
+    transition-duration: 1s;
+}
+.showonhovertext{
+    display: none;
+}
+.hideonhover:hover {
+    display : none;
+}
+.hideonhover:hover +.showonhover{
+    display: inline-block;
+    opacity: 1;
+    box-shadow: 4px 4px 4px lightgray;
+}
+.hideonhover:hover +.showonhovertext {
+    display: block;
+}
+.activateshowonhovertext:hover +.showonhovertext {
+    display: block;
+}
+.darkmode--activated .hideonhover:hover +.showonhover{
+    display: inline-block;
+    opacity: 1;
+    box-shadow: 4px 4px 4px #383838;
+}
+.only-outline{
+    background-color: white;
+    border: 2px black solid;
+    color: rgb(0, 0, 0);
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.darkmode--activated .only-outline{
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+    border-color:white;
+}
+.notable > tbody > tr > td, .notable > td, .notable{
+    border: none;
+}
+form > table{
+    width: 25rem;
+    margin: 0 auto;
+}
+form > table > td{
+    width: 50%;
+    text-align: left;
+}
+.scroll{
+    overflow: scroll;
+    overflow-x: hidden;
+    height:15.5rem;
+}
+.scroll::-webkit-scrollbar{
+    display:none;
+}
+.outertable{
+    width: 70rem;
+}
+.actioncol{
+    width: 4rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.bg-red{
+    background-color: #d9515e;
+}
+.bg-green{
+    background-color: #51bb88;
+}
+.bg-teal{
+    background-color: #0f8a8e;
+}
+.bg-orange{
+    background-color: #f86e0b;
+}
+.bg-yellow{
+    background-color: #9370DB;
+}
+.bg-purple{
+    background-color: mediumpurple;
+}
+.bg-blue{
+    /* background-color: #00bbff; */
+    background-color: #52bbe8;
 }
 
-.App-link {
-  color: #61dafb;
+
+/*-----
+.bgo-red{
+    background-color: #d9515e12;
+
+}
+.bgo-green{
+    background-color: #51bb8812;
+}
+.bgo-teal{
+    background-color: #0f8a8e12;
+}
+.bgo-orange{
+    background-color: #f86e0b12;
+}
+.bgo-yellow{
+    background-color: #ffb10012;
+}
+.bgo-purple{
+    background-color: #9370DB12;
+}
+.bgo-blue{
+//background-color: #00bbff;
+    background-color: #52bbe812;
+}*/
+.w3{
+    width: 3rem;
+}
+.w5{
+    width: 5rem;
+}
+.w7{
+    width: 7rem;
+}
+.h3{
+    height:3rem;
+}
+.h5{
+    height:5rem;
+}
+.h10{
+    height:10rem;
+}
+.mw30{
+    max-width: 30%;
+}
+.right{
+    text-align: right;
+    align-content: end;
+    align-items: end;
+}
+.left{
+    text-align: left;
+}
+.middle{
+    text-align: center;
+    align-content: center;
+}
+.bold{
+    font-weight: bold;
+}
+.italic{
+    font-style: italic;
+    color: darkslategray;
+}
+.min-width{
+    width: fit-content;
+    padding: 0;
+}
+.summary_table{
+    width: 80%;
+    table-layout: fixed;
+    margin: 7rem auto;
+}
+img{
+    margin: 0 5px;
+    display: inline-block;
+}
+input{
+    border: solid gray 2px;
+    border-width: 0 0 2px 0;
+    background:none;
+    text-align: center;
+    color: black;
+    font-family: "Poppins", Helvetica;
+    font-size: 18px;
+    margin: 10px;
+    width: 25rem;
+    outline:none;
+}
+.color{
+    border: 2px solid gray;
+    padding: 1px;
+    height: 2rem;
+    width: 5rem;
+}
+input:hover{
+    border-color: black;
+    outline:none;
+    /*box-shadow: 0 2px 4px lightgray;*/
+}
+input:focus{
+    border-width: 0 0 3px 0;
+    /*box-shadow: 0 4px 4px lightgray;*/
+}
+label{
+    font-family: "Poppins", Helvetica;
+    color: gray;
+    font-size: 18px;
+}
+textarea{
+    border: solid gray 2px;
+    border-width: 2px;
+    background:none;
+    text-align: left;
+    color: black;
+    font-family: "Poppins", Helvetica;
+    font-size: 18px;
+    margin: 10px;
+    width: 40rem;
+    height: 15rem;
+    outline:none;
+}
+.color:hover{
+    border: 2px solid black;
+}
+.color:focus{
+    border: 3px solid black;
+}
+.sbtn_with_h4:focus{
+    border: 2px solid black;
+}
+.radio{
+    width:auto;
+    accent-color: black;
+}
+.radio:hover{
+    border:red 2px solid;
+    box-shadow:none;
+}
+.radio:focus{
+    box-shadow: none;
+}
+.checkbox{
+    width: auto;
+    accent-color: black;
+}
+.checkbox:hover{
+    box-shadow: none;
+}
+.checkbox:focus{
+    box-shadow: none;
+}
+.floating-top{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+}
+.card{
+    width: 14rem;
+    height: 7rem;
+    border: none;
+    border-radius: 20px;
+    float: right;
+    display:inline-block;
+    margin:  10px 10px;
+    padding: 10px 20px;
+    top: 20px;
+    right: 20px;
+    color:black;
+}
+@media (max-width:1270px) {
+    .card{
+        display: none;
+    }
+}
+.card:hover{
+    box-shadow: 4px 4px 4px lightgray;
+}
+.darkmode--activated  .card:hover{
+    box-shadow: 4px 4px 4px #383838;
+}
+.card > h2{
+    color:black;
+    margin: 10px;
+    margin-left: 40px;
+    font-weight: 700;
+}
+.card > a{
+    display: block;
+    text-underline: black;
+    text-decoration: black;
+    font-family: Poppins, Helvetica;
+    margin: 0;
+    font-size: 14px;
+    text-decoration: black underline;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loading-bottle {
+    background-color: rgb(166, 166, 166);
+    width: calc(100% + 14px);
+    height: 3px;
+    position: relative;
+    z-index: -5;
+    top: -7px;
+    right: -7px;
+    left: -7px;
+    overflow: hidden;
+    border-radius: 7px;
+    display: none;
+}
+
+#myLink:hover .loading-bottle {
+    display: block;
+    animation: fill 3s ease-in-out;
+}
+
+/*.loading-bottle {
+    background-color: rgb(155, 125, 125);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#myLink:hover  + .loading-bottle {
+    bottom: 0;
+    left: 0;
+    height: 0;
+    content: "";
+    position: absolute;
+    width: 100%;
+    background-color: #e09393;
+    animation: fill 3s ease-in-out;
+}*/
+
+@keyframes fill {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: calc(100% + 14px);;
+    }
+}
+
+@keyframes border {
+    0% {
+        box-shadow: 0 0 4px #626262;
+        transform: translate(0,0);
+    }
+    50% {
+        box-shadow: 8px 8px 4px #626262;
+        transform: translate(-4px,-8px);
+    }
+    100% {
+        box-shadow: 0px 0px 4px #626262;
+        transform: translate(0,0);
+    }
+}
+@keyframes border-dark {
+    0% {
+        box-shadow: 0 0 4px #383838;
+        transform: translate(0,0);
+    }
+    50% {
+        box-shadow: 8px 8px 4px #383838;
+        transform: translate(-4px,-8px);
+    }
+    100% {
+        box-shadow: 0px 0px 4px #383838;
+        transform: translate(0,0);
+    }
+
+}
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+
+}
+
+
+.darkmode--activated .darkmode-background {
+    color: #b03131 !important;
+}
+.darkmode--activated .hideondark{
+    display: none;
+}
+.hideonlight{
+    display: none;
+}
+.darkmode--activated .hideonlight{
+    display: inline-block;
 }
