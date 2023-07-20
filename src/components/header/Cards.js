@@ -1,3 +1,4 @@
+
 import Card from "./Card";
 export default function Cards(props) {
     if(props.summary){
@@ -6,21 +7,20 @@ export default function Cards(props) {
             <Card
               color={"green"}
               title={"Összesen elszámolt"}
-              value={"41 Ft"}
+              value={props.cardsData.doneall + " Ft"}
               bottomLink={{ name: "Új utalás", ref: "/add_transfer" }}
             ></Card>
               <Card
                 color={"blue"}
                 title={"Összesen költött"}
-                value={"45 Ft"}
+                value={props.cardsData.spentall + " Ft"}
                 bottomLink={{ name: "Új költés", ref: "/add_expense" }}
               ></Card>
               <Card
                 color={"red"}
                 title={"A spórolós"}
-                value={"Bujdi"}
+                value={props.cardsData.thrifty}
               ></Card>
-              
             </div>
           );
     }

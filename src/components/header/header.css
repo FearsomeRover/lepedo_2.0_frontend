@@ -1,0 +1,17 @@
+h1{
+    font-size: 85px;
+    font-weight: 500;
+    letter-spacing: 2.88px;
+    line-height: normal;
+    margin: 40px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    color: black;
+}

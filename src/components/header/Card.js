@@ -1,4 +1,5 @@
 import '../../App.css'
+import './card.css'
 export default function Card({color, title, value, bottomLink}) {
   return (
       <div className={"card bg-" + color}>
