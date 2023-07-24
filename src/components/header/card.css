@@ -50,3 +50,26 @@ h2:hover{
     right: 20px;
     color:black;
 }
+a {
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    color: black;
+}
+.card:hover{
+    box-shadow: 4px 4px 4px lightgray;
+}
+.card > h2{
+    color:black;
+    margin: 10px;
+    margin-left: 40px;
+    font-weight: 700;
+}
+.card > a{
+    display: block;
+    text-decoration: black;
+    font-family: Poppins, Helvetica;
+    margin: 0;
+    font-size: 14px;
+    text-decoration: black underline;
+}

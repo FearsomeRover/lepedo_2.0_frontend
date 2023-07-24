@@ -3,7 +3,7 @@ import Card from "./Card";
 export default function Cards(props) {
     if(props.summary){
         return (
-            <div class="floating-top">
+            <div className="floating-top">
             <Card
               color={"green"}
               title={"Összesen elszámolt"}

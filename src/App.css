@@ -62,8 +62,8 @@ p{
 }
 .sbtn:hover{
     /*todo uncommment the line below*/
-/*    box-shadow: 4px 4px 4px lightgray;*/
-    animation: border 3s ease-in-out infinite;
+   box-shadow: 4px 4px 4px lightgray;
+    /* animation: border 3s ease-in-out infinite; */
 }
 .darkmode--activated .sbtn:hover{
     filter: invert(0);
@@ -291,27 +291,7 @@ textarea{
         display: none;
     }
 }
-.card:hover{
-    box-shadow: 4px 4px 4px lightgray;
-}
-.darkmode--activated  .card:hover{
-    box-shadow: 4px 4px 4px #383838;
-}
-.card > h2{
-    color:black;
-    margin: 10px;
-    margin-left: 40px;
-    font-weight: 700;
-}
-.card > a{
-    display: block;
-    text-underline: black;
-    text-decoration: black;
-    font-family: Poppins, Helvetica;
-    margin: 0;
-    font-size: 14px;
-    text-decoration: black underline;
-}
+
 
 .loading-bottle {
     background-color: rgb(166, 166, 166);
