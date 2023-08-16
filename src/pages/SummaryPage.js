@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import SummaryTable from "../body/SummaryTable";
-import Cards from "../header/Cards";
-import NewUserForm from "../NewUserForm";
+import SummaryTable from "../components/Summary/SummaryTable";
+import Cards from "../components/header/Cards";
+import NewUserForm from "../components/NewUserForm";
 
 export default function SummaryPage() {
   const [table, setTable] = useState(false);

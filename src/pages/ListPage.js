@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "../header/Header";
+import Expense from "../components/List/Expense/Expense";
+import Transfer from "../components/List/Transfer/Transfer";
 
 export default function ListPage() {
 //   const [table, setTable] = useState(false);
@@ -20,7 +21,8 @@ export default function ListPage() {
 
   return (
     <div>
-      <h1>Nothing to see here</h1>
+      <Expense/>
+      <Transfer/>
     </div>
   );
 }

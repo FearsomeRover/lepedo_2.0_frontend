@@ -1,5 +1,5 @@
 import { useState } from "react"
-import NewUserForm from "../NewUserForm";
+import NewUserForm from "../components/NewUserForm";
 export default function NewUser(){
     const [visible, setVisible] = useState(false);
     return(

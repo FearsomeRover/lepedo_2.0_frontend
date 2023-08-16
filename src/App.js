@@ -1,9 +1,9 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SummaryPage from "./components/pages/SummaryPage";
-import ListPage from "./components/pages/ListPage";
-import Root from "./components/pages/Root";
-import NewUser from "./components/pages/newUser";
+import SummaryPage from "./pages/SummaryPage";
+import ListPage from "./pages/ListPage";
+import Root from "./pages/Root";
+import NewUser from "./pages/newUser";
 
 const router = createBrowserRouter([
   {path: '/', element:<Root/>, children:[

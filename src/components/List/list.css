@@ -1,0 +1,24 @@
+.secdiv{
+    width: 100%;
+    height: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.new_area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.scroll{
+    overflow: scroll;
+    overflow-x: hidden;
+    height:15.5rem;
+    width: 70vw;
+    position: relative;
+    float: right;
+}
+.scroll::-webkit-scrollbar{
+    display:none;
+}
