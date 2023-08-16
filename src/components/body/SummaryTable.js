@@ -2,8 +2,14 @@ import UserRow from "./UserRow";
 import { useState } from "react";
 import NewUserForm from "../NewUserForm";
 
-export default function SummaryTable({table}) {
+export default function SummaryTable(props) {
+  const table = props.table;
   const [visibleNewUser, setVisibleNewUser] = useState(false);
+  const[userId, setUserId] = useState();
+  const handleEditUser = (userId) =>{
+    setVisibleNewUser(true);
+    setUserId(userId);
+  }
   return (
     <div>
       <table className="summary_table">
@@ -28,10 +34,10 @@ export default function SummaryTable({table}) {
             <p className="right">Összesített mérleg</p>
           </th>
         </tr>
-        {Object.keys(table).map(user => <UserRow key={user} userId={user} user={table[user]}/>)}
+        {Object.keys(table).map(user => <UserRow key={user} userId={user} user={table[user]} editUser={handleEditUser} refresh={props.refresh}/>)}
         <tr className="notable">
           <td>
-            <button onClick={()=>setVisibleNewUser((state=> !state))} className="usertag only-outline">
+            <button onClick={()=>setVisibleNewUser(true)} className="usertag only-outline">
               + Új user 
             </button>
           </td>
@@ -41,7 +47,7 @@ export default function SummaryTable({table}) {
         </tr>
       </tbody>
     </table>
-      <NewUserForm visible={visibleNewUser} abort={()=>setVisibleNewUser(false)}/>
+      {visibleNewUser && <NewUserForm abort={()=>setVisibleNewUser(false)} refresh={props.refresh} user={userId?table[userId]:null} userId={userId}/>}
     </div>
   );
 }

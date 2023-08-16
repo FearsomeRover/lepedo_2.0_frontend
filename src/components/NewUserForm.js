@@ -1,14 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
 import "./newUserForm.css";
-import { Link } from "react-router-dom";
 
 export default function NewUserForm(props) {
-  const [color, setColor] = useState("#000000");
-  const [name, setName] = useState("");
-  const [revTag, setRevTag] = useState("");
+  const user = props.user ? props.user : null;
+  const generateRandomColor = () => {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  };
+  const [color, setColor] = useState(user ? user.color : generateRandomColor);
+  const [name, setName] = useState(user ? user.name : "");
+  const [revTag, setRevTag] = useState(user ? user.revTag : "");
   const [freeTag, setFreeTag] = useState(true);
-  const [customColor, setCustomColor] = useState(false);
+  const [customColor, setCustomColor] = useState(user ? user.color : false);
   const colors = [
     "#D9515E",
     "#51BB88",
@@ -18,42 +21,55 @@ export default function NewUserForm(props) {
     "#9370DB",
     "#52BBE8",
   ];
+  const reset = () => {
+    setColor(generateRandomColor());
+    setName("");
+    setRevTag("");
+    setFreeTag(true);
+    setCustomColor(false);
+  };
   const checkRevTag = async () => {
-    if (revTag) {
+    if (revTag && !user) {
       const data = await axios.get(
         process.env.REACT_APP_BASE_URL + "/user/revtag/" + revTag
       );
       setFreeTag(data.data);
-      console.log(data.data);
     }
   };
-  const checkSubmit = (event) => {
+  const checkSubmit = async (event) => {
     event.preventDefault();
-    if (freeTag && name.length > 2) {
-      axios.post(process.env.REACT_APP_BASE_URL + "/user", {
+    if (user) {
+      await axios.patch(process.env.REACT_APP_BASE_URL + `/user/${props.userId}`, {
         name,
         revTag,
         color,
       });
+    } else if (freeTag && name.length > 2) {
+      await axios.post(process.env.REACT_APP_BASE_URL + "/user", {
+        name,
+        revTag,
+        color,
+      });
+    } else {
+      return;
     }
+    props.refresh();
+    if (props.abort) {
+      props.abort();
+    }
+    reset();
   };
   const handleColorGen = () => {
-    if (!customColor) {
+    if (!customColor && name.length >= 2) {
       setColor(
         colors[(name.charCodeAt(0) + name.charCodeAt(2)) % colors.length]
       );
-      console.log('handle');
     }
   };
+  console.log(color);
   return (
-    <div className="popup" style={{display: (props.visible?'block':'none'), background:"white", padding:'10rem', border:"black"}}>
-      <div className="h10"></div>
-      <form
-        method="post"
-        onSubmit={checkSubmit}
-        className="container"
-        style={{ textAlign: "center" , background:"white"}}
-      >
+    <div className="popup">
+      <form method="post" onSubmit={checkSubmit} className="userform" autocomplete="off">
         <input
           placeholder="Név"
           minLength="3"
@@ -62,6 +78,7 @@ export default function NewUserForm(props) {
           value={name}
           onChange={(event) => setName(event.target.value)}
           onBlur={handleColorGen}
+          autocomplete="off"
         />
         <input
           placeholder="@revtag"
@@ -71,26 +88,38 @@ export default function NewUserForm(props) {
           value={revTag}
           onChange={(event) => setRevTag(event.target.value)}
           onBlur={checkRevTag}
+          autocomplete="off"
         />
-        {!freeTag && <p>Tag already registered to user!</p>}
-        <input
-          id="color"
-          name="color"
-          type="color"
-          className="color"
-          value={color}
-          onChange={(event) => {
-            setColor(event.target.value);
-            setCustomColor(true);
-          }}
-        />
-        <p>{color}</p>
-        <div className="h5"></div>
+        {!freeTag && (
+          <p className="tagerror">Tag already registered to user!</p>
+        )}
+        <div className="colorwrapper">
+          <input
+            id="color"
+            name="color"
+            type="color"
+            className="color"
+            value={color}
+            onChange={(event) => {
+              console.log("submit");
+              setColor(event.target.value);
+              setCustomColor(true);
+            }}
+          />
+          <p className="colortext">{color}</p>
+        </div>
         <div>
           <input className="sbtn_with_h4" type="submit" value="Mentés" />
-          <button className="sbtn" onClick={props.abort}>
-            <h4>Mégse</h4>
-          </button>
+          {!props.disabled && (
+            <button
+              className="sbtn"
+              onClick={() => {
+                props.abort();
+              }}
+            >
+              <h4>Mégse</h4>
+            </button>
+          )}
         </div>
       </form>
     </div>

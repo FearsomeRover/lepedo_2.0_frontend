@@ -1,6 +1,7 @@
+import axios from "axios";
 import "./table.css";
 import { useState } from "react";
-export default function UserRow({ userId, user }) {
+export default function UserRow({ userId, user, editUser, refresh}) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -10,6 +11,10 @@ export default function UserRow({ userId, user }) {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+  const handleUserDelete = async() => {
+    await axios.delete(process.env.REACT_APP_BASE_URL + "/user/" + userId);
+    refresh();
+  }
   return (
     <tr>
       <td className="left">
@@ -21,14 +26,14 @@ export default function UserRow({ userId, user }) {
         >
           {isHovered ?(`@${user.revTag}`): user.name}
         </div>
-        <a href="/edit_user/1">
+        <button onClick={() => editUser(userId)}>
           <img src="/images/pencil.svg" className="hideondark" alt="edit" />
           <img src="/images/pencil-white.svg" className="hideonlight" alt="edit" />
-        </a>
-        <a href="/delete_user/1">
+        </button>
+        <button onClick={handleUserDelete}>
           <img src="/images/trash.svg" className="hideondark" alt="delete" />
           <img src="/images/trash-white.svg" className="hideonlight" alt="delete" />
-        </a>
+        </button>
       </td>
       <td>
         <p className="right">{user.spent + " Ft"}</p>
