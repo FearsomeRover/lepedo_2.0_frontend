@@ -1,16 +1,7 @@
 import axios from "axios";
 import "./table.css";
-import { useState } from "react";
+import UserCard from "../UserCard";
 export default function UserRow({ userId, user, editUser, refresh}) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
   const handleUserDelete = async() => {
     await axios.delete(process.env.REACT_APP_BASE_URL + "/user/" + userId);
     refresh();
@@ -18,14 +9,7 @@ export default function UserRow({ userId, user, editUser, refresh}) {
   return (
     <tr>
       <td className="left">
-        <div
-          className="usertag"
-          style={{ backgroundColor: user.color }}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {isHovered ?(`@${user.revTag}`): user.name}
-        </div>
+        <UserCard user={user}/>
         <button onClick={() => editUser(userId)}>
           <img src="/images/pencil.svg" className="hideondark" alt="edit" />
           <img src="/images/pencil-white.svg" className="hideonlight" alt="edit" />

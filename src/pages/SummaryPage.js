@@ -9,7 +9,6 @@ export default function SummaryPage() {
   const [noUser, setNoUser] = useState(false);
   const handleRefresh = () => {
     const fetchData = async () => {
-      console.log("refresh")
       try {
         const response = await axios.get(
           process.env.REACT_APP_BASE_URL + "/user/table"

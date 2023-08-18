@@ -213,6 +213,18 @@ input{
     width: 25rem;
     outline:none;
 }
+.input{
+    border: solid gray 2px;
+    border-width: 0 0 2px 0;
+    background:none;
+    text-align: center;
+    color: black;
+    font-family: "Poppins", Helvetica;
+    font-size: 18px;
+    margin: 10px;
+    width: 25rem;
+    outline:none;
+}
 .color{
     border: 2px solid gray;
     padding: 1px;

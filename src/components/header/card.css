@@ -39,6 +39,8 @@ h2:hover{
     font-size: 22px;
 }
 .card{
+    display: flex;
+    flex-direction: column;
     width: 14rem;
     height: 7rem;
     border: none;

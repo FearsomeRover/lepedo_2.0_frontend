@@ -1,4 +1,8 @@
-export default function Transfer() {
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+export default function Transfer({transfers}) {
+  console.log(transfers);
   return (
     <div className="secdiv">
       <div className="new_area">
@@ -13,19 +17,19 @@ export default function Transfer() {
           <tbody>
             <tr>
               <th>
-                <p class="left"> &nbsp; &nbsp; #</p>
+                <p className="left"> &nbsp; &nbsp; #</p>
               </th>
               <th>
                 <p>Utaló</p>
               </th>
-              <th class="min-width"></th>
-              <th class="w7">
+              <th className="min-width"></th>
+              <th className="w7">
                 <p>Kedvezményezett</p>
               </th>
-              <th class="w7">
+              <th className="w7">
                 <p>Összeg</p>
               </th>
-              <th class="actioncol"></th>
+              <th className="actioncol"></th>
             </tr>
             <tr>
               <td>
@@ -33,20 +37,17 @@ export default function Transfer() {
                   123
                 </p>
               </td>
-              {/* <td>
-                    <p className="middle"> 123 </p>
-                  </td> */}
               <td className="middle">
                 <div className="usertag">bujdi</div>
               </td>
-              <td class="min-width">
+              <td className="min-width">
                 <img
-                  class="arrow-right hideondark"
+                  className="arrow-right hideondark"
                   src="/images/arrow-right.svg"
                   alt="arrow-right"
                 />
                 <img
-                  class="arrow-right hideonlight"
+                  className="arrow-right hideonlight"
                   src="/images/arrow-right-white.svg"
                   alt="arrow-right"
                 />
@@ -54,7 +55,9 @@ export default function Transfer() {
               <td className="middle">
                 <div className="usertag activateshowonhovertext"> mate </div>
               </td>
-              <td><p class="right bold">      123 Ft</p></td>
+              <td>
+                <p className="right bold"> 123 Ft</p>
+              </td>
               <td className="min-width right">
                 <a href="/edit_expense/<%= cur._id %>">
                   <img

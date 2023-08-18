@@ -62,6 +62,7 @@ form > table > td{
     color: white;
     font-weight: bold;
     font-size: 13px;
+    float: inherit;
 }
 table, tr, td, th{
 }

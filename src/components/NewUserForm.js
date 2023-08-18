@@ -66,7 +66,6 @@ export default function NewUserForm(props) {
       );
     }
   };
-  console.log(color);
   return (
     <div className="popup">
       <form method="post" onSubmit={checkSubmit} className="userform" autocomplete="off">
@@ -88,7 +87,7 @@ export default function NewUserForm(props) {
           value={revTag}
           onChange={(event) => setRevTag(event.target.value)}
           onBlur={checkRevTag}
-          autocomplete="off"
+          autoComplete="off"
         />
         {!freeTag && (
           <p className="tagerror">Tag already registered to user!</p>

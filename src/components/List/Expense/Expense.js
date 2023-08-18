@@ -1,13 +1,17 @@
-import "../list.css"
-export default function Expense() {
+import "./expense.css"
+import ExpenseRow from "./ExpenseRow";
+import { useState } from "react";
+import NewExpenseForm from "./NewExpenseForm";
+export default function Expense({expenses, refresh}) {
+  const [visibleNewExpense, setVisibleNewExpense] = useState(false);
   return (
     <div className="secdiv">
+      {visibleNewExpense && <NewExpenseForm abort={()=>setVisibleNewExpense(false)} refresh={refresh}/>}
       <div className="new_area">
         <h3>Költések</h3>
-        <a href="/add_expense" id="myLink" className="sbtn">
-          <div className="loading-bottle"></div>
-          <h4 id="myText"> + Új költés </h4>
-        </a>
+        <button onClick={() => setVisibleNewExpense(true)} className="sbtn">
+          <h4 > + Új költés </h4>
+        </button>
       </div>
       <div className="scroll">
         <table>
@@ -19,7 +23,7 @@ export default function Expense() {
               <th>
                 <p className="left">Megnevezés</p>
               </th>
-              <th>
+              <th className="payedheader">
                 <p>Fizetett</p>
               </th>
               <th className="min-width"></th>
@@ -31,63 +35,7 @@ export default function Expense() {
               </th>
               <th className="actioncol"></th>
             </tr>
-            <tr>
-              <td>
-                <p title="<%= cur._id %>" className="left">
-                  123
-                </p>
-              </td>
-              <td>
-                <p> bujdi </p>
-              </td>
-              {/* <td>
-                <p className="middle"> 123 </p>
-              </td> */}
-              <td className="middle">
-                <div className="usertag">bujdi</div>
-              </td>
-              <td>
-                <img
-                  className="arrow-right hideondark"
-                  src="/images/arrow-right.svg"
-                  alt="arrow-right"
-                />
-                <img
-                  className="arrow-right hideonlight"
-                  src="/images/arrow-right-white.svg"
-                  alt="arrow-right"
-                />
-              </td>
-              <td className="middle">
-                <div className="usertag activateshowonhovertext"> mate </div>
-              </td>
-              <td>
-                <p className="hideonhover right bold">123 Ft </p>
-                <p className="showonhovertext right bold italic">123 Ft </p>
-              </td>
-              <td className="min-width right">
-                <a href="/edit_expense/<%= cur._id %>">
-                  <img src="/images/pencil.svg" className="hideondark" alt="edit" />
-                  <img
-                    src="/images/pencil-white.svg"
-                    className="hideonlight"
-                    alt="edit"
-                  />
-                </a>
-                <a href="/delete_expense/<%= cur._id %>">
-                  <img
-                    src="/images/trash.svg"
-                    className="hideondark"
-                    alt="delete"
-                  />
-                  <img
-                    src="/images/trash-white.svg"
-                    className="hideonlight"
-                    alt="delete"
-                  />
-                </a>
-              </td>
-            </tr>
+            {expenses.map((expense)=>(<ExpenseRow expense={expense} refresh={refresh} key={expense.id}/>))}
           </tbody>
         </table>
       </div>
