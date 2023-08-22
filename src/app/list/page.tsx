@@ -1,7 +1,8 @@
+"use client"
 import axios from "axios";
 import "../components/List/list.css"
-import Expense from "../components/List/Expense/Expense";
-import Transfer from "../components/List/Transfer/Transfer";
+import Expense from "@/components/List/Expense/Expense";
+import Transfer from "@/components/List/Transfer/Transfer";
 import { useState, useEffect } from "react";
 
 export default function ListPage() {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Transfer({ transfers }) {
+export default function Transfer({ transfers, refresh }) {
   console.log(transfers);
   return (
     <div className="secdiv">

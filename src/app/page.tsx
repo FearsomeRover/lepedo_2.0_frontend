@@ -1,26 +1,33 @@
+"use client"
 import { useState, useEffect } from "react";
-import axios from "axios";
-import SummaryTable from "../components/Summary/SummaryTable";
-import Cards from "../components/header/Cards";
-import NewUserForm from "../components/NewUserForm";
+import axios, { AxiosError } from "axios";
+import SummaryTable from "@/components/Summary/SummaryTable"
+import Cards from "@/components/header/Cards";
+import NewUserForm from "@/components/NewUserForm";
+import { stats } from "@/types/stats";
 
-export default function SummaryPage() {
-  const [table, setTable] = useState(false);
-  const [noUser, setNoUser] = useState(false);
+
+type Table  = {
+  table: Record<string, User>;
+  stats: stats;
+}
+export default function Page() {
+  const [table, setTable] = useState<Table | null>(null);
+  const [noUser, setNoUser] = useState<boolean>(false);
   const handleRefresh = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          process.env.REACT_APP_BASE_URL + "/user/table"
+          process.env.NEXT_PUBLIC_BASE_URL + "/user/table"
         );
         if (response.status === 404) {
           return;
         }
         const data = await response.data;
         setTable(data);
-      } catch (error) {
+      } catch (error: any) {
         if(error.request.status === 404){
-          setTable(false);
+          setTable(null);
           setNoUser(true);
         }
         else{
@@ -39,6 +46,6 @@ export default function SummaryPage() {
       <SummaryTable table={table.table} refresh={handleRefresh}/>
     </div>
   ) : (
-    noUser?<NewUserForm refresh={handleRefresh} disabled={true} abort={()=>{setNoUser(false); setTable(false)}}/>:<p>loading</p>
+    noUser?<NewUserForm refresh={handleRefresh} disabled={true} abort={()=>{setNoUser(false); setTable(null)}}/>:<p>loading</p>
   );
 }
