@@ -16,6 +16,7 @@ export default function ListPage() {
         process.env.REACT_APP_BASE_URL + "/expense"
       );
       const data = await response.data;
+      if(data.length===0) setNoExpense(true);
       setExpenses(data);
     }
     getExpenses();
@@ -27,7 +28,7 @@ export default function ListPage() {
       );
       const data = await response.data;
       if(data.length===0) setNoTransfer(true);
-      setExpenses(data);
+      setTransfers(data);
     };
     getTransfers();
   }

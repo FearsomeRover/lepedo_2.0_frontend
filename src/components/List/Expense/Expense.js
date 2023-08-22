@@ -23,6 +23,7 @@ export default function Expense({expenses, refresh}) {
               <th>
                 <p className="left">Megnevezés</p>
               </th>
+              <th><p>Dátum</p></th>
               <th className="payedheader">
                 <p>Fizetett</p>
               </th>

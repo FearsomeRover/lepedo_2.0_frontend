@@ -11,12 +11,13 @@ export default function ExpenseRow({ expense, refresh }) {
     <tr>
       <td>
         <p title="<%= cur._id %>" className="left">
-          ...{expense.id.slice(-3)}
+          ...{expense.id.slice(-4)}
         </p>
       </td>
       <td>
         <p>{expense.title} </p>
       </td>
+      <td><p className="middle">    {expense.date}   </p></td>
       <td className="middle">
         <UserCard user={expense.payer} />
       </td>

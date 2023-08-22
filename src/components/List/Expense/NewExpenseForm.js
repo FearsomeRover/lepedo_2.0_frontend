@@ -6,6 +6,7 @@ export default function NewExpenseForm(props) {
   const [users, setUsers] = useState();
   const [shortName, setShortName] = useState(false);
   const [littleAmount, setLittleAmount] = useState(false);
+  const [wrongDate, setWrongDate] = useState(false); 
   const getAllUsers = async () => {
     const response = await axios.get(process.env.REACT_APP_BASE_URL + "/user");
     setUsers(response.data);
@@ -18,9 +19,16 @@ export default function NewExpenseForm(props) {
     const formData = new FormData(event.target);
     const name = formData.get("name");
     const amount = parseInt(formData.get("amount"));
+    const date = formData.get("date");
+
     if (name.length === 0) {
       setShortName(true);
       return;
+    }
+    if(new Date(date) > new Date()){
+      setWrongDate(true);
+      return;
+
     }
     if (amount < 100) {
       setLittleAmount(true);
@@ -30,7 +38,8 @@ export default function NewExpenseForm(props) {
         title:name,
         payerId:formData.get("payed"),
         amount,
-        received:formData.getAll("payedto")
+        received:formData.getAll("payedto"),
+        date:formData.get("date"),
         
     }
     console.log(data);
@@ -55,7 +64,9 @@ export default function NewExpenseForm(props) {
             name="date"
             type="date"
             defaultValue={currentDate}
+            onChange={()=>setWrongDate(false)}
           />
+          {wrongDate && <p className="tagerror">Really bro?</p>}
             <input
               placeholder="Összeg"
               name="amount"
