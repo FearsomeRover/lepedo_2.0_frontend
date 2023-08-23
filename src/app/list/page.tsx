@@ -13,7 +13,7 @@ export default function ListPage() {
   return (
     <>
       <Expense/>
-      {(transfers)?<Transfer/>:noTransfer?<h3>No transfers yet</h3>:<p>loading</p>}
+      <Transfer/>
     </>
   );
 }
