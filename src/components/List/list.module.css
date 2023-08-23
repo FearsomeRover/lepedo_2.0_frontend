@@ -1,0 +1,92 @@
+.secdiv {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.new_area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.scroll {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 15.5rem;
+  width: 70vw;
+  position: relative;
+  float: right;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+.actioncol {
+  width: 4rem;
+}
+.popup {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .expenseform {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 15px;
+    justify-content: space-between;
+    height: 60vh;
+    z-index: 15;
+  }
+  .userarea {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .payed {
+    display: flex;
+    float: left;
+    flex-direction: column;
+    min-width: 33%;
+    gap: 12px;
+  }
+  .arrow {
+    max-width: 10%;
+    padding-top: 38px;
+  }
+  .payedto {
+    display: flex;
+    float: right;
+    flex-direction: column;
+    min-width: 33%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .radiolabel {
+    display: flex;
+    flex-direction: row;
+  }
+  .checklabel {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    text-align: right;
+    justify-content: right;
+  }
+  .usertitle {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  

@@ -1,128 +1,124 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600|Inter:400,700,800");
 
-
-body{
-    padding: 0 20px;
+body {
+  padding: 0 20px;
 }
 
-h1, h2, h3, h4, h5{
-    font-family: "Poppins", Helvetica;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Poppins", Helvetica;
 }
 
-
-
-
-h3{
-    font-size: 44px;
-    font-weight: 500;
-    line-height: normal;
-    margin: 40px;
-    margin-left: 20px;
-    margin-bottom:0;
+h3 {
+  font-size: 44px;
+  font-weight: 500;
+  line-height: normal;
+  margin: 40px;
+  margin-left: 20px;
+  margin-bottom: 0;
 }
-h4{
-    margin: 0 10px;
-    font-size: 19px;
-    letter-spacing: 1px;
-    font-weight: 500;
+h4 {
+  margin: 0 10px;
+  font-size: 19px;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
-h5{
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 2px;
-    margin-top: 10px;
+h5 {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 2px;
+  margin-top: 10px;
 }
-p{
-    font-family: "Inter", Consolas;
-    font-weight: 500;
-    font-size: 14px;
-    margin-top: 12px;
-    margin-bottom: 12px;
+p {
+  font-family: "Inter", Consolas;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
+.sbtn {
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 7px;
+  background-color: #00000000;
+  width: fit-content;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-family: "Poppins";
+  display: inline-block;
+  text-underline: none;
+  color: black;
+  outline: none;
+  text-decoration: none;
+}
+.sbtn:hover {
+  /*todo uncommment the line below*/
+  box-shadow: 4px 4px 4px lightgray;
+  /* animation: border 3s ease-in-out infinite; */
+}
+.darkmode--activated .sbtn:hover {
+  filter: invert(0);
+  color: white;
+  border-color: white;
+  animation: border-dark 3s ease-in-out infinite;
+}
+.sbtn_with_h4 {
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 7px 20px;
+  background-color: #00000000;
+  width: fit-content;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-family: "Poppins";
+  display: inline-block;
+  text-underline: none;
+  color: black;
+  outline: none;
+  text-decoration: none;
 
-
-.sbtn{
-    border: 2px solid black;
-    border-radius: 8px;
-    padding: 7px;
-    background-color: #00000000;
-    width: fit-content;
-    margin-left: 20px;
-    margin-right: 20px;
-    font-family: "Poppins";
-    display: inline-block;
-    text-underline: none;
-    color: black;
-    outline: none;
-    text-decoration: none;
+  font-size: 19px;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
-.sbtn:hover{
-    /*todo uncommment the line below*/
-   box-shadow: 4px 4px 4px lightgray;
-    /* animation: border 3s ease-in-out infinite; */
-}
-.darkmode--activated .sbtn:hover{
-    filter: invert(0);
-    color: white;
-    border-color: white;
-    animation: border-dark 3s ease-in-out infinite;
-}
-.sbtn_with_h4{
-    border: 2px solid black;
-    border-radius: 8px;
-    padding: 7px 20px;
-    background-color: #00000000;
-    width: fit-content;
-    margin-left: 20px;
-    margin-right: 20px;
-    font-family: "Poppins";
-    display: inline-block;
-    text-underline: none;
-    color: black;
-    outline: none;
-    text-decoration: none;
-
-    font-size: 19px;
-    letter-spacing: 1px;
-    font-weight: 500;
-}
-.sbtn_with_h4:hover{
-    box-shadow: 4px 4px 4px lightgray;
+.sbtn_with_h4:hover {
+  box-shadow: 4px 4px 4px lightgray;
 }
 
-.darkmode--activated  .usertag{
-    filter: invert(0);
-    color:black;
-    background:none;
+.darkmode--activated .usertag {
+  filter: invert(0);
+  color: black;
+  background: none;
 }
-.darkmode--activated  .usertag .anim {
-    animation: appear 1s linear;
-}
-
-.darkmode--activated  .usertag:hover{
-    box-shadow: 4px 4px 4px #383838;
+.darkmode--activated .usertag .anim {
+  animation: appear 1s linear;
 }
 
-.darkmode--activated .hideonhover:hover +.showonhover{
-    display: inline-block;
-    opacity: 1;
-    box-shadow: 4px 4px 4px #383838;
-}
-.only-outline{
-    background-color: white;
-    border: 2px black solid;
-    color: rgb(0, 0, 0);
-    padding-right: 20px;
-    padding-left: 20px;
-}
-.darkmode--activated .only-outline{
-    background-color: rgba(0, 0, 0, 0);
-    color:white;
-    border-color:white;
+.darkmode--activated .usertag:hover {
+  box-shadow: 4px 4px 4px #383838;
 }
 
-
+.darkmode--activated .hideonhover:hover + .showonhover {
+  display: inline-block;
+  opacity: 1;
+  box-shadow: 4px 4px 4px #383838;
+}
+.only-outline {
+  background-color: white;
+  border: 2px black solid;
+  color: rgb(0, 0, 0);
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.darkmode--activated .only-outline {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border-color: white;
+}
 
 /*-----
 .bgo-red{
@@ -148,177 +144,185 @@ p{
 //background-color: #00bbff;
     background-color: #52bbe812;
 }*/
-.w3{
-    width: 3rem;
+.w3 {
+  width: 3rem;
 }
-.w5{
-    width: 5rem;
+.w5 {
+  width: 5rem;
 }
-.w7{
-    width: 7rem;
+.w7 {
+  width: 7rem;
 }
-.h3{
-    height:3rem;
+.h3 {
+  height: 3rem;
 }
-.h5{
-    height:5rem;
+.h5 {
+  height: 5rem;
 }
-.h10{
-    height:10rem;
+.h10 {
+  height: 10rem;
 }
-.mw30{
-    max-width: 30%;
+.mw30 {
+  max-width: 30%;
 }
-.right{
-    text-align: right;
-    align-content: end;
-    align-items: end;
+.right {
+  text-align: right;
+  align-content: end;
+  align-items: end;
 }
-.left{
-    text-align: left;
+.left {
+  text-align: left;
 }
-.middle{
-    text-align: center;
-    align-content: center;
+.middle {
+  text-align: center;
+  align-content: center;
 }
-.bold{
-    font-weight: bold;
+.bold {
+  font-weight: bold;
 }
-.italic{
-    font-style: italic;
-    color: darkslategray;
+.italic {
+  font-style: italic;
+  color: darkslategray;
 }
-.min-width{
-    width: fit-content;
-    padding: 0;
+.min-width {
+  width: fit-content;
+  padding: 0;
 }
-.summary_table{
-    width: 80%;
-    table-layout: fixed;
-    margin: 7rem auto;
+.summary_table {
+  width: 80%;
+  table-layout: fixed;
+  margin: 7rem auto;
 }
-img{
-    margin: 0 5px;
-    display: inline-block;
+img {
+  margin: 0 5px;
+  display: inline-block;
 }
-input{
-    border: solid gray 2px;
-    border-width: 0 0 2px 0;
-    background:none;
-    text-align: center;
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
     color: black;
-    font-family: "Poppins", Helvetica;
-    font-size: 18px;
-    margin: 10px;
-    width: 25rem;
-    outline:none;
+    text-decoration: underline;
 }
-.input{
-    border: solid gray 2px;
-    border-width: 0 0 2px 0;
-    background:none;
-    text-align: center;
-    color: black;
-    font-family: "Poppins", Helvetica;
-    font-size: 18px;
-    margin: 10px;
-    width: 25rem;
-    outline:none;
+input {
+  border: solid gray 2px;
+  border-width: 0 0 2px 0;
+  background: none;
+  text-align: center;
+  color: black;
+  font-family: "Poppins", Helvetica;
+  font-size: 18px;
+  margin: 10px;
+  width: 25rem;
+  outline: none;
 }
-.color{
-    border: 2px solid gray;
-    padding: 1px;
-    height: 2rem;
-    width: 5rem;
+.input {
+  border: solid gray 2px;
+  border-width: 0 0 2px 0;
+  background: none;
+  text-align: center;
+  color: black;
+  font-family: "Poppins", Helvetica;
+  font-size: 18px;
+  margin: 10px;
+  width: 25rem;
+  outline: none;
 }
-input:hover{
-    border-color: black;
-    outline:none;
-    /*box-shadow: 0 2px 4px lightgray;*/
+.color {
+  border: 2px solid gray;
+  padding: 1px;
+  height: 2rem;
+  width: 5rem;
 }
-input:focus{
-    border-width: 0 0 3px 0;
-    /*box-shadow: 0 4px 4px lightgray;*/
+input:hover {
+  border-color: black;
+  outline: none;
+  /*box-shadow: 0 2px 4px lightgray;*/
 }
-label{
-    font-family: "Poppins", Helvetica;
-    color: gray;
-    font-size: 18px;
+input:focus {
+  border-width: 0 0 3px 0;
+  /*box-shadow: 0 4px 4px lightgray;*/
 }
-textarea{
-    border: solid gray 2px;
-    border-width: 2px;
-    background:none;
-    text-align: left;
-    color: black;
-    font-family: "Poppins", Helvetica;
-    font-size: 18px;
-    margin: 10px;
-    width: 40rem;
-    height: 15rem;
-    outline:none;
+label {
+  font-family: "Poppins", Helvetica;
+  color: gray;
+  font-size: 18px;
 }
-.color:hover{
-    border: 2px solid black;
+textarea {
+  border: solid gray 2px;
+  border-width: 2px;
+  background: none;
+  text-align: left;
+  color: black;
+  font-family: "Poppins", Helvetica;
+  font-size: 18px;
+  margin: 10px;
+  width: 40rem;
+  height: 15rem;
+  outline: none;
 }
-.color:focus{
-    border: 3px solid black;
+.color:hover {
+  border: 2px solid black;
 }
-.sbtn_with_h4:focus{
-    border: 2px solid black;
+.color:focus {
+  border: 3px solid black;
 }
-.radio{
-    width:auto;
-    accent-color: black;
+.sbtn_with_h4:focus {
+  border: 2px solid black;
 }
-.radio:hover{
-    border:red 2px solid;
-    box-shadow:none;
+.radio {
+  width: auto;
+  accent-color: black;
 }
-.radio:focus{
-    box-shadow: none;
+.radio:hover {
+  border: red 2px solid;
+  box-shadow: none;
 }
-.checkbox{
-    width: auto;
-    accent-color: black;
+.radio:focus {
+  box-shadow: none;
 }
-.checkbox:hover{
-    box-shadow: none;
+.checkbox {
+  width: auto;
+  accent-color: black;
 }
-.checkbox:focus{
-    box-shadow: none;
+.checkbox:hover {
+  box-shadow: none;
 }
-.floating-top{
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.checkbox:focus {
+  box-shadow: none;
+}
+.floating-top {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
+}
 
+@media (max-width: 1270px) {
+  .card {
+    display: none;
+  }
 }
-
-@media (max-width:1270px) {
-    .card{
-        display: none;
-    }
-}
-
 
 .loading-bottle {
-    background-color: rgb(166, 166, 166);
-    width: calc(100% + 14px);
-    height: 3px;
-    position: relative;
-    z-index: -5;
-    top: -7px;
-    right: -7px;
-    left: -7px;
-    overflow: hidden;
-    border-radius: 7px;
-    display: none;
+  background-color: rgb(166, 166, 166);
+  width: calc(100% + 14px);
+  height: 3px;
+  position: relative;
+  z-index: -5;
+  top: -7px;
+  right: -7px;
+  left: -7px;
+  overflow: hidden;
+  border-radius: 7px;
+  display: none;
 }
 
 #myLink:hover .loading-bottle {
-    display: block;
-    animation: fill 3s ease-in-out;
+  display: block;
+  animation: fill 3s ease-in-out;
 }
 
 /*.loading-bottle {
@@ -341,63 +345,63 @@ textarea{
 }*/
 
 @keyframes fill {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: calc(100% + 14px);;
-    }
+  0% {
+    width: 0;
+  }
+  100% {
+    width: calc(100% + 14px);
+  }
 }
 
 @keyframes border {
-    0% {
-        box-shadow: 0 0 4px #626262;
-        transform: translate(0,0);
-    }
-    50% {
-        box-shadow: 8px 8px 4px #626262;
-        transform: translate(-4px,-8px);
-    }
-    100% {
-        box-shadow: 0px 0px 4px #626262;
-        transform: translate(0,0);
-    }
+  0% {
+    box-shadow: 0 0 4px #626262;
+    transform: translate(0, 0);
+  }
+  50% {
+    box-shadow: 8px 8px 4px #626262;
+    transform: translate(-4px, -8px);
+  }
+  100% {
+    box-shadow: 0px 0px 4px #626262;
+    transform: translate(0, 0);
+  }
 }
 @keyframes border-dark {
-    0% {
-        box-shadow: 0 0 4px #383838;
-        transform: translate(0,0);
-    }
-    50% {
-        box-shadow: 8px 8px 4px #383838;
-        transform: translate(-4px,-8px);
-    }
-    100% {
-        box-shadow: 0px 0px 4px #383838;
-        transform: translate(0,0);
-    }
-
+  0% {
+    box-shadow: 0 0 4px #383838;
+    transform: translate(0, 0);
+  }
+  50% {
+    box-shadow: 8px 8px 4px #383838;
+    transform: translate(-4px, -8px);
+  }
+  100% {
+    box-shadow: 0px 0px 4px #383838;
+    transform: translate(0, 0);
+  }
 }
 @keyframes appear {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
 
 .darkmode--activated .darkmode-background {
-    color: #b03131 !important;
+  color: #b03131 !important;
 }
-.darkmode--activated .hideondark{
-    display: none;
+.darkmode--activated .hideondark {
+  display: none;
 }
-.hideonlight{
-    display: none;
+.hideonlight {
+  display: none;
 }
-.darkmode--activated .hideonlight{
-    display: inline-block;
+.darkmode--activated .hideonlight {
+  display: inline-block;
 }
+.tagerror{
+    color: red;
+  }
