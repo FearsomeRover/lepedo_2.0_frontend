@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function UserCard({user, className}) {
+export default function UserCard({user}) {
     const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {

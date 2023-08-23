@@ -77,7 +77,7 @@ export default function NewUserForm(props) {
           value={name}
           onChange={(event) => setName(event.target.value)}
           onBlur={handleColorGen}
-          autocomplete="off"
+          autoComplete="off"
         />
         <input
           placeholder="@revtag"

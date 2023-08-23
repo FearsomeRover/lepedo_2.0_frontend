@@ -37,7 +37,7 @@ export default function SummaryTable(props) {
         {Object.keys(table).map(user => <UserRow key={user} userId={user} user={table[user]} editUser={handleEditUser} refresh={props.refresh}/>)}
         <tr className="notable">
           <td>
-            <button onClick={()=>setVisibleNewUser(true)} className="usertag only-outline">
+            <button onClick={()=>{setVisibleNewUser(true); setUserId(null)}} className="usertag only-outline">
               + Új user 
             </button>
           </td>

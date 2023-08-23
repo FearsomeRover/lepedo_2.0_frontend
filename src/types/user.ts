@@ -1,4 +1,5 @@
 type User = {
+  id?: string;
   revTag: string;
   name: string;
   color: string;

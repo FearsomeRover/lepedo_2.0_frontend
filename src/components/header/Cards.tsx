@@ -1,7 +1,8 @@
 
+"use client"
 import { useState } from "react";
 import Card from "./Card";
-import NewExpenseForm from "../List/Expense/NewExpenseForm";
+import NewExpenseForm from "@/components/List/Expense/NewExpenseForm";
 import { access } from "fs";
 import { Cards } from "@/types/cardData";
 export default function Cards(props:any) {
@@ -9,7 +10,7 @@ export default function Cards(props:any) {
     if(props.summary){
         return (
             <>
-              {visibleNewExpense && <NewExpenseForm abort={()=>setVisibleNewExpense(false)}/>}
+              {visibleNewExpense && <NewExpenseForm abort={()=>setVisibleNewExpense(false)} refresh={props.refresh}/>}
             <div className="floating-top">
             <Card
               color={"#51bb88"}

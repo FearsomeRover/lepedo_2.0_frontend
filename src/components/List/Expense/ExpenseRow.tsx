@@ -1,25 +1,31 @@
-import UserCard from "../../UserCard";
+import { ExpenseType } from "@/types/expense";
+import UserCard from "@/components/UserCard";
 import axios from "axios";
-export default function ExpenseRow({ expense, refresh }) {
+type ExpenseRowProps = {
+  expense: ExpenseType;
+  refresh: ()=>void;
+  editExpense: (expenseId: string)=>void;
+}
+export default function ExpenseRow(props:ExpenseRowProps) {
   const handleExpenseDelete = async () => {
     await axios.delete(
-      process.env.REACT_APP_BASE_URL + "/expense/" + expense.id
+      process.env.NEXT_PUBLIC_BASE_URL + "/expense/" + props.expense.id
     );
-    refresh();
+    props.refresh();
   };
   return (
     <tr>
       <td>
-        <p title="<%= cur._id %>" className="left">
-          ...{expense.id.slice(-4)}
+        <p className="left">
+          ...{props.expense.id.slice(-4)}
         </p>
       </td>
       <td>
-        <p>{expense.title} </p>
+        <p>{props.expense.title} </p>
       </td>
-      <td><p className="middle">    {expense.date}   </p></td>
+      
       <td className="middle">
-        <UserCard user={expense.payer} />
+        <UserCard user={props.expense.payer} />
       </td>
       <td>
         <img
@@ -34,15 +40,16 @@ export default function ExpenseRow({ expense, refresh }) {
         />
       </td>
       <td className="middle">
-        {expense.received.map((user) => (
+        {props.expense.received.map((user) => (
           <UserCard user={user} key={user.id}/>
         ))}
       </td>
+      <td><p className="middle">    {props.expense.date}   </p></td>
       <td>
-        <p className="right bold">{expense.amount} Ft </p>
+        <p className="right bold">{props.expense.amount} Ft </p>
       </td>
       <td className="min-width right">
-        <button onClick={handleExpenseDelete}>
+        <button onClick={()=>props.editExpense(props.expense.id)}>
           <img src="/images/pencil.svg" className="hideondark" alt="edit" />
           <img
             src="/images/pencil-white.svg"

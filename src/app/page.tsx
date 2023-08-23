@@ -42,7 +42,7 @@ export default function Page() {
   }, []);
   return table ? (
     <div>
-      <Cards summary={true} cardsData={table.stats} />
+      <Cards summary={true} cardsData={table.stats} refresh={handleRefresh}/>
       <SummaryTable table={table.table} refresh={handleRefresh}/>
     </div>
   ) : (
