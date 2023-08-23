@@ -1,6 +1,8 @@
 import { useState } from "react";
-export default function UserCard({user}) {
-    const [isHovered, setIsHovered] = useState(false);
+import styles from "./usercard.module.css";
+
+export default function UserCard( {user}:{user:User}) {
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -11,8 +13,8 @@ export default function UserCard({user}) {
   };
   return (
     <div
-      className="usertag"
       style={{ backgroundColor: user.color }}
+      className={styles.usertag}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

@@ -1,5 +1,5 @@
 import { ExpenseType } from "@/types/expense";
-import UserCard from "@/components/UserCard";
+import UserCard from "@/components/UserCard/UserCard";
 import axios from "axios";
 type ExpenseRowProps = {
   expense: ExpenseType;

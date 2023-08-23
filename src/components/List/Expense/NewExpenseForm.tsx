@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import UserCard from "@/components/UserCard";
+import UserCard from "@/components/UserCard/UserCard";
 import styles from "../list.module.css";
 import { ExpenseType } from "@/types/expense";
 type ExpenseFormProps = {

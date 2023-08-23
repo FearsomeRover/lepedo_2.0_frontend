@@ -8,11 +8,14 @@ import {Transfer} from "@/types/transfer"
 export default function Transfer() {
   const [visibleNewTransfer, setVisibleTransfer] = useState(false);
   const [transfers, setTransfers] = useState<Transfer[] | null>();
-  
+  const [transferId, setTransferId] = useState<string | null>()
   const [noTransfer, setNoTransfer] = useState(false);
-  
-  
+  const editTransfer = (expenseId:string)=>{
+    setVisibleTransfer(true);
+    setTransferId(expenseId);
+  }
   const refresh = () => {
+    console.log("ref");
     const getTransfers = async () => {
       const response = await axios.get(
         process.env.NEXT_PUBLIC_BASE_URL + "/transfer"
@@ -30,14 +33,21 @@ export default function Transfer() {
     return(<h2>Loading</h2>)
   }
   if(noTransfer){
-    return(
-      <h2>Még nincsenek költések</h2>
+    return(<div className={styles.emptytable}>
+      <h2>Még nincsenek utalások</h2>
+      
+      <button onClick={()=>{setVisibleTransfer(true)}} className="sbtn">
+          <div className="loading-bottle"></div>
+          <h4 id="myText"> + Új utalás </h4>
+        </button>
+        {visibleNewTransfer && <NewTransferForm abort={()=>setVisibleTransfer(false)} refresh={refresh}/>}
+    </div>
     )
   }
   return (
     
     <div className={styles.secdiv}>
-      {visibleNewTransfer && <NewTransferForm abort={()=>setVisibleTransfer(false)} refresh={refresh}/>}
+      {visibleNewTransfer && <NewTransferForm abort={()=>setVisibleTransfer(false)} refresh={refresh} transfer={transfers.find((transfer)=> transfer.id === transferId)}/>}
       <div className={styles.new_area}>
         <h3>Utalások</h3>
         <button onClick={()=>{setVisibleTransfer(true)}} className="sbtn">
@@ -65,9 +75,9 @@ export default function Transfer() {
               <th>
                 <p>Összeg</p>
               </th>
-              <th className="actioncol"></th>
+              <th ></th>
             </tr>
-            {transfers.map((transfer)=><TransferRow transfer={transfer} refresh={refresh} key={transfer.id}/>)}
+            {transfers.map((transfer)=><TransferRow transfer={transfer} refresh={refresh} key={transfer.id} editTransfer={editTransfer}/>)}
           </tbody>
         </table>
       </div>

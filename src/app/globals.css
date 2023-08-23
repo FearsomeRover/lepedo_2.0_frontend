@@ -11,7 +11,12 @@ h4,
 h5 {
   font-family: "Poppins", Helvetica;
 }
-
+table{
+  width: 100%;
+  border-spacing: 0;
+  margin-right: 20px;
+  table-layout: fixed;
+}
 h3 {
   font-size: 44px;
   font-weight: 500;
@@ -39,6 +44,9 @@ p {
   margin-top: 12px;
   margin-bottom: 12px;
 }
+th > p{
+  font-weight: bold;
+}
 
 .sbtn {
   border: 2px solid black;
@@ -46,8 +54,7 @@ p {
   padding: 7px;
   background-color: #00000000;
   width: fit-content;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 20px;
   font-family: "Poppins";
   display: inline-block;
   text-underline: none;
@@ -72,8 +79,7 @@ p {
   padding: 7px 20px;
   background-color: #00000000;
   width: fit-content;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 20px;
   font-family: "Poppins";
   display: inline-block;
   text-underline: none;
@@ -188,14 +194,17 @@ p {
   width: fit-content;
   padding: 0;
 }
-.summary_table {
-  width: 80%;
-  table-layout: fixed;
-  margin: 7rem auto;
-}
 img {
   margin: 0 5px;
   display: inline-block;
+}
+th{
+  border: 3px black solid;
+  border-width: 0 0 3px 0;
+}
+td{
+  border: 1px gray solid;
+  border-width: 0 0 1px 0;
 }
 button {
     background-color: transparent;
@@ -204,6 +213,9 @@ button {
     outline: none;
     color: black;
     text-decoration: underline;
+}
+.notable{
+  border: none;
 }
 input {
   border: solid gray 2px;

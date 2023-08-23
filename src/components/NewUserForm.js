@@ -68,7 +68,7 @@ export default function NewUserForm(props) {
   };
   return (
     <div className="popup">
-      <form method="post" onSubmit={checkSubmit} className="userform" autocomplete="off">
+      <form method="post" onSubmit={checkSubmit} className="userform" autoComplete="off">
         <input
           placeholder="Név"
           minLength="3"

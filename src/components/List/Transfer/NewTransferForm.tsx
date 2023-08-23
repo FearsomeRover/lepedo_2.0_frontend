@@ -1,9 +1,11 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import UserCard from "@/components/UserCard";
+import UserCard from "@/components/UserCard/UserCard";
 import styles from "../list.module.css";
+import { Transfer } from "@/types/transfer";
 type TransferFormProps = {
+  transfer?: Transfer;
   abort: () => void;
   refresh: () => void;
 };
@@ -40,8 +42,14 @@ export default function NewTransferForm(props: TransferFormProps) {
       userToId: formData.get("payedto"),
       date: formData.get("date"),
     };
-    console.log(data);
-    await axios.post(process.env.NEXT_PUBLIC_BASE_URL + "/transfer", data);
+    if (props.transfer) {
+      await axios.patch(
+        process.env.NEXT_PUBLIC_BASE_URL + "/transfer/" + props.transfer.id,
+        data
+      );
+    } else {
+      await axios.post(process.env.NEXT_PUBLIC_BASE_URL + "/transfer", data);
+    }
     props.abort();
     props.refresh();
   };
@@ -61,13 +69,14 @@ export default function NewTransferForm(props: TransferFormProps) {
             min={50}
             max={1_000_000}
             required
+            defaultValue={props.transfer ? props.transfer.amount : ""}
             //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
           />
           <input
             placeholder="Dátum"
             name="date"
             type="date"
-            defaultValue={currentDate}
+            defaultValue={props.transfer ? props.transfer.date : currentDate}
             onChange={validateDate}
             onInvalid={(e) =>
               (e.target as HTMLInputElement).setCustomValidity(
@@ -87,6 +96,7 @@ export default function NewTransferForm(props: TransferFormProps) {
                     value={user.id}
                     className="radio"
                     name="payed"
+                    defaultChecked={props.transfer?.userFromId === user.id}
                     //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                   />
                   <UserCard user={user} key={user.id} />
@@ -109,6 +119,7 @@ export default function NewTransferForm(props: TransferFormProps) {
                     value={user.id}
                     className="radio"
                     name="payedto"
+                    defaultChecked={props.transfer?.userToId === user.id}
                     //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                   />
                 </label>

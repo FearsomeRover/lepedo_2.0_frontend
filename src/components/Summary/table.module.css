@@ -1,14 +1,6 @@
 .notable > tbody > tr > td, .notable > td, .notable{
     border: none;
 }
-form > table{
-    width: 25rem;
-    margin: 0 auto;
-}
-form > table > td{
-    width: 50%;
-    text-align: left;
-}
 .scroll{
     overflow: scroll;
     overflow-x: hidden;
@@ -51,27 +43,9 @@ form > table > td{
 .usertag:hover{
     box-shadow: 4px 4px 4px lightgray;
 }
-.usertag{
-    background-color:gray;
-    border: 0px;
-    border-radius: 50px;
-    display: inline-block;
-    margin: 2px 2px;
-    padding: 3px 10px;
-    font-family: "Poppins", Helvetica;
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
-    float: inherit;
-}
-table, tr, td, th{
-}
-table{
-    width: 100%;
-    border-spacing: 0;
-    margin-right: 20px;
-}
-td, th{
+
+
+/* td, th{
     padding: 0px 10px;
 }
 th{
@@ -81,8 +55,8 @@ th{
 td{
     border: 1px gray solid;
     border-width: 0 0 1px 0;
-}
-th > p{
+} */
+.summary_table > th > p{
     font-weight: bold;
 }
 .only-outline{
@@ -92,3 +66,13 @@ th > p{
     padding-right: 20px;
     padding-left: 20px;
 }
+.summary_table {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 7rem auto;
+    align-items: center;
+  }
+  .disabled{
+    opacity: 50%;
+  }

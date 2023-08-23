@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import NewExpenseForm from "@/components/List/Expense/NewExpenseForm";
 import { ExpenseType } from "@/types/expense";
 import axios from "axios";
-import { useStyleRegistry } from "styled-jsx";
 export default function Expense() {
   const [expenses, setExpenses] = useState<ExpenseType[] | null>();
   const [noExpense, setNoExpense] = useState<boolean>(false);
@@ -32,8 +31,13 @@ export default function Expense() {
     return(<h2>Loading</h2>)
   }
   if(noExpense){
-    return(
+    return(<div className={styles.emptytable}>
       <h2>Még nincsenek költések</h2>
+      <button onClick={() => {setVisibleNewExpense(true); setExpenseId(null)}} className="sbtn">
+          <h4 > + Új költés </h4>
+        </button>
+        {visibleNewExpense && <NewExpenseForm abort={()=>setVisibleNewExpense(false)} refresh={refresh}/>}
+    </div>
     )
   }
   return (
@@ -67,7 +71,7 @@ export default function Expense() {
               <th>
                 <p>Összeg</p>
               </th>
-              <th className={styles.actioncol}></th>
+              <th ></th>
             </tr>
             {expenses.map((expense)=>(<ExpenseRow expense={expense} refresh={refresh} key={expense.id} editExpense={editExpense}/>))}
           </tbody>

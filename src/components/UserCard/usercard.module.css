@@ -1,0 +1,13 @@
+.usertag{
+    background-color:gray;
+    border: 0px;
+    border-radius: 50px;
+    display: inline-block;
+    margin: 2px 2px;
+    padding: 3px 10px;
+    font-family: "Poppins", Helvetica;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    float: inherit;
+}

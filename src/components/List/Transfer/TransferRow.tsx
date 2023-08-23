@@ -1,11 +1,20 @@
 import { Transfer } from "@/types/transfer";
-import UserCard from "../../UserCard";
+import UserCard from "@/components/UserCard/UserCard";
+import axios from "axios";
 
 type TransferProps = {
   transfer: Transfer;
   refresh: () => void;
+  editTransfer: (expenseId: string)=>void;
 };
+
 export default function TransferRow(props: TransferProps) {
+  const handleExpenseDelete = async() =>{
+    await axios.delete(
+      process.env.NEXT_PUBLIC_BASE_URL + "/transfer/" + props.transfer.id
+    );
+    props.refresh();
+  }
   return (
     <tr>
       <td>
@@ -30,22 +39,22 @@ export default function TransferRow(props: TransferProps) {
         <p className="right bold"> {props.transfer.amount} Ft</p>
       </td>
       <td className="min-width right">
-        <a href="/edit_expense/<%= cur._id %>">
+        <button onClick={()=>props.editTransfer(props.transfer.id)}>
           <img src="/images/pencil.svg" className="hideondark" alt="edit" />
           <img
             src="/images/pencil-white.svg"
             className="hideonlight"
             alt="edit"
           />
-        </a>
-        <a href="/delete_expense/<%= cur._id %>">
+        </button>
+        <button onClick={handleExpenseDelete}>
           <img src="/images/trash.svg" className="hideondark" alt="delete" />
           <img
             src="/images/trash-white.svg"
             className="hideonlight"
             alt="delete"
           />
-        </a>
+        </button>
       </td>
     </tr>
   );
