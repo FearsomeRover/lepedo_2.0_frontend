@@ -1,6 +1,7 @@
 import axios from "axios";
 import styles from "./table.module.css";
 import UserCard from "../UserCard/UserCard";
+import Image from "next/image";
 type UserRowProps = {
   userId: string;
   user: User;
@@ -22,25 +23,19 @@ export default function UserRow({
       <td className="left">
         <UserCard user={user} />
         <button onClick={() => editUser(userId)}>
-          <img src="/images/pencil.svg" alt="edit" />
+          <Image src="/images/pencil.svg" alt="edit" width="16" height="16"/>
         </button>
-        {user.deleteable ? (
-          <button onClick={handleUserDelete}>
-            <img src="/images/trash.svg" alt="delete" color="black" />
-          </button>
-        ) : (
-          <button
-            onClick={handleUserDelete}
-            disabled
-            title="A user még résztvesz legalább 1 tranzakcióban, ezért nem törölhető."
-          >
-            <img
-              src="/images/trash.svg"
-              className={styles.disabled}
-              alt="delete"
-            />
-          </button>
-        )}
+        <button
+          onClick={handleUserDelete}
+          disabled={!user.deleteable}
+          title={
+            user.deleteable
+              ? ""
+              : "A user még résztvesz legalább 1 tranzakcióban, ezért nem törölhető."
+          }
+        >
+          <Image src="/images/trash.svg" alt="delete" color="black" width="16" height="16"/>
+        </button>
       </td>
       <td>
         <p className="right">{user.spent + " Ft"}</p>

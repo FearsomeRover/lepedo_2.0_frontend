@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import UserCard from "@/components/UserCard/UserCard";
 import styles from "./forms.module.css";
 import { Transfer } from "@/types/transfer";
+import Image from "next/image";
 type TransferFormProps = {
   transfer?: Transfer;
   abort: () => void;
@@ -103,11 +104,12 @@ export default function NewTransferForm(props: TransferFormProps) {
                 </label>
               ))}
             </div>
-            <img
+            <Image
               className={styles.arrow}
               src="/images/arrow-right.svg"
               alt="arrow-right"
-            ></img>
+              fill
+            ></Image>
             <div className={styles.payedto}>
               <h5 className={styles.usertitle}>Kedvezményezett</h5>
               {users.map((user) => (

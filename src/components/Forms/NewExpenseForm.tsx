@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import UserCard from "@/components/UserCard/UserCard";
 import styles from "./forms.module.css";
 import { ExpenseType } from "@/types/expense";
+import Image from "next/image";
 type ExpenseFormProps = {
   abort: () => void;
   refresh: () => void;
@@ -108,11 +109,12 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                 </label>
               ))}
             </div>
-            <img
+            <Image
               className={styles.arrow}
               src="/images/arrow-right.svg"
               alt="arrow-right"
-            ></img>
+              fill
+            ></Image>
             <div className={styles.payedto}>
               <h5 className={styles.usertitle}>Részvett</h5>
               {users.map((user) => (

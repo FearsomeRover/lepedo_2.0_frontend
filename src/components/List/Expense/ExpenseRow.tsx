@@ -1,6 +1,7 @@
 import { ExpenseType } from "@/types/expense";
 import UserCard from "@/components/UserCard/UserCard";
 import axios from "axios";
+import Image from "next/image";
 type ExpenseRowProps = {
   expense: ExpenseType;
   refresh: ()=>void;
@@ -28,15 +29,10 @@ export default function ExpenseRow(props:ExpenseRowProps) {
         <UserCard user={props.expense.payer} />
       </td>
       <td>
-        <img
-          className="arrow-right hideondark"
+        <Image
           src="/images/arrow-right.svg"
           alt="arrow-right"
-        />
-        <img
-          className="arrow-right hideonlight"
-          src="/images/arrow-right-white.svg"
-          alt="arrow-right"
+          fill
         />
       </td>
       <td className="middle">
@@ -50,20 +46,10 @@ export default function ExpenseRow(props:ExpenseRowProps) {
       </td>
       <td className="min-width right">
         <button onClick={()=>props.editExpense(props.expense.id)}>
-          <img src="/images/pencil.svg" className="hideondark" alt="edit" />
-          <img
-            src="/images/pencil-white.svg"
-            className="hideonlight"
-            alt="edit"
-          />
+          <Image src="/images/pencil.svg" alt="edit" width="16" height="16"/>
         </button>
         <button onClick={handleExpenseDelete}>
-          <img src="/images/trash.svg" className="hideondark" alt="delete" />
-          <img
-            src="/images/trash-white.svg"
-            className="hideonlight"
-            alt="delete"
-          />
+          <Image src="/images/trash.svg"  alt="delete" width="16" height="16"/>
         </button>
       </td>
     </tr>

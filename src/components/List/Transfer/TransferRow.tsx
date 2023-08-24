@@ -1,7 +1,7 @@
 import { Transfer } from "@/types/transfer";
 import UserCard from "@/components/UserCard/UserCard";
 import axios from "axios";
-
+import Image from "next/image";
 type TransferProps = {
   transfer: Transfer;
   refresh: () => void;
@@ -24,9 +24,10 @@ export default function TransferRow(props: TransferProps) {
         <UserCard user={props.transfer.userFrom} />
       </td>
       <td className="min-width">
-        <img
+        <Image
           src="/images/arrow-right.svg"
           alt="arrow-right"
+          fill
         />
       </td>
       <td className="middle">
@@ -40,20 +41,10 @@ export default function TransferRow(props: TransferProps) {
       </td>
       <td className="min-width right">
         <button onClick={()=>props.editTransfer(props.transfer.id)}>
-          <img src="/images/pencil.svg" className="hideondark" alt="edit" />
-          <img
-            src="/images/pencil-white.svg"
-            className="hideonlight"
-            alt="edit"
-          />
+          <Image src="/images/pencil.svg" alt="edit" width="16" height="16"/>
         </button>
         <button onClick={handleExpenseDelete}>
-          <img src="/images/trash.svg" className="hideondark" alt="delete" />
-          <img
-            src="/images/trash-white.svg"
-            className="hideonlight"
-            alt="delete"
-          />
+          <Image src="/images/trash.svg" alt="delete" width="16" height="16"/>
         </button>
       </td>
     </tr>
