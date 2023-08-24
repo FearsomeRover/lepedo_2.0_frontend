@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import styles from "../list.module.css"
-import NewTransferForm from "@/components/List/Transfer/NewTransferForm"
+import NewTransferForm from "@/components/Forms/NewTransferForm"
 import TransferRow from "./TransferRow";
 import {Transfer} from "@/types/transfer"
 

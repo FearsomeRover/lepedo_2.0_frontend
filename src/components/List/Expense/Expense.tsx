@@ -1,7 +1,7 @@
 import styles from "../list.module.css"
 import ExpenseRow from "./ExpenseRow";
 import { useEffect, useState } from "react";
-import NewExpenseForm from "@/components/List/Expense/NewExpenseForm";
+import NewExpenseForm from "@/components/Forms/NewExpenseForm";
 import { ExpenseType } from "@/types/expense";
 import axios from "axios";
 export default function Expense() {

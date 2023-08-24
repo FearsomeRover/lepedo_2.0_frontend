@@ -2,17 +2,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UserCard from "@/components/UserCard/UserCard";
-import styles from "../list.module.css";
-import { ExpenseType } from "@/types/expense";
-type ExpenseFormProps = {
+import styles from "./forms.module.css";
+import { Transfer } from "@/types/transfer";
+type TransferFormProps = {
+  transfer?: Transfer;
   abort: () => void;
   refresh: () => void;
-  expense?: ExpenseType;
 };
 type Response = {
   data: User[];
 };
-export default function NewExpenseForm(props: ExpenseFormProps) {
+export default function NewTransferForm(props: TransferFormProps) {
   const currentDate = new Date().toISOString().split("T")[0];
   const [users, setUsers] = useState<User[] | null>();
   const getAllUsers = async () => {
@@ -37,16 +37,18 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
       }
     }
     const data = {
-      title: formData.get("name"),
-      payerId: formData.get("payed"),
+      userFromId: formData.get("payed"),
       amount,
-      received: formData.getAll("payedto"),
+      userToId: formData.get("payedto"),
       date: formData.get("date"),
     };
-    if(props.expense){
-      await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + "/expense/" + props.expense.id, data);
-    }else{
-      await axios.post(process.env.NEXT_PUBLIC_BASE_URL + "/expense", data);
+    if (props.transfer) {
+      await axios.patch(
+        process.env.NEXT_PUBLIC_BASE_URL + "/transfer/" + props.transfer.id,
+        data
+      );
+    } else {
+      await axios.post(process.env.NEXT_PUBLIC_BASE_URL + "/transfer", data);
     }
     props.abort();
     props.refresh();
@@ -61,18 +63,20 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
       {users ? (
         <form onSubmit={handleFormSubmit} className={styles.expenseform}>
           <input
-            placeholder="Megnevezés"
-            name="name"
-            defaultValue={props.expense?props.expense.title:""}
-            minLength={3}
-            maxLength={15}
+            placeholder="Összeg"
+            name="amount"
+            type="number"
+            min={50}
+            max={1_000_000}
             required
+            defaultValue={props.transfer ? props.transfer.amount : ""}
+            //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
           />
           <input
             placeholder="Dátum"
             name="date"
             type="date"
-            defaultValue={props.expense?props.expense.date:currentDate}
+            defaultValue={props.transfer ? props.transfer.date : currentDate}
             onChange={validateDate}
             onInvalid={(e) =>
               (e.target as HTMLInputElement).setCustomValidity(
@@ -80,19 +84,10 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
               )
             }
           />
-          <input
-            placeholder="Összeg"
-            name="amount"
-            type="number"
-            defaultValue={props.expense?props.expense.amount:""}
-            min={50}
-            max={1_000_000}
-            //required
-            //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
-          />
-          <div className={styles.userares}>
+
+          <div className={styles.userarea}>
             <div className={styles.payed}>
-              <h5 className={styles.usertitle}>Fizetett</h5>
+              <h5 className={styles.usertitle}>Utaló</h5>
               {users.map((user) => (
                 <label className={styles.radiolabel} key={user.id}>
                   <input
@@ -101,7 +96,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                     value={user.id}
                     className="radio"
                     name="payed"
-                    defaultChecked={props.expense?.payerId === user.id}
+                    defaultChecked={props.transfer?.userFromId === user.id}
                     //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                   />
                   <UserCard user={user} key={user.id} />
@@ -114,17 +109,17 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
               alt="arrow-right"
             ></img>
             <div className={styles.payedto}>
-              <h5 className={styles.usertitle}>Részvett</h5>
+              <h5 className={styles.usertitle}>Kedvezményezett</h5>
               {users.map((user) => (
                 <label className={styles.checklabel} key={user.id}>
                   <UserCard user={user} key={user.id} />
                   <input
-                    type="checkbox"
+                    type="radio"
                     id={user.id}
                     value={user.id}
                     className="radio"
                     name="payedto"
-                    defaultChecked={props.expense?.received.some(curruser=>curruser.id===user.id)}
+                    defaultChecked={props.transfer?.userToId === user.id}
                     //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                   />
                 </label>
@@ -134,13 +129,13 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
           <div>
             <input className="sbtn_with_h4" type="submit" value="Mentés" />
             <button
-                className="sbtn"
-                onClick={() => {
-                  props.abort();
-                }}
-              >
-                <h4>Mégse</h4>
-              </button>
+              className="sbtn"
+              onClick={() => {
+                props.abort();
+              }}
+            >
+              <h4>Mégse</h4>
+            </button>
           </div>
         </form>
       ) : (

@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import SummaryTable from "@/components/Summary/SummaryTable"
-import Cards from "@/components/header/Cards";
-import NewUserForm from "@/components/NewUserForm";
+import Cards from "@/components/Header/Cards";
+import NewUserForm from "@/components/Forms/NewUserForm";
 import { stats } from "@/types/stats";
 
 

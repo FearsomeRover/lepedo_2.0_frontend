@@ -1,6 +1,6 @@
 import UserRow from "./UserRow";
 import { useState } from "react";
-import NewUserForm from "../NewUserForm";
+import NewUserForm from "../Forms/NewUserForm";
 import styles from "./table.module.css";
 
 type SummaryTableProps = {
@@ -64,7 +64,7 @@ export default function SummaryTable(props: SummaryTableProps) {
           abort={() => setVisibleNewUser(false)}
           refresh={props.refresh}
           user={userId ? table[userId] : null}
-          userId={userId}
+          disabled={false}
         />
       )}
     </div>

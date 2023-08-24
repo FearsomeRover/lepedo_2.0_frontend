@@ -1,8 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
-import "./newUserForm.css";
-
-export default function NewUserForm(props) {
+import styles from "./forms.module.css"
+type NewUserFormProps={
+  user?: User;
+  refresh:()=>void;
+  disabled: boolean;
+  abort:()=>void;
+}
+export default function NewUserForm(props:NewUserFormProps) {
   const user = props.user ? props.user : null;
   const generateRandomColor = () => {
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
@@ -36,10 +41,10 @@ export default function NewUserForm(props) {
       setFreeTag(data.data);
     }
   };
-  const checkSubmit = async (event) => {
+  const checkSubmit = async (event:any) => {
     event.preventDefault();
     if (user) {
-      await axios.patch(process.env.REACT_APP_BASE_URL + `/user/${props.userId}`, {
+      await axios.patch(process.env.REACT_APP_BASE_URL + `/user/${props.user?.id}`, {
         name,
         revTag,
         color,
@@ -67,11 +72,11 @@ export default function NewUserForm(props) {
     }
   };
   return (
-    <div className="popup">
-      <form method="post" onSubmit={checkSubmit} className="userform" autoComplete="off">
+    <div className={styles.popup}>
+      <form method="post" onSubmit={checkSubmit} className={styles.userform} autoComplete="off">
         <input
           placeholder="Név"
-          minLength="3"
+          minLength={3}
           id="name"
           name="name"
           value={name}
@@ -92,7 +97,7 @@ export default function NewUserForm(props) {
         {!freeTag && (
           <p className="tagerror">Tag already registered to user!</p>
         )}
-        <div className="colorwrapper">
+        <div className={styles.colorwrapper}>
           <input
             id="color"
             name="color"
@@ -105,7 +110,7 @@ export default function NewUserForm(props) {
               setCustomColor(true);
             }}
           />
-          <p className="colortext">{color}</p>
+          <p className={styles.colortext}>{color}</p>
         </div>
         <div>
           <input className="sbtn_with_h4" type="submit" value="Mentés" />
