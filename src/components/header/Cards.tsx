@@ -2,21 +2,23 @@
 "use client"
 import { useState } from "react";
 import NewExpenseForm from "@/components/Forms/NewExpenseForm";
-import { access } from "fs";
+import NewTransferForm from "../Forms/NewTransferForm";
 import { Cards } from "@/types/cardData";
 import Card from "./Card";
 export default function Cards(props:any) {
   const [visibleNewExpense, setVisibleNewExpense] = useState(false);
+  const [visibleNewTransfer, setVisibleNewTransfer] = useState(false);
     if(props.summary){
         return (
             <>
               {visibleNewExpense && <NewExpenseForm abort={()=>setVisibleNewExpense(false)} refresh={props.refresh}/>}
+              {visibleNewTransfer && <NewTransferForm abort={()=>setVisibleNewTransfer(false)} refresh={()=>{}}/>}
             <div className="floating-top">
             <Card
               color={"#51bb88"}
               title={"Összesen elszámolt"}
               value={props.cardsData.doneall + " Ft"}
-              bottomLink={{ name: "Új utalás", action: () => {}}}
+              bottomLink={{ name: "Új utalás", action: () => setVisibleNewTransfer(true)}}
             ></Card>
               <Card
                 color={"#52bbe8"}
