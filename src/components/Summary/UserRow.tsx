@@ -33,8 +33,9 @@ export default function UserRow({
               ? ""
               : "A user még résztvesz legalább 1 tranzakcióban, ezért nem törölhető."
           }
+          
         >
-          <Image src="/images/trash.svg" alt="delete" color="black" width="16" height="16"/>
+          <Image src="/images/trash.svg" alt="delete" color={user.deleteable?"black":"gray"} width="16" height="16"/>
         </button>
       </td>
       <td>

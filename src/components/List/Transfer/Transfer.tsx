@@ -60,7 +60,7 @@ export default function Transfer() {
           <tbody>
             <tr>
               <th>
-                <p className="left"> &nbsp; &nbsp; #</p>
+                <p className={styles.left}> &nbsp; &nbsp; #</p>
               </th>
               <th>
                 <p>Utaló</p>
@@ -69,10 +69,10 @@ export default function Transfer() {
               <th>
                 <p>Kedvezményezett</p>
               </th>
-              <th>
+              <th className={styles.center}>
                 <p>Dátum</p>
               </th>
-              <th>
+              <th className={styles.amount}>
                 <p>Összeg</p>
               </th>
               <th ></th>

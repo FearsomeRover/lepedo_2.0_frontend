@@ -2,6 +2,7 @@ import { Transfer } from "@/types/transfer";
 import UserCard from "@/components/UserCard/UserCard";
 import axios from "axios";
 import Image from "next/image";
+import styles from "../list.module.css"
 type TransferProps = {
   transfer: Transfer;
   refresh: () => void;
@@ -23,11 +24,12 @@ export default function TransferRow(props: TransferProps) {
       <td className="middle">
         <UserCard user={props.transfer.userFrom} />
       </td>
-      <td className="min-width">
+      <td className={styles.center}>
         <Image
           src="/images/arrow-right.svg"
           alt="arrow-right"
-          fill
+          width={29}
+          height={24}
         />
       </td>
       <td className="middle">

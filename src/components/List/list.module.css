@@ -35,3 +35,16 @@
   align-items: center;
   margin: 50px;
 }
+.center{
+  text-align: center;
+}
+.right{
+  text-align: right;
+}
+.left{
+  text-align:left;
+}
+.amount{
+  text-align: right;
+  font-weight: bold;
+}

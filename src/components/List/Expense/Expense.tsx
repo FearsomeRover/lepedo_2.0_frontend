@@ -54,21 +54,21 @@ export default function Expense() {
           <tbody>
             <tr>
               <th>
-                <p className="left"> &nbsp; &nbsp; #</p>
+                <p className={styles.left}> &nbsp; &nbsp; #</p>
               </th>
               <th>
-                <p className="left">Megnevezés</p>
+                <p className={styles.left}>Megnevezés</p>
               </th>
               
               <th>
                 <p>Fizetett</p>
               </th>
-              <th className="min-width"></th>
+              <th/>
               <th>
                 <p>Résztvevők</p>
               </th>
               <th><p>Dátum</p></th>
-              <th>
+              <th className={styles.right}>
                 <p>Összeg</p>
               </th>
               <th ></th>
