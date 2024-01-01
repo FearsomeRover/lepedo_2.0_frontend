@@ -26,6 +26,7 @@ export default function NewUserForm(props:NewUserFormProps) {
     "#9370DB",
     "#52BBE8",
   ];
+  const prohibitedColors = ["#FFFFFF", "#000000"];
   const reset = () => {
     setColor(generateRandomColor());
     setName("");
@@ -74,6 +75,7 @@ export default function NewUserForm(props:NewUserFormProps) {
   return (
     <div className={styles.popup}>
       <form method="post" onSubmit={checkSubmit} className={styles.userform} autoComplete="off">
+      <h2>Új user hozzáadása</h2>
         <input
           placeholder="Név"
           minLength={3}

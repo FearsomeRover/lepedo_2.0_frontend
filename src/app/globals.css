@@ -242,10 +242,11 @@ input {
   outline: none;
 }
 .color {
-  border: 2px solid gray;
   padding: 1px;
-  height: 2rem;
-  width: 5rem;
+  height: 2.5rem;
+  width: 4rem;
+  border: none;
+  outline: none;
 }
 input:hover {
   border-color: black;
