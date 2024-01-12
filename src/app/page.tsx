@@ -17,7 +17,7 @@ export default function Page() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          process.env.NEXT_PUBLIC_BASE_URL + "/user"
+          process.env.NEXT_PUBLIC_BASE_URL + "/user/table"
         );
         if (response.status === 404) {
           return;
