@@ -61,6 +61,7 @@ export default function NewTransferForm(props: TransferFormProps) {
   };
   return (
     <div className={styles.popup}>
+      <h3>Új utalás hozzáadása</h3>
       {users ? (
         <form onSubmit={handleFormSubmit} className={styles.expenseform}>
           <input

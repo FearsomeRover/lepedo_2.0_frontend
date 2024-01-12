@@ -63,6 +63,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
     };
     return (
         <div className = {styles.popup}>
+            <h3>Új költés hozzáadása</h3>
             {users ? (
                 <form onSubmit = {handleFormSubmit} className = {styles.expenseform}>
                     <input
