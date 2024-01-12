@@ -7,8 +7,8 @@
   margin-left: 20px;
   margin-bottom: 10px;
 }
-.link h2{
-  color:gray;
+.link h2 {
+  color: gray;
   font-size: 27px;
   display: inline-block;
   margin-left: 20px;
@@ -18,6 +18,6 @@
   text-decoration: none;
   display: inline block;
 }
-.link:hover{
+.link:hover {
   color: black;
 }
