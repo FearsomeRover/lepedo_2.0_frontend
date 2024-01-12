@@ -1,3 +1,7 @@
-export default function LogInPage() {
-    return {}
+export default function LogIn() {
+    return (
+        <>
+            <h2>Bejelentkezés</h2>
+        </>
+    )
 }
