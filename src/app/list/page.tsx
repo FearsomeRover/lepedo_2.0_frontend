@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import axios from "axios";
-import styles from "./page.module.css"
+import styles from "./page.module.css";
 import Expense from "@/components/List/Expense/Expense";
 import Transfer from "@/components/List/Transfer/Transfer";
 
@@ -8,12 +8,12 @@ import { useState, useEffect } from "react";
 import { ExpenseType } from "@/types/expense";
 
 export default function ListPage() {
-  
-  
+  //this is a meaningless comment
+
   return (
     <>
-      <Expense/>
-      <Transfer/>
+      <Expense />
+      <Transfer />
     </>
   );
 }

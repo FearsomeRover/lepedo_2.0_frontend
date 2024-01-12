@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
-import styles from "./forms.module.css"
-type NewUserFormProps={
+import styles from "./forms.module.css";
+type NewUserFormProps = {
   user?: User;
-  refresh:()=>void;
+  refresh: () => void;
   disabled: boolean;
-  abort:()=>void;
-}
-export default function NewUserForm(props:NewUserFormProps) {
+  abort: () => void;
+};
+export default function NewUserForm(props: NewUserFormProps) {
   const user = props.user ? props.user : null;
   const generateRandomColor = () => {
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
@@ -36,21 +36,24 @@ export default function NewUserForm(props:NewUserFormProps) {
   const checkRevTag = async () => {
     if (revTag && !user) {
       const data = await axios.get(
-        process.env.REACT_APP_BASE_URL + "/user/revtag/" + revTag
+        process.env.NEXT_PUBLIC_BASE_URL + "/user/revtag/" + revTag
       );
       setFreeTag(data.data);
     }
   };
-  const checkSubmit = async (event:any) => {
+  const checkSubmit = async (event: any) => {
     event.preventDefault();
     if (user) {
-      await axios.patch(process.env.REACT_APP_BASE_URL + `/user/${props.user?.id}`, {
-        name,
-        revTag,
-        color,
-      });
+      await axios.patch(
+        process.env.NEXT_PUBLIC_BASE_URL + `/user/${props.user?.id}`,
+        {
+          name,
+          revTag,
+          color,
+        }
+      );
     } else if (freeTag && name.length > 2) {
-      await axios.post(process.env.REACT_APP_BASE_URL + "/user", {
+      await axios.post(process.env.NEXT_PUBLIC_BASE_URL + "/user", {
         name,
         revTag,
         color,
@@ -73,7 +76,12 @@ export default function NewUserForm(props:NewUserFormProps) {
   };
   return (
     <div className={styles.popup}>
-      <form method="post" onSubmit={checkSubmit} className={styles.userform} autoComplete="off">
+      <form
+        method="post"
+        onSubmit={checkSubmit}
+        className={styles.userform}
+        autoComplete="off"
+      >
         <input
           placeholder="Név"
           minLength={3}

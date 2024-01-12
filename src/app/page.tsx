@@ -1,16 +1,15 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
-import SummaryTable from "@/components/Summary/SummaryTable"
+import SummaryTable from "@/components/Summary/SummaryTable";
 import Cards from "@/components/Header/Cards";
 import NewUserForm from "@/components/Forms/NewUserForm";
 import { stats } from "@/types/stats";
 
-
-type Table  = {
+type Table = {
   table: Record<string, User>;
   stats: stats;
-}
+};
 export default function Page() {
   const [table, setTable] = useState<Table | null>(null);
   const [noUser, setNoUser] = useState<boolean>(false);
@@ -18,7 +17,7 @@ export default function Page() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          process.env.NEXT_PUBLIC_BASE_URL + "/user/table"
+          process.env.NEXT_PUBLIC_BASE_URL + "/user"
         );
         if (response.status === 404) {
           return;
@@ -26,11 +25,10 @@ export default function Page() {
         const data = await response.data;
         setTable(data);
       } catch (error: any) {
-        if(error.request.status === 404){
+        if (error.request.status === 404) {
           setTable(null);
           setNoUser(true);
-        }
-        else{
+        } else {
           console.error("Error fetching data:", error.request.status);
         }
       }
@@ -42,10 +40,19 @@ export default function Page() {
   }, []);
   return table ? (
     <div>
-      <Cards summary={true} cardsData={table.stats} refresh={handleRefresh}/>
-      <SummaryTable table={table.table} refresh={handleRefresh}/>
+      <Cards summary={true} cardsData={table.stats} refresh={handleRefresh} />
+      <SummaryTable table={table.table} refresh={handleRefresh} />
     </div>
+  ) : noUser ? (
+    <NewUserForm
+      refresh={handleRefresh}
+      disabled={true}
+      abort={() => {
+        setNoUser(false);
+        setTable(null);
+      }}
+    />
   ) : (
-    noUser?<NewUserForm refresh={handleRefresh} disabled={true} abort={()=>{setNoUser(false); setTable(null)}}/>:<p>loading</p>
+    <p>loading</p>
   );
 }
