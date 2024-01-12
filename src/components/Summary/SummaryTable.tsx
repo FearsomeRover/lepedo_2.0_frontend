@@ -17,7 +17,7 @@ export default function SummaryTable(props: SummaryTableProps) {
   };
   return (
     <div className={styles.summary_table}>
-      <table >
+      <table>
         <tbody>
           <tr>
             <th>
