@@ -80,7 +80,7 @@ export default function NewTransferForm(props: TransferFormProps) {
 
                     <div className={styles.userarea}>
                         <div className={styles.payed}>
-                            <h5 className={styles.usertitle}>Utaló</h5>
+                            <h5 className={styles.userareatitle}>Utaló</h5>
                             {users.map(user => (
                                 <label className={styles.radiolabel} key={user.id}>
                                     <input
@@ -100,7 +100,7 @@ export default function NewTransferForm(props: TransferFormProps) {
                             <Image className={styles.arrow} src='/images/arrow-right.svg' alt='arrow-right' fill></Image>
                         </div>
                         <div className={styles.payedto}>
-                            <h5 className={styles.usertitle}>Kedvezményezett</h5>
+                            <h5 className={styles.userareatitle}>Kedvezményezett</h5>
                             {users.map(user => (
                                 <label className={styles.checklabel} key={user.id}>
                                     <UserCard user={user} key={user.id} />

@@ -89,7 +89,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                     />
                     <div className={styles.userarea}>
                         <div className={styles.payed}>
-                            <h5 className={styles.usertitle}>Fizetett</h5>
+                            <h5 className={styles.userareatitle}>Fizetett</h5>
                             {users.map(user => (
                                 <label className={styles.radiolabel} key={user.id}>
                                     <input
@@ -109,7 +109,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                             <Image className={styles.arrow} src='/images/arrow-right.svg' alt='arrow-right' fill></Image>
                         </div>
                         <div className={styles.payedto}>
-                            <h5 className={styles.usertitle}>Részvett</h5>
+                            <h5 className={styles.userareatitle}>Részvett</h5>
                             {users.map(user => (
                                 <label className={styles.checklabel} key={user.id}>
                                     <UserCard user={user} key={user.id} />

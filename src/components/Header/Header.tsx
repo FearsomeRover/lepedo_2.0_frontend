@@ -3,12 +3,12 @@ import Link from "next/link";
 export default function Header() {
   return (
     <div>
-      <h1 className={styles.title}>Lepedő</h1>
+      <h1>Lepedő</h1>
 
-      <Link className={styles.link} href="/">
+      <Link href="/">
         <h2>Összegzés</h2>
       </Link>
-      <Link className={styles.link} href="/list">
+      <Link href="/list">
         <h2>Tételek</h2>
       </Link>
     </div>

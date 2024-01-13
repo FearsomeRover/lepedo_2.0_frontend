@@ -196,15 +196,6 @@ input:focus {
 }
 
 
-
-/*user label*/
-label {
-    font-family: 'Poppins', serif;
-    font-weight: 500;
-    color: gray;
-    font-size: 18px;
-}
-
 textarea {
     border: solid gray 2px;
     background: none;
@@ -217,8 +208,6 @@ textarea {
     height: 15rem;
     outline: none;
 }
-
-
 
 
 /*Radio Buttons*/
