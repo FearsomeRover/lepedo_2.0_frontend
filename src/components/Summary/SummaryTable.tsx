@@ -21,22 +21,22 @@ export default function SummaryTable(props: SummaryTableProps) {
                 <tbody>
                     <tr>
                         <th>
-                            <p className='left mw30'>#</p>
+                            <h5 className='left mw30'>#</h5>
                         </th>
                         <th>
-                            <p className='right'>Költésben részesült</p>
+                            <h5 className='right'>Költésben részesült</h5>
                         </th>
                         <th>
-                            <p className='right'>Fizetett</p>
+                            <h5 className='right'>Fizetett</h5>
                         </th>
                         <th>
-                            <p className='right'>Utalt</p>
+                            <h5 className='right'>Utalt</h5>
                         </th>
                         <th>
-                            <p className='right'>Utaltak neki</p>
+                            <h5 className='right'>Utaltak neki</h5>
                         </th>
                         <th>
-                            <p className='right'>Összesített mérleg</p>
+                            <h5 className='right'>Összesített mérleg</h5>
                         </th>
                     </tr>
                     {Object.keys(table).map(user => (

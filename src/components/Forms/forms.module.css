@@ -1,87 +1,101 @@
 .popup {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
+
 .userform {
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  border-radius: 15px;
-  justify-content: space-between;
-  height: 40vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 15px;
+    justify-content: space-between;
+    height: 40vh;
 }
+
 .colorwrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
+
 .colortext {
-  text-align: center;
+    text-align: center;
 }
+
 .expenseform {
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  border-radius: 15px;
-  justify-content: space-between;
-  height: 60vh;
-  z-index: 15;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 15px;
+    justify-content: space-between;
+    height: 60vh;
+    z-index: 15;
 }
+
 .userarea {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
+
 .payed {
-  display: flex;
-  float: left;
-  flex-direction: column;
-  min-width: 33%;
-  gap: 12px;
+    display: flex;
+    float: left;
+    flex-direction: column;
+    min-width: 33%;
+    gap: 12px;
 }
+
 .radiolabel {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
+
 .usertitle {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 400;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.imageContainer {
+    position: relative;
+    height: 100%;
+    flex: 1;
+    max-width: 10%;
 }
 
 .arrow {
-  max-width: 10%;
-  padding-top: 38px;
-  float:center
+    position: center;
 }
 
 .payedto {
-  display: flex;
-  float: right;
-  flex-direction: column;
-  min-width: 33%;
-  justify-content: space-between;
-  gap: 12px;
+    display: flex;
+    float: right;
+    flex-direction: column;
+    min-width: 33%;
+    justify-content: space-between;
+    gap: 12px;
 }
+
 .checklabel {
-  display: flex;
-  flex-direction: row;
-  float: right;
-  text-align: right;
-  justify-content: right;
+    display: flex;
+    flex-direction: row;
+    float: right;
+    text-align: right;
+    justify-content: right;
 }
