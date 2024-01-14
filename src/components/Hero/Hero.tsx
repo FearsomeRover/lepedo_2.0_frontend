@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from "./hero.module.css";
-import LinkButton from "@/components/Button/LinkButton";
+import React from 'react'
+import styles from './hero.module.css'
+import LinkButton from '@/components/Button/LinkButton'
 
 export default function Hero() {
     return (
@@ -13,7 +13,11 @@ export default function Hero() {
                     <h2>Manage group expenses. Easily.</h2>
                 </div>
             </div>
-            <LinkButton text={"Sign In"} href={"google.com"} textOnHover={"Sign In"}/>
+            <LinkButton
+                text={'Bejelentkezés'}
+                href={'/api/auth/login'}
+                textOnHover={'Bejelentkezés'}
+            />
         </>
     )
 }

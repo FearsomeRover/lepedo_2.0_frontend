@@ -15,4 +15,10 @@
     color: var(--black);
     outline: none;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.stbn:focus {
+    box-shadow: 4px 4px 4px lightgray;
+    border-color: red;
 }
