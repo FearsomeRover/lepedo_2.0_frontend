@@ -11,6 +11,7 @@ type Table = {
   stats: stats;
 };
 export default function Page() {
+  //random comment
   const [table, setTable] = useState<Table | null>(null);
   const [noUser, setNoUser] = useState<boolean>(false);
   const handleRefresh = () => {
