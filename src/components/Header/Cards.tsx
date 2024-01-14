@@ -1,29 +1,34 @@
-"use client";
-import { useState } from "react";
-import NewExpenseForm from "@/components/Forms/NewExpenseForm";
-import NewTransferForm from "../Forms/NewTransferForm";
-import { Cards } from "@/types/cardData";
-import Card from "./Card";
+'use client'
+import React, { useState } from 'react'
+import NewExpenseForm from '@/components/Forms/NewExpenseForm'
+import NewTransferForm from '../Forms/NewTransferForm'
+import Card from './Card'
+import { useUser } from '@auth0/nextjs-auth0/client'
+import LinkButton from '@/components/Button/LinkButton'
+import { redirect } from 'next/navigation'
+
 export default function Cards(props: any) {
-  const [visibleNewExpense, setVisibleNewExpense] = useState(false);
-  const [visibleNewTransfer, setVisibleNewTransfer] = useState(false);
-  if (props.summary) {
-    return (
-      <>
-        {visibleNewExpense && (
-          <NewExpenseForm
-            abort={() => setVisibleNewExpense(false)}
-            refresh={props.refresh}
-          />
-        )}
-        {visibleNewTransfer && (
-          <NewTransferForm
-            abort={() => setVisibleNewTransfer(false)}
-            refresh={() => {}}
-          />
-        )}
-        <div className="floating-top">
-          <Card
+    const [visibleNewExpense, setVisibleNewExpense] = useState(false)
+    const [visibleNewTransfer, setVisibleNewTransfer] = useState(false)
+    const { user, error, isLoading } = useUser()
+
+    if (props.summary) {
+        return (
+            <>
+                {visibleNewExpense && (
+                    <NewExpenseForm
+                        abort={() => setVisibleNewExpense(false)}
+                        refresh={props.refresh}
+                    />
+                )}
+                {visibleNewTransfer && (
+                    <NewTransferForm
+                        abort={() => setVisibleNewTransfer(false)}
+                        refresh={() => {}}
+                    />
+                )}
+                <div className="floating-top">
+                    {/*<Card
             color={"#51bb88"}
             title={"Összesen elszámolt"}
             value={props.cardsData.doneall + " Ft"}
@@ -40,16 +45,27 @@ export default function Cards(props: any) {
               name: "Új költés",
               action: () => setVisibleNewExpense(true),
             }}
-          ></Card>
-          <Card
-            color={"#d9515e"}
-            title={"A spórolós"}
-            value={props.cardsData.thrifty}
-          ></Card>
-        </div>
-      </>
-    );
-  } else {
-    console.log("fuck");
-  }
+          ></Card>*/}
+
+                    {user == undefined ? (
+                        <LinkButton
+                            text={'Bejelentkezés'}
+                            href={'/api/auth/login'}
+                            textOnHover={'Bejelentkezés'}
+                        />
+                    ) : (
+                        <>
+                            <LinkButton
+                                text={user?.name!}
+                                href={'/api/auth/logout'}
+                                textOnHover={'Kijelentkezés'}
+                            />
+                        </>
+                    )}
+                </div>
+            </>
+        )
+    } else {
+        console.log('fuck')
+    }
 }

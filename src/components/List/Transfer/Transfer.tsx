@@ -35,7 +35,7 @@ export default function Transfer() {
   if (noTransfer) {
     return (
       <div className={styles.emptytable}>
-        <h2>Még nincsenek utalások</h2>
+        <h3>Még nincsenek utalások</h3>
 
         <button
           onClick={() => {

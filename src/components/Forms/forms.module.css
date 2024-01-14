@@ -17,14 +17,14 @@
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    border-radius: 15px;
+    border-radius: 20px;
     justify-content: space-between;
     height: 40vh;
 }
 
 .colorwrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     text-align: center;
 }
@@ -42,7 +42,7 @@
     border-radius: 15px;
     justify-content: space-between;
     height: 60vh;
-    z-index: 15;
+    z-index: 2;
 }
 
 .userarea {
@@ -58,7 +58,13 @@
     float: left;
     flex-direction: column;
     min-width: 33%;
-    gap: 12px;
+}
+
+.payedto {
+    display: flex;
+    float: right;
+    flex-direction: column;
+    min-width: 33%;
 }
 
 .radiolabel {
@@ -66,7 +72,16 @@
     flex-direction: row;
 }
 
-.usertitle {
+.checklabel {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    text-align: right;
+    justify-content: right;
+}
+
+
+.userareatitle {
     text-align: center;
     font-size: 16px;
     font-weight: 400;
@@ -83,19 +98,3 @@
     position: center;
 }
 
-.payedto {
-    display: flex;
-    float: right;
-    flex-direction: column;
-    min-width: 33%;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.checklabel {
-    display: flex;
-    flex-direction: row;
-    float: right;
-    text-align: right;
-    justify-content: right;
-}

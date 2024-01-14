@@ -1,0 +1,24 @@
+/*Buttons*/
+.sbtn {
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border: 2px solid var(--black);
+    border-radius: 8px;
+    width: fit-content;
+    margin: 20px;
+    padding: 8px 20px;
+    display: inline-block;
+    text-underline: none;
+    color: var(--black);
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.stbn:focus {
+    box-shadow: 4px 4px 4px lightgray;
+    border-color: red;
+}

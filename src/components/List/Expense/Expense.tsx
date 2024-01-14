@@ -33,7 +33,7 @@ export default function Expense() {
   if (noExpense) {
     return (
       <div className={styles.emptytable}>
-        <h2>Még nincsenek költések</h2>
+        <h3>Még nincsenek költések</h3>
         <button
           onClick={() => {
             setVisibleNewExpense(true);
