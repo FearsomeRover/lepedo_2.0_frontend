@@ -5,6 +5,7 @@ import UserCard from '@/components/UserCard/UserCard'
 import styles from './forms.module.css'
 import { ExpenseType } from '@/types/expense'
 import Image from 'next/image'
+import UserCardSimple from '@/components/UserCard/UserCardSimple'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -17,10 +18,13 @@ type Response = {
 export default function NewExpenseForm(props: ExpenseFormProps) {
     const currentDate = new Date().toISOString().split('T')[0]
     const [users, setUsers] = useState<User[] | null>()
+    const [selectedUsers, setSelectedUsers] = useState<User[]>([])
     const getAllUsers = async () => {
         const response: Response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user')
         setUsers(response.data)
     }
+    const [searchPhrase, setSearchPhrase] = useState<string>('')
+
     useEffect(() => {
         getAllUsers()
     }, [])
@@ -60,25 +64,25 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
         <div className={styles.popup}>
             {users ? (
                 <form onSubmit={handleFormSubmit} className={styles.expenseform}>
-                    <h4>Új kiadás hozzáadása</h4>
+                    <h3>Új kiadás hozzáadása</h3>
+                    <h5>Név</h5>
                     <input
-                        placeholder='Megnevezés'
                         name='name'
                         defaultValue={props.expense ? props.expense.title : ''}
                         minLength={3}
                         maxLength={15}
                         required
                     />
+                    <h5>Dátum</h5>
                     <input
-                        placeholder='Dátum'
                         name='date'
                         type='date'
                         defaultValue={props.expense ? props.expense.date : currentDate}
                         onChange={validateDate}
                         onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Csak 50Ft és 1000000Ft közti érték lehet')}
                     />
+                    <h5>Összeg</h5>
                     <input
-                        placeholder='Összeg'
                         name='amount'
                         type='number'
                         defaultValue={props.expense ? props.expense.amount : ''}
@@ -87,10 +91,38 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                         //required
                         //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
                     />
+                    <h5>Résztvételek</h5>
+                    <select>
+                        {users.map(user => (
+                            <option key={user.id} value='dfs'>
+                                <UserCard user={user} key={user.id} />
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        type='text'
+                        placeholder='Keresés...'
+                        onChange={s => setSearchPhrase(s.target.value)}
+                    />
+                    <div className={styles.userbucket} title={"Válaszd ki a költésben résztvevőket!"}>
+                        {users.filter(user => (user.name.toLowerCase().includes(searchPhrase.toLowerCase()))).map(user => (
+                            <UserCardSimple name={user.name}
+                                            color={user.color}
+                                            revTag={user.revTag}
+                                            isSelected={selectedUsers.includes(user)}
+                                            onClick={() => {
+                                                setSelectedUsers((prevSelectedUsers) => prevSelectedUsers.includes(user) ? prevSelectedUsers.filter(u => u !== user) : [...prevSelectedUsers, user])
+                                            }}
+                                            key={user.id}
+                            />
+                        ))}
+                    </div>
+
+
                     <div className={styles.userarea}>
                         <div className={styles.payed}>
                             <h5 className={styles.userareatitle}>Fizetett</h5>
-                            {users.map(user => (
+                            {selectedUsers.map(user => (
                                 <label className={styles.radiolabel} key={user.id}>
                                     <input
                                         type='radio'
@@ -99,18 +131,18 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                         className='radio'
                                         name='payed'
                                         defaultChecked={props.expense?.payerId === user.id}
-                                        //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                                     />
                                     <UserCard user={user} key={user.id} />
                                 </label>
                             ))}
                         </div>
                         <div className={styles.imageContainer}>
-                            <Image className={styles.arrow} src='/images/arrow-right.svg' alt='arrow-right' fill></Image>
+                            <Image className={styles.arrow} src='/images/arrow-right.svg' alt='arrow-right'
+                                   fill></Image>
                         </div>
                         <div className={styles.payedto}>
                             <h5 className={styles.userareatitle}>Részvett</h5>
-                            {users.map(user => (
+                            {selectedUsers.map(user => (
                                 <label className={styles.checklabel} key={user.id}>
                                     <UserCard user={user} key={user.id} />
                                     <input
@@ -138,6 +170,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                         </button>
                     </div>
                 </form>
+
             ) : (
                 <p>loading</p>
             )}

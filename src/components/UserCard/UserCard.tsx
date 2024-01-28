@@ -17,6 +17,7 @@ export default function UserCard({ user }: { user: User }) {
       className="usertag"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+
     >
       {isHovered ? `@${user.revTag}` : user.name}
     </div>

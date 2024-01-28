@@ -29,6 +29,9 @@ export default function NewUserForm(props: NewUserFormProps) {
         '#9370DB',
         '#52BBE8',
     ]
+    /*todo https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color*/
+
+
     const reset = () => {
         setColor(generateRandomColor())
         setName('')
@@ -128,7 +131,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                     }}
                 />
 
-
+                <div className="h3"></div>
 
                 <div>
                     <input className='sbtn_with_h4' type='submit' value='Mentés' />

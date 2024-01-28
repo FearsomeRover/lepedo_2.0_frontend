@@ -95,10 +95,17 @@ p {
     font-weight: 500;
     font-size: 14px;
     float: inherit;
+    box-sizing: content-box;
 }
 
+.unselectable{
+    user-select: none;
+}
 
-
+.outlined {
+    padding: 2px 8px;
+    border: 2px solid black;
+}
 
 
 
@@ -378,4 +385,11 @@ textarea {
 .min-width {
     width: fit-content;
     padding: 0;
+}
+
+.scrollY{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
 }
