@@ -56,7 +56,7 @@
 
 .userarea {
     display: flex;
-    min-height: 10rem;
+    height: 10rem;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

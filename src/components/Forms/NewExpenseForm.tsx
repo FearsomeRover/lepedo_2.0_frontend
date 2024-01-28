@@ -91,15 +91,9 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                         //required
                         //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
                     />
-                    <h5>Résztvételek</h5>
-                    <select>
-                        {users.map(user => (
-                            <option key={user.id} value='dfs'>
-                                <UserCard user={user} key={user.id} />
-                            </option>
-                        ))}
-                    </select>
+                    <h5>Résztvevők</h5>
                     <input
+                        className={"w50 right searchinput"}
                         type='text'
                         placeholder='Keresés...'
                         onChange={s => setSearchPhrase(s.target.value)}
@@ -118,7 +112,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                         ))}
                     </div>
 
-
+                    <h5>Leosztás</h5>
                     <div className={styles.userarea}>
                         <div className={styles.payed}>
                             <h5 className={styles.userareatitle}>Fizetett</h5>
@@ -151,7 +145,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                         value={user.id}
                                         className='radio'
                                         name='payedto'
-                                        defaultChecked={props.expense?.received.some(curruser => curruser.id === user.id)}
+                                        defaultChecked={props.expense ? props.expense?.received.some(curruser => curruser.id === user.id) : true}
                                         //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                                     />
                                 </label>

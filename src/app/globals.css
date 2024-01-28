@@ -96,6 +96,9 @@ p {
     font-size: 14px;
     float: inherit;
     box-sizing: content-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .unselectable{
@@ -212,7 +215,12 @@ input:focus {
     /*box-shadow: 0 4px 4px lightgray;*/
 }
 
-
+.searchinput{
+    font-family : Inter, serif;
+    font-weight : 400;
+    font-size: 14px;
+    float: right;
+}
 
 
 
@@ -342,6 +350,10 @@ textarea {
     width: 7rem;
 }
 
+.w50 {
+    width: 50%;
+}
+
 .h3 {
     height: 3rem;
 }
@@ -362,6 +374,7 @@ textarea {
     text-align: right;
     align-content: end;
     align-items: end;
+    align-self: end;
 }
 
 .left {
