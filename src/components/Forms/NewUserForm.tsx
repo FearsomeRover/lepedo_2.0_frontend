@@ -89,7 +89,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                 autoComplete='off'
             >
                 <h3>Saját profil</h3>
-                <UserCardSimple color={color} name={name} revTag={revTag}></UserCardSimple>
+                <UserCardSimple color={color} name={name} revTag={revTag} isSelected={false} onClick={() => {}}></UserCardSimple>
                 <div className="h3"></div>
                 <h3>Adataid</h3>
                 <h5>Név</h5>
