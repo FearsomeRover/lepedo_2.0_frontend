@@ -1,7 +1,13 @@
 import { useState } from "react";
 import styles from "./usercard.module.css";
 
-export default function UserCard({ user }: { user: User }) {
+type SimpleUserProps = {
+    name: string;
+    revTag: string;
+    color: string;
+};
+
+export default function UserCardSimple( simple: SimpleUserProps ) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -13,12 +19,12 @@ export default function UserCard({ user }: { user: User }) {
   };
   return (
     <div
-      style={{ backgroundColor: user.color }}
+      style={{ backgroundColor: simple.color }}
       className="usertag"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {isHovered ? `@${user.revTag}` : user.name}
+      {isHovered ? `@${simple.revTag}` : (simple.name == "" ?  "-" : simple.name)}
     </div>
   );
 }

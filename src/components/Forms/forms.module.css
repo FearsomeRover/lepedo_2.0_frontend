@@ -19,18 +19,26 @@
     padding: 2rem;
     border-radius: 20px;
     justify-content: space-between;
-    height: 40vh;
+}
+.color {
+    margin: 0;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 50px;
+    border: 0px;
 }
 
-.colorwrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
+.color:hover {
 }
 
-.colortext {
-    text-align: center;
+.color:focus {
+}
+.coloroverlay{
+    position: absolute;
+
+    background-color: rgba(255, 255, 255, 0);
+    color: blue;
+    z-index: 2;
 }
 
 .expenseform {
