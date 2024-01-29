@@ -14,7 +14,6 @@ export default function UserCardSimple(simple: SimpleUserProps) {
     const [isHovered, setIsHovered] = useState(false)
     const [nameWidth, setNameWidth] = useState<number>(0)
     const [revTagWidth, setRevTagWidth] = useState<number>(0)
-    const contentRef = useRef<HTMLDivElement>(null)
     const nameRef = useRef<HTMLDivElement>(null)
     const revTagRef = useRef<HTMLDivElement>(null)
 
@@ -42,7 +41,6 @@ export default function UserCardSimple(simple: SimpleUserProps) {
              className={simple.isAlignedToCenter ? 'usertagcontainer middle' : 'usertagcontainer'}
              onMouseEnter={handleMouseEnter}
              onMouseLeave={handleMouseLeave}>
-            <div ref={contentRef} style={{ width: '2px solid blue' }}>
                 {isHovered && simple.isHoverable ? (
                     <div
                         ref={revTagRef}
@@ -63,6 +61,5 @@ export default function UserCardSimple(simple: SimpleUserProps) {
                     </div>
                 )}
             </div>
-        </div>
     )
 }
