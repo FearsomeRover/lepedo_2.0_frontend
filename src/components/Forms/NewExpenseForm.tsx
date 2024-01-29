@@ -104,6 +104,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                             color={user.color}
                                             revTag={user.revTag}
                                             isSelected={selectedUsers.includes(user)}
+                                            isHoverable={false}
                                             onClick={() => {
                                                 setSelectedUsers((prevSelectedUsers) => prevSelectedUsers.includes(user) ? prevSelectedUsers.filter(u => u !== user) : [...prevSelectedUsers, user])
                                             }}

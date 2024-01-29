@@ -90,7 +90,8 @@ export default function NewUserForm(props: NewUserFormProps) {
             >
                 <h3>Saját profil</h3>
                 <div className="h3"></div>
-                <UserCardSimple color={color} name={name} revTag={revTag} isSelected={false} onClick={() => {}}></UserCardSimple>
+                <UserCardSimple color={color} name={name} revTag={revTag} isSelected={false} isHoverable={true} isAlignedToCenter={true} onClick={() => {}}></UserCardSimple>
+                <h5 className="middle">{user?.email}</h5>
                 <div className="h3"></div>
                 <h5>Név</h5>
                 <input

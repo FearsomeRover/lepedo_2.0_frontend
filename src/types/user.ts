@@ -9,4 +9,5 @@ type User = {
   transferto: number;
   balance: number;
   deleteable: boolean;
+  email : string;
 };
