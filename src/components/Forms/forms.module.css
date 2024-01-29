@@ -1,14 +1,15 @@
 .popup {
     width: 100vw;
-    height: 100vh;
-    position: absolute;
+    height: 100%;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1001;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
     display: flex;
+    scroll-behavior: initial;
 }
 
 .userform {
@@ -57,6 +58,7 @@
 .userarea {
     display: flex;
     height: 10rem;
+    overflow: scroll;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

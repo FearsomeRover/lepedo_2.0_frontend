@@ -1,7 +1,6 @@
 'use client'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import UserCard from '@/components/UserCard/UserCard'
 import styles from './forms.module.css'
 import { ExpenseType } from '@/types/expense'
 import Image from 'next/image'
@@ -65,40 +64,55 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
             {users ? (
                 <form onSubmit={handleFormSubmit} className={styles.expenseform}>
                     <h3>Új kiadás hozzáadása</h3>
-                    <h5>Név</h5>
-                    <input
-                        name='name'
-                        defaultValue={props.expense ? props.expense.title : ''}
-                        minLength={3}
-                        maxLength={15}
-                        required
-                    />
-                    <h5>Dátum</h5>
-                    <input
-                        name='date'
-                        type='date'
-                        defaultValue={props.expense ? props.expense.date : currentDate}
-                        onChange={validateDate}
-                        onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Csak 50Ft és 1000000Ft közti érték lehet')}
-                    />
-                    <h5>Összeg</h5>
-                    <input
-                        name='amount'
-                        type='number'
-                        defaultValue={props.expense ? props.expense.amount : ''}
-                        min={50}
-                        max={1_000_000}
-                        //required
-                        //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
-                    />
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <h5>Név</h5>
+                                <input
+                                    name='name'
+                                    defaultValue={props.expense ? props.expense.title : ''}
+                                    minLength={3}
+                                    maxLength={15}
+                                    required
+                                />
+                            </td>
+                            <td>
+                                <h5>Dátum</h5>
+                                <input
+                                    name='date'
+                                    type='date'
+                                    defaultValue={props.expense ? props.expense.date : currentDate}
+                                    onChange={validateDate}
+                                    onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Csak 50Ft és 1000000Ft közti érték lehet')}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Összeg</h5>
+                                <input
+                                    name='amount'
+                                    type='number'
+                                    defaultValue={props.expense ? props.expense.amount : ''}
+                                    min={50}
+                                    max={1_000_000}
+                                    //required
+                                    //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
+                                />
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <h5>Résztvevők</h5>
                     <input
-                        className={"w50 right searchinput"}
+                        className={'w50 right searchinput'}
                         type='text'
                         placeholder='Keresés...'
                         onChange={s => setSearchPhrase(s.target.value)}
                     />
-                    <div className={styles.userbucket} title={"Válaszd ki a költésben résztvevőket!"}>
+                    <div className={styles.userbucket} title={'Válaszd ki a költésben résztvevőket!'}>
                         {users.filter(user => (user.name.toLowerCase().includes(searchPhrase.toLowerCase()))).map(user => (
                             <UserCardSimple name={user.name}
                                             color={user.color}
@@ -127,7 +141,13 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                         name='payed'
                                         defaultChecked={props.expense?.payerId === user.id}
                                     />
-                                    <UserCard user={user} key={user.id} />
+                                    <UserCardSimple
+                                        name={user.name}
+                                        color={user.color}
+                                        onClick={() => {
+                                        }}
+                                        revTag={user.revTag}
+                                        key={user.id} />
                                 </label>
                             ))}
                         </div>
@@ -139,7 +159,8 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                             <h5 className={styles.userareatitle}>Részvett</h5>
                             {selectedUsers.map(user => (
                                 <label className={styles.checklabel} key={user.id}>
-                                    <UserCard user={user} key={user.id} />
+                                    <UserCardSimple name={user.name} color={user.color} onClick={() => {
+                                    }} revTag={user.revTag} key={user.id} />
                                     <input
                                         type='checkbox'
                                         id={user.id}
