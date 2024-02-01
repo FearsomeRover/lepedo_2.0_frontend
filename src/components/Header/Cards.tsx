@@ -1,33 +1,54 @@
 'use client'
-import React, { useState } from 'react'
-import NewExpenseForm from '@/components/Forms/NewExpenseForm'
-import NewTransferForm from '../Forms/NewTransferForm'
-import Card from './Card'
+import React, { useEffect, useState } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import LinkButton from '@/components/Button/LinkButton'
-import { redirect } from 'next/navigation'
+import NewUserForm from '@/components/Forms/NewUserForm'
+import axios from 'axios'
 
 export default function Cards(props: any) {
-    const [visibleNewExpense, setVisibleNewExpense] = useState(false)
-    const [visibleNewTransfer, setVisibleNewTransfer] = useState(false)
+    const [visibleUserForm, setvisibleUserForm] = useState(false)
     const { user, error, isLoading } = useUser()
+    const [dbUser, setDbUser] = useState<User | null>(null)
+    const [users, setUsers] = useState<User[]>([])
+
+    const getUser = async () => {
+        if (!user) return
+        const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user')
+        for (const u of response.data) {
+            if (u.auth0sub === user.sub) {
+                setDbUser(u)
+                console.log('found')
+                console.log(u)
+                return
+            }
+        }
+       /* const data = {
+            name: user.name,
+            revTag: user.name,
+            color: '#000000',
+            auth0sub: user.sub,
+        }
+        console.log(data)
+        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', data)*/
+    }
+
+    useEffect(() => {
+        getUser()
+    }, [user])
+
+
+    function deleteUsers() {
+        axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user').then(response => setUsers(response.data)).then(() => {
+            for (const u of users) {
+                axios.delete(process.env.NEXT_PUBLIC_BASE_URL + `/user/${u.id}`)
+            }
+        })
+    }
 
     if (props.summary) {
         return (
             <>
-                {visibleNewExpense && (
-                    <NewExpenseForm
-                        abort={() => setVisibleNewExpense(false)}
-                        refresh={props.refresh}
-                    />
-                )}
-                {visibleNewTransfer && (
-                    <NewTransferForm
-                        abort={() => setVisibleNewTransfer(false)}
-                        refresh={() => {}}
-                    />
-                )}
-                <div className="floating-top">
+                <div className='floating-top'>
                     {user == undefined ? (
                         <LinkButton
                             text={'Bejelentkezés'}
@@ -35,17 +56,25 @@ export default function Cards(props: any) {
                         />
                     ) : (
                         <>
-                            <LinkButton
-                            text={user?.name!}
-                            href={'/api/auth/logout'}
-                            textOnHover={'Kijelentkezés'}
-                        />
+                            <button onClick={deleteUsers}>
+                                [drop users]
+                            </button>
+                            <button className='sbtn' onClick={() => {
+                                setvisibleUserForm(true)
+                                console.log('afsd')
+                            }}>
+                                {user?.name!}
+                            </button>
                         </>
                     )}
                 </div>
+                {visibleUserForm && dbUser && <NewUserForm refresh={() => {
+                }} user={dbUser!} abort={() => {
+                    setvisibleUserForm(false)
+                }} disabled={false} />}
             </>
         )
     } else {
-        console.log('fuck')
+        console.log('f')
     }
 }

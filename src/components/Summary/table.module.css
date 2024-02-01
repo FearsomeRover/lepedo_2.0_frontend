@@ -28,7 +28,6 @@
   position: relative;
 }
 .summarytable th {
-  background-color: white;
   position: sticky;
   top: 0;
 }

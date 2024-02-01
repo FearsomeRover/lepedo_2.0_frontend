@@ -3,6 +3,7 @@ import { useState } from 'react'
 import styles from './forms.module.css'
 import UserCard from '@/components/UserCard/UserCard'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
+import LinkButton from '@/components/Button/LinkButton'
 
 type NewUserFormProps = {
     user?: User;
@@ -49,7 +50,6 @@ export default function NewUserForm(props: NewUserFormProps) {
     }
     const checkSubmit = async (event: any) => {
         event.preventDefault()
-        const auth0sub = new Date().toISOString()
         if (user) {
             await axios.patch(
                 process.env.NEXT_PUBLIC_BASE_URL + `/user/${props.user?.id}`,
@@ -57,16 +57,9 @@ export default function NewUserForm(props: NewUserFormProps) {
                     name,
                     revTag,
                     color,
-                    auth0sub,
+                    auth0sub : user!.auth0sub,
                 },
             )
-        } else if (freeTag && name.length > 2) {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', {
-                name,
-                revTag,
-                color,
-                auth0sub,
-            })
         } else {
             return
         }
@@ -146,9 +139,10 @@ export default function NewUserForm(props: NewUserFormProps) {
                                 props.abort()
                             }}
                         >
-                            <h4>Mégse</h4>
+                            Mégse
                         </button>
                     )}
+                    <LinkButton href="/api/auth/logout" text="Kijelentkezés" />
                 </div>
             </form>
         </div>

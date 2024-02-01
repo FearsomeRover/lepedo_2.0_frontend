@@ -128,6 +128,7 @@ table {
 th {
     border: 3px var(--black) solid;
     border-width: 0 0 3px 0;
+    background-color: var(--white)
 }
 
 td {
@@ -293,7 +294,7 @@ textarea {
 
 
 
-@media (max-width: 1270px) {
+@media (max-width: 900px) {
     h1{
         font-size: 48px;
         display: inline-block;
