@@ -49,6 +49,7 @@ export default function NewUserForm(props: NewUserFormProps) {
     }
     const checkSubmit = async (event: any) => {
         event.preventDefault()
+        const auth0sub = new Date().toISOString()
         if (user) {
             await axios.patch(
                 process.env.NEXT_PUBLIC_BASE_URL + `/user/${props.user?.id}`,
@@ -56,6 +57,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                     name,
                     revTag,
                     color,
+                    auth0sub,
                 },
             )
         } else if (freeTag && name.length > 2) {
@@ -63,6 +65,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                 name,
                 revTag,
                 color,
+                auth0sub,
             })
         } else {
             return

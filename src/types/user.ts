@@ -10,4 +10,5 @@ type User = {
   balance: number;
   deleteable: boolean;
   email : string;
+  auth0sub : string;
 };

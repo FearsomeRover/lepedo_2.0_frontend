@@ -28,38 +28,18 @@ export default function Cards(props: any) {
                     />
                 )}
                 <div className="floating-top">
-                    {/*<Card
-            color={"#51bb88"}
-            title={"Összesen elszámolt"}
-            value={props.cardsData.doneall + " Ft"}
-            bottomLink={{
-              name: "Új utalás",
-              action: () => setVisibleNewTransfer(true),
-            }}
-          ></Card>
-          <Card
-            color={"#52bbe8"}
-            title={"Összesen költött"}
-            value={props.cardsData.spentall + " Ft"}
-            bottomLink={{
-              name: "Új költés",
-              action: () => setVisibleNewExpense(true),
-            }}
-          ></Card>*/}
-
                     {user == undefined ? (
                         <LinkButton
                             text={'Bejelentkezés'}
                             href={'/api/auth/login'}
-                            textOnHover={'Bejelentkezés'}
                         />
                     ) : (
                         <>
                             <LinkButton
-                                text={user?.name!}
-                                href={'/api/auth/logout'}
-                                textOnHover={'Kijelentkezés'}
-                            />
+                            text={user?.name!}
+                            href={'/api/auth/logout'}
+                            textOnHover={'Kijelentkezés'}
+                        />
                         </>
                     )}
                 </div>

@@ -1,12 +1,10 @@
 import {useState} from "react";
-import styles from "./linkbutton.module.css";
 import {useRouter} from "next/navigation";
-import {redirect} from "next/navigation";
 
 
 type LinkButtonProps = {
     text: String,
-    textOnHover: String,
+    textOnHover?: String,
     href: String,
 }
 export default function LinkButton(props: LinkButtonProps) {
@@ -26,13 +24,13 @@ export default function LinkButton(props: LinkButtonProps) {
     }
     return (
         <div
-            className = {styles.sbtn}
+            className = "sbtn"
             onMouseEnter = {handleMouseEnter}
             onMouseLeave = {handleMouseLeave}
             onClick = {handleClick}
         >
             <h4>
-                {isHovered ? `${props.textOnHover}` : props.text}
+                {isHovered && props.textOnHover ? `${props.textOnHover}` : props.text}
             </h4>
         </div>
     );

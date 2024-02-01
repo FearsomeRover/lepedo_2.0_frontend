@@ -12,13 +12,13 @@ type Table = {
 };
 export default function Page() {
   //random comment
-  const [table, setTable] = useState<Table | null>(null);
   const [noUser, setNoUser] = useState<boolean>(false);
+  const [table, setTable] = useState<User[]>([]);
   const handleRefresh = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          process.env.NEXT_PUBLIC_BASE_URL + "/user/table"
+          process.env.NEXT_PUBLIC_BASE_URL + "/user"
         );
         if (response.status === 404) {
           return;
@@ -27,7 +27,6 @@ export default function Page() {
         setTable(data);
       } catch (error: any) {
         if (error.request.status === 404) {
-          setTable(null);
           setNoUser(true);
         } else {
           console.error("Error fetching data:", error.request.status);
@@ -39,21 +38,9 @@ export default function Page() {
   useEffect(() => {
     handleRefresh();
   }, []);
-  return table ? (
+  return (
     <div>
-      <Cards summary={true} cardsData={table.stats} refresh={handleRefresh} />
-      <SummaryTable table={table.table} refresh={handleRefresh} />
+      <SummaryTable friendlyUsers={table} refresh={handleRefresh} />
     </div>
-  ) : noUser ? (
-    <NewUserForm
-      refresh={handleRefresh}
-      disabled={true}
-      abort={() => {
-        setNoUser(false);
-        setTable(null);
-      }}
-    />
-  ) : (
-    <p>loading</p>
   );
 }
