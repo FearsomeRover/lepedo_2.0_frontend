@@ -1,6 +1,5 @@
 import UserRow from './UserRow'
 import { useState } from 'react'
-import NewUserForm from '../Forms/NewUserForm'
 import styles from './table.module.css'
 
 type SummaryTableProps = {
@@ -18,29 +17,31 @@ export default function SummaryTable(props: SummaryTableProps) {
         <div className={styles.summarytable}>
             <table>
                 <tbody>
-                    <tr>
-                        <th>
-                            <h5 className='left mw30'>#</h5>
-                        </th>
-                        <th>
-                            <h5 className='right'>Költésben részesült</h5>
-                        </th>
-                        <th>
-                            <h5 className='right'>Fizetett</h5>
-                        </th>
-                        <th>
-                            <h5 className='right'>Utalt</h5>
-                        </th>
-                        <th>
-                            <h5 className='right'>Utaltak neki</h5>
-                        </th>
-                        <th>
-                            <h5 className='right'>Összesített mérleg</h5>
-                        </th>
-                    </tr>
-                    {props.friendlyUsers.map(user => (
-                        <UserRow key={user.id} userId={user.id!} user={user} editUser={handleEditUser} refresh={props.refresh} />
-                    ))}
+                <tr>
+                    <th>
+                        <h5 className='left mw30'>#</h5>
+                    </th>
+                    <th>
+                        <h5 className='right'>Költésben részesült</h5>
+                    </th>
+                    <th>
+                        <h5 className='right'>Fizetett</h5>
+                    </th>
+                    <th>
+                        <h5 className='right'>Utalt</h5>
+                    </th>
+                    <th>
+                        <h5 className='right'>Utaltak neki</h5>
+                    </th>
+                    <th>
+                        <h5 className='right'>Összesített mérleg</h5>
+                    </th>
+                </tr>
+
+                {props.friendlyUsers.map(user => (
+                    <UserRow key={user.id} userId={user.id!} user={user} editUser={handleEditUser}
+                             refresh={props.refresh} />
+                ))}
                 </tbody>
             </table>
         </div>
