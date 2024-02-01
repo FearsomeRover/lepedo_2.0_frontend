@@ -4,19 +4,21 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import LinkButton from '@/components/Button/LinkButton'
 import NewUserForm from '@/components/Forms/NewUserForm'
 import axios from 'axios'
+import { DBUserProvider, useUserContext } from '@/app/dbUserContext'
 
 export default function Cards(props: any) {
     const [visibleUserForm, setvisibleUserForm] = useState(false)
     const { user, error, isLoading } = useUser()
-    const [dbUser, setDbUser] = useState<User | null>(null)
-    const [users, setUsers] = useState<User[]>([])
+    const [ curdbUser, setCurdbUser] = useState<User | null>(null)
+    const [ users, setUsers] = useState<User[]>([])
+    const [ contextUsers, setContextUsers ] = useUserContext()
 
     const getUser = async () => {
         if (!user) return
         const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user')
         for (const u of response.data) {
             if (u.auth0sub === user.sub) {
-                setDbUser(u)
+                setCurdbUser(u)
                 return
             }
         }
@@ -33,7 +35,11 @@ export default function Cards(props: any) {
 
     useEffect(() => {
         getUser()
+
+        // @ts-ignore
+        setContextUsers(users)
     }, [user])
+
 
 
     function deleteUsers() {
@@ -72,12 +78,12 @@ export default function Cards(props: any) {
                         </>
                     )}
                 </div>
-                {visibleUserForm && dbUser &&
+                {visibleUserForm && curdbUser &&
                     <NewUserForm
                         refresh={() => {
                             getUser
                         }}
-                        user={dbUser!}
+                        user={curdbUser!}
                         abort={() => {
                             setvisibleUserForm(false)
                         }}

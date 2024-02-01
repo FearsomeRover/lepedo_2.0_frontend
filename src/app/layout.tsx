@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import React from 'react'
+import {DBUserProvider} from './dbUserContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,23 +13,19 @@ export const metadata: Metadata = {
     description: 'Lepedo',
 }
 
-function AppProvider(props: { children: ReactNode }) {
-    return null
-}
 
-export default function RootLayout({
-                                       children,
-                                   }: {
+export default function RootLayout({ children }: {
     children: React.ReactNode
 }) {
     return (
-        <html lang='en'>
+        <html lang='hu'>
         <UserProvider>
-
+            <DBUserProvider>
                 <body className={inter.className}>
-                <Header />
-                {children}
+                    <Header />
+                    {children}
                 </body>
+            </DBUserProvider>
         </UserProvider>
         </html>
     )
