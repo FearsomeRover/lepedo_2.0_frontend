@@ -57,10 +57,10 @@ export default function Cards(props: any) {
                         <>
 
 
-                            <button onClick={deleteUsers} className="sbtn">
+                            <button onClick={deleteUsers} className='sbtn'>
                                 [drop users]
                             </button>
-                            <LinkButton href={"/api/auth/logout"} text={"[logout]"}/>
+                            <LinkButton href={'/api/auth/logout'} text={'[logout]'} />
 
 
                             <button className='sbtn' onClick={() => {
@@ -72,10 +72,17 @@ export default function Cards(props: any) {
                         </>
                     )}
                 </div>
-                {visibleUserForm && dbUser && <NewUserForm refresh={() => {
-                }} user={dbUser!} abort={() => {
-                    setvisibleUserForm(false)
-                }} disabled={false} />}
+                {visibleUserForm && dbUser &&
+                    <NewUserForm
+                        refresh={() => {
+                            getUser
+                        }}
+                        user={dbUser!}
+                        abort={() => {
+                            setvisibleUserForm(false)
+                        }}
+                        disabled={false} />
+                }
             </>
         )
     } else {

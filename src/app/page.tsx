@@ -38,7 +38,7 @@ export default function Page() {
     }
     useEffect(() => {
         handleRefresh()
-    }, [,user])
+    }, [,])
     return (
         <>
             <QuickActionButtons/>
