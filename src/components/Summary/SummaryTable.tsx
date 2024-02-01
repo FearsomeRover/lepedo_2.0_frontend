@@ -15,7 +15,7 @@ export default function SummaryTable(props: SummaryTableProps) {
         setUserId(userId)
     }
     return (
-        <div className={styles.summary_table}>
+        <div className={styles.summarytable}>
             <table>
                 <tbody>
                     <tr>

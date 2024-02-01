@@ -97,7 +97,6 @@ p {
     float: inherit;
     box-sizing: content-box;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
     transition: width 0.3s ease;
 }
@@ -132,6 +131,7 @@ th {
 }
 
 td {
+    overflow-y: hidden;
     border: 1px var(--black) solid;
     border-width: 0 0 1px 0;
 }
@@ -280,9 +280,30 @@ textarea {
     flex-direction: row;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 1270px) {
-    .card {
-        display: none;
+    h1{
+        font-size: 48px;
+        display: inline-block;
+    }
+    .floating-top {
+        position: initial;
+    }
+    .sbtn, .sbtn_with_h4 {
+        width: 100%;
+        text-align: center;
     }
 }
 
@@ -411,5 +432,5 @@ textarea {
 }
 
 div{
-    background-color: #ff000011;
+    /*background-color: #ff000011;*/
 }
