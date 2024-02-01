@@ -3,7 +3,8 @@ export type ExpenseType = {
   title: string;
   amount: number;
   payerId: string;
+  payer: User;
   date: string;
   received: User[];
-  payer: User;
+  items: Item[];
 };
