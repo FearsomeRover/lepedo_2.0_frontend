@@ -4,6 +4,7 @@ import axios from 'axios'
 import SummaryTable from '@/components/Summary/SummaryTable'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { stats } from '@/types/stats'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 type Table = {
     table: Record<string, User>;
@@ -13,6 +14,7 @@ export default function Page() {
     //random comment
     const [noUser, setNoUser] = useState<boolean>(false)
     const [table, setTable] = useState<User[]>([])
+    const { user, isLoading, error} = useUser()
     const handleRefresh = () => {
         const fetchData = async () => {
             try {
@@ -36,7 +38,7 @@ export default function Page() {
     }
     useEffect(() => {
         handleRefresh()
-    }, [])
+    }, [,user])
     return (
         <>
             <QuickActionButtons/>

@@ -142,7 +142,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                             Mégse
                         </button>
                     )}
-                    <LinkButton href="/api/auth/logout" text="Kijelentkezés" />
+                    <a href="/api/auth/logout">Kijelentkezés</a>
                 </div>
             </form>
         </div>

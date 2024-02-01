@@ -17,19 +17,18 @@ export default function Cards(props: any) {
         for (const u of response.data) {
             if (u.auth0sub === user.sub) {
                 setDbUser(u)
-                console.log('found')
-                console.log(u)
                 return
             }
         }
-       /* const data = {
+
+        /*if the user has not been seen before, create a database user for them*/
+        const data = {
             name: user.name,
             revTag: user.name,
             color: '#000000',
             auth0sub: user.sub,
         }
-        console.log(data)
-        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', data)*/
+        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', data)
     }
 
     useEffect(() => {
@@ -56,9 +55,14 @@ export default function Cards(props: any) {
                         />
                     ) : (
                         <>
-                            <button onClick={deleteUsers}>
+
+
+                            <button onClick={deleteUsers} className="sbtn">
                                 [drop users]
                             </button>
+                            <LinkButton href={"/api/auth/logout"} text={"[logout]"}/>
+
+
                             <button className='sbtn' onClick={() => {
                                 setvisibleUserForm(true)
                                 console.log('afsd')

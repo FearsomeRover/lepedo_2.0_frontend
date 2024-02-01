@@ -290,10 +290,6 @@ textarea {
 
 
 
-
-
-
-
 @media (max-width: 900px) {
     h1{
         font-size: 48px;
@@ -433,5 +429,5 @@ textarea {
 }
 
 div{
-    /*background-color: #ff000011;*/
+    background-color: #ff000011;
 }
