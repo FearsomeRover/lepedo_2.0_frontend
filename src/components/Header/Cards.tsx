@@ -36,8 +36,8 @@ export default function Cards(props: any) {
     useEffect(() => {
         getUser()
 
-        // @ts-ignore
-        setContextUsers(users)
+/*        // @ts-ignore
+        setContextUsers(users)*/
     }, [user])
 
 
