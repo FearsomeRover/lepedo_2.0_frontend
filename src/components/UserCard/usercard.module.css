@@ -1,0 +1,55 @@
+/*UserTag text*/
+.usertag {
+    background-color: gray;
+    border: 0px;
+    border-radius: 50px;
+    display: inline-block;
+    padding: 4px 10px;
+    font-family: 'Poppins', serif;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    float: inherit;
+    box-sizing: content-box;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: width 0.3s ease;
+}
+
+.unselectable {
+    user-select: none;
+}
+
+.outlined {
+    padding: 2px 8px;
+    border: 2px solid black;
+}
+
+.middle {
+    text-align: center;
+    align-content: center;
+}
+
+.usertagcontainer {
+    margin: 4px;
+    display: inline-block;
+    border: 2px dashed red;
+}
+
+.userbadgecontainer {
+    border: 2px dashed red;
+    width: min-content;
+}
+
+.userbadgebehind {
+    background-color: gray;
+    border: 0px;
+    border-radius: 50px;
+    display: inline;
+    padding: 4px 10px;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+    position: relative;
+}

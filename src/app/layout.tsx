@@ -1,14 +1,13 @@
 'use client'
 import Header from '@/components/Header/Header'
 import './globals.css'
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
-import React from 'react'
-import { DBUserProvider } from './dbUserContext'
+import React, { useState } from 'react'
 import { useKeyboardShortcut } from '../../hooks/useKeyboardShorcut'
 import NewExpenseForm from '@/components/Forms/NewExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
+import ShortcutsPopUp from '@/components/Forms/shortcutsPopUp'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,11 +21,21 @@ export default function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    const [expenseFormRevealed, setExpenseFormRevealed] = React.useState(false)
-    const [tranfserFormRevealed, setTranfserFormRevealed] =
-        React.useState(false)
-    useKeyboardShortcut(['e'], () => setExpenseFormRevealed(true))
-    useKeyboardShortcut(['t'], () => setTranfserFormRevealed(true))
+    const [shortcutsPopUpRevealed, setShortcutsPopUpRevealed] = useState(false)
+    const [expenseFormRevealed, setExpenseFormRevealed] = useState(false)
+    const [tranfserFormRevealed, setTranfserFormRevealed] = useState(false)
+
+    useKeyboardShortcut(['e'], () => {
+        if (tranfserFormRevealed == false) setExpenseFormRevealed(true)
+    })
+    useKeyboardShortcut(['t'], () => {
+        if (expenseFormRevealed == false) setTranfserFormRevealed(true)
+    })
+
+    useKeyboardShortcut(['esc'], () => {
+        setTranfserFormRevealed(false)
+        setExpenseFormRevealed(false)
+    })
 
     return (
         <html lang="hu">
@@ -49,6 +58,7 @@ export default function RootLayout({
                             refresh={() => {}}
                         />
                     )}
+                    {shortcutsPopUpRevealed && <ShortcutsPopUp />}
                     {children}
                 </body>
             </UserProvider>

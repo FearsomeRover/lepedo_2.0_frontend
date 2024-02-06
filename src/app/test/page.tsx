@@ -3,6 +3,7 @@ import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import { DBUserProvider } from '@/app/dbUserContext'
 import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import { useState } from 'react'
+import UsersBagde from '@/components/UserCard/UsersBadge'
 
 const dummyUser = {
     id: 'sdfa',
@@ -80,6 +81,18 @@ export default function Page() {
             <form>
                 <input type={'text'} />
             </form>
+            <UsersBagde
+                users={[
+                    dummyUser,
+                    dummyUser2,
+                    dummyUser3,
+                    dummyUser,
+                    dummyUser2,
+                    dummyUser3,
+                    dummyUser,
+                    dummyUser2,
+                    dummyUser3,
+                ]}></UsersBagde>
         </>
     )
 }
