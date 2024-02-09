@@ -1,11 +1,38 @@
 .expensecard {
-    width: fit-content;
+    width: 20rem;
     margin: 12px;
-    border: 2px dashed blue;
-    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 8px;
+    display: inline-block;
+    position: relative;
 }
 
 .userplayground {
     border: 1px solid black;
     max-width: 20rem;
+}
+
+.date {
+    float: right;
+    position: absolute;
+    z-index: 2;
+    right: 8px;
+    top: 8px;
+    margin: 0;
+}
+
+.expenserow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expenserow h5 {
+    margin: 0;
+}
+
+.expenserow p {
+    margin: 0;
 }

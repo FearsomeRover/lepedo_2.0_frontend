@@ -37,12 +37,17 @@
 }
 
 .userbadgecontainer {
-    border: 2px dashed red;
-    width: min-content;
+    margin: 4px;
+    width: 60px;
+    height: 28px;
+    text-align: right;
+    position: relative;
 }
 
-.userbadgebehind {
+.userbadgelement {
+    text-align: center;
     background-color: gray;
+    min-width: 16px;
     border: 0px;
     border-radius: 50px;
     display: inline;
@@ -51,5 +56,5 @@
     font-weight: 500;
     font-size: 14px;
     color: white;
-    position: relative;
+    position: absolute;
 }

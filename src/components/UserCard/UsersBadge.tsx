@@ -7,22 +7,18 @@ type UsersBadgeProps = {
 }
 
 export default function UsersBagde(props: UsersBadgeProps) {
-    /*    useEffect(() => {
-        if(props.users.length > 4) {
-
-        }
-    }, [])*/
+    let userNames = props.users.map((user) => ' ' + user.name)
 
     return (
-        <div className={styles.userbadgecontainer}>
+        <div className={styles.userbadgecontainer} title={userNames.toString()}>
             {props.users.slice(0, 4).map((user, index) => (
                 <div
                     key={user.id}
-                    className={styles.userbadgebehind}
+                    className={styles.userbadgelement}
                     style={{
                         backgroundColor: user.color,
                         zIndex: -index,
-                        left: -index * 23,
+                        left: index * 8,
                     }}>
                     {props.users.length}
                 </div>

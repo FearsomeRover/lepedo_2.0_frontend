@@ -6,7 +6,7 @@ import { useState } from 'react'
 import UsersBagde from '@/components/UserCard/UsersBadge'
 
 const dummyUser = {
-    id: 'sdfa',
+    id: 'sdfffa',
     revTag: 'rte',
     name: 'Test User',
     color: '#123456',
@@ -20,7 +20,7 @@ const dummyUser = {
     auth0sub: 'fads',
 }
 const dummyUser2 = {
-    id: 'sdfada',
+    id: 'sdsdaafada',
     revTag: 'rtdfe',
     name: 'Test User2',
     color: '#51af2d',
@@ -34,7 +34,7 @@ const dummyUser2 = {
     auth0sub: 'ffsdads',
 }
 const dummyUser3 = {
-    id: 'sdffsda',
+    id: 'sdffwwsda',
     revTag: 'rxte',
     name: 'Test User3',
     color: '#c013a4',
@@ -48,10 +48,18 @@ const dummyUser3 = {
     auth0sub: 'fadfsads',
 }
 
-const dummyItem = {
+const dummyItem: Item = {
     id: 'asdf',
     name: 'Milk',
     price: 123,
+    participated: [dummyUser],
+}
+
+const dummyItem2: Item = {
+    id: 'ww',
+    name: 'PS5',
+    price: 123423,
+    participated: [dummyUser2, dummyUser3, dummyUser],
 }
 
 const dummyExpense = {
@@ -62,37 +70,19 @@ const dummyExpense = {
     date: '2022-10-10',
     received: [dummyUser, dummyUser2, dummyUser3],
     payer: dummyUser,
-    items: [dummyItem],
+    items: [dummyItem, dummyItem2],
 }
 
 export default function Page() {
-    const [pressed, setPressed] = useState(0)
-    useKeyboardShortcut(['ctrl', 'k'], () => {
-        setPressed(1)
-    })
-    useKeyboardShortcut([], () => {
-        setPressed(0)
-    })
     return (
         <>
-            {pressed == 1 && <p>K PRESSED</p>}
             {ExpenseCard(dummyExpense)}
             {ExpenseCard(dummyExpense)}
             <form>
                 <input type={'text'} />
             </form>
             <UsersBagde
-                users={[
-                    dummyUser,
-                    dummyUser2,
-                    dummyUser3,
-                    dummyUser,
-                    dummyUser2,
-                    dummyUser3,
-                    dummyUser,
-                    dummyUser2,
-                    dummyUser3,
-                ]}></UsersBagde>
+                users={[dummyUser, dummyUser2, dummyUser3]}></UsersBagde>
         </>
     )
 }

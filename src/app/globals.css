@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600|Inter:400,700,800');
 
-
 /*https://coolors.co/f5f5f5-2c2c2c-d9515e-ec8843-ffbe27-a4b950-3fa272-38b8bc-637fbb*/
 
 :root {
@@ -63,7 +62,7 @@ h4 {
 h5 {
     font-family: Inter, serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     margin: 8px;
     margin-bottom: 0px;
     margin-top: 24px;
@@ -80,6 +79,7 @@ p {
     font-family: 'Podkova Medium', serif;
     font-size: 18px;
     margin: 12px;
+    width: fit-content;
     color: var(--black);
 }
 
@@ -90,7 +90,7 @@ p {
     border-radius: 50px;
     display: inline-block;
     padding: 4px 10px;
-    font-family: "Poppins", serif;
+    font-family: 'Poppins', serif;
     color: white;
     font-weight: 500;
     font-size: 14px;
@@ -116,7 +116,6 @@ p {
     border: 2px solid black;
 }
 
-
 table {
     width: 100%;
     border-spacing: 0;
@@ -124,11 +123,10 @@ table {
     table-layout: fixed;
 }
 
-
 th {
     border: 3px var(--black) solid;
     border-width: 0 0 3px 0;
-    background-color: var(--white)
+    background-color: var(--white);
 }
 
 td {
@@ -150,9 +148,9 @@ th > h5 {
     border: none;
 }
 
-
 /*Buttons*/
-.sbtn, .sbtn_with_h4 {
+.sbtn,
+.sbtn_with_h4 {
     font-family: 'Poppins', serif;
     font-weight: 500;
     font-size: 18px;
@@ -178,7 +176,6 @@ th > h5 {
     box-shadow: 4px 4px 4px lightgray;
 }
 
-
 /*Links*/
 button {
     background-color: transparent;
@@ -189,16 +186,15 @@ button {
     text-decoration: underline;
 }
 
-
 /*Images (arrow)*/
 img {
     margin: 0 5px;
     display: inline-block;
 }
 
-
 /*Input Fields*/
-input, .input {
+input,
+.input {
     font-family: 'Poppins', serif;
     font-weight: 500;
     font-size: 18px;
@@ -215,13 +211,27 @@ input, .input {
 
 input:hover {
     outline: none;
-    border-image: linear-gradient(90deg, rgba(217, 81, 94, 1) 10%, rgba(255, 190, 39, 1) 36%, rgba(164, 185, 80, 1) 66%, rgba(56, 184, 188, 1) 90%) 50;
+    border-image: linear-gradient(
+            90deg,
+            rgba(217, 81, 94, 1) 10%,
+            rgba(255, 190, 39, 1) 36%,
+            rgba(164, 185, 80, 1) 66%,
+            rgba(56, 184, 188, 1) 90%
+        )
+        50;
     /*box-shadow: 0 2px 4px lightgray;*/
 }
 
 input:focus {
     border-width: 0 0 4px 0;
-    border-image: linear-gradient(90deg, rgba(217, 81, 94, 1) 10%, rgba(255, 190, 39, 1) 36%, rgba(164, 185, 80, 1) 66%, rgba(56, 184, 188, 1) 90%) 30;
+    border-image: linear-gradient(
+            90deg,
+            rgba(217, 81, 94, 1) 10%,
+            rgba(255, 190, 39, 1) 36%,
+            rgba(164, 185, 80, 1) 66%,
+            rgba(56, 184, 188, 1) 90%
+        )
+        30;
     /*box-shadow: 0 4px 4px lightgray;*/
 }
 
@@ -231,7 +241,6 @@ input:focus {
     font-size: 14px;
     float: right;
 }
-
 
 textarea {
     border: solid gray 2px;
@@ -246,7 +255,6 @@ textarea {
     outline: none;
 }
 
-
 /*Radio Buttons*/
 .radio {
     width: auto;
@@ -256,7 +264,6 @@ textarea {
 .radio:focus {
     box-shadow: none;
 }
-
 
 /*Checkbox*/
 .checkbox {
@@ -281,24 +288,16 @@ textarea {
     flex-direction: row;
 }
 
-
-
-
-
-
-
-
-
-
 @media (max-width: 900px) {
-    h1{
+    h1 {
         font-size: 48px;
         display: inline-block;
     }
     .floating-top {
         position: initial;
     }
-    .sbtn, .sbtn_with_h4 {
+    .sbtn,
+    .sbtn_with_h4 {
         width: 100%;
         text-align: center;
     }
@@ -352,11 +351,9 @@ textarea {
     }
 }
 
-
 .tagerror {
     color: red;
 }
-
 
 /*Generic*/
 .w3 {
@@ -373,6 +370,10 @@ textarea {
 
 .w50 {
     width: 50%;
+}
+
+.h1 {
+    height: 1rem;
 }
 
 .h3 {
@@ -428,6 +429,6 @@ textarea {
     height: 100%;
 }
 
-div{
-    background-color: #ff000011;
+div {
+    /*    background-color: #ff000011;*/
 }
