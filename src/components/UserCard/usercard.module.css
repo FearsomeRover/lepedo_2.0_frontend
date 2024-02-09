@@ -1,13 +1,60 @@
+/*UserTag text*/
 .usertag {
-  background-color: gray;
-  border: 0px;
-  border-radius: 50px;
-  display: inline-block;
-  margin: 4px;
-  padding: 4px 10px;
-  font-family: "Poppins", serif;
-  color: white;
-  font-weight: 500;
-  font-size: 14px;
-  float: inherit;
+    background-color: gray;
+    border: 0px;
+    border-radius: 50px;
+    display: inline-block;
+    padding: 4px 10px;
+    font-family: 'Poppins', serif;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    float: inherit;
+    box-sizing: content-box;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: width 0.3s ease;
+}
+
+.unselectable {
+    user-select: none;
+}
+
+.outlined {
+    padding: 2px 8px;
+    border: 2px solid black;
+}
+
+.middle {
+    text-align: center;
+    align-content: center;
+}
+
+.usertagcontainer {
+    margin: 4px;
+    display: inline-block;
+    border: 2px dashed red;
+}
+
+.userbadgecontainer {
+    margin: 4px;
+    width: 60px;
+    height: 28px;
+    text-align: right;
+    position: relative;
+}
+
+.userbadgelement {
+    text-align: center;
+    background-color: gray;
+    min-width: 16px;
+    border: 0px;
+    border-radius: 50px;
+    display: inline;
+    padding: 4px 10px;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+    position: absolute;
 }

@@ -1,71 +1,104 @@
 'use client'
-import React, { useState } from 'react'
-import NewExpenseForm from '@/components/Forms/NewExpenseForm'
-import NewTransferForm from '../Forms/NewTransferForm'
-import Card from './Card'
+import React, { useEffect, useState } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import LinkButton from '@/components/Button/LinkButton'
-import { redirect } from 'next/navigation'
+import NewUserForm from '@/components/Forms/NewUserForm'
+import axios from 'axios'
+import { User } from '@/types/user'
 
 export default function Cards(props: any) {
-    const [visibleNewExpense, setVisibleNewExpense] = useState(false)
-    const [visibleNewTransfer, setVisibleNewTransfer] = useState(false)
+    const [visibleUserForm, setvisibleUserForm] = useState(false)
     const { user, error, isLoading } = useUser()
+    const [curdbUser, setCurdbUser] = useState<User | null>(null)
+    const [users, setUsers] = useState<User[]>([])
+
+    const getUser = async () => {
+        if (!user) return
+        const response = await axios.get(
+            process.env.NEXT_PUBLIC_BASE_URL + '/user',
+        )
+        for (const u of response.data) {
+            if (u.auth0sub === user.sub) {
+                setCurdbUser(u)
+                return
+            }
+        }
+
+        /*if the user has not been seen before, create a database user for them*/
+        const data = {
+            name: user.name,
+            revTag: user.name,
+            color: '#000000',
+            auth0sub: user.sub,
+        }
+        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', data)
+    }
+
+    useEffect(() => {
+        getUser()
+
+        /*        // @ts-ignore
+        setContextUsers(users)*/
+    }, [user])
+
+    function deleteUsers() {
+        axios
+            .get(process.env.NEXT_PUBLIC_BASE_URL + '/user')
+            .then((response) => setUsers(response.data))
+            .then(() => {
+                for (const u of users) {
+                    axios.delete(
+                        process.env.NEXT_PUBLIC_BASE_URL + `/user/${u.id}`,
+                    )
+                }
+            })
+    }
 
     if (props.summary) {
         return (
             <>
-                {visibleNewExpense && (
-                    <NewExpenseForm
-                        abort={() => setVisibleNewExpense(false)}
-                        refresh={props.refresh}
-                    />
-                )}
-                {visibleNewTransfer && (
-                    <NewTransferForm
-                        abort={() => setVisibleNewTransfer(false)}
-                        refresh={() => {}}
-                    />
-                )}
                 <div className="floating-top">
-                    {/*<Card
-            color={"#51bb88"}
-            title={"Összesen elszámolt"}
-            value={props.cardsData.doneall + " Ft"}
-            bottomLink={{
-              name: "Új utalás",
-              action: () => setVisibleNewTransfer(true),
-            }}
-          ></Card>
-          <Card
-            color={"#52bbe8"}
-            title={"Összesen költött"}
-            value={props.cardsData.spentall + " Ft"}
-            bottomLink={{
-              name: "Új költés",
-              action: () => setVisibleNewExpense(true),
-            }}
-          ></Card>*/}
-
                     {user == undefined ? (
                         <LinkButton
                             text={'Bejelentkezés'}
                             href={'/api/auth/login'}
-                            textOnHover={'Bejelentkezés'}
                         />
                     ) : (
                         <>
+                            <button onClick={deleteUsers} className="sbtn">
+                                [drop users]
+                            </button>
                             <LinkButton
-                                text={user?.name!}
                                 href={'/api/auth/logout'}
-                                textOnHover={'Kijelentkezés'}
+                                text={'[logout]'}
                             />
+
+                            <button
+                                className="sbtn"
+                                onClick={() => {
+                                    setvisibleUserForm(true)
+                                    console.log('afsd')
+                                }}>
+                                {user?.name!}
+                            </button>
                         </>
                     )}
                 </div>
+                {visibleUserForm && curdbUser && (
+                    <NewUserForm
+                        refresh={() => {
+                            getUser
+                        }}
+                        user={curdbUser!}
+                        abort={() => {
+                            setvisibleUserForm(false)
+                        }}
+                        disabled={false}
+                    />
+                )}
             </>
         )
     } else {
-        console.log('fuck')
+        console.log('f')
     }
 }

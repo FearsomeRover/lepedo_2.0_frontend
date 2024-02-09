@@ -1,24 +1,37 @@
-import { useState } from "react";
-import styles from "./usercard.module.css";
+import { BasicUser } from '@/types/user'
+import { useEffect, useState } from 'react'
 
-export default function UserCard({ user }: { user: User }) {
-  const [isHovered, setIsHovered] = useState(false);
+export default function UserCard({ user }: { user: BasicUser }) {
+    const [isHovered, setIsHovered] = useState(false)
+    const [contentWidth, setContentWidth] = useState<number>(500)
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+    useEffect(() => {
+        const contentElement = document.getElementById('content')
+        if (contentElement) {
+            setContentWidth(contentElement.offsetWidth)
+        }
+        console.log(contentWidth)
+    }, [])
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-  return (
-    <div
-      style={{ backgroundColor: user.color }}
-      className={styles.usertag}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {isHovered ? `@${user.revTag}` : user.name}
-    </div>
-  );
+    const handleMouseEnter = () => {
+        setIsHovered(true)
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false)
+    }
+    return (
+        <div
+            style={{ width: contentWidth, textAlign: 'center' }}
+            className="usertagcontainer"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>
+            <div
+                style={{ backgroundColor: user.color }}
+                id="content"
+                className="usertag">
+                {isHovered ? `@${user.revTag}` : user.name}
+            </div>
+        </div>
+    )
 }
