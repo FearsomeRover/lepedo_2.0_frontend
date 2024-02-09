@@ -1,5 +1,5 @@
 import { ExpenseType } from '@/types/expense'
-import styles from './expenseCard.module.css'
+import styles from './expensecard.module.css'
 import ExpenseRow from '@/components/ExpenseCard/ExpenseRow'
 
 export default function ExpenseCard(expense: ExpenseType) {

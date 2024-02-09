@@ -8,6 +8,7 @@ import { useKeyboardShortcut } from '../../hooks/useKeyboardShorcut'
 import NewExpenseForm from '@/components/Forms/NewExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 import ShortcutsPopUp from '@/components/Forms/shortcutsPopUp'
+import GlobalContext from '@/components/context/context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -40,27 +41,29 @@ export default function RootLayout({
     return (
         <html lang="hu">
             <UserProvider>
-                <body className={inter.className}>
-                    <Header />
-                    {expenseFormRevealed && (
-                        <NewExpenseForm
-                            abort={() => {
-                                setExpenseFormRevealed(false)
-                            }}
-                            refresh={() => {}}
-                        />
-                    )}
-                    {tranfserFormRevealed && (
-                        <NewTransferForm
-                            abort={() => {
-                                setTranfserFormRevealed(false)
-                            }}
-                            refresh={() => {}}
-                        />
-                    )}
-                    {shortcutsPopUpRevealed && <ShortcutsPopUp />}
-                    {children}
-                </body>
+                <GlobalContext>
+                    <body className={inter.className}>
+                        <Header />
+                        {expenseFormRevealed && (
+                            <NewExpenseForm
+                                abort={() => {
+                                    setExpenseFormRevealed(false)
+                                }}
+                                refresh={() => {}}
+                            />
+                        )}
+                        {tranfserFormRevealed && (
+                            <NewTransferForm
+                                abort={() => {
+                                    setTranfserFormRevealed(false)
+                                }}
+                                refresh={() => {}}
+                            />
+                        )}
+                        {shortcutsPopUpRevealed && <ShortcutsPopUp />}
+                        {children}
+                    </body>
+                </GlobalContext>
             </UserProvider>
         </html>
     )

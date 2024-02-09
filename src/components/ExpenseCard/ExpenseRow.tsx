@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './expenseCard.module.css'
+import styles from './expensecard.module.css'
 import UsersBagde from '@/components/UserCard/UsersBadge'
 
 export default function ExpenseRow(item: Item) {

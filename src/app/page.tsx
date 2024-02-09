@@ -5,16 +5,17 @@ import SummaryTable from '@/components/Summary/SummaryTable'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { stats } from '@/types/stats'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { User } from '@/types/user'
 
 type Table = {
-    table: Record<string, User>;
-    stats: stats;
-};
+    table: Record<string, User>
+    stats: stats
+}
 export default function Page() {
     //random comment
     const [noUser, setNoUser] = useState<boolean>(false)
     const [table, setTable] = useState<User[]>([])
-    const { user, isLoading, error} = useUser()
+    const { user, isLoading, error } = useUser()
     const handleRefresh = () => {
         const fetchData = async () => {
             try {
@@ -41,7 +42,7 @@ export default function Page() {
     }, [,])
     return (
         <>
-            <QuickActionButtons/>
+            <QuickActionButtons />
             <SummaryTable friendlyUsers={table} refresh={handleRefresh} />
         </>
     )
