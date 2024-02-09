@@ -1,3 +1,4 @@
+import { Item } from './item'
 import { BasicUser, User } from './user'
 
 export type ExpenseType = {

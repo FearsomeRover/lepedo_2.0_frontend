@@ -1,6 +1,6 @@
 import { User } from './user'
 
-type Item = {
+export type Item = {
     id: string
     name: string
     price: number

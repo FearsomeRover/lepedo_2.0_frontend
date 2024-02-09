@@ -3,6 +3,7 @@ import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import { useState } from 'react'
 import UsersBagde from '@/components/UserCard/UsersBadge'
+import { Item } from '@/types/item'
 
 const dummyUser = {
     id: 'sdfffa',
