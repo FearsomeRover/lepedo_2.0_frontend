@@ -4,18 +4,19 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import LinkButton from '@/components/Button/LinkButton'
 import NewUserForm from '@/components/Forms/NewUserForm'
 import axios from 'axios'
-import { DBUserProvider, useUserContext } from '@/app/dbUserContext'
+import { User } from '@/types/user'
 
 export default function Cards(props: any) {
     const [visibleUserForm, setvisibleUserForm] = useState(false)
     const { user, error, isLoading } = useUser()
-    const [ curdbUser, setCurdbUser] = useState<User | null>(null)
-    const [ users, setUsers] = useState<User[]>([])
-    const [ contextUsers, setContextUsers ] = useUserContext()
+    const [curdbUser, setCurdbUser] = useState<User | null>(null)
+    const [users, setUsers] = useState<User[]>([])
 
     const getUser = async () => {
         if (!user) return
-        const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user')
+        const response = await axios.get(
+            process.env.NEXT_PUBLIC_BASE_URL + '/user',
+        )
         for (const u of response.data) {
             if (u.auth0sub === user.sub) {
                 setCurdbUser(u)
@@ -36,24 +37,27 @@ export default function Cards(props: any) {
     useEffect(() => {
         getUser()
 
-/*        // @ts-ignore
+        /*        // @ts-ignore
         setContextUsers(users)*/
     }, [user])
 
-
-
     function deleteUsers() {
-        axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user').then(response => setUsers(response.data)).then(() => {
-            for (const u of users) {
-                axios.delete(process.env.NEXT_PUBLIC_BASE_URL + `/user/${u.id}`)
-            }
-        })
+        axios
+            .get(process.env.NEXT_PUBLIC_BASE_URL + '/user')
+            .then((response) => setUsers(response.data))
+            .then(() => {
+                for (const u of users) {
+                    axios.delete(
+                        process.env.NEXT_PUBLIC_BASE_URL + `/user/${u.id}`,
+                    )
+                }
+            })
     }
 
     if (props.summary) {
         return (
             <>
-                <div className='floating-top'>
+                <div className="floating-top">
                     {user == undefined ? (
                         <LinkButton
                             text={'Bejelentkezés'}
@@ -61,24 +65,26 @@ export default function Cards(props: any) {
                         />
                     ) : (
                         <>
-
-
-                            <button onClick={deleteUsers} className='sbtn'>
+                            <button onClick={deleteUsers} className="sbtn">
                                 [drop users]
                             </button>
-                            <LinkButton href={'/api/auth/logout'} text={'[logout]'} />
+                            <LinkButton
+                                href={'/api/auth/logout'}
+                                text={'[logout]'}
+                            />
 
-
-                            <button className='sbtn' onClick={() => {
-                                setvisibleUserForm(true)
-                                console.log('afsd')
-                            }}>
+                            <button
+                                className="sbtn"
+                                onClick={() => {
+                                    setvisibleUserForm(true)
+                                    console.log('afsd')
+                                }}>
                                 {user?.name!}
                             </button>
                         </>
                     )}
                 </div>
-                {visibleUserForm && curdbUser &&
+                {visibleUserForm && curdbUser && (
                     <NewUserForm
                         refresh={() => {
                             getUser
@@ -87,8 +93,9 @@ export default function Cards(props: any) {
                         abort={() => {
                             setvisibleUserForm(false)
                         }}
-                        disabled={false} />
-                }
+                        disabled={false}
+                    />
+                )}
             </>
         )
     } else {

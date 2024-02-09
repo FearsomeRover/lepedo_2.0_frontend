@@ -4,13 +4,14 @@ import styles from './forms.module.css'
 import UserCard from '@/components/UserCard/UserCard'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import LinkButton from '@/components/Button/LinkButton'
+import { User } from '@/types/user'
 
 type NewUserFormProps = {
-    user?: User;
-    refresh: () => void;
-    disabled: boolean;
-    abort: () => void;
-};
+    user?: User
+    refresh: () => void
+    disabled: boolean
+    abort: () => void
+}
 export default function NewUserForm(props: NewUserFormProps) {
     const user = props.user ? props.user : null
     const generateRandomColor = () => {
@@ -31,7 +32,6 @@ export default function NewUserForm(props: NewUserFormProps) {
         '#52BBE8',
     ]
     /*todo https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color*/
-
 
     const reset = () => {
         setColor(generateRandomColor())
@@ -57,7 +57,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                     name,
                     revTag,
                     color,
-                    auth0sub : user!.auth0sub,
+                    auth0sub: user!.auth0sub,
                 },
             )
         } else {
@@ -72,53 +72,60 @@ export default function NewUserForm(props: NewUserFormProps) {
     const handleColorGen = () => {
         if (!customColor && name.length >= 2) {
             setColor(
-                colors[(name.charCodeAt(0) + name.charCodeAt(2)) % colors.length],
+                colors[
+                    (name.charCodeAt(0) + name.charCodeAt(2)) % colors.length
+                ],
             )
         }
     }
     return (
         <div className={styles.popup}>
             <form
-                method='post'
+                method="post"
                 onSubmit={checkSubmit}
                 className={styles.userform}
-                autoComplete='off'
-            >
+                autoComplete="off">
                 <h3>Saját profil</h3>
                 <div className="h3"></div>
-                <UserCardSimple color={color} name={name} revTag={revTag} isSelected={false} isHoverable={true} isAlignedToCenter={true} onClick={() => {}}></UserCardSimple>
+                <UserCardSimple
+                    color={color}
+                    name={name}
+                    revTag={revTag}
+                    isSelected={false}
+                    isHoverable={true}
+                    isAlignedToCenter={true}
+                    onClick={() => {}}></UserCardSimple>
                 <h5 className="middle">{user?.email}</h5>
                 <div className="h3"></div>
                 <h5>Név</h5>
                 <input
                     minLength={3}
-                    id='name'
-                    name='name'
+                    id="name"
+                    name="name"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                     onBlur={handleColorGen}
-                    autoComplete='off'
+                    autoComplete="off"
                 />
                 <h5>RevTag</h5>
                 <input
-                    name='revtag'
-                    pattern='[^@]*'
-                    title='Nem kell a @ karaktert is megadnod'
+                    name="revtag"
+                    pattern="[^@]*"
+                    title="Nem kell a @ karaktert is megadnod"
                     value={revTag}
                     onChange={(event) => setRevTag(event.target.value)}
                     onBlur={checkRevTag}
-                    autoComplete='off'
+                    autoComplete="off"
                 />
                 {!freeTag && (
-                    <p className='tagerror'>Tag already registered to user!</p>
+                    <p className="tagerror">Tag already registered to user!</p>
                 )}
                 <h5>Tag szín</h5>
 
-
                 <input
-                    id='color'
-                    name='color'
-                    type='color'
+                    id="color"
+                    name="color"
+                    type="color"
                     className={styles.color}
                     value={color}
                     onChange={(event) => {
@@ -131,14 +138,17 @@ export default function NewUserForm(props: NewUserFormProps) {
                 <div className="h3"></div>
 
                 <div>
-                    <input className='sbtn_with_h4' type='submit' value='Mentés' />
+                    <input
+                        className="sbtn_with_h4"
+                        type="submit"
+                        value="Mentés"
+                    />
                     {!props.disabled && (
                         <button
-                            className='sbtn'
+                            className="sbtn"
                             onClick={() => {
                                 props.abort()
-                            }}
-                        >
+                            }}>
                             Mégse
                         </button>
                     )}

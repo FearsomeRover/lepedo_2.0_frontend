@@ -1,11 +1,12 @@
 'use client'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import UserCard from '@/components/UserCard/UserCard'
 import styles from './forms.module.css'
 import { Transfer } from '@/types/transfer'
 import Image from 'next/image'
 import { User } from '@/types/user'
+import GlobalContext, { GlobalStateContext } from '../context/context'
 type TransferFormProps = {
     transfer?: Transfer
     abort: () => void
@@ -16,16 +17,7 @@ type Response = {
 }
 export default function NewTransferForm(props: TransferFormProps) {
     const currentDate = new Date().toISOString().split('T')[0]
-    const [users, setUsers] = useState<User[] | null>()
-    const getAllUsers = async () => {
-        const response: Response = await axios.get(
-            process.env.NEXT_PUBLIC_BASE_URL + '/user',
-        )
-        setUsers(response.data)
-    }
-    useEffect(() => {
-        getAllUsers()
-    }, [])
+    const { users } = useContext(GlobalStateContext)
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
         const formData = new FormData(event.target)

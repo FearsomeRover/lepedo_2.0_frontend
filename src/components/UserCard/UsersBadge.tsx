@@ -1,4 +1,5 @@
 'use client'
+import { User } from '@/types/user'
 import styles from './usercard.module.css'
 import { useEffect } from 'react'
 
