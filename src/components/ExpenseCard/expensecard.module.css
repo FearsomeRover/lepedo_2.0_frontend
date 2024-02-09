@@ -1,8 +1,8 @@
 .expensecard {
-    width: 20rem;
+    width: 16rem;
     margin: 12px;
     border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 8px;
     display: inline-block;
     position: relative;

@@ -1,7 +1,5 @@
 import { ExpenseType } from '@/types/expense'
 import styles from './expenseCard.module.css'
-import UserCardSimple from '@/components/UserCard/UserCardSimple'
-import UsersBagde from '@/components/UserCard/UsersBadge'
 import ExpenseRow from '@/components/ExpenseCard/ExpenseRow'
 
 export default function ExpenseCard(expense: ExpenseType) {

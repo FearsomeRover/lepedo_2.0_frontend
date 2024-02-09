@@ -1,5 +1,8 @@
 'use client'
+
 import { useEffect, useState } from 'react'
+
+/*https://www.reddit.com/r/learnjavascript/comments/gp2t2h/how_to_add_gravity_to_elements/*/
 
 interface Element {
     id: number
@@ -22,7 +25,7 @@ const LandingPage: React.FC = () => {
                 position: {
                     x: Math.random() * window.innerWidth,
                     y: Math.random() * window.innerHeight * 0.1,
-                    velocity: Math.random() * 2 + 1,
+                    velocity: 10,
                 },
             }),
         )
@@ -30,19 +33,62 @@ const LandingPage: React.FC = () => {
 
         const updateElements = () => {
             setElements((prevElements) =>
-                prevElements.map((element) => ({
-                    ...element,
-                    position: {
-                        ...element.position,
-                        y: element.position.y + element.position.velocity,
-                    },
-                })),
+                prevElements.map((element) => {
+                    let newY = element.position.y + element.position.velocity
+
+                    // Check collision with bottom of the viewport
+                    if (newY > window.innerHeight) {
+                        newY = window.innerHeight
+                    }
+
+                    // Check collision with other elements
+                    prevElements.forEach((otherElement) => {
+                        if (element.id !== otherElement.id) {
+                            const distance = Math.sqrt(
+                                Math.pow(
+                                    element.position.x -
+                                        otherElement.position.x,
+                                    2,
+                                ) +
+                                    Math.pow(
+                                        element.position.y -
+                                            otherElement.position.y,
+                                        2,
+                                    ),
+                            )
+                            const minDistance = 20 // Minimum distance to avoid collision
+                            if (distance < minDistance) {
+                                newY = Math.min(
+                                    newY,
+                                    otherElement.position.y - minDistance,
+                                )
+                            }
+                        }
+                    })
+
+                    return {
+                        ...element,
+                        position: {
+                            ...element.position,
+                            y: newY,
+                        },
+                    }
+                }),
             )
         }
 
-        const animationFrame = requestAnimationFrame(updateElements)
+        const animationFrame = requestAnimationFrame(() => {
+            updateElements()
+        })
 
-        return () => cancelAnimationFrame(animationFrame)
+        const intervalId = setInterval(() => {
+            updateElements()
+        }, 1000 / 60) // Update roughly every 60th of a second
+
+        return () => {
+            cancelAnimationFrame(animationFrame)
+            clearInterval(intervalId)
+        }
     }, [])
 
     return (
