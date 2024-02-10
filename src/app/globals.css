@@ -40,6 +40,19 @@ h2:hover {
     transition: 0.2s ease-in-out;
 }
 
+.activeheader {
+    color: var(--black);
+    background: linear-gradient(
+        90deg,
+        rgba(217, 81, 94, 1) 10%,
+        rgba(255, 190, 39, 1) 36%,
+        rgba(164, 185, 80, 1) 66%,
+        rgba(56, 184, 188, 1) 90%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /*Section titles?*/
 h3 {
     font-family: Inter, serif;
