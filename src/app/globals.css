@@ -321,7 +321,7 @@ textarea {
     .sbtn,
     .sbtn_with_h4 {
         margin: 8px auto;
-        width: max-content;
+        width: 100%;
         text-align: center;
     }
     table {
@@ -422,6 +422,14 @@ textarea {
     max-width: 30%;
 }
 
+.mw700 {
+    max-width: 700px;
+}
+
+.fs36 {
+    font-size: 36px;
+}
+
 .right {
     text-align: right;
     align-content: end;
@@ -433,9 +441,13 @@ textarea {
     text-align: left;
 }
 
-.middle {
+.middleinside {
     text-align: center;
     align-content: center;
+}
+
+.middleself {
+    margin: 0 auto;
 }
 
 .bold {
@@ -450,6 +462,27 @@ textarea {
 .min-width {
     width: fit-content;
     padding: 0;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex * {
+    flex: 1;
+}
+
+.imageContainer {
+    position: relative;
+    height: 30px;
+    flex: 1;
+    max-width: 10%;
+}
+
+.arrow {
+    position: center;
 }
 
 .scrollY {

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
 type SimpleUserProps = {
-    name: string;
-    revTag?: string;
-    color: string;
-    isSelected?: boolean;
-    isHoverable?: boolean;
-    onClick: () => void;
-    isAlignedToCenter?: boolean;
-};
+    name: string
+    revTag?: string
+    color: string
+    isSelected?: boolean
+    isHoverable?: boolean
+    onClick: () => void
+    isAlignedToCenter?: boolean
+}
 
 export default function UserCardSimple(simple: SimpleUserProps) {
     const [isHovered, setIsHovered] = useState(false)
@@ -37,29 +37,40 @@ export default function UserCardSimple(simple: SimpleUserProps) {
         setIsHovered(false)
     }
     return (
-        <div style={{ width: Math.max(nameWidth, revTagWidth)}}
-             className={simple.isAlignedToCenter ? 'usertagcontainer middle' : 'usertagcontainer'}
-             onMouseEnter={handleMouseEnter}
-             onMouseLeave={handleMouseLeave}>
-                {isHovered && simple.isHoverable ? (
-                    <div
-                        ref={revTagRef}
-                        style={{ backgroundColor: simple.color }}
-                        className={simple.isSelected ? 'usertag unselectable outlined ' : 'usertag unselectable'}
-                        onClick={simple.onClick}
-                    >
-                        @{simple.revTag}
-                    </div>
-                ) : (
-                    <div
-                        ref={nameRef}
-                        style={{ backgroundColor: simple.color }}
-                        className={simple.isSelected ? 'usertag unselectable outlined ' : 'usertag unselectable'}
-                        onClick={simple.onClick}
-                    >
-                        {simple.name === '' ? '-' : simple.name}
-                    </div>
-                )}
-            </div>
+        <div
+            style={{ width: Math.max(nameWidth, revTagWidth) }}
+            className={
+                simple.isAlignedToCenter
+                    ? 'usertagcontainer middleinside'
+                    : 'usertagcontainer'
+            }
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>
+            {isHovered && simple.isHoverable ? (
+                <div
+                    ref={revTagRef}
+                    style={{ backgroundColor: simple.color }}
+                    className={
+                        simple.isSelected
+                            ? 'usertag unselectable outlined '
+                            : 'usertag unselectable'
+                    }
+                    onClick={simple.onClick}>
+                    @{simple.revTag}
+                </div>
+            ) : (
+                <div
+                    ref={nameRef}
+                    style={{ backgroundColor: simple.color }}
+                    className={
+                        simple.isSelected
+                            ? 'usertag unselectable outlined '
+                            : 'usertag unselectable'
+                    }
+                    onClick={simple.onClick}>
+                    {simple.name === '' ? '-' : simple.name}
+                </div>
+            )}
+        </div>
     )
 }

@@ -95,7 +95,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                     isHoverable={true}
                     isAlignedToCenter={true}
                     onClick={() => {}}></UserCardSimple>
-                <h5 className="middle">{user?.email}</h5>
+                <h5 className="middleinside">{user?.email}</h5>
                 <div className="h3"></div>
                 <h5>Név</h5>
                 <input

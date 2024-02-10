@@ -28,7 +28,7 @@ export default function Page() {
             {expenses.length === 0 && (
                 <>
                     <div className={'h5'}></div>
-                    <div className={'middle'}>
+                    <div className={'middleinside'}>
                         <h3>Még nem veszel részt egyetlen költségben sem</h3>
                         <QuickActionButtons
                             revealed={[true, true, false, false]}

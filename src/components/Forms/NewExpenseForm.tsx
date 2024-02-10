@@ -192,9 +192,9 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                 </label>
                             ))}
                         </div>
-                        <div className={styles.imageContainer}>
+                        <div className={'imageContainer'}>
                             <Image
-                                className={styles.arrow}
+                                className={'arrow'}
                                 src="/images/arrow-right.svg"
                                 alt="arrow-right"
                                 fill></Image>

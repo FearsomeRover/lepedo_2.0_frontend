@@ -34,7 +34,7 @@
 
 .color:focus {
 }
-.coloroverlay{
+.coloroverlay {
     position: absolute;
 
     background-color: rgba(255, 255, 255, 0);
@@ -92,28 +92,14 @@
     justify-content: right;
 }
 
-
 .userareatitle {
     text-align: center;
     font-size: 16px;
     font-weight: 400;
 }
 
-.userbucket{
+.userbucket {
     width: 100%;
     height: 3rem;
     overflow: scroll;
 }
-
-
-.imageContainer {
-    position: relative;
-    height: 100%;
-    flex: 1;
-    max-width: 10%;
-}
-
-.arrow {
-    position: center;
-}
-
