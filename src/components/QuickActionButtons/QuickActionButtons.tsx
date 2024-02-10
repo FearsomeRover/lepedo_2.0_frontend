@@ -3,50 +3,63 @@ import { useState } from 'react'
 import NewExpenseForm from '@/components/Forms/NewExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 
-type QuickActionButtonProps = {}
+type QuickActionButtonProps = {
+    revealed?: boolean[]
+}
 
-export default function QuickActionButton(props: QuickActionButtonProps) {
+export default function QuickActionButtons(props: QuickActionButtonProps) {
     const [expensePopup, setExpensePopup] = useState(false)
     const [transferPopup, setTransferPopup] = useState(false)
 
-    const refresh = () => {
-    }
-
+    const refresh = () => {}
 
     return (
         <div className={styles.actionrow}>
-            <button
-                className='sbtn'
-                onClick={() => {
-                    setExpensePopup(true)
-                }}>
-                Új tétel felvétele
-            </button>
-            {expensePopup &&
-                <NewExpenseForm abort={() => setExpensePopup(false)} refresh={refresh} />
-            }
-            <button
-                className='sbtn'
-                onClick={() => {
-                }}>
-                Új számla felvétele [haladó]
-            </button>
-            <button
-                className='sbtn'
-                onClick={() => {
-                    setTransferPopup(true)
-                }}>
-                Új utalás rögzítése
-            </button>
-            {transferPopup &&
-                <NewTransferForm abort={() => setTransferPopup(false)} refresh={refresh} />
-            }
-            <button
-                className='sbtn'
-                onClick={() => {
-                }}>
-                Új QR kód generálása
-            </button>
+            {(!props.revealed || props.revealed[0]) && (
+                <button
+                    className="sbtn"
+                    onClick={() => {
+                        setExpensePopup(true)
+                    }}>
+                    Új tétel felvétele
+                </button>
+            )}
+
+            {expensePopup && (
+                <NewExpenseForm
+                    abort={() => setExpensePopup(false)}
+                    refresh={refresh}
+                />
+            )}
+
+            {(!props.revealed || props.revealed[1]) && (
+                <button className="sbtn" onClick={() => {}}>
+                    Új számla felvétele [haladó]
+                </button>
+            )}
+
+            {(!props.revealed || props.revealed[2]) && (
+                <button
+                    className="sbtn"
+                    onClick={() => {
+                        setTransferPopup(true)
+                    }}>
+                    Új utalás rögzítése
+                </button>
+            )}
+
+            {transferPopup && (
+                <NewTransferForm
+                    abort={() => setTransferPopup(false)}
+                    refresh={refresh}
+                />
+            )}
+
+            {(!props.revealed || props.revealed[3]) && (
+                <button className="sbtn" onClick={() => {}}>
+                    Új QR kód generálása
+                </button>
+            )}
         </div>
     )
 }

@@ -385,6 +385,10 @@ textarea {
     width: 50%;
 }
 
+.w100 {
+    width: 100%;
+}
+
 .h1 {
     height: 1rem;
 }

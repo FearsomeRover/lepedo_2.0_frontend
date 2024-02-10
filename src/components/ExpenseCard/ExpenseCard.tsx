@@ -2,7 +2,7 @@ import { ExpenseType } from '@/types/expense'
 import styles from './expensecard.module.css'
 import ExpenseRow from '@/components/ExpenseCard/ExpenseRow'
 
-export default function ExpenseCard(expense: ExpenseType) {
+export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
     return (
         <div className={styles.expensecard}>
             <h4>{expense.title}</h4>
