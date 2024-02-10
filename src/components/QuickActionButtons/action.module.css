@@ -1,6 +1,18 @@
-.actionrow{
+.actionrow {
     margin-top: 3rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .actionrow {
+        overflow-x: scroll;
+        justify-content: left;
+    }
+    .actionrow button {
+        margin: 8px 8px;
+        width: max-content;
+        text-align: center;
+    }
 }

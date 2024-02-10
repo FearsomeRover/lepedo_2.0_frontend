@@ -53,12 +53,12 @@ h2:hover {
     -webkit-text-fill-color: transparent;
 }
 
-/*Section titles?*/
+/*Section titles?, short instructions*/
 h3 {
     font-family: Inter, serif;
     font-weight: 400;
     font-size: 24px;
-    margin: 8px;
+    margin: 20px;
     color: var(--black);
 }
 
@@ -117,7 +117,6 @@ p {
 .usertagcontainer {
     margin: 4px;
     display: inline-block;
-    border: 2px dashed red;
 }
 
 .unselectable {
@@ -304,14 +303,19 @@ textarea {
 @media (max-width: 900px) {
     h1 {
         font-size: 48px;
+        margin-bottom: 8px;
         display: inline-block;
+    }
+    .headerrow {
+        margin-top: 32px;
     }
     .floating-top {
         position: initial;
     }
     .sbtn,
     .sbtn_with_h4 {
-        width: 100%;
+        margin: 8px auto;
+        width: max-content;
         text-align: center;
     }
 }
