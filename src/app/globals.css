@@ -138,11 +138,17 @@ table {
 th {
     border: 3px var(--black) solid;
     border-width: 0 0 3px 0;
+    min-width: min-content;
     background-color: var(--white);
+}
+
+tr {
+    min-width: min-content;
 }
 
 td {
     overflow-y: hidden;
+    min-width: min-content;
     border: 1px var(--black) solid;
     border-width: 0 0 1px 0;
 }
@@ -317,6 +323,9 @@ textarea {
         margin: 8px auto;
         width: max-content;
         text-align: center;
+    }
+    table {
+        width: unset;
     }
 }
 
