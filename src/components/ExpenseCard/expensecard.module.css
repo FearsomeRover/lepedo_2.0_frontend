@@ -13,7 +13,12 @@
     max-width: 20rem;
 }
 
-.date {
+.usercardsimplecontainer {
+    margin-top: 12px;
+}
+
+.righttop {
+    text-align: right;
     float: right;
     position: absolute;
     z-index: 2;
@@ -23,10 +28,11 @@
 }
 
 .expenserow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+}
+
+.expenserow td {
+    border: none;
 }
 
 .expenserow h5 {
@@ -35,4 +41,6 @@
 
 .expenserow p {
     margin: 0;
+    width: 100%;
+    text-align: right;
 }

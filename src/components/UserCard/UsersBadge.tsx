@@ -1,10 +1,10 @@
 'use client'
-import { User } from '@/types/user'
+import { BasicUser, User } from '@/types/user'
 import styles from './usercard.module.css'
 import { useEffect } from 'react'
 
 type UsersBadgeProps = {
-    users: User[]
+    users: BasicUser[]
 }
 
 export default function UsersBagde(props: UsersBadgeProps) {
@@ -19,7 +19,7 @@ export default function UsersBagde(props: UsersBadgeProps) {
                     style={{
                         backgroundColor: user.color,
                         zIndex: -index,
-                        left: index * 8,
+                        left: index * 6,
                     }}>
                     {props.users.length}
                 </div>

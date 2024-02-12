@@ -67,7 +67,7 @@ h4 {
     font-family: Poppins, serif;
     font-weight: 500;
     font-size: 18px;
-    margin: 0;
+    margin: 0px;
     color: var(--black);
 }
 
@@ -75,10 +75,17 @@ h4 {
 h5 {
     font-family: Inter, serif;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     margin: 8px;
     margin-bottom: 0px;
     margin-top: 24px;
+    color: var(--black);
+}
+h6 {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 16px 0;
     color: var(--black);
 }
 
@@ -115,7 +122,7 @@ p {
 }
 
 .usertagcontainer {
-    margin: 4px;
+    margin-right: 4px;
     display: inline-block;
 }
 
@@ -171,7 +178,7 @@ th > h5 {
 .sbtn_with_h4 {
     font-family: 'Poppins', serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     letter-spacing: 1px;
     font-weight: 500;
     border: 2px solid var(--black);
@@ -306,7 +313,7 @@ textarea {
     flex-direction: row;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
     h1 {
         font-size: 48px;
         margin-bottom: 8px;
@@ -394,8 +401,22 @@ textarea {
     width: 7rem;
 }
 
+.w20 {
+    width: 20%;
+    background-color: #62626255;
+}
+
+.w30 {
+    width: 30%;
+    background-color: #62626277;
+}
+
 .w50 {
     width: 50%;
+}
+
+.w60px {
+    width: 60px;
 }
 
 .w100 {
@@ -460,8 +481,12 @@ textarea {
 }
 
 .min-width {
-    width: fit-content;
+    width: min-content;
     padding: 0;
+}
+
+.nomargin {
+    margin: 0;
 }
 
 .flex {

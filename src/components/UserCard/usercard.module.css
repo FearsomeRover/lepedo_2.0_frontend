@@ -37,8 +37,8 @@
 }
 
 .userbadgecontainer {
-    margin: 4px;
-    width: 60px;
+    margin: 2px 2px 2px 8px;
+    width: 44px;
     height: 28px;
     text-align: right;
     position: relative;
@@ -48,10 +48,10 @@
     text-align: center;
     background-color: gray;
     min-width: 16px;
-    border: 0px;
+    border: none;
     border-radius: 50px;
     display: inline;
-    padding: 4px 10px;
+    padding: 2px 8px;
     font-family: 'Poppins', serif;
     font-weight: 500;
     font-size: 14px;

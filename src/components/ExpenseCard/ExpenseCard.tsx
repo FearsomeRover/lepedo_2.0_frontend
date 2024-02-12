@@ -1,22 +1,61 @@
 import { ExpenseType } from '@/types/expense'
 import styles from './expensecard.module.css'
-import ExpenseRow from '@/components/ExpenseCard/ExpenseRow'
+import ExpenseItemRow from '@/components/ExpenseCard/ExpenseItemRow'
+import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
+import UserCardSimple from '@/components/UserCard/UserCardSimple'
+import StatusButton from '@/components/Button/StatusButton'
 
 export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
+    const total = expense.items.reduce((acc, item) => acc + item.price, 0)
+
     return (
         <div className={styles.expensecard}>
             <h4>{expense.title}</h4>
-            <h5 className={styles.date}>{expense.date}</h5>
-            <div className={'h1'}></div>
-            {expense.items.map((item) => (
-                <ExpenseRow
-                    key={item.id}
-                    id={item.id}
-                    name={item.name}
-                    price={item.price}
-                    participated={item.participated}
+            <div className={styles.righttop}>
+                <StatusButton
+                    title={'Elfogad'}
+                    text={'OK'}
+                    color={'green'}
+                    onClick={() => {}}
                 />
-            ))}
+                <StatusButton
+                    title={'Elutasít'}
+                    text={'X'}
+                    color={'red'}
+                    onClick={() => {}}
+                />
+                <h6>{expense.date}</h6>
+            </div>
+            <div className={styles.usercardsimplecontainer}>
+                <UserCardSimple
+                    name={expense.payer.name}
+                    color={expense.payer.color}
+                    onClick={() => {}}
+                />
+            </div>
+            <div className={'h1'}></div>
+            <table>
+                <tbody>
+                    {expense.items.map((item) => (
+                        <ExpenseItemRow
+                            key={item.id}
+                            id={item.id}
+                            name={item.name}
+                            price={item.price}
+                            participated={item.participated}
+                        />
+                    ))}
+                </tbody>
+            </table>
+            <div className={'h2'}></div>
+
+            <h6 className={'middleinside'}>
+                További 3 tétel, amiben nem vettél részt
+            </h6>
+
+            <HorizontalLine />
+            <h5>Összesen:</h5>
+            <p className={'right'}>{total} Ft</p>
         </div>
     )
 }

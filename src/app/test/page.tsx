@@ -4,48 +4,26 @@ import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import { useState } from 'react'
 import UsersBagde from '@/components/UserCard/UsersBadge'
 import { Item } from '@/types/item'
+import { BasicUser } from '@/types/user'
+import { ExpenseType } from '@/types/expense'
 
-const dummyUser = {
+const dummyUser: BasicUser = {
     id: 'sdfffa',
     revTag: 'rte',
     name: 'Test User',
     color: '#123456',
-    spent: 2243,
-    paid: 243,
-    transferfrom: 1432,
-    transferto: 4132,
-    balance: 1432,
-    deleteable: false,
-    email: 'valam',
-    auth0sub: 'fads',
 }
-const dummyUser2 = {
+const dummyUser2: BasicUser = {
     id: 'sdsdaafada',
     revTag: 'rtdfe',
     name: 'Test User2',
     color: '#51af2d',
-    spent: 2243,
-    paid: 243,
-    transferfrom: 1432,
-    transferto: 4132,
-    balance: 1432,
-    deleteable: false,
-    email: 'valam',
-    auth0sub: 'ffsdads',
 }
-const dummyUser3 = {
+const dummyUser3: BasicUser = {
     id: 'sdffwwsda',
     revTag: 'rxte',
     name: 'Test User3',
     color: '#c013a4',
-    spent: 2243,
-    paid: 243,
-    transferfrom: 1432,
-    transferto: 4132,
-    balance: 1432,
-    deleteable: false,
-    email: 'valam',
-    auth0sub: 'fadfsads',
 }
 
 const dummyItem: Item = {
@@ -62,7 +40,7 @@ const dummyItem2: Item = {
     participated: [dummyUser2, dummyUser3, dummyUser],
 }
 
-const dummyExpense = {
+const dummyExpense: ExpenseType = {
     id: 'adsf',
     title: 'Shopping',
     amount: 12343,
@@ -76,8 +54,8 @@ const dummyExpense = {
 export default function Page() {
     return (
         <>
-            {ExpenseCard(dummyExpense)}
-            {ExpenseCard(dummyExpense)}
+            <ExpenseCard expense={dummyExpense} />
+            <ExpenseCard expense={dummyExpense} />
             <form>
                 <input type={'text'} />
             </form>
