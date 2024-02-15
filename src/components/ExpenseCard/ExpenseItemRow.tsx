@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './expensecard.module.css'
 import UsersBagde from '@/components/UserCard/UsersBadge'
 import { Item } from '@/types/item'
+import { formatAmount } from '@/app/page'
 
 export default function ExpenseItemRow(item: Item) {
     return (
@@ -10,7 +11,9 @@ export default function ExpenseItemRow(item: Item) {
                 <h5>{item.name}</h5>
             </td>
             <td>
-                <p className={styles.expenserowprice}>{item.price} Ft</p>
+                <p className={styles.expenserowprice}>
+                    {formatAmount(item.price)} Ft
+                </p>
             </td>
             <td className={'min-width'}>
                 <UsersBagde users={item.participated} />

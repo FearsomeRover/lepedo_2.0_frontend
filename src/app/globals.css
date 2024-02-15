@@ -182,7 +182,7 @@ th > h5 {
 .sbtn_with_h4 {
     font-family: 'Poppins', serif;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 1px;
     font-weight: 500;
     border: 2px solid var(--black);
@@ -493,6 +493,14 @@ textarea {
     margin-top: 8px;
 }
 
+.m8 {
+    margin: 8px;
+}
+
+.m8right {
+    margin-right: 8px;
+}
+
 .middleinside {
     text-align: center;
     align-content: center;
@@ -517,6 +525,10 @@ textarea {
 }
 
 .nomargin {
+    margin: 0;
+}
+
+.nomargininside * {
     margin: 0;
 }
 

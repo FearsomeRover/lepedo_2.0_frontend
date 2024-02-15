@@ -4,6 +4,8 @@ import ExpenseItemRow from '@/components/ExpenseCard/ExpenseItemRow'
 import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import StatusButton from '@/components/Button/StatusButton'
+import { formatAmount } from '@/app/page'
+import Link from 'next/link'
 
 export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
     const total = expense.items.reduce((acc, item) => acc + item.price, 0)
@@ -11,22 +13,8 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
     return (
         <div className={styles.expensecard}>
             <h4>{expense.title}</h4>
+            <h6 className={'nomargin'}>{expense.date}</h6>
             <div className={styles.righttop}>
-                <StatusButton
-                    title={'Elfogad'}
-                    text={'OK'}
-                    color={'green'}
-                    onClick={() => {}}
-                />
-                <StatusButton
-                    title={'Elutasít'}
-                    text={'X'}
-                    color={'red'}
-                    onClick={() => {}}
-                />
-                <h6>{expense.date}</h6>
-            </div>
-            <div className={'m8top'}>
                 <UserCardSimple
                     name={expense.payer.name}
                     color={expense.payer.color}
@@ -57,11 +45,22 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
             <HorizontalLine />
             <div className={'flex-row-space-between'}>
                 <h5 className={'bold'}>Te:</h5>
-                <p className={'right'}>{total} Ft</p>
+                <p className={'right'}>{formatAmount(total)} Ft</p>
             </div>
             <div className={'flex-row-space-between m8top'}>
                 <h5 className={'bold'}>Összesen:</h5>
-                <p className={'right'}>{total} Ft</p>
+                <p className={'right'}>{formatAmount(total)} Ft</p>
+            </div>
+
+            {/*todo if not participation status is none*/}
+            <div>
+                <HorizontalLine />
+                <div className={'flex-row-space-between'}>
+                    <button className={'sbtn'} style={{ marginRight: '16px' }}>
+                        Approve
+                    </button>
+                    <button className={'sbtn'}> Decline</button>
+                </div>
             </div>
         </div>
     )
