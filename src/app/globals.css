@@ -62,7 +62,7 @@ h3 {
     color: var(--black);
 }
 
-/*Buttons*/
+/*Buttons, ExpenseCard Titles*/
 h4 {
     font-family: Poppins, serif;
     font-weight: 500;
@@ -71,19 +71,17 @@ h4 {
     color: var(--black);
 }
 
-/*Statistics Titles, Input labels*/
+/*List Item*/
 h5 {
     font-family: Inter, serif;
     font-weight: 400;
     font-size: 18px;
-    margin: 8px;
-    margin-bottom: 0px;
-    margin-top: 24px;
+    margin: 24px 8px 0px;
     color: var(--black);
     width: fit-content;
 }
 
-/*disclaimer at bottom*/
+/*disclaimer at bottom, */
 h6 {
     font-family: Inter, serif;
     font-style: italic;
@@ -93,9 +91,8 @@ h6 {
     color: var(--black);
 }
 
-form > h5 {
+form h6 {
     text-align: left;
-    width: 90%;
 }
 
 /*Numbers, Amounts*/
@@ -167,6 +164,7 @@ td {
 form > table > tbody > tr > td {
     border: none;
     text-align: center;
+    padding: 0 8px;
 }
 
 th > h5 {
@@ -232,8 +230,9 @@ input,
     background: none;
     text-align: center;
     color: black;
-    width: 90%;
+    box-sizing: border-box;
     margin-bottom: 12px;
+    width: 100%;
     outline: none;
     transition: 0.1s ease-in-out;
 }
@@ -430,12 +429,16 @@ textarea {
     width: 50%;
 }
 
-.w60px {
-    width: 60px;
+.w90 {
+    width: 90%;
 }
 
 .w100 {
     width: 100%;
+}
+
+.w60px {
+    width: 60px;
 }
 
 .h1 {
@@ -475,6 +478,10 @@ textarea {
     align-content: end;
     align-items: end;
     align-self: end;
+}
+
+.inline-block {
+    display: inline-block;
 }
 
 .left {
@@ -517,6 +524,11 @@ textarea {
 .italic {
     font-style: italic;
     color: darkslategray;
+}
+
+.podkova {
+    font-family: 'Podkova Medium', serif;
+    font-size: 24px;
 }
 
 .min-width {
@@ -563,4 +575,13 @@ textarea {
 
 div {
     /*    background-color: #ff000011;*/
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
 }

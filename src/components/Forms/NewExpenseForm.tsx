@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './forms.module.css'
 import { ExpenseType } from '@/types/expense'
 import Image from 'next/image'
@@ -68,12 +68,12 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                 <form
                     onSubmit={handleFormSubmit}
                     className={styles.expenseform}>
-                    <h3>Új kiadás hozzáadása</h3>
+                    <h2>Új kiadás hozzáadása</h2>
                     <table>
                         <tbody>
                             <tr>
                                 <td>
-                                    <h5>Név</h5>
+                                    <h6>Név</h6>
                                     <input
                                         name="name"
                                         defaultValue={
@@ -87,7 +87,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                     />
                                 </td>
                                 <td>
-                                    <h5>Dátum</h5>
+                                    <h6>Dátum</h6>
                                     <input
                                         name="date"
                                         type="date"
@@ -101,138 +101,198 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                             (
                                                 e.target as HTMLInputElement
                                             ).setCustomValidity(
-                                                'Csak 50Ft és 1000000Ft közti érték lehet',
+                                                'Normális dátumot írj be!',
                                             )
                                         }
                                     />
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <h5>Összeg</h5>
-                                    <input
-                                        name="amount"
-                                        type="number"
-                                        defaultValue={
-                                            props.expense
-                                                ? props.expense.amount
-                                                : ''
-                                        }
-                                        min={50}
-                                        max={1_000_000}
-                                        //required
-                                        //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
-                                    />
+                                <td colSpan={2}>
+                                    <div className={'w50 middleself'}>
+                                        <h6>Összeg</h6>
+                                        <input
+                                            name="amount"
+                                            type="number"
+                                            className={'right podkova w90'}
+                                            defaultValue={
+                                                props.expense
+                                                    ? props.expense.amount
+                                                    : ''
+                                            }
+                                            min={50}
+                                            max={1_000_000}
+                                            required
+                                            onInvalid={(e) =>
+                                                (
+                                                    e.target as HTMLInputElement
+                                                ).setCustomValidity(
+                                                    'Csak 50Ft és 1000000Ft közti érték lehet',
+                                                )
+                                            }
+                                        />
+                                        <span className={styles.currencytext}>
+                                            Ft
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}>
+                                    <details>
+                                        <summary className={'left'}>
+                                            <h6 className={'inline-block'}>
+                                                Ismeretlen résztvevők
+                                            </h6>
+                                        </summary>
+                                        <input
+                                            className={'w50 right searchinput'}
+                                            type="text"
+                                            placeholder="Keresés..."
+                                            onChange={(s) =>
+                                                setSearchPhrase(s.target.value)
+                                            }
+                                        />
+                                        <div className={styles.userbucket}>
+                                            {users
+                                                .filter((user) =>
+                                                    user.name
+                                                        .toLowerCase()
+                                                        .includes(
+                                                            searchPhrase.toLowerCase(),
+                                                        ),
+                                                )
+                                                .map((user) => (
+                                                    <UserCardSimple
+                                                        name={user.name}
+                                                        color={user.color}
+                                                        revTag={user.revTag}
+                                                        isSelected={selectedUsers.includes(
+                                                            user,
+                                                        )}
+                                                        isHoverable={false}
+                                                        onClick={() => {
+                                                            setSelectedUsers(
+                                                                (
+                                                                    prevSelectedUsers,
+                                                                ) =>
+                                                                    prevSelectedUsers.includes(
+                                                                        user,
+                                                                    )
+                                                                        ? prevSelectedUsers.filter(
+                                                                              (
+                                                                                  u,
+                                                                              ) =>
+                                                                                  u !==
+                                                                                  user,
+                                                                          )
+                                                                        : [
+                                                                              ...prevSelectedUsers,
+                                                                              user,
+                                                                          ],
+                                                            )
+                                                        }}
+                                                        key={user.id}
+                                                    />
+                                                ))}
+                                        </div>
+                                    </details>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}>
+                                    <h6 className={'w100 left'}>Leosztás</h6>
+                                    <div className={styles.userarea}>
+                                        <div className={styles.payed}>
+                                            <h6
+                                                className={
+                                                    styles.userareatitle
+                                                }>
+                                                Fizetett
+                                            </h6>
+                                            {selectedUsers.map((user) => (
+                                                <label
+                                                    className={
+                                                        styles.radiolabel
+                                                    }
+                                                    key={user.id}>
+                                                    <input
+                                                        type="radio"
+                                                        id={user.id}
+                                                        value={user.id}
+                                                        className="radio"
+                                                        name="payed"
+                                                        defaultChecked={
+                                                            props.expense
+                                                                ?.payerId ===
+                                                            user.id
+                                                        }
+                                                    />
+                                                    <UserCardSimple
+                                                        name={user.name}
+                                                        color={user.color}
+                                                        onClick={() => {}}
+                                                        revTag={user.revTag}
+                                                        key={user.id}
+                                                    />
+                                                </label>
+                                            ))}
+                                        </div>
+                                        <div className={'imageContainer'}>
+                                            <Image
+                                                className={'arrow'}
+                                                src="/images/arrow-right.svg"
+                                                alt="arrow-right"
+                                                fill></Image>
+                                        </div>
+                                        <div className={styles.payedto}>
+                                            <h6
+                                                className={
+                                                    styles.userareatitle
+                                                }>
+                                                Részvett
+                                            </h6>
+                                            {selectedUsers.map((user) => (
+                                                <label
+                                                    className={
+                                                        styles.checklabel
+                                                    }
+                                                    key={user.id}>
+                                                    <UserCardSimple
+                                                        name={user.name}
+                                                        color={user.color}
+                                                        onClick={() => {}}
+                                                        revTag={user.revTag}
+                                                        key={user.id}
+                                                    />
+                                                    <input
+                                                        type="checkbox"
+                                                        id={user.id}
+                                                        value={user.id}
+                                                        className="radio"
+                                                        name="payedto"
+                                                        defaultChecked={
+                                                            props.expense
+                                                                ? props.expense?.received.some(
+                                                                      (
+                                                                          curruser,
+                                                                      ) =>
+                                                                          curruser.id ===
+                                                                          user.id,
+                                                                  )
+                                                                : true
+                                                        }
+                                                        //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
+                                                    />
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <h5>Résztvevők</h5>
-                    <input
-                        className={'w50 right searchinput'}
-                        type="text"
-                        placeholder="Keresés..."
-                        onChange={(s) => setSearchPhrase(s.target.value)}
-                    />
-                    <div
-                        className={styles.userbucket}
-                        title={'Válaszd ki a költésben résztvevőket!'}>
-                        {users
-                            .filter((user) =>
-                                user.name
-                                    .toLowerCase()
-                                    .includes(searchPhrase.toLowerCase()),
-                            )
-                            .map((user) => (
-                                <UserCardSimple
-                                    name={user.name}
-                                    color={user.color}
-                                    revTag={user.revTag}
-                                    isSelected={selectedUsers.includes(user)}
-                                    isHoverable={false}
-                                    onClick={() => {
-                                        setSelectedUsers((prevSelectedUsers) =>
-                                            prevSelectedUsers.includes(user)
-                                                ? prevSelectedUsers.filter(
-                                                      (u) => u !== user,
-                                                  )
-                                                : [...prevSelectedUsers, user],
-                                        )
-                                    }}
-                                    key={user.id}
-                                />
-                            ))}
-                    </div>
 
-                    <h5>Leosztás</h5>
-                    <div className={styles.userarea}>
-                        <div className={styles.payed}>
-                            <h5 className={styles.userareatitle}>Fizetett</h5>
-                            {selectedUsers.map((user) => (
-                                <label
-                                    className={styles.radiolabel}
-                                    key={user.id}>
-                                    <input
-                                        type="radio"
-                                        id={user.id}
-                                        value={user.id}
-                                        className="radio"
-                                        name="payed"
-                                        defaultChecked={
-                                            props.expense?.payerId === user.id
-                                        }
-                                    />
-                                    <UserCardSimple
-                                        name={user.name}
-                                        color={user.color}
-                                        onClick={() => {}}
-                                        revTag={user.revTag}
-                                        key={user.id}
-                                    />
-                                </label>
-                            ))}
-                        </div>
-                        <div className={'imageContainer'}>
-                            <Image
-                                className={'arrow'}
-                                src="/images/arrow-right.svg"
-                                alt="arrow-right"
-                                fill></Image>
-                        </div>
-                        <div className={styles.payedto}>
-                            <h5 className={styles.userareatitle}>Részvett</h5>
-                            {selectedUsers.map((user) => (
-                                <label
-                                    className={styles.checklabel}
-                                    key={user.id}>
-                                    <UserCardSimple
-                                        name={user.name}
-                                        color={user.color}
-                                        onClick={() => {}}
-                                        revTag={user.revTag}
-                                        key={user.id}
-                                    />
-                                    <input
-                                        type="checkbox"
-                                        id={user.id}
-                                        value={user.id}
-                                        className="radio"
-                                        name="payedto"
-                                        defaultChecked={
-                                            props.expense
-                                                ? props.expense?.received.some(
-                                                      (curruser) =>
-                                                          curruser.id ===
-                                                          user.id,
-                                                  )
-                                                : true
-                                        }
-                                        //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
-                                    />
-                                </label>
-                            ))}
-                        </div>
-                    </div>
                     <div>
                         <input
                             className="sbtn_with_h4"
