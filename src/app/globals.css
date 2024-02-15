@@ -136,6 +136,11 @@ p {
     border: 2px solid black;
 }
 
+.smallcard {
+    border: 1px solid gray;
+    border-radius: 12px;
+}
+
 table {
     width: 100%;
     border-spacing: 0;
@@ -506,6 +511,18 @@ textarea {
 
 .m8right {
     margin-right: 8px;
+}
+
+.m4top {
+    margin-top: 4px;
+}
+
+.m4 {
+    margin: 4px;
+}
+
+.m4right {
+    margin-right: 4px;
 }
 
 .middleinside {

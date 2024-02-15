@@ -14,16 +14,40 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
     const refresh = () => {}
 
     return (
-        <div className={styles.actionrow}>
-            {(!props.revealed || props.revealed[0]) && (
-                <button
-                    className="sbtn"
-                    onClick={() => {
-                        setExpensePopup(true)
-                    }}>
-                    Új tétel felvétele
-                </button>
-            )}
+        <>
+            <div className={styles.actionrow}>
+                {(!props.revealed || props.revealed[0]) && (
+                    <button
+                        className="sbtn"
+                        onClick={() => {
+                            setExpensePopup(true)
+                        }}>
+                        Új tétel felvétele
+                    </button>
+                )}
+
+                {(!props.revealed || props.revealed[1]) && (
+                    <button className="sbtn" onClick={() => {}}>
+                        Új számla felvétele [haladó]
+                    </button>
+                )}
+
+                {(!props.revealed || props.revealed[2]) && (
+                    <button
+                        className="sbtn"
+                        onClick={() => {
+                            setTransferPopup(true)
+                        }}>
+                        Új utalás rögzítése
+                    </button>
+                )}
+
+                {(!props.revealed || props.revealed[3]) && (
+                    <button className="sbtn" onClick={() => {}}>
+                        Új QR kód generálása
+                    </button>
+                )}
+            </div>
 
             {expensePopup && (
                 <NewExpenseForm
@@ -32,34 +56,12 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                 />
             )}
 
-            {(!props.revealed || props.revealed[1]) && (
-                <button className="sbtn" onClick={() => {}}>
-                    Új számla felvétele [haladó]
-                </button>
-            )}
-
-            {(!props.revealed || props.revealed[2]) && (
-                <button
-                    className="sbtn"
-                    onClick={() => {
-                        setTransferPopup(true)
-                    }}>
-                    Új utalás rögzítése
-                </button>
-            )}
-
             {transferPopup && (
                 <NewTransferForm
                     abort={() => setTransferPopup(false)}
                     refresh={refresh}
                 />
             )}
-
-            {(!props.revealed || props.revealed[3]) && (
-                <button className="sbtn" onClick={() => {}}>
-                    Új QR kód generálása
-                </button>
-            )}
-        </div>
+        </>
     )
 }

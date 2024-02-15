@@ -163,37 +163,42 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                         ),
                                                 )
                                                 .map((user) => (
-                                                    <UserCardSimple
-                                                        name={user.name}
-                                                        color={user.color}
-                                                        revTag={user.revTag}
-                                                        isSelected={selectedUsers.includes(
-                                                            user,
-                                                        )}
-                                                        isHoverable={false}
-                                                        onClick={() => {
-                                                            setSelectedUsers(
-                                                                (
-                                                                    prevSelectedUsers,
-                                                                ) =>
-                                                                    prevSelectedUsers.includes(
-                                                                        user,
-                                                                    )
-                                                                        ? prevSelectedUsers.filter(
-                                                                              (
-                                                                                  u,
-                                                                              ) =>
-                                                                                  u !==
-                                                                                  user,
-                                                                          )
-                                                                        : [
-                                                                              ...prevSelectedUsers,
-                                                                              user,
-                                                                          ],
-                                                            )
-                                                        }}
+                                                    <div
                                                         key={user.id}
-                                                    />
+                                                        className={
+                                                            'inline-block m4top m4right'
+                                                        }>
+                                                        <UserCardSimple
+                                                            name={user.name}
+                                                            color={user.color}
+                                                            revTag={user.revTag}
+                                                            isSelected={selectedUsers.includes(
+                                                                user,
+                                                            )}
+                                                            isHoverable={false}
+                                                            onClick={() => {
+                                                                setSelectedUsers(
+                                                                    (
+                                                                        prevSelectedUsers,
+                                                                    ) =>
+                                                                        prevSelectedUsers.includes(
+                                                                            user,
+                                                                        )
+                                                                            ? prevSelectedUsers.filter(
+                                                                                  (
+                                                                                      u,
+                                                                                  ) =>
+                                                                                      u !==
+                                                                                      user,
+                                                                              )
+                                                                            : [
+                                                                                  ...prevSelectedUsers,
+                                                                                  user,
+                                                                              ],
+                                                                )
+                                                            }}
+                                                        />
+                                                    </div>
                                                 ))}
                                         </div>
                                     </details>

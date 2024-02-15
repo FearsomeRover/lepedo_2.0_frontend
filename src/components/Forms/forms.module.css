@@ -12,13 +12,6 @@
     scroll-behavior: initial;
 }
 
-@media (max-width: 700px) {
-    .popup {
-        width: 100%;
-        height: 100%;
-    }
-}
-
 .userform {
     background: #ffffff;
     display: flex;
@@ -28,6 +21,24 @@
     border-radius: 20px;
     justify-content: space-between;
 }
+
+@media (max-width: 700px) {
+    .popup {
+        width: 100%;
+        height: 100%;
+    }
+
+    .expenseform {
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .popup h2 {
+        margin-top: 32px;
+    }
+}
+
 .color {
     margin: 0;
     width: 5rem;
