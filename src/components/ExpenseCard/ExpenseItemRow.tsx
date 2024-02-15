@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './expensecard.module.css'
 import UsersBagde from '@/components/UserCard/UsersBadge'
 import { Item } from '@/types/item'
-import { formatAmount } from '@/app/page'
+import { formatAmount } from 'utils/formatAmount'
 
 export default function ExpenseItemRow(item: Item) {
     return (

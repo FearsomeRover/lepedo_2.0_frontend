@@ -4,7 +4,7 @@ import ExpenseItemRow from '@/components/ExpenseCard/ExpenseItemRow'
 import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import StatusButton from '@/components/Button/StatusButton'
-import { formatAmount } from '@/app/page'
+import { formatAmount } from 'utils/formatAmount'
 import Link from 'next/link'
 
 export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
