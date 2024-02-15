@@ -33,7 +33,7 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
                     onClick={() => {}}
                 />
             </div>
-            <div className={'h1'}></div>
+            <div className={'h3'}></div>
             <table>
                 <tbody>
                     {expense.items.map((item) => (
@@ -54,8 +54,14 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
             </h6>
 
             <HorizontalLine />
-            <h5>Összesen:</h5>
-            <p className={'right'}>{total} Ft</p>
+            <div className={'flex-row-space-between'}>
+                <h5 className={'bold'}>Te:</h5>
+                <p className={'right'}>{total} Ft</p>
+            </div>
+            <div className={'flex-row-space-between'}>
+                <h5 className={'bold'}>Összesen:</h5>
+                <p className={'right'}>{total} Ft</p>
+            </div>
         </div>
     )
 }

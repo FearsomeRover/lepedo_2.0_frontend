@@ -28,7 +28,7 @@ export default function Page() {
                     <div className={'h5'}></div>
                     <p className={'middleself fs36'}>300 Ft</p>
                     <div className={'h3'}></div>
-                    <div className={'flex mw700 middleself'}>
+                    <div className={'flex-row-space-between mw700 middleself'}>
                         <UserCardSimple
                             name={user!.name!}
                             onClick={() => {}}

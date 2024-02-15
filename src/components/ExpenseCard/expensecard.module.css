@@ -1,11 +1,19 @@
 .expensecard {
-    width: 16rem;
+    width: 20rem;
+    max-width: 100%;
     margin: 12px;
     border: 2px solid black;
     border-radius: 12px;
     padding: 8px;
     display: inline-block;
     position: relative;
+    box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+    .expensecard {
+        margin: 16px auto;
+    }
 }
 
 .userplayground {

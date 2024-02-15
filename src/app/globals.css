@@ -80,12 +80,16 @@ h5 {
     margin-bottom: 0px;
     margin-top: 24px;
     color: var(--black);
+    width: fit-content;
 }
+
+/*disclaimer at bottom*/
 h6 {
     font-family: Inter, serif;
+    font-style: italic;
     font-weight: 400;
     font-size: 14px;
-    margin: 16px 0;
+    margin: 16px 0 0;
     color: var(--black);
 }
 
@@ -313,14 +317,24 @@ textarea {
     flex-direction: row;
 }
 
+.headerrow {
+    margin-bottom: 3rem;
+}
+
 @media (max-width: 700px) {
     h1 {
         font-size: 48px;
+        margin-left: 0;
         margin-bottom: 8px;
         display: inline-block;
     }
+    h2 {
+        margin-left: 0;
+        margin-right: 40px;
+    }
     .headerrow {
-        margin-top: 32px;
+        margin-top: 16px;
+        margin-bottom: 3rem;
     }
     .floating-top {
         position: initial;
@@ -462,6 +476,10 @@ textarea {
     text-align: left;
 }
 
+.m20sides {
+    margin: 0 20px;
+}
+
 .middleinside {
     text-align: center;
     align-content: center;
@@ -489,14 +507,15 @@ textarea {
     margin: 0;
 }
 
-.flex {
+.flex-row-space-between {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-.flex * {
+.flex-row-space-between * {
     flex: 1;
+    margin: 0;
 }
 
 .imageContainer {
