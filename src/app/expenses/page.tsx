@@ -35,9 +35,37 @@ const dummyItem: Item = {
 
 const dummyItem2: Item = {
     id: 'ww',
-    name: 'PS5',
+    name: 'finom kaja',
     price: 123423,
     participated: [dummyUser2, dummyUser3, dummyUser],
+}
+
+const dummyItem3: Item = {
+    id: 'wwfds',
+    name: 'kakao',
+    price: 123423,
+    participated: [dummyUser2, dummyUser3, dummyUser],
+}
+
+const dummyItem4: Item = {
+    id: 'wwasd',
+    name: 'PS5',
+    price: 123423,
+    participated: [dummyUser3, dummyUser],
+}
+
+const dummyItem5: Item = {
+    id: 'wwadfsafsd',
+    name: 'Katjes ofc',
+    price: 534,
+    participated: [dummyUser2, dummyUser],
+}
+
+const dummyItem6: Item = {
+    id: 'Valami',
+    name: 'Valami random termek',
+    price: 123423,
+    participated: [dummyUser2, dummyUser3],
 }
 
 const dummyExpense: ExpenseType = {
@@ -48,7 +76,14 @@ const dummyExpense: ExpenseType = {
     date: '2022-10-10',
     received: [dummyUser, dummyUser2, dummyUser3],
     payer: dummyUser,
-    items: [dummyItem, dummyItem2],
+    items: [
+        dummyItem,
+        dummyItem2,
+        dummyItem3,
+        dummyItem4,
+        dummyItem5,
+        dummyItem6,
+    ],
 }
 
 export default function Page() {

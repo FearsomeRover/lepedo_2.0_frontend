@@ -4,7 +4,7 @@
     margin: 12px;
     border: 2px solid black;
     border-radius: 12px;
-    padding: 8px;
+    padding: 16px;
     display: inline-block;
     position: relative;
     box-sizing: border-box;
@@ -12,17 +12,19 @@
 
 @media (max-width: 700px) {
     .expensecard {
-        margin: 16px auto;
+        margin: 16px 0;
+        width: 100%;
     }
+}
+
+.itemsplayground {
+    height: 10rem;
+    overflow-y: scroll;
 }
 
 .userplayground {
     border: 1px solid black;
     max-width: 20rem;
-}
-
-.usercardsimplecontainer {
-    margin-top: 12px;
 }
 
 .righttop {
@@ -41,10 +43,18 @@
 
 .expenserow td {
     border: none;
+    box-sizing: content-box;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide any content that overflows its container */
+    text-overflow: ellipsis; /* Add an ellipsis (...) when text overflows */
 }
 
 .expenserow h5 {
-    margin: 0;
+    margin: 0 8px 0 0;
+    box-sizing: content-box;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide any content that overflows its container */
+    text-overflow: ellipsis; /* Add an ellipsis (...) when text overflows */
 }
 
 .expenserow p {

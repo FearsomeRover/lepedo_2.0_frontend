@@ -26,28 +26,29 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
                 />
                 <h6>{expense.date}</h6>
             </div>
-            <div className={styles.usercardsimplecontainer}>
+            <div className={'m8top'}>
                 <UserCardSimple
                     name={expense.payer.name}
                     color={expense.payer.color}
                     onClick={() => {}}
                 />
             </div>
-            <div className={'h3'}></div>
-            <table>
-                <tbody>
-                    {expense.items.map((item) => (
-                        <ExpenseItemRow
-                            key={item.id}
-                            id={item.id}
-                            name={item.name}
-                            price={item.price}
-                            participated={item.participated}
-                        />
-                    ))}
-                </tbody>
-            </table>
-            <div className={'h2'}></div>
+            <div className={'h1'}></div>
+            <div className={styles.itemsplayground}>
+                <table>
+                    <tbody>
+                        {expense.items.map((item) => (
+                            <ExpenseItemRow
+                                key={item.id}
+                                id={item.id}
+                                name={item.name}
+                                price={item.price}
+                                participated={item.participated}
+                            />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
             <h6 className={'middleinside'}>
                 További 3 tétel, amiben nem vettél részt
@@ -58,7 +59,7 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
                 <h5 className={'bold'}>Te:</h5>
                 <p className={'right'}>{total} Ft</p>
             </div>
-            <div className={'flex-row-space-between'}>
+            <div className={'flex-row-space-between m8top'}>
                 <h5 className={'bold'}>Összesen:</h5>
                 <p className={'right'}>{total} Ft</p>
             </div>

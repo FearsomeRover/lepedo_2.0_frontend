@@ -20,7 +20,7 @@ h1 {
     font-size: 96px;
     letter-spacing: 2.88px;
     line-height: normal;
-    margin: 20px;
+    margin: 0 16px;
     color: var(--black);
 }
 
@@ -319,11 +319,12 @@ textarea {
 
 .headerrow {
     margin-bottom: 3rem;
+    margin-top: 0;
 }
 
 @media (max-width: 700px) {
     h1 {
-        font-size: 48px;
+        font-size: 56px;
         margin-left: 0;
         margin-bottom: 8px;
         display: inline-block;
@@ -441,6 +442,10 @@ textarea {
     height: 1rem;
 }
 
+.h2 {
+    height: 2rem;
+}
+
 .h3 {
     height: 3rem;
 }
@@ -478,6 +483,14 @@ textarea {
 
 .m20sides {
     margin: 0 20px;
+}
+
+.m16topdown {
+    margin: 16px 0;
+}
+
+.m8top {
+    margin-top: 8px;
 }
 
 .middleinside {
