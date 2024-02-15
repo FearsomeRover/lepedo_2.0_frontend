@@ -142,7 +142,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                     <details>
                                         <summary className={'left'}>
                                             <h6 className={'inline-block'}>
-                                                Ismeretlen résztvevők
+                                                Ismeretlen résztvevők hozzáadása
                                             </h6>
                                         </summary>
                                         <input

@@ -11,11 +11,13 @@ type SimpleUserProps = {
 }
 
 export default function UserCardSimple(simple: SimpleUserProps) {
-    const [isHovered, setIsHovered] = useState(false)
-    const [nameWidth, setNameWidth] = useState<number>(0)
-    const [revTagWidth, setRevTagWidth] = useState<number>(0)
     const nameRef = useRef<HTMLDivElement>(null)
     const revTagRef = useRef<HTMLDivElement>(null)
+    const [isHovered, setIsHovered] = useState(false)
+    const [nameWidth, setNameWidth] = useState<number>(
+        nameRef.current ? nameRef.current.offsetWidth : 0,
+    )
+    const [revTagWidth, setRevTagWidth] = useState<number>(0)
 
     useEffect(() => {
         if (nameRef.current) {
@@ -27,6 +29,7 @@ export default function UserCardSimple(simple: SimpleUserProps) {
         if (revTagRef.current) {
             setRevTagWidth(revTagRef.current.offsetWidth)
         }
+        console.log(revTagRef.current)
     }, [simple.revTag, isHovered])
 
     const handleMouseEnter = () => {
@@ -38,7 +41,7 @@ export default function UserCardSimple(simple: SimpleUserProps) {
     }
     return (
         <div
-            style={{ width: Math.max(nameWidth, revTagWidth) }}
+            style={{ minWidth: Math.max(nameWidth, revTagWidth) }}
             className={
                 simple.isAlignedToCenter
                     ? 'usertagcontainer middleinside'
