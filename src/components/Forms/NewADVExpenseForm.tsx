@@ -229,27 +229,37 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                             <tr>
                                 <td colSpan={2}>
                                     <h6 className={'w100 left'}>Tételek</h6>
-                                    <table className={styles.itemtable}>
-                                        <tbody>
-                                            <tr>
-                                                <th className={'minw300'}>Tételek</th>
-                                                {selectedUsers.map((user) => (
-                                                    <th key={user.id}>
-                                                        <UserCardSimple
-                                                            name={user.name}
-                                                            color={user.color}
-                                                            onClick={() => {}}
-                                                        />
-                                                    </th>
-                                                ))}
-                                            </tr>
-                                            {items.map((item) => (
-                                                <tr key={item.id}>
-                                                    <td>
-                                                        <div className={'flex-row-space-between'}>
+                                    <div className={'w100 left m8top'}>
+                                        <button className={'sbtn nomargin p48'} type={'button'} onClick={addItem}>
+                                            +
+                                        </button>
+                                    </div>
+                                    <div className={styles.itemtablecontainer}>
+                                        <table className={styles.itemtable}>
+                                            <tbody>
+                                                <tr>
+                                                    <td colSpan={2} className={'minw300'}>
+                                                        Tételek
+                                                    </td>
+                                                    {selectedUsers.map((user) => (
+                                                        <td key={user.id}>
+                                                            <div className={'m4'}>
+                                                                <UserCardSimple
+                                                                    name={user.name}
+                                                                    color={user.color}
+                                                                    onClick={() => {}}
+                                                                />
+                                                            </div>
+                                                        </td>
+                                                    ))}
+                                                </tr>
+                                                {items.map((item) => (
+                                                    <tr key={item.id}>
+                                                        <td>
                                                             <input
-                                                                className={'searchinput m8right'}
+                                                                className={'searchinput m8right left'}
                                                                 defaultValue={item.name}
+                                                                placeholder={'Tétel neve'}
                                                                 onBlur={(n) =>
                                                                     updateItem(
                                                                         item.id,
@@ -259,39 +269,42 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                     )
                                                                 }
                                                             />
-                                                            <input
-                                                                className={'searchinput'}
-                                                                type={'number'}
-                                                                defaultValue={item.name}
-                                                                onBlur={(n) =>
-                                                                    updateItem(
-                                                                        item.id,
-                                                                        item.name,
-                                                                        n.target.valueAsNumber,
-                                                                        item.participated,
-                                                                    )
-                                                                }
-                                                            />
-                                                            <p className={'currencytext'}> Ft</p>
-                                                        </div>
-                                                    </td>
-                                                    {selectedUsers.map((user) => (
-                                                        <td key={user.id}>
-                                                            <input
-                                                                type="checkbox"
-                                                                name="participated"
-                                                                style={{ accentColor: user.color }}
-                                                            />
                                                         </td>
-                                                    ))}
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                    <div className={'w100 left m8top'}>
-                                        <button className={'sbtn nomargin p48'} type={'button'} onClick={addItem}>
-                                            +
-                                        </button>
+                                                        <td>
+                                                            <div className={'flex-row-space-between'}>
+                                                                <input
+                                                                    className={'searchinput right'}
+                                                                    type={'number'}
+                                                                    defaultValue={item.name}
+                                                                    placeholder={'Ára'}
+                                                                    onBlur={(n) =>
+                                                                        updateItem(
+                                                                            item.id,
+                                                                            item.name,
+                                                                            n.target.valueAsNumber,
+                                                                            item.participated,
+                                                                        )
+                                                                    }
+                                                                />
+                                                                <p className={'currencytext'}> Ft</p>
+                                                            </div>
+                                                        </td>
+                                                        {selectedUsers.map((user) => (
+                                                            <td key={user.id}>
+                                                                <div className={'flex-row-space-between'}>
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        name="participated"
+                                                                        style={{ accentColor: user.color }}
+                                                                    />
+                                                                    <input type={'number'} className={'searchinput'} />
+                                                                </div>
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </td>
                             </tr>

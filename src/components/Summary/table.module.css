@@ -32,6 +32,17 @@
     top: 0;
 }
 
+.summarytablecontainer th,
+.summarytablecontainer td,
+.summarytablecontainer tr {
+    width: unset;
+}
+
+.summarytablecontainer table {
+    width: unset;
+    min-width: 100%;
+}
+
 .disabled {
     opacity: 50%;
 }
