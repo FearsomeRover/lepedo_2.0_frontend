@@ -272,6 +272,16 @@ summary {
     margin-bottom: 12px;
 }
 
+/*details > input {
+    height: 0;
+    overflow: hidden;
+}
+
+details[open] > input {
+    height: 100px;
+    transition: height 0.3s ease-in-out;
+}*/
+
 .searchinput {
     font-family: Inter, serif;
     font-weight: 400;
@@ -350,6 +360,10 @@ textarea {
         margin-right: 40px;
     }
 
+    h4 {
+        font-size: 14px;
+    }
+
     .headerrow {
         margin-top: 16px;
         margin-bottom: 3rem;
@@ -361,6 +375,7 @@ textarea {
 
     .sbtn,
     .sbtn_with_h4 {
+        font-size: 14px;
         margin: 8px auto;
         width: 100%;
         text-align: center;
@@ -370,6 +385,12 @@ textarea {
 @media (min-width: 700px) {
     .w50-desktop {
         width: 50%;
+    }
+    .w500px-desktop {
+        width: 500px;
+    }
+    .w700px-desktop {
+        width: 700px;
     }
 }
 
@@ -458,12 +479,28 @@ textarea {
     width: 100%;
 }
 
+.w20px {
+    width: 20px;
+}
+
 .w60px {
     width: 60px;
 }
 
+.w100px {
+    width: 100px;
+}
+
 .w300px {
     width: 300px;
+}
+
+.w500px {
+    width: 500px;
+}
+
+.w700px {
+    width: 700px;
 }
 
 .h1 {
@@ -492,6 +529,10 @@ textarea {
 
 .maxw30 {
     max-width: 30%;
+}
+
+.minw700 {
+    min-width: 700px;
 }
 
 .maxw700 {
@@ -561,6 +602,10 @@ textarea {
     padding: 8px;
 }
 
+.p8right {
+    padding-right: 16px;
+}
+
 .p48 {
     padding: 4px 8px;
 }
@@ -621,6 +666,11 @@ textarea {
 
 .arrow {
     align-self: center;
+}
+
+.highlight {
+    background-color: rgba(232, 134, 108, 0.37);
+    border-radius: 12px;
 }
 
 .scrollY {

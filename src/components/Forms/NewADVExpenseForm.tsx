@@ -6,6 +6,8 @@ import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { BasicUser, User } from '@/types/user'
 import { Item } from '@/types/item'
 import { GlobalStateContext } from '../context/context'
+import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
+import KeyCap from '@/components/KeyCap/KeyCap'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -15,6 +17,9 @@ type ExpenseFormProps = {
 type Response = {
     data: User[]
 }
+
+const keyboardShortcuts = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
+
 export default function NewExpenseForm(props: ExpenseFormProps) {
     const currentDate = new Date().toISOString().split('T')[0]
     const [selectedUsers, setSelectedUsers] = useState<BasicUser[]>([])
@@ -22,6 +27,32 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
     const [searchPhraseForAll, setSearchPhraseForAll] = useState<string>('')
     const { users } = useContext(GlobalStateContext)
     const [items, setItems] = useState<Item[]>([])
+    const [selectedItem, setSelectedItem] = useState<number>(-1)
+
+    useKeyboardShortcut(['arrowdown'], () => {
+        setSelectedItem((selectedItem + 1) % items.length)
+    })
+    useKeyboardShortcut(['arrowup'], () => {
+        setSelectedItem((selectedItem + items.length - 1) % items.length)
+    })
+    useKeyboardShortcut(keyboardShortcuts, (index) => {
+        if (selectedItem !== -1 && index !== undefined && index > -1) {
+            setItems((prevItems) => {
+                const newItems = prevItems.map((item, _index) => {
+                    if (_index === selectedItem) {
+                        return {
+                            ...item,
+                            participated: item.participated.includes(selectedUsers[index])
+                                ? item.participated.filter((u) => u !== selectedUsers[index])
+                                : [...item.participated, selectedUsers[index]],
+                        }
+                    }
+                    return item
+                })
+                return newItems
+            })
+        }
+    })
 
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
@@ -93,10 +124,29 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
         })
     }
 
+    const updateItemParticipation = (id: string, user: BasicUser) => {
+        setItems((prevItems) => {
+            const newItems = prevItems.map((item) => {
+                if (item.id === id) {
+                    return {
+                        id,
+                        name: item.name,
+                        price: item.price,
+                        participated: item.participated.includes(user)
+                            ? item.participated.filter((u) => u !== user)
+                            : [...item.participated, user],
+                    }
+                }
+                return item
+            })
+            return newItems
+        })
+    }
+
     return (
         <div className={styles.popup}>
             {users ? (
-                <form onSubmit={handleFormSubmit} className={styles.expenseform}>
+                <form onSubmit={handleFormSubmit} className={`w700px-desktop ${styles.popupform} `}>
                     <h2>Új számla hozzáadása</h2>
                     <table>
                         <tbody>
@@ -228,22 +278,32 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                             </tr>
                             <tr>
                                 <td colSpan={2}>
-                                    <h6 className={'w100 left'}>Tételek</h6>
-                                    <div className={'w100 left m8top'}>
-                                        <button className={'sbtn nomargin p48'} type={'button'} onClick={addItem}>
-                                            +
+                                    <h6 className={'w100 left'}>
+                                        Tételek{' '}
+                                        <button type={'button'} onClick={addItem}>
+                                            Új tétel
                                         </button>
-                                    </div>
+                                    </h6>
+                                    <div className={'w100 left m8top'}></div>
                                     <div className={styles.itemtablecontainer}>
                                         <table className={styles.itemtable}>
                                             <tbody>
                                                 <tr>
-                                                    <td colSpan={2} className={'minw300'}>
-                                                        Tételek
+                                                    <td colSpan={2} className={'minw300 p8right'}>
+                                                        {/*                                                        <button
+                                                            className={'sbtn nomargin p48 w100'}
+                                                            type={'button'}
+                                                            onClick={addItem}>
+                                                            +
+                                                        </button>*/}
                                                     </td>
-                                                    {selectedUsers.map((user) => (
+                                                    {selectedUsers.map((user, _index) => (
                                                         <td key={user.id}>
                                                             <div className={'m4'}>
+                                                                {/*<KeyCap keya={'Ctrl'} />*/}
+                                                                <KeyCap
+                                                                    keya={keyboardShortcuts[_index].toUpperCase()}
+                                                                />
                                                                 <UserCardSimple
                                                                     name={user.name}
                                                                     color={user.color}
@@ -253,11 +313,13 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                         </td>
                                                     ))}
                                                 </tr>
-                                                {items.map((item) => (
-                                                    <tr key={item.id}>
-                                                        <td>
+                                                {items.map((item, _index) => (
+                                                    <tr
+                                                        key={item.id}
+                                                        className={selectedItem === _index ? 'highlight' : ''}>
+                                                        <td className={'p8right'}>
                                                             <input
-                                                                className={'searchinput m8right left'}
+                                                                className={'searchinput m8right left inline-block'}
                                                                 defaultValue={item.name}
                                                                 placeholder={'Tétel neve'}
                                                                 onBlur={(n) =>
@@ -270,10 +332,10 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                 }
                                                             />
                                                         </td>
-                                                        <td>
+                                                        <td className={'p8right'}>
                                                             <div className={'flex-row-space-between'}>
                                                                 <input
-                                                                    className={'searchinput right'}
+                                                                    className={'searchinput right podkova'}
                                                                     type={'number'}
                                                                     defaultValue={item.name}
                                                                     placeholder={'Ára'}
@@ -291,14 +353,33 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                         </td>
                                                         {selectedUsers.map((user) => (
                                                             <td key={user.id}>
-                                                                <div className={'flex-row-space-between'}>
+                                                                <label htmlFor={user.id + '/' + item.id}>
                                                                     <input
+                                                                        id={user.id + '/' + item.id}
                                                                         type="checkbox"
                                                                         name="participated"
+                                                                        className={'w20px'}
+                                                                        checked={item.participated.includes(user)}
+                                                                        onChange={(e) => {
+                                                                            updateItemParticipation(item.id, user)
+                                                                        }}
                                                                         style={{ accentColor: user.color }}
                                                                     />
-                                                                    <input type={'number'} className={'searchinput'} />
-                                                                </div>
+
+                                                                    {item.participated.includes(user) ? (
+                                                                        <input
+                                                                            type={'number'}
+                                                                            defaultValue={
+                                                                                item.price / item.participated.length
+                                                                            }
+                                                                            className={
+                                                                                'searchinput w60px right podkova'
+                                                                            }
+                                                                        />
+                                                                    ) : (
+                                                                        <div className={'w60px inline-block'}></div>
+                                                                    )}
+                                                                </label>
                                                             </td>
                                                         ))}
                                                     </tr>

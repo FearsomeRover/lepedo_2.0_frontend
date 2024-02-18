@@ -22,15 +22,7 @@ export default function NewUserForm(props: NewUserFormProps) {
     const [revTag, setRevTag] = useState(user ? user.revTag : '')
     const [freeTag, setFreeTag] = useState(true)
     const [customColor, setCustomColor] = useState(user ? user.color : false)
-    const colors = [
-        '#D9515E',
-        '#51BB88',
-        '#F86E0B',
-        '#0F8A8E',
-        '#FFB100',
-        '#9370DB',
-        '#52BBE8',
-    ]
+    const colors = ['#D9515E', '#51BB88', '#F86E0B', '#0F8A8E', '#FFB100', '#9370DB', '#52BBE8']
     /*todo https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color*/
 
     const reset = () => {
@@ -42,24 +34,19 @@ export default function NewUserForm(props: NewUserFormProps) {
     }
     const checkRevTag = async () => {
         if (revTag && !user) {
-            const data = await axios.get(
-                process.env.NEXT_PUBLIC_BASE_URL + '/user/revtag/' + revTag,
-            )
+            const data = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user/revtag/' + revTag)
             setFreeTag(data.data)
         }
     }
     const checkSubmit = async (event: any) => {
         event.preventDefault()
         if (user) {
-            await axios.patch(
-                process.env.NEXT_PUBLIC_BASE_URL + `/user/${props.user?.id}`,
-                {
-                    name,
-                    revTag,
-                    color,
-                    auth0sub: user!.auth0sub,
-                },
-            )
+            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + `/user/${props.user?.id}`, {
+                name,
+                revTag,
+                color,
+                auth0sub: user!.auth0sub,
+            })
         } else {
             return
         }
@@ -71,20 +58,12 @@ export default function NewUserForm(props: NewUserFormProps) {
     }
     const handleColorGen = () => {
         if (!customColor && name.length >= 2) {
-            setColor(
-                colors[
-                    (name.charCodeAt(0) + name.charCodeAt(2)) % colors.length
-                ],
-            )
+            setColor(colors[(name.charCodeAt(0) + name.charCodeAt(2)) % colors.length])
         }
     }
     return (
         <div className={styles.popup}>
-            <form
-                method="post"
-                onSubmit={checkSubmit}
-                className={styles.userform}
-                autoComplete="off">
+            <form method="post" onSubmit={checkSubmit} className={styles.popupform} autoComplete="off">
                 <h3>Saját profil</h3>
                 <div className="h3"></div>
                 <UserCardSimple
@@ -117,9 +96,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                     onBlur={checkRevTag}
                     autoComplete="off"
                 />
-                {!freeTag && (
-                    <p className="tagerror">Tag already registered to user!</p>
-                )}
+                {!freeTag && <p className="tagerror">Tag already registered to user!</p>}
                 <h5>Tag szín</h5>
 
                 <input
@@ -138,11 +115,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                 <div className="h3"></div>
 
                 <div>
-                    <input
-                        className="sbtn_with_h4"
-                        type="submit"
-                        value="Mentés"
-                    />
+                    <input className="sbtn_with_h4" type="submit" value="Mentés" />
                     {!props.disabled && (
                         <button
                             className="sbtn"

@@ -1,6 +1,7 @@
 import styles from './action.module.css'
 import { useState } from 'react'
 import NewSMPExpenseForm from '@/components/Forms/NewSMPExpenseForm'
+import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 
 type QuickActionButtonProps = {
@@ -8,7 +9,8 @@ type QuickActionButtonProps = {
 }
 
 export default function QuickActionButtons(props: QuickActionButtonProps) {
-    const [expensePopup, setExpensePopup] = useState(false)
+    const [SMPExpensePopup, setSMPExpensePopup] = useState(false)
+    const [ADVExpensePopup, setADVExpensePopup] = useState(false)
     const [transferPopup, setTransferPopup] = useState(false)
 
     const refresh = () => {}
@@ -20,14 +22,18 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                     <button
                         className="sbtn"
                         onClick={() => {
-                            setExpensePopup(true)
+                            setSMPExpensePopup(true)
                         }}>
                         Új tétel felvétele
                     </button>
                 )}
 
                 {(!props.revealed || props.revealed[1]) && (
-                    <button className="sbtn" onClick={() => {}}>
+                    <button
+                        className="sbtn"
+                        onClick={() => {
+                            setADVExpensePopup(true)
+                        }}>
                         Új számla felvétele [haladó]
                     </button>
                 )}
@@ -49,19 +55,11 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                 )}
             </div>
 
-            {expensePopup && (
-                <NewSMPExpenseForm
-                    abort={() => setExpensePopup(false)}
-                    refresh={refresh}
-                />
-            )}
+            {SMPExpensePopup && <NewSMPExpenseForm abort={() => setSMPExpensePopup(false)} refresh={refresh} />}
 
-            {transferPopup && (
-                <NewTransferForm
-                    abort={() => setTransferPopup(false)}
-                    refresh={refresh}
-                />
-            )}
+            {ADVExpensePopup && <NewADVExpenseForm abort={() => setADVExpensePopup(false)} refresh={refresh} />}
+
+            {transferPopup && <NewTransferForm abort={() => setTransferPopup(false)} refresh={refresh} />}
         </>
     )
 }

@@ -37,17 +37,9 @@ export default function NewTransferForm(props: TransferFormProps) {
             date: formData.get('date'),
         }
         if (props.transfer) {
-            await axios.patch(
-                process.env.NEXT_PUBLIC_BASE_URL +
-                    '/transfer/' +
-                    props.transfer.id,
-                data,
-            )
+            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + props.transfer.id, data)
         } else {
-            await axios.post(
-                process.env.NEXT_PUBLIC_BASE_URL + '/transfer',
-                data,
-            )
+            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', data)
         }
         props.abort()
         props.refresh()
@@ -60,9 +52,7 @@ export default function NewTransferForm(props: TransferFormProps) {
     return (
         <div className={styles.popup}>
             {users ? (
-                <form
-                    onSubmit={handleFormSubmit}
-                    className={styles.expenseform}>
+                <form onSubmit={handleFormSubmit} className={styles.popupform}>
                     <h4>Új utalás hozzáadása</h4>
                     <input
                         placeholder="Összeg"
@@ -71,23 +61,17 @@ export default function NewTransferForm(props: TransferFormProps) {
                         min={50}
                         max={1_000_000}
                         required
-                        defaultValue={
-                            props.transfer ? props.transfer.amount : ''
-                        }
+                        defaultValue={props.transfer ? props.transfer.amount : ''}
                         //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity("Csak 50Ft és 1000000Ft közti érték lehet")}
                     />
                     <input
                         placeholder="Dátum"
                         name="date"
                         type="date"
-                        defaultValue={
-                            props.transfer ? props.transfer.date : currentDate
-                        }
+                        defaultValue={props.transfer ? props.transfer.date : currentDate}
                         onChange={validateDate}
                         onInvalid={(e) =>
-                            (e.target as HTMLInputElement).setCustomValidity(
-                                'Csak 50Ft és 1000000Ft közti érték lehet',
-                            )
+                            (e.target as HTMLInputElement).setCustomValidity('Csak 50Ft és 1000000Ft közti érték lehet')
                         }
                     />
 
@@ -95,19 +79,14 @@ export default function NewTransferForm(props: TransferFormProps) {
                         <div className={styles.payed}>
                             <h5 className={styles.userareatitle}>Utaló</h5>
                             {users.map((user) => (
-                                <label
-                                    className={styles.radiolabel}
-                                    key={user.id}>
+                                <label className={styles.radiolabel} key={user.id}>
                                     <input
                                         type="radio"
                                         id={user.id}
                                         value={user.id}
                                         className="radio"
                                         name="payed"
-                                        defaultChecked={
-                                            props.transfer?.userFromId ===
-                                            user.id
-                                        }
+                                        defaultChecked={props.transfer?.userFromId === user.id}
                                         //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                                     />
                                     <UserCard user={user} key={user.id} />
@@ -115,20 +94,12 @@ export default function NewTransferForm(props: TransferFormProps) {
                             ))}
                         </div>
                         <div className={'imageContainer'}>
-                            <Image
-                                className={'arrow'}
-                                src="/images/arrow-right.svg"
-                                alt="arrow-right"
-                                fill></Image>
+                            <Image className={'arrow'} src="/images/arrow-right.svg" alt="arrow-right" fill></Image>
                         </div>
                         <div className={styles.payedto}>
-                            <h5 className={styles.userareatitle}>
-                                Kedvezményezett
-                            </h5>
+                            <h5 className={styles.userareatitle}>Kedvezményezett</h5>
                             {users.map((user) => (
-                                <label
-                                    className={styles.checklabel}
-                                    key={user.id}>
+                                <label className={styles.checklabel} key={user.id}>
                                     <UserCard user={user} key={user.id} />
                                     <input
                                         type="radio"
@@ -136,9 +107,7 @@ export default function NewTransferForm(props: TransferFormProps) {
                                         value={user.id}
                                         className="radio"
                                         name="payedto"
-                                        defaultChecked={
-                                            props.transfer?.userToId === user.id
-                                        }
+                                        defaultChecked={props.transfer?.userToId === user.id}
                                         //onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('És akkor ezt most kinek írjam be?')}
                                     />
                                 </label>
@@ -146,11 +115,7 @@ export default function NewTransferForm(props: TransferFormProps) {
                         </div>
                     </div>
                     <div>
-                        <input
-                            className="sbtn_with_h4"
-                            type="submit"
-                            value="Mentés"
-                        />
+                        <input className="sbtn_with_h4" type="submit" value="Mentés" />
                         <button
                             className="sbtn"
                             onClick={() => {
