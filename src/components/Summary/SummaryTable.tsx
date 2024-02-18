@@ -20,7 +20,7 @@ export default function SummaryTable(props: SummaryTableProps) {
                 <tbody>
                     <tr>
                         <th>
-                            <h5 className="left mw30">#</h5>
+                            <h5 className="left maxw30">#</h5>
                         </th>
                         <th>
                             <h5 className="right">Költésben részesült</h5>

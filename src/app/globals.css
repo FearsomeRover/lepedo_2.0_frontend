@@ -272,7 +272,14 @@ input:focus {
     font-family: Inter, serif;
     font-weight: 400;
     font-size: 14px;
-    float: right;
+    border-image: none;
+    border-bottom: 2px solid gray;
+}
+
+.searchinput:hover,
+.searchinput:focus {
+    border-image: none;
+    border-bottom: 2px solid black;
 }
 
 textarea {
@@ -433,12 +440,14 @@ textarea {
 
 .w20 {
     width: 20%;
-    background-color: #62626255;
 }
 
 .w30 {
     width: 30%;
-    background-color: #62626277;
+}
+
+.w50 {
+    width: 50%;
 }
 
 .w90 {
@@ -473,11 +482,15 @@ textarea {
     height: 10rem;
 }
 
-.mw30 {
+.minw300 {
+    min-width: 300px;
+}
+
+.maxw30 {
     max-width: 30%;
 }
 
-.mw700 {
+.maxw700 {
     max-width: 700px;
 }
 
@@ -490,6 +503,10 @@ textarea {
     align-content: end;
     align-items: end;
     align-self: end;
+}
+
+.floatright {
+    float: right;
 }
 
 .inline-block {
@@ -530,6 +547,18 @@ textarea {
 
 .m4right {
     margin-right: 4px;
+}
+
+.p4 {
+    padding: 4px;
+}
+
+.p8 {
+    padding: 8px;
+}
+
+.p48 {
+    padding: 4px 8px;
 }
 
 .middleinside {
@@ -576,7 +605,6 @@ textarea {
 }
 
 .flex-row-space-between * {
-    flex: 1;
     margin: 0;
 }
 
@@ -588,7 +616,7 @@ textarea {
 }
 
 .arrow {
-    position: center;
+    align-self: center;
 }
 
 .scrollY {

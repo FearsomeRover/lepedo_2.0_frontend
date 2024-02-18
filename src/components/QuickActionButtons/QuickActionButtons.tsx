@@ -1,6 +1,6 @@
 import styles from './action.module.css'
 import { useState } from 'react'
-import NewExpenseForm from '@/components/Forms/NewExpenseForm'
+import NewSMPExpenseForm from '@/components/Forms/NewSMPExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 
 type QuickActionButtonProps = {
@@ -50,7 +50,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
             </div>
 
             {expensePopup && (
-                <NewExpenseForm
+                <NewSMPExpenseForm
                     abort={() => setExpensePopup(false)}
                     refresh={refresh}
                 />

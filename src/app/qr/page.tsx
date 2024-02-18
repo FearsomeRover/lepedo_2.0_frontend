@@ -18,9 +18,7 @@ export default function Page() {
             {!user && (
                 <>
                     <div className={'h5'}></div>
-                    <h3 className={'middleinside'}>
-                        Jelentkezz be tess, hogy striugálhass!
-                    </h3>
+                    <h3 className={'middleinside'}>Jelentkezz be tess, hogy striugálhass!</h3>
                 </>
             )}
             {user && (
@@ -28,7 +26,7 @@ export default function Page() {
                     <div className={'h5'}></div>
                     <p className={'middleself fs36'}>300 Ft</p>
                     <div className={'h3'}></div>
-                    <div className={'flex-row-space-between mw700 middleself'}>
+                    <div className={'flex-row-space-between maxw700 middleself'}>
                         <UserCardSimple
                             name={user!.name!}
                             onClick={() => {}}
@@ -38,11 +36,7 @@ export default function Page() {
                             revTag={'kfadsfakl;ajdf'}
                         />
                         <div className={'imageContainer'}>
-                            <Image
-                                className={'arrow'}
-                                src="/images/arrow-right.svg"
-                                alt="arrow-right"
-                                fill></Image>
+                            <Image className={'arrow'} src="/images/arrow-right.svg" alt="arrow-right" fill></Image>
                         </div>
                         <UserCardSimple
                             name={user!.name!}

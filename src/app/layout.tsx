@@ -5,7 +5,8 @@ import { Inter } from 'next/font/google'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import React, { useState } from 'react'
 import { useKeyboardShortcut } from '../../hooks/useKeyboardShorcut'
-import NewExpenseForm from '@/components/Forms/NewExpenseForm'
+import NewSMPExpenseForm from '@/components/Forms/NewSMPExpenseForm'
+import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 import ShortcutsPopUp from '@/components/Forms/shortcutsPopUp'
 import GlobalContext from '@/components/context/context'
@@ -23,19 +24,44 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     const [shortcutsPopUpRevealed, setShortcutsPopUpRevealed] = useState(false)
-    const [expenseFormRevealed, setExpenseFormRevealed] = useState(false)
+    const [SIMexpenseFormRevealed, setSIMExpenseFormRevealed] = useState(false)
+    const [ADVexpenseFormRevealed, setADVExpenseFormRevealed] = useState(false)
     const [tranfserFormRevealed, setTranfserFormRevealed] = useState(false)
 
     useKeyboardShortcut(['e'], () => {
-        if (tranfserFormRevealed == false) setExpenseFormRevealed(true)
+        if (
+            !(
+                tranfserFormRevealed ||
+                SIMexpenseFormRevealed ||
+                ADVexpenseFormRevealed
+            )
+        )
+            setSIMExpenseFormRevealed(true)
+    })
+    useKeyboardShortcut(['r'], () => {
+        if (
+            !(
+                tranfserFormRevealed ||
+                SIMexpenseFormRevealed ||
+                ADVexpenseFormRevealed
+            )
+        )
+            setADVExpenseFormRevealed(true)
     })
     useKeyboardShortcut(['t'], () => {
-        if (expenseFormRevealed == false) setTranfserFormRevealed(true)
+        if (
+            !(
+                tranfserFormRevealed ||
+                SIMexpenseFormRevealed ||
+                ADVexpenseFormRevealed
+            )
+        )
+            setTranfserFormRevealed(true)
     })
 
     useKeyboardShortcut(['esc'], () => {
         setTranfserFormRevealed(false)
-        setExpenseFormRevealed(false)
+        setSIMExpenseFormRevealed(false)
     })
 
     return (
@@ -44,10 +70,18 @@ export default function RootLayout({
                 <GlobalContext>
                     <body className={inter.className}>
                         <Header />
-                        {expenseFormRevealed && (
-                            <NewExpenseForm
+                        {SIMexpenseFormRevealed && (
+                            <NewSMPExpenseForm
                                 abort={() => {
-                                    setExpenseFormRevealed(false)
+                                    setSIMExpenseFormRevealed(false)
+                                }}
+                                refresh={() => {}}
+                            />
+                        )}
+                        {ADVexpenseFormRevealed && (
+                            <NewADVExpenseForm
+                                abort={() => {
+                                    setADVExpenseFormRevealed(false)
                                 }}
                                 refresh={() => {}}
                             />
