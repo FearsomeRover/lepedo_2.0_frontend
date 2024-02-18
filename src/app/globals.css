@@ -333,25 +333,36 @@ textarea {
         margin-bottom: 8px;
         display: inline-block;
     }
+
     h2 {
         margin-left: 0;
         margin-right: 40px;
     }
+
     .headerrow {
         margin-top: 16px;
         margin-bottom: 3rem;
     }
+
     .floating-top {
         position: initial;
     }
+
     .sbtn,
     .sbtn_with_h4 {
         margin: 8px auto;
         width: 100%;
         text-align: center;
     }
+
     table {
         width: unset;
+    }
+}
+
+@media (min-width: 700px) {
+    .w50-desktop {
+        width: 50%;
     }
 }
 
@@ -428,10 +439,6 @@ textarea {
 .w30 {
     width: 30%;
     background-color: #62626277;
-}
-
-.w50 {
-    width: 50%;
 }
 
 .w90 {
@@ -567,6 +574,7 @@ textarea {
     justify-content: space-between;
     align-items: center;
 }
+
 .flex-row-space-between * {
     flex: 1;
     margin: 0;

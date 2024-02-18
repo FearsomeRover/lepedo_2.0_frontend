@@ -109,7 +109,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                             </tr>
                             <tr>
                                 <td colSpan={2}>
-                                    <div className={'w50 middleself'}>
+                                    <div className={'w50-desktop middleself'}>
                                         <h6>Összeg</h6>
                                         <input
                                             name="amount"
@@ -135,73 +135,6 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                             Ft
                                         </span>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2}>
-                                    <details>
-                                        <summary className={'left'}>
-                                            <h6 className={'inline-block'}>
-                                                Ismeretlen résztvevők hozzáadása
-                                            </h6>
-                                        </summary>
-                                        <input
-                                            className={'w50 right searchinput'}
-                                            type="text"
-                                            placeholder="Keresés..."
-                                            onChange={(s) =>
-                                                setSearchPhrase(s.target.value)
-                                            }
-                                        />
-                                        <div className={styles.userbucket}>
-                                            {users
-                                                .filter((user) =>
-                                                    user.name
-                                                        .toLowerCase()
-                                                        .includes(
-                                                            searchPhrase.toLowerCase(),
-                                                        ),
-                                                )
-                                                .map((user) => (
-                                                    <div
-                                                        key={user.id}
-                                                        className={
-                                                            'inline-block m4top m4right'
-                                                        }>
-                                                        <UserCardSimple
-                                                            name={user.name}
-                                                            color={user.color}
-                                                            revTag={user.revTag}
-                                                            isSelected={selectedUsers.includes(
-                                                                user,
-                                                            )}
-                                                            isHoverable={false}
-                                                            onClick={() => {
-                                                                setSelectedUsers(
-                                                                    (
-                                                                        prevSelectedUsers,
-                                                                    ) =>
-                                                                        prevSelectedUsers.includes(
-                                                                            user,
-                                                                        )
-                                                                            ? prevSelectedUsers.filter(
-                                                                                  (
-                                                                                      u,
-                                                                                  ) =>
-                                                                                      u !==
-                                                                                      user,
-                                                                              )
-                                                                            : [
-                                                                                  ...prevSelectedUsers,
-                                                                                  user,
-                                                                              ],
-                                                                )
-                                                            }}
-                                                        />
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    </details>
                                 </td>
                             </tr>
                             <tr>
@@ -293,6 +226,75 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                             ))}
                                         </div>
                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}>
+                                    <details>
+                                        <summary className={'left'}>
+                                            <h6 className={'inline-block'}>
+                                                Ismeretlen résztvevők hozzáadása
+                                            </h6>
+                                        </summary>
+                                        <input
+                                            className={
+                                                'w50-desktop right searchinput'
+                                            }
+                                            type="text"
+                                            placeholder="Keresés..."
+                                            onChange={(s) =>
+                                                setSearchPhrase(s.target.value)
+                                            }
+                                        />
+                                        <div className={styles.userbucket}>
+                                            {users
+                                                .filter((user) =>
+                                                    user.name
+                                                        .toLowerCase()
+                                                        .includes(
+                                                            searchPhrase.toLowerCase(),
+                                                        ),
+                                                )
+                                                .map((user) => (
+                                                    <div
+                                                        key={user.id}
+                                                        className={
+                                                            'inline-block m4top m4right'
+                                                        }>
+                                                        <UserCardSimple
+                                                            name={user.name}
+                                                            color={user.color}
+                                                            revTag={user.revTag}
+                                                            isSelected={selectedUsers.includes(
+                                                                user,
+                                                            )}
+                                                            isHoverable={false}
+                                                            onClick={() => {
+                                                                setSelectedUsers(
+                                                                    (
+                                                                        prevSelectedUsers,
+                                                                    ) =>
+                                                                        prevSelectedUsers.includes(
+                                                                            user,
+                                                                        )
+                                                                            ? prevSelectedUsers.filter(
+                                                                                  (
+                                                                                      u,
+                                                                                  ) =>
+                                                                                      u !==
+                                                                                      user,
+                                                                              )
+                                                                            : [
+                                                                                  ...prevSelectedUsers,
+                                                                                  user,
+                                                                              ],
+                                                                )
+                                                            }}
+                                                        />
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </details>
                                 </td>
                             </tr>
                         </tbody>

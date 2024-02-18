@@ -75,7 +75,7 @@
 
 .userarea {
     display: flex;
-    height: 10rem;
+    height: 20rem;
     overflow: scroll;
     flex-direction: row;
     justify-content: space-between;

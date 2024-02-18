@@ -92,7 +92,7 @@ export default function Page() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    process.env.NEXT_PUBLIC_BASE_URL + '/transfer',
+                    process.env.NEXT_PUBLIC_BASE_URL + '/expense',
                 )
                 if (response.status === 404) {
                     return
@@ -104,7 +104,14 @@ export default function Page() {
         }
 
         //fetchData()
-        setExpenses([dummyExpense, dummyExpense, dummyExpense])
+        setExpenses([
+            dummyExpense,
+            dummyExpense,
+            dummyExpense,
+            dummyExpense,
+            dummyExpense,
+            dummyExpense,
+        ])
     }
 
     useEffect(() => {
