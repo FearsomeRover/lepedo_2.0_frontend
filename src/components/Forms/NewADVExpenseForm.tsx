@@ -37,7 +37,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
     useKeyboardShortcut(['ctrl', 'arrowup'], () => {
         setSelectedItem((selectedItem + items.length - 1) % items.length)
     })
-    useEffect(() => {
+    /*    useEffect(() => {
         if (selectedItem !== -1) {
             const tableRow = document.getElementById(`${selectedItem}`)
             if (tableRow) {
@@ -47,7 +47,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                 }
             }
         }
-    }, [selectedItem])
+    }, [selectedItem])*/
 
     useKeyboardShortcut(keyboardShortcuts, (index) => {
         if (selectedItem !== -1 && index !== undefined && index > -1) {
