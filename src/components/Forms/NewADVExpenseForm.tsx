@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styles from './forms.module.css'
 import { ExpenseType } from '@/types/expense'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
@@ -8,6 +8,8 @@ import { Item } from '@/types/item'
 import { GlobalStateContext } from '../context/context'
 import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import KeyCap from '@/components/KeyCap/KeyCap'
+import { Simulate } from 'react-dom/test-utils'
+import input = Simulate.input
 
 type ExpenseFormProps = {
     abort: () => void
@@ -29,12 +31,24 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
     const [items, setItems] = useState<Item[]>([])
     const [selectedItem, setSelectedItem] = useState<number>(-1)
 
-    useKeyboardShortcut(['arrowdown'], () => {
+    useKeyboardShortcut(['ctrl', 'arrowdown'], () => {
         setSelectedItem((selectedItem + 1) % items.length)
     })
-    useKeyboardShortcut(['arrowup'], () => {
+    useKeyboardShortcut(['ctrl', 'arrowup'], () => {
         setSelectedItem((selectedItem + items.length - 1) % items.length)
     })
+    useEffect(() => {
+        if (selectedItem !== -1) {
+            const tableRow = document.getElementById(`${selectedItem}`)
+            if (tableRow) {
+                const inputField = tableRow.querySelector('input[type="text"]') as HTMLInputElement | null
+                if (inputField) {
+                    inputField.focus()
+                }
+            }
+        }
+    }, [selectedItem])
+
     useKeyboardShortcut(keyboardShortcuts, (index) => {
         if (selectedItem !== -1 && index !== undefined && index > -1) {
             setItems((prevItems) => {
@@ -316,9 +330,11 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                 {items.map((item, _index) => (
                                                     <tr
                                                         key={item.id}
+                                                        id={_index.toString()}
                                                         className={selectedItem === _index ? 'highlight' : ''}>
                                                         <td className={'p8right'}>
                                                             <input
+                                                                type={'text'}
                                                                 className={'searchinput m8right left inline-block'}
                                                                 defaultValue={item.name}
                                                                 placeholder={'Tétel neve'}
@@ -370,7 +386,10 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                         <input
                                                                             type={'number'}
                                                                             defaultValue={
-                                                                                item.price / item.participated.length
+                                                                                item.participated.length === 0
+                                                                                    ? 0
+                                                                                    : item.price /
+                                                                                      item.participated.length
                                                                             }
                                                                             className={
                                                                                 'searchinput w60px right podkova'

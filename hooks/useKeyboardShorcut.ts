@@ -1,18 +1,12 @@
 import { KeyboardEvent, useEffect, useState } from 'react'
 
 type Key = 'ctrl' | 'shift' | 'alt' | 'esc' | string
+const keysThatWorkFromInput = ['escape', 'enter', 'arrowup', 'arrowdown']
 
 export const useKeyboardShortcut = (keys: Key[], callback: (idxOfKey?: number) => void) => {
-    /*    const [ctrlPressed, setCtrlPressed] = useState(false)*/
-
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             const targetTagName = (event.target as HTMLElement)?.tagName?.toLowerCase()
-
-            // Check if the event originated from an input field or textarea
-            if (targetTagName === 'input' || targetTagName === 'textarea') {
-                return
-            }
 
             // Prevent default browser shortcuts
             if (event.ctrlKey || event.altKey || event.metaKey) {
@@ -23,6 +17,7 @@ export const useKeyboardShortcut = (keys: Key[], callback: (idxOfKey?: number) =
                 setCtrlPressed(true)
             }
 */
+
             const index = keys.findIndex((key) => {
                 switch (key) {
                     case 'ctrl':
@@ -37,6 +32,14 @@ export const useKeyboardShortcut = (keys: Key[], callback: (idxOfKey?: number) =
                         return event.key.toLowerCase() === key
                 }
             })
+
+            // Check if the event originated from an input field or textarea
+            if (
+                !keysThatWorkFromInput.includes(keys[index]) &&
+                (targetTagName === 'input' || targetTagName === 'textarea')
+            ) {
+                return
+            }
 
             if (index !== -1) {
                 callback(index)
