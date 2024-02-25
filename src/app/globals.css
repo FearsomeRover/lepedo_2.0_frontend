@@ -31,18 +31,80 @@ h2 {
     font-size: 28px;
     color: gray;
     display: inline-block;
-    margin: 0 20px;
+    padding: 0 8px;
+    border-radius: 12px;
+    margin: 0 12px;
     letter-spacing: 1px;
 }
 
 h2:hover {
+    /*    color: var(--black);
+    transition: 0.2s ease-in-out;*/
+    animation: color-box 1s;
     color: var(--black);
-    transition: 0.2s ease-in-out;
+}
+@keyframes gradient-animation-color {
+    0% {
+        color: var(--black);
+        background: linear-gradient(
+            90deg,
+            rgba(217, 81, 94, 1) 10%,
+            rgba(255, 190, 39, 1) 36%,
+            rgba(164, 185, 80, 1) 66%,
+            rgba(56, 184, 188, 1) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    100% {
+        color: black;
+    }
+}
+
+@keyframes color-box {
+    0% {
+        color: var(--white);
+        background-color: rgba(217, 81, 94, 1);
+    }
+    20% {
+        background-color: rgba(255, 190, 39, 1);
+    }
+    40% {
+        background-color: rgba(164, 185, 80, 1);
+    }
+    60% {
+        background-color: rgba(56, 184, 188, 1);
+    }
+    80% {
+        color: var(--white);
+        background-color: rgb(19, 19, 19, 1);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes color-text {
+    0% {
+        color: rgba(217, 81, 94, 1);
+    }
+    20% {
+        color: rgba(255, 190, 39, 1);
+    }
+    40% {
+        color: rgba(164, 185, 80, 1);
+    }
+    60% {
+        color: rgba(56, 184, 188, 1);
+    }
+    80% {
+        color: rgb(19, 19, 19, 1);
+    }
 }
 
 .activeheader {
     color: var(--black);
-    background: linear-gradient(
+    /*    background: linear-gradient(
         90deg,
         rgba(217, 81, 94, 1) 10%,
         rgba(255, 190, 39, 1) 36%,
@@ -51,6 +113,7 @@ h2:hover {
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    */
 }
 
 /*Section titles?, short instructions*/
@@ -166,7 +229,7 @@ td {
     border-width: 0 0 1px 0;
 }
 
-form > table > tbody > tr > td {
+form td {
     border: none;
     text-align: center;
     padding: 0 8px;
@@ -236,6 +299,7 @@ input,
     text-align: center;
     color: black;
     box-sizing: border-box;
+    height: fit-content;
     margin-bottom: 12px;
     width: 100%;
     outline: none;
@@ -243,7 +307,8 @@ input,
 }
 
 input:hover {
-    outline: none;
+    border-width: 0 0 3px 0;
+    /*
     border-image: linear-gradient(
             90deg,
             rgba(217, 81, 94, 1) 10%,
@@ -251,12 +316,14 @@ input:hover {
             rgba(164, 185, 80, 1) 66%,
             rgba(56, 184, 188, 1) 90%
         )
-        50;
+        50;*/
     /*box-shadow: 0 2px 4px lightgray;*/
 }
 
 input:focus {
     border-width: 0 0 4px 0;
+    border-color: var(--black);
+    /*
     border-image: linear-gradient(
             90deg,
             rgba(217, 81, 94, 1) 10%,
@@ -264,8 +331,24 @@ input:focus {
             rgba(164, 185, 80, 1) 66%,
             rgba(56, 184, 188, 1) 90%
         )
-        30;
+        30;*/
     /*box-shadow: 0 4px 4px lightgray;*/
+}
+
+@keyframes gradient-animation {
+    0% {
+        border-image: linear-gradient(
+                90deg,
+                rgba(217, 81, 94, 1) 10%,
+                rgba(255, 190, 39, 1) 36%,
+                rgba(164, 185, 80, 1) 66%,
+                rgba(56, 184, 188, 1) 90%
+            )
+            50;
+    }
+    100% {
+        border-image: linear-gradient(0deg, black, black);
+    }
 }
 
 summary {

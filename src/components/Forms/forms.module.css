@@ -21,7 +21,7 @@
     border-radius: 12px;
     justify-content: space-between;
     max-width: 90%;
-    max-height: 90%;
+    height: 90%;
     overflow: scroll;
 }
 
