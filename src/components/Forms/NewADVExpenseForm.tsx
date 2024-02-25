@@ -161,255 +161,268 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
         <div className={styles.popup}>
             {users ? (
                 <form onSubmit={handleFormSubmit} className={`w700px-desktop ${styles.popupform} `}>
-                    <h2>Új számla hozzáadása</h2>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h6>Név</h6>
-                                    <input
-                                        name="name"
-                                        defaultValue={props.expense ? props.expense.title : ''}
-                                        minLength={3}
-                                        maxLength={15}
-                                        required
-                                    />
-                                </td>
-                                <td>
-                                    <h6>Dátum</h6>
-                                    <input
-                                        name="date"
-                                        type="date"
-                                        defaultValue={props.expense ? props.expense.date : currentDate}
-                                        onChange={validateDate}
-                                        onInvalid={(e) =>
-                                            (e.target as HTMLInputElement).setCustomValidity('Normális dátumot írj be!')
-                                        }
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2}>
-                                    <div className={'w50-desktop middleself'}>
-                                        <h6>Összeg</h6>
+                    <div>
+                        <div className={'middleinside'}>
+                            <h2>Új számla hozzáadása</h2>
+                        </div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h6>Név</h6>
                                         <input
-                                            disabled
-                                            name="amount"
-                                            type="number"
-                                            className={'right podkova w90'}
-                                            defaultValue={props.expense ? props.expense.amount : ''}
-                                            min={50}
-                                            max={1_000_000}
+                                            name="name"
+                                            defaultValue={props.expense ? props.expense.title : ''}
+                                            minLength={3}
+                                            maxLength={15}
                                             required
+                                        />
+                                    </td>
+                                    <td>
+                                        <h6>Dátum</h6>
+                                        <input
+                                            name="date"
+                                            type="date"
+                                            defaultValue={props.expense ? props.expense.date : currentDate}
+                                            onChange={validateDate}
                                             onInvalid={(e) =>
                                                 (e.target as HTMLInputElement).setCustomValidity(
-                                                    'Csak 50Ft és 1000000Ft közti érték lehet',
+                                                    'Normális dátumot írj be!',
                                                 )
                                             }
                                         />
-                                        <span className={styles.currencytext}>Ft</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2}>
-                                    <details open={true}>
-                                        <summary className={'left'}>
-                                            <h6 className={'inline-block'}>Barátok hozzáadása</h6>
-                                        </summary>
-                                        <input
-                                            className={'w50-desktop floatright right     searchinput'}
-                                            type="text"
-                                            placeholder="Keresés..."
-                                            onChange={(s) => setSearchPhraseForFriends(s.target.value)}
-                                        />
-                                        <div className={styles.userbucket}>
-                                            {users
-                                                .filter((user) =>
-                                                    user.name
-                                                        .toLowerCase()
-                                                        .includes(searchPhraseForFriends.toLowerCase()),
-                                                )
-                                                .map((user) => (
-                                                    <div key={user.id} className={'inline-block m4top m4right'}>
-                                                        <UserCardSimple
-                                                            name={user.name}
-                                                            color={user.color}
-                                                            revTag={user.revTag}
-                                                            isSelected={selectedUsers.includes(user)}
-                                                            onClick={() => {
-                                                                setSelectedUsers((prevSelectedUsers) =>
-                                                                    prevSelectedUsers.includes(user)
-                                                                        ? prevSelectedUsers.filter((u) => u !== user)
-                                                                        : [...prevSelectedUsers, user],
-                                                                )
-                                                            }}
-                                                        />
-                                                    </div>
-                                                ))}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <div className={'w50-desktop middleself'}>
+                                            <h6>Összeg</h6>
+                                            <input
+                                                disabled
+                                                name="amount"
+                                                type="number"
+                                                className={'right podkova w90'}
+                                                defaultValue={props.expense ? props.expense.amount : ''}
+                                                min={50}
+                                                max={1_000_000}
+                                                placeholder={'számított mező'}
+                                                required
+                                                onInvalid={(e) =>
+                                                    (e.target as HTMLInputElement).setCustomValidity(
+                                                        'Csak 50Ft és 1000000Ft közti érték lehet',
+                                                    )
+                                                }
+                                            />
+                                            <span className={styles.currencytext}>Ft</span>
                                         </div>
-                                    </details>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2}>
-                                    <details>
-                                        <summary className={'left'}>
-                                            <h6 className={'inline-block'}>Ismeretlen résztvevők hozzáadása</h6>
-                                        </summary>
-                                        <input
-                                            className={'w50-desktop floatright right searchinput'}
-                                            type="text"
-                                            placeholder="Keresés..."
-                                            onChange={(s) => setSearchPhraseForAll(s.target.value)}
-                                        />
-                                        <div className={styles.userbucket}>
-                                            {users
-                                                .filter((user) =>
-                                                    user.name.toLowerCase().includes(searchPhraseForAll.toLowerCase()),
-                                                )
-                                                .map((user) => (
-                                                    <div key={user.id} className={'inline-block m4top m4right'}>
-                                                        <UserCardSimple
-                                                            name={user.name}
-                                                            color={user.color}
-                                                            revTag={user.revTag}
-                                                            isSelected={selectedUsers.includes(user)}
-                                                            isHoverable={false}
-                                                            onClick={() => {
-                                                                setSelectedUsers((prevSelectedUsers) =>
-                                                                    prevSelectedUsers.includes(user)
-                                                                        ? prevSelectedUsers.filter((u) => u !== user)
-                                                                        : [...prevSelectedUsers, user],
-                                                                )
-                                                            }}
-                                                        />
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    </details>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2}>
-                                    <h6 className={'w100 left'}>
-                                        Tételek{' '}
-                                        <button type={'button'} onClick={addItem}>
-                                            Új tétel
-                                        </button>
-                                    </h6>
-                                    <div className={'w100 left m8top'}></div>
-                                    <div className={styles.itemtablecontainer}>
-                                        <table className={styles.itemtable}>
-                                            <tbody>
-                                                <tr>
-                                                    <td colSpan={2} className={'minw300 p8right'}>
-                                                        {/*                                                        <button
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <details open={true}>
+                                            <summary className={'left'}>
+                                                <h6 className={'inline-block'}>Barátok hozzáadása</h6>
+                                            </summary>
+                                            <input
+                                                className={'w50-desktop floatright right     searchinput'}
+                                                type="text"
+                                                placeholder="Keresés..."
+                                                onChange={(s) => setSearchPhraseForFriends(s.target.value)}
+                                            />
+                                            <div className={styles.userbucket}>
+                                                {users
+                                                    .filter((user) =>
+                                                        user.name
+                                                            .toLowerCase()
+                                                            .includes(searchPhraseForFriends.toLowerCase()),
+                                                    )
+                                                    .map((user) => (
+                                                        <div key={user.id} className={'inline-block m4top m4right'}>
+                                                            <UserCardSimple
+                                                                name={user.name}
+                                                                color={user.color}
+                                                                revTag={user.revTag}
+                                                                isSelected={selectedUsers.includes(user)}
+                                                                onClick={() => {
+                                                                    setSelectedUsers((prevSelectedUsers) =>
+                                                                        prevSelectedUsers.includes(user)
+                                                                            ? prevSelectedUsers.filter(
+                                                                                  (u) => u !== user,
+                                                                              )
+                                                                            : [...prevSelectedUsers, user],
+                                                                    )
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                            </div>
+                                        </details>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <details>
+                                            <summary className={'left'}>
+                                                <h6 className={'inline-block'}>Ismeretlen résztvevők hozzáadása</h6>
+                                            </summary>
+                                            <input
+                                                className={'w50-desktop floatright right searchinput'}
+                                                type="text"
+                                                placeholder="Keresés..."
+                                                onChange={(s) => setSearchPhraseForAll(s.target.value)}
+                                            />
+                                            <div className={styles.userbucket}>
+                                                {users
+                                                    .filter((user) =>
+                                                        user.name
+                                                            .toLowerCase()
+                                                            .includes(searchPhraseForAll.toLowerCase()),
+                                                    )
+                                                    .map((user) => (
+                                                        <div key={user.id} className={'inline-block m4top m4right'}>
+                                                            <UserCardSimple
+                                                                name={user.name}
+                                                                color={user.color}
+                                                                revTag={user.revTag}
+                                                                isSelected={selectedUsers.includes(user)}
+                                                                isHoverable={false}
+                                                                onClick={() => {
+                                                                    setSelectedUsers((prevSelectedUsers) =>
+                                                                        prevSelectedUsers.includes(user)
+                                                                            ? prevSelectedUsers.filter(
+                                                                                  (u) => u !== user,
+                                                                              )
+                                                                            : [...prevSelectedUsers, user],
+                                                                    )
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                            </div>
+                                        </details>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <h6 className={'w100 left'}>
+                                            Tételek{' '}
+                                            <button type={'button'} onClick={addItem}>
+                                                Új tétel
+                                            </button>
+                                        </h6>
+                                        <div className={'w100 left m8top'}></div>
+                                        <div className={styles.itemtablecontainer}>
+                                            <table className={styles.itemtable}>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colSpan={2} className={'minw300 p8right'}>
+                                                            {/*                                                        <button
                                                             className={'sbtn nomargin p48 w100'}
                                                             type={'button'}
                                                             onClick={addItem}>
                                                             +
                                                         </button>*/}
-                                                    </td>
-                                                    {selectedUsers.map((user, _index) => (
-                                                        <td key={user.id}>
-                                                            <div className={'m4'}>
-                                                                {/*<KeyCap keya={'Ctrl'} />*/}
-                                                                <KeyCap
-                                                                    keya={keyboardShortcuts[_index].toUpperCase()}
-                                                                />
-                                                                <UserCardSimple
-                                                                    name={user.name}
-                                                                    color={user.color}
-                                                                    onClick={() => {}}
-                                                                />
-                                                            </div>
                                                         </td>
-                                                    ))}
-                                                </tr>
-                                                {items.map((item, _index) => (
-                                                    <tr
-                                                        key={item.id}
-                                                        id={_index.toString()}
-                                                        className={selectedItem === _index ? 'highlight' : ''}>
-                                                        <td className={'p8right'}>
-                                                            <input
-                                                                type={'text'}
-                                                                className={'searchinput m8right left inline-block'}
-                                                                defaultValue={item.name}
-                                                                placeholder={'Tétel neve'}
-                                                                onBlur={(n) =>
-                                                                    updateItem(
-                                                                        item.id,
-                                                                        n.target.value,
-                                                                        item.price,
-                                                                        item.participated,
-                                                                    )
-                                                                }
-                                                            />
-                                                        </td>
-                                                        <td className={'p8right'}>
-                                                            <div className={'flex-row-space-between'}>
+                                                        {selectedUsers.map((user, _index) => (
+                                                            <td key={user.id}>
+                                                                <div className={'m4'}>
+                                                                    {/*<KeyCap keya={'Ctrl'} />*/}
+                                                                    <KeyCap
+                                                                        keya={keyboardShortcuts[_index].toUpperCase()}
+                                                                    />
+                                                                    <UserCardSimple
+                                                                        name={user.name}
+                                                                        color={user.color}
+                                                                        onClick={() => {}}
+                                                                    />
+                                                                </div>
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                    {items.map((item, _index) => (
+                                                        <tr
+                                                            key={item.id}
+                                                            id={_index.toString()}
+                                                            className={selectedItem === _index ? 'highlight' : ''}>
+                                                            <td className={'p8right'}>
                                                                 <input
-                                                                    className={'searchinput right podkova'}
-                                                                    type={'number'}
+                                                                    type={'text'}
+                                                                    className={'searchinput m8right left inline-block'}
                                                                     defaultValue={item.name}
-                                                                    placeholder={'Ára'}
+                                                                    placeholder={'Tétel neve'}
                                                                     onBlur={(n) =>
                                                                         updateItem(
                                                                             item.id,
-                                                                            item.name,
-                                                                            n.target.valueAsNumber,
+                                                                            n.target.value,
+                                                                            item.price,
                                                                             item.participated,
                                                                         )
                                                                     }
                                                                 />
-                                                                <p className={'currencytext'}> Ft</p>
-                                                            </div>
-                                                        </td>
-                                                        {selectedUsers.map((user) => (
-                                                            <td key={user.id}>
-                                                                <label htmlFor={user.id + '/' + item.id}>
-                                                                    <input
-                                                                        id={user.id + '/' + item.id}
-                                                                        type="checkbox"
-                                                                        name="participated"
-                                                                        className={'w20px'}
-                                                                        checked={item.participated.includes(user)}
-                                                                        onChange={(e) => {
-                                                                            updateItemParticipation(item.id, user)
-                                                                        }}
-                                                                        style={{ accentColor: user.color }}
-                                                                    />
-
-                                                                    {item.participated.includes(user) ? (
-                                                                        <input
-                                                                            type={'number'}
-                                                                            defaultValue={
-                                                                                item.participated.length === 0
-                                                                                    ? 0
-                                                                                    : item.price /
-                                                                                      item.participated.length
-                                                                            }
-                                                                            className={
-                                                                                'searchinput w60px right podkova'
-                                                                            }
-                                                                        />
-                                                                    ) : (
-                                                                        <div className={'w60px inline-block'}></div>
-                                                                    )}
-                                                                </label>
                                                             </td>
-                                                        ))}
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                                            <td className={'p8right'}>
+                                                                <div className={'flex-row-space-between'}>
+                                                                    <input
+                                                                        className={'searchinput right podkova'}
+                                                                        type={'number'}
+                                                                        defaultValue={item.name}
+                                                                        placeholder={'Ára'}
+                                                                        onBlur={(n) =>
+                                                                            updateItem(
+                                                                                item.id,
+                                                                                item.name,
+                                                                                n.target.valueAsNumber,
+                                                                                item.participated,
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                    <p className={'currencytext'}> Ft</p>
+                                                                </div>
+                                                            </td>
+                                                            {selectedUsers.map((user) => (
+                                                                <td key={user.id}>
+                                                                    <label htmlFor={user.id + '/' + item.id}>
+                                                                        <input
+                                                                            id={user.id + '/' + item.id}
+                                                                            type="checkbox"
+                                                                            name="participated"
+                                                                            className={'w20px'}
+                                                                            checked={item.participated.includes(user)}
+                                                                            onChange={(e) => {
+                                                                                updateItemParticipation(item.id, user)
+                                                                            }}
+                                                                            style={{ accentColor: user.color }}
+                                                                        />
+
+                                                                        {item.participated.includes(user) ? (
+                                                                            <input
+                                                                                type={'number'}
+                                                                                defaultValue={
+                                                                                    item.participated.length === 0
+                                                                                        ? 0
+                                                                                        : item.price /
+                                                                                          item.participated.length
+                                                                                }
+                                                                                className={
+                                                                                    'searchinput w60px right podkova'
+                                                                                }
+                                                                            />
+                                                                        ) : (
+                                                                            <div className={'w60px inline-block'}></div>
+                                                                        )}
+                                                                    </label>
+                                                                </td>
+                                                            ))}
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div>
                         <input className="sbtn_with_h4" type="submit" value="Mentés" />

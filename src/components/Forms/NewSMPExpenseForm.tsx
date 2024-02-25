@@ -7,6 +7,7 @@ import Image from 'next/image'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { BasicUser, User } from '@/types/user'
 import { GlobalStateContext } from '../context/context'
+import { Participation } from '@/types/participation'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -25,27 +26,38 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
         const formData = new FormData(event.target)
-        const name = formData.get('name') ?? ''
         const amountValue: FormDataEntryValue | null = formData.get('amount')
-        let amount = 0
+        let amount: number = 0
         if (amountValue !== null && typeof amountValue === 'string') {
             const intValue: number = parseInt(amountValue)
             if (!isNaN(intValue)) {
                 amount = intValue
             }
         }
+        const participants: Participation[] = []
+        selectedUsers.forEach((user) => {
+            participants.push({
+                userId: user.id,
+                amount: amount / selectedUsers.length,
+            })
+        })
+
         const data = {
-            title: formData.get('name'),
+            items: [
+                {
+                    price: amount,
+                    name: formData.get('name') ?? 'nincs név',
+                    participants: participants,
+                },
+            ],
+            title: formData.get('name') ?? 'nincs név',
+            amount: amount,
             payerId: formData.get('payed'),
-            amount,
-            received: formData.getAll('payedto'),
             date: formData.get('date'),
         }
-        if (props.expense) {
-            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/expense/' + props.expense.id, data)
-        } else {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', data)
-        }
+
+        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', data)
+
         props.abort()
         props.refresh()
     }
