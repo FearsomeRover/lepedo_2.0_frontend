@@ -395,6 +395,7 @@ textarea {
 /*Radio Buttons*/
 .radio {
     width: auto;
+    margin: auto 4px;
     accent-color: var(--black);
 }
 

@@ -70,7 +70,7 @@
 
 .userarea {
     display: flex;
-    height: 20rem;
+    height: 16rem;
     overflow: scroll;
     flex-direction: row;
     justify-content: space-between;
@@ -93,11 +93,13 @@
 }
 
 .radiolabel {
+    margin: 4px;
     display: flex;
     flex-direction: row;
 }
 
 .checklabel {
+    margin: 4px;
     display: flex;
     flex-direction: row;
     float: right;

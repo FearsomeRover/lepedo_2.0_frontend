@@ -162,7 +162,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
             {users ? (
                 <form onSubmit={handleFormSubmit} className={`w700px-desktop ${styles.popupform} `}>
                     <div>
-                        <div className={'middleinside'}>
+                        <div className={'middleinside m16topdown'}>
                             <h2>Új számla hozzáadása</h2>
                         </div>
                         <table>

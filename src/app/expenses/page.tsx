@@ -76,24 +76,17 @@ const dummyExpense: ExpenseType = {
     date: '2022-10-10',
     received: [dummyUser, dummyUser2, dummyUser3],
     payer: dummyUser,
-    items: [
-        dummyItem,
-        dummyItem2,
-        dummyItem3,
-        dummyItem4,
-        dummyItem5,
-        dummyItem6,
-    ],
+    items: [dummyItem, dummyItem2, dummyItem3, dummyItem4, dummyItem5, dummyItem6],
 }
 
 export default function Page() {
     const [expenses, setExpenses] = useState<ExpenseType[]>([])
+    const [filterPhrase, setFilterPhrase] = useState<string>('')
+
     const handleRefresh = () => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(
-                    process.env.NEXT_PUBLIC_BASE_URL + '/expense',
-                )
+                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/expense')
                 if (response.status === 404) {
                     return
                 }
@@ -104,36 +97,47 @@ export default function Page() {
         }
 
         //fetchData()
-        setExpenses([
-            dummyExpense,
-            dummyExpense,
-            dummyExpense,
-            dummyExpense,
-            dummyExpense,
-            dummyExpense,
-        ])
+        setExpenses([dummyExpense, dummyExpense, dummyExpense, dummyExpense, dummyExpense, dummyExpense])
     }
 
     useEffect(() => {
         handleRefresh()
     }, [])
 
+    const filter = (expense: ExpenseType, filterPhrase: string) => {
+        if (filterPhrase === '') return true
+        if (expense.title.toLowerCase().includes(filterPhrase.toLowerCase())) return true
+        if (expense.payer.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
+        if (expense.items.some((item) => item.name.toLowerCase().includes(filterPhrase.toLowerCase()))) return true
+        return false
+    }
+
     return (
         <>
-            {expenses.length === 0 && (
-                <>
-                    <div className={'h5'}></div>
-                    <div className={'middleinside'}>
-                        <h3>Még nem veszel részt egyetlen költségben sem</h3>
-                        <QuickActionButtons
-                            revealed={[true, true, false, false]}
-                        />
-                    </div>
-                </>
-            )}
-            {expenses.map((expense, index) => (
-                <ExpenseCard key={index} expense={expense} />
-            ))}
+            <div className={'h3'}>
+                <input
+                    className={'w50-desktop floatright right searchinput nomargin'}
+                    type="text"
+                    placeholder="Keresés..."
+                    onChange={(s) => setFilterPhrase(s.target.value)}
+                />
+            </div>
+            <div>
+                {expenses.length === 0 && (
+                    <>
+                        <div className={'h5'}></div>
+                        <div className={'middleinside'}>
+                            <h3>Még nem veszel részt egyetlen költségben sem</h3>
+                            <QuickActionButtons revealed={[true, true, false, false]} />
+                        </div>
+                    </>
+                )}
+                {expenses
+                    .filter((expense) => filter(expense, filterPhrase))
+                    .map((expense, index) => (
+                        <ExpenseCard key={index} expense={expense} />
+                    ))}
+            </div>
         </>
     )
 }
