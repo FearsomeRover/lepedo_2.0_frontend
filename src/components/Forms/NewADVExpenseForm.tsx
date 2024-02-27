@@ -10,6 +10,7 @@ import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import KeyCap from '@/components/KeyCap/KeyCap'
 import { Simulate } from 'react-dom/test-utils'
 import input = Simulate.input
+import { Participation } from '@/types/participation'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -117,11 +118,18 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                 name: '',
                 price: 0,
                 participated: [],
+                participations: [],
             },
         ])
     }
 
-    const updateItem = (id: string, name: string, price: number, participated: BasicUser[]) => {
+    const updateItem = (
+        id: string,
+        name: string,
+        price: number,
+        participated: BasicUser[],
+        participations: Participation[],
+    ) => {
         setItems((prevItems) => {
             const newItems = prevItems.map((item) => {
                 if (item.id === id) {
@@ -130,6 +138,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                         name,
                         price,
                         participated,
+                        participations,
                     }
                 }
                 return item
@@ -149,6 +158,8 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                         participated: item.participated.includes(user)
                             ? item.participated.filter((u) => u !== user)
                             : [...item.participated, user],
+                        participations: item.participations,
+                        /*todo this wont be good but not that baad*/
                     }
                 }
                 return item
@@ -356,6 +367,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                             n.target.value,
                                                                             item.price,
                                                                             item.participated,
+                                                                            item.participations,
                                                                         )
                                                                     }
                                                                 />
@@ -373,6 +385,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                                 item.name,
                                                                                 n.target.valueAsNumber,
                                                                                 item.participated,
+                                                                                item.participations,
                                                                             )
                                                                         }
                                                                     />
