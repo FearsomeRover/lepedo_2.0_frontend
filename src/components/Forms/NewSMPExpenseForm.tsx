@@ -38,9 +38,10 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
         selectedUsers.forEach((user) => {
             participants.push({
                 userId: user.id,
-                amount: amount / selectedUsers.length,
+                amount: Math.round(amount / selectedUsers.length),
             })
         })
+        console.log(participants)
 
         const data = {
             items: [
