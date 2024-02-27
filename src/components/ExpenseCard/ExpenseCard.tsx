@@ -1,4 +1,4 @@
-import { ExpenseType } from '@/types/expense'
+import { ExpenseType } from '@/types/expenseType'
 import styles from './expensecard.module.css'
 import ExpenseItemRow from '@/components/ExpenseCard/ExpenseItemRow'
 import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'

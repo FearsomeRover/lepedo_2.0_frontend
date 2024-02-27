@@ -1,7 +1,7 @@
 'use client'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { ExpenseType } from '@/types/expense'
+import { ExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { BasicUser } from '@/types/user'

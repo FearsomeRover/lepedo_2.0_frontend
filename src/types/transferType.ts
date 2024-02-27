@@ -1,11 +1,11 @@
 import { BasicUser } from './user'
 
-export type Transfer = {
+export type TransferType = {
     id: string
     date: string
     amount: number
-    userFromId: string
+    /*    userFromId: string*/
     userFrom: BasicUser
-    userToId: string
+    /*    userToId: string*/
     userTo: BasicUser
 }
