@@ -1,7 +1,7 @@
 'use client'
 import { useContext, useEffect, useRef, useState } from 'react'
 import styles from './forms.module.css'
-import { ExpenseType } from '@/types/expense'
+import { ExpenseType } from '@/types/expenseType'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { BasicUser, User } from '@/types/user'
 import { Item } from '@/types/item'

@@ -3,12 +3,12 @@ import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import UserCard from '@/components/UserCard/UserCard'
 import styles from './forms.module.css'
-import { Transfer } from '@/types/transfer'
+import { TransferType } from '@/types/transferType'
 import Image from 'next/image'
 import { User } from '@/types/user'
 import GlobalContext, { GlobalStateContext } from '../context/context'
 type TransferFormProps = {
-    transfer?: Transfer
+    transfer?: TransferType
     abort: () => void
     refresh: () => void
 }
