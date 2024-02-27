@@ -138,7 +138,7 @@ h4 {
 h5 {
     font-family: Inter, serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px;
     margin: 24px 8px 0px;
     color: var(--black);
     width: fit-content;
@@ -149,7 +149,7 @@ h6 {
     font-family: Inter, serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     margin: 16px 0 0;
     color: var(--black);
 }
@@ -161,7 +161,7 @@ form h6 {
 /*Numbers, Amounts*/
 p {
     font-family: 'Podkova Medium', serif;
-    font-size: 18px;
+    font-size: 14px;
     margin: 12px;
     width: fit-content;
     color: var(--black);
@@ -623,6 +623,18 @@ textarea {
     max-width: 700px;
 }
 
+.fs14 {
+    font-size: 14px;
+}
+
+.fs18 {
+    font-size: 18px;
+}
+
+.fs24 {
+    font-size: 24px;
+}
+
 .fs36 {
     font-size: 36px;
 }
@@ -734,6 +746,13 @@ textarea {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+}
+
+.flex-row-space-around {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
 }
 

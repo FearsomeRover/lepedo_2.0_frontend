@@ -41,22 +41,22 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
 
             <HorizontalLine />
             <div className={'flex-row-space-between'}>
-                <h5 className={'bold'}>Te:</h5>
-                <p className={'right'}>{formatAmount(total)} Ft</p>
+                <h5 className={'bold fs18'}>Te:</h5>
+                <p className={'right fs18'}>{formatAmount(total)} Ft</p>
             </div>
             <div className={'flex-row-space-between m8top'}>
-                <h5 className={'bold'}>Összesen:</h5>
-                <p className={'right'}>{formatAmount(total)} Ft</p>
+                <h5 className={'bold '}>Összesen:</h5>
+                <p className={'right '}>{formatAmount(total)} Ft</p>
             </div>
 
             {/*todo if not participation status is none*/}
             <div>
                 <HorizontalLine />
-                <div className={'flex-row-space-between'}>
-                    <button className={'sbtn'} style={{ marginRight: '16px' }}>
+                <div className={'flex-row-space-around nomargininside'}>
+                    <button className={'sbtn fs14'} style={{ marginRight: '16px' }}>
                         Approve
                     </button>
-                    <button className={'sbtn'}> Decline</button>
+                    <button className={'sbtn fs14'}> Decline</button>
                 </div>
             </div>
         </div>
