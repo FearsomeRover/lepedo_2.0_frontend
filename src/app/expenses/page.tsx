@@ -31,6 +31,7 @@ const dummyItem: Item = {
     name: 'Milk',
     price: 123,
     participated: [dummyUser],
+    participations: [],
 }
 
 const dummyItem2: Item = {
@@ -38,6 +39,7 @@ const dummyItem2: Item = {
     name: 'finom kaja',
     price: 123423,
     participated: [dummyUser2, dummyUser3, dummyUser],
+    participations: [],
 }
 
 const dummyItem3: Item = {
@@ -45,6 +47,7 @@ const dummyItem3: Item = {
     name: 'kakao',
     price: 123423,
     participated: [dummyUser2, dummyUser3, dummyUser],
+    participations: [],
 }
 
 const dummyItem4: Item = {
@@ -52,6 +55,7 @@ const dummyItem4: Item = {
     name: 'PS5',
     price: 123423,
     participated: [dummyUser3, dummyUser],
+    participations: [],
 }
 
 const dummyItem5: Item = {
@@ -59,6 +63,7 @@ const dummyItem5: Item = {
     name: 'Katjes ofc',
     price: 534,
     participated: [dummyUser2, dummyUser],
+    participations: [],
 }
 
 const dummyItem6: Item = {
@@ -66,6 +71,7 @@ const dummyItem6: Item = {
     name: 'Valami random termek',
     price: 123423,
     participated: [dummyUser2, dummyUser3],
+    participations: [],
 }
 
 const dummyExpense: ExpenseType = {
@@ -97,7 +103,7 @@ export default function Page() {
         }
 
         //fetchData()
-        setExpenses([dummyExpense, dummyExpense, dummyExpense, dummyExpense, dummyExpense, dummyExpense])
+        setExpenses([dummyExpense])
     }
 
     useEffect(() => {
