@@ -470,6 +470,9 @@ textarea {
     .w50-desktop {
         width: 50%;
     }
+    .w200px-desktop {
+        width: 200px;
+    }
     .w500px-desktop {
         width: 500px;
     }

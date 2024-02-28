@@ -139,42 +139,33 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
         })
     }
 
-    const updateItemParticipation = (id: string, user: BasicUser) => {
+    const updateItemParticipation = (itemId: string, user: BasicUser) => {
         setItems((prevItems) => {
-            const newItems = prevItems.map((item) => {
-                if (item.id === id) {
-                    let newParticipations: Participation[] = []
-                    /*if was in there remove*/
-                    if (item.participations.some((p) => p.userId === user.id)) {
-                        newParticipations = item.participations.filter((p) => p.userId !== user.id)
-                    } else {
-                        /*if was not in there add, update the others*/
-                        newParticipations = [
-                            ...item.participations,
-                            {
-                                userId: user.id,
-                                amount: 123,
-                                status: ParticipationStatus.NONE,
-                            },
-                        ]
-                    }
-                    newParticipations = newParticipations.map((p) => {
-                        return {
-                            ...p,
-                            amount: Math.round(item.price / newParticipations.length),
-                        }
+            const index = prevItems.findIndex((item) => item.id === itemId)
+            if (index !== -1) {
+                const updatedItems = [...prevItems]
+                const item = { ...updatedItems[index] }
+                const userParticipationIndex = item.participations.findIndex((p) => p.userId === user.id)
+                if (userParticipationIndex !== -1) {
+                    // User participation exists, remove it
+                    item.participations.splice(userParticipationIndex, 1)
+                } else {
+                    // Add user participation
+                    item.participations.push({
+                        userId: user.id,
+                        amount: 0,
+                        status: ParticipationStatus.NONE,
                     })
-                    console.log(newParticipations)
-                    return {
-                        id,
-                        name: item.name,
-                        price: item.price,
-                        participations: newParticipations,
-                    }
                 }
-                return item
-            })
-            return newItems
+                // Update participation amounts
+                const participationCount = item.participations.length
+                item.participations.forEach((participation) => {
+                    participation.amount = Math.round(item.price / participationCount)
+                })
+                updatedItems[index] = item
+                return updatedItems
+            }
+            return prevItems
         })
     }
 
@@ -336,7 +327,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                             <table className={styles.itemtable}>
                                                 <tbody>
                                                     <tr>
-                                                        <td colSpan={2} className={'minw300 p8right'}>
+                                                        <td className={'w200px-desktop'}>
                                                             {/*                                                        <button
                                                             className={'sbtn nomargin p48 w100'}
                                                             type={'button'}
@@ -366,23 +357,23 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                             id={_index.toString()}
                                                             className={selectedItem === _index ? 'highlight' : ''}>
                                                             <td className={'p8right'}>
-                                                                <input
-                                                                    type={'text'}
-                                                                    className={'searchinput m8right left inline-block'}
-                                                                    defaultValue={item.name}
-                                                                    placeholder={'Tétel neve'}
-                                                                    onBlur={(n) =>
-                                                                        updateItem(
-                                                                            item.id,
-                                                                            n.target.value,
-                                                                            item.price,
-                                                                            item.participations,
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className={'p8right'}>
                                                                 <div className={'flex-row-space-between'}>
+                                                                    <input
+                                                                        type={'text'}
+                                                                        className={'searchinput left m8right'}
+                                                                        defaultValue={item.name}
+                                                                        placeholder={'Tétel neve'}
+                                                                        onBlur={(n) =>
+                                                                            updateItem(
+                                                                                item.id,
+                                                                                n.target.value,
+                                                                                item.price,
+                                                                                item.participations,
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                    <div>/</div>
+
                                                                     <input
                                                                         className={'searchinput right podkova'}
                                                                         type={'number'}
@@ -411,9 +402,9 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                             checked={item.participations.some(
                                                                                 (p) => p.userId === user.id,
                                                                             )}
-                                                                            onChange={(e) => {
+                                                                            onChange={() =>
                                                                                 updateItemParticipation(item.id, user)
-                                                                            }}
+                                                                            }
                                                                             style={{ accentColor: user.color }}
                                                                         />
 
@@ -427,6 +418,30 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                                         (p) => p.userId === user.id,
                                                                                     )?.amount
                                                                                 }
+                                                                                onChange={(e) => {
+                                                                                    const newValue = parseInt(
+                                                                                        e.target.value,
+                                                                                    )
+                                                                                    if (!isNaN(newValue)) {
+                                                                                        // Update the amount in state
+                                                                                        const updatedItems = [...items]
+                                                                                        const itemIndex =
+                                                                                            updatedItems.findIndex(
+                                                                                                (i) => i.id === item.id,
+                                                                                            )
+                                                                                        if (itemIndex !== -1) {
+                                                                                            updatedItems[
+                                                                                                itemIndex
+                                                                                            ].participations.find(
+                                                                                                (p) =>
+                                                                                                    p.userId ===
+                                                                                                    user.id,
+                                                                                            )!.amount = newValue
+                                                                                            setItems(updatedItems)
+                                                                                        }
+                                                                                    }
+                                                                                }}
+                                                                                contentEditable={true}
                                                                                 className={
                                                                                     'searchinput w60px right podkova'
                                                                                 }
