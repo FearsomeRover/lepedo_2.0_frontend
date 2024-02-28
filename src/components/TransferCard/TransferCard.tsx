@@ -15,7 +15,7 @@ export default function TransferCard({ transfer }: { transfer: TransferType }) {
             <h4>{transfer.title}</h4>
             <h6 className={'nomargin'}>{transfer.date}</h6>
             <div className={'h1'}></div>
-            <p className={'fs18 nomargin w100 middleinside'}>{transfer.amount} Ft</p>
+            <p className={'fs24 nomargin w100 middleinside'}>{transfer.amount} Ft</p>
             <div className={'h1'}></div>
             <div className={'flex-row-space-between'}>
                 <UserCardSimple name={transfer.userFrom.name} color={transfer.userFrom.color} onClick={() => {}} />

@@ -1,5 +1,5 @@
 .transfercard {
-    width: 16rem;
+    min-width: 16rem;
     max-width: 100%;
     margin: 12px;
     border: 2px solid black;

@@ -1,3 +1,5 @@
+/*ezt a fajlt hasznaljuk? todo */
+
 import { ExpenseType } from '@/types/expenseType'
 import UserCard from '@/components/UserCard/UserCard'
 import styles from '../list.module.css'

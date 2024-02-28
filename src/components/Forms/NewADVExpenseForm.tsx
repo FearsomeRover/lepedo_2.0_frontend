@@ -366,7 +366,6 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                             item.id,
                                                                             n.target.value,
                                                                             item.price,
-                                                                            item.participated,
                                                                             item.participations,
                                                                         )
                                                                     }
@@ -384,7 +383,6 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                                                 item.id,
                                                                                 item.name,
                                                                                 n.target.valueAsNumber,
-                                                                                item.participated,
                                                                                 item.participations,
                                                                             )
                                                                         }

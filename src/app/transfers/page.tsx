@@ -43,13 +43,13 @@ export default function Page() {
                     return
                 }
                 const data = await response.data
+                setTransfers(data)
             } catch (error: any) {
                 console.error('Error fetching data:', error.request.status)
             }
         }
 
-        //fetchData()
-        setTransfers([dummyTransfer])
+        fetchData()
     }
 
     useEffect(() => {
