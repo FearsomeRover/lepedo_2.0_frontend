@@ -16,3 +16,13 @@
         width: 100%;
     }
 }
+
+.righttop {
+    text-align: right;
+    float: right;
+    position: absolute;
+    z-index: 2;
+    right: 8px;
+    top: 16px;
+    margin: 0;
+}
