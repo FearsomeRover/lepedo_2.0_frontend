@@ -5,6 +5,12 @@ export type Item = {
     id: string
     name: string
     price: number
-    participated: BasicUser[]
     participations: Participation[]
+}
+
+export type BasicItem = {
+    id: string
+    name: string
+    price: number
+    participated: BasicUser[]
 }
