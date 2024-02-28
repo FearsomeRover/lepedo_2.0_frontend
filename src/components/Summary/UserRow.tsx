@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Image from 'next/image'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { User } from '@/types/user'
 
@@ -9,12 +8,7 @@ type UserRowProps = {
     editUser: (userId: string) => void
     refresh: () => void
 }
-export default function UserRow({
-    userId,
-    user,
-    editUser,
-    refresh,
-}: UserRowProps) {
+export default function UserRow({ userId, user, editUser, refresh }: UserRowProps) {
     const handleUserDelete = async () => {
         await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/user/' + userId)
         refresh()
@@ -31,19 +25,19 @@ export default function UserRow({
                 />
             </td>
             <td>
-                <p className="right">{user.spent + ' Ft'}</p>
+                <p className="right fs18">{user.spent + ' Ft'}</p>
             </td>
             <td>
-                <p className="right">{user.paid + ' Ft'}</p>
+                <p className="right  fs18">{user.paid + ' Ft'}</p>
             </td>
             <td>
-                <p className="right">{user.transferfrom + ' Ft'}</p>
+                <p className="right  fs18">{user.transferfrom + ' Ft'}</p>
             </td>
             <td>
-                <p className="right">{user.transferto + ' Ft'}</p>
+                <p className="right  fs18">{user.transferto + ' Ft'}</p>
             </td>
             <td>
-                <p className="right bold">{user.balance + ' Ft'}</p>
+                <p className="right bold  fs18">{user.balance + ' Ft'}</p>
             </td>
         </tr>
     )
