@@ -7,6 +7,7 @@ import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButto
 import { BasicUser } from '@/types/user'
 import { Item } from '@/types/item'
 import { TransferType } from '@/types/transferType'
+import TransferCard from '@/components/TransferCard/TransferCard'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -24,6 +25,7 @@ const dummyUser2: BasicUser = {
 const dummyTransfer: TransferType = {
     id: 'a kedvenc utalásom',
     date: '2021-11-11',
+    title: 'Kedvenc utalásom',
     userFrom: dummyUser,
     userTo: dummyUser2,
     amount: 123,
@@ -36,7 +38,7 @@ export default function Page() {
     const handleRefresh = () => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/expense')
+                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/transfer')
                 if (response.status === 404) {
                     return
                 }
@@ -54,15 +56,16 @@ export default function Page() {
         handleRefresh()
     }, [])
 
-    const filter = (expense: TransferType, filterPhrase: string) => {
+    const filter = (transfer: TransferType, filterPhrase: string) => {
         if (filterPhrase === '') return true
-        if (expense.userFrom.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (expense.userTo.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (expense.date.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (expense.amount.toString().toLowerCase().includes(filterPhrase.toLowerCase())) return true
+        if (transfer.userFrom.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
+        if (transfer.userTo.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
+        if (transfer.date && transfer.date.toLowerCase().includes(filterPhrase.toLowerCase())) return true
+        if (transfer.amount.toString().toLowerCase().includes(filterPhrase.toLowerCase())) return true
         return false
     }
 
+    // @ts-ignore
     return (
         <>
             <div className={'h3'}>
@@ -86,7 +89,7 @@ export default function Page() {
                 {transfers
                     .filter((transfer) => filter(transfer, filterPhrase))
                     .map((transfer, index) => (
-                        <p key={transfer.id}>alma</p>
+                        <TransferCard transfer={transfer} key={transfer.id} />
                     ))}
             </div>
         </>
