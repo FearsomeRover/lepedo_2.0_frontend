@@ -6,7 +6,7 @@ type SimpleUserProps = {
     color: string
     isSelected?: boolean
     isHoverable?: boolean
-    onClick: () => void
+    onClick?: () => void
     isAlignedToCenter?: boolean
 }
 
@@ -14,9 +14,7 @@ export default function UserCardSimple(simple: SimpleUserProps) {
     const nameRef = useRef<HTMLDivElement>(null)
     const revTagRef = useRef<HTMLDivElement>(null)
     const [isHovered, setIsHovered] = useState(false)
-    const [nameWidth, setNameWidth] = useState<number>(
-        nameRef.current ? nameRef.current.offsetWidth : 0,
-    )
+    const [nameWidth, setNameWidth] = useState<number>(nameRef.current ? nameRef.current.offsetWidth : 0)
     const [revTagWidth, setRevTagWidth] = useState<number>(0)
 
     useEffect(() => {
@@ -42,35 +40,23 @@ export default function UserCardSimple(simple: SimpleUserProps) {
     return (
         <div
             style={{ minWidth: Math.max(nameWidth, revTagWidth) }}
-            className={
-                simple.isAlignedToCenter
-                    ? 'usertagcontainer middleinside'
-                    : 'usertagcontainer'
-            }
+            className={simple.isAlignedToCenter ? 'usertagcontainer middleinside' : 'usertagcontainer'}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}>
             {isHovered && simple.isHoverable ? (
                 <div
                     ref={revTagRef}
                     style={{ backgroundColor: simple.color }}
-                    className={
-                        simple.isSelected
-                            ? 'usertag unselectable outlined '
-                            : 'usertag unselectable'
-                    }
-                    onClick={simple.onClick}>
+                    className={simple.isSelected ? 'usertag unselectable outlined ' : 'usertag unselectable'}
+                    onClick={simple.onClick ? simple.onClick : () => {}}>
                     @{simple.revTag}
                 </div>
             ) : (
                 <div
                     ref={nameRef}
                     style={{ backgroundColor: simple.color }}
-                    className={
-                        simple.isSelected
-                            ? 'usertag unselectable outlined '
-                            : 'usertag unselectable'
-                    }
-                    onClick={simple.onClick}>
+                    className={simple.isSelected ? 'usertag unselectable outlined ' : 'usertag unselectable'}
+                    onClick={simple.onClick ? simple.onClick : () => {}}>
                     {simple.name === '' ? '-' : simple.name}
                 </div>
             )}

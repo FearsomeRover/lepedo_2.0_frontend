@@ -7,7 +7,7 @@ import Image from 'next/image'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { BasicUser, User } from '@/types/user'
 import { GlobalStateContext } from '../context/context'
-import { Participation } from '@/types/participation'
+import { Participation, ParticipationStatus } from '@/types/participation'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -38,7 +38,8 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
         selectedUsers.forEach((user) => {
             participants.push({
                 userId: user.id,
-                amount: Math.round(amount / selectedUsers.length),
+                amount: amount / selectedUsers.length,
+                status: ParticipationStatus.NONE,
             })
         })
         console.log(participants)
@@ -141,7 +142,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
                                                             value={user.id}
                                                             className="radio"
                                                             name="payed"
-                                                            defaultChecked={props.expense?.payerId === user.id}
+                                                            defaultChecked={props.expense?.payer.id === user.id}
                                                         />
                                                         <UserCardSimple
                                                             name={user.name}
@@ -179,8 +180,9 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
                                                             name="payedto"
                                                             defaultChecked={
                                                                 props.expense
-                                                                    ? props.expense?.received.some(
-                                                                          (curruser) => curruser.id === user.id,
+                                                                    ? props.expense?.items[0].participations.some(
+                                                                          (participation) =>
+                                                                              participation.userId === user.id,
                                                                       )
                                                                     : true
                                                             }

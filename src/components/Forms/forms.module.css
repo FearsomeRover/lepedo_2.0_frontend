@@ -21,6 +21,7 @@
     border-radius: 12px;
     justify-content: space-between;
     max-width: 90%;
+    min-width: 28rem;
     height: 90%;
     overflow: scroll;
 }
@@ -105,10 +106,6 @@
     float: right;
     text-align: right;
     justify-content: right;
-}
-
-.userareatitle {
-    text-align: center;
 }
 
 .userbucket {

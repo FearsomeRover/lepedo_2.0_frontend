@@ -1,3 +1,5 @@
+/*ezt a fajlt hasznaljuk? todo */
+
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import styles from '../list.module.css'
