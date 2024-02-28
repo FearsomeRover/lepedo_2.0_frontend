@@ -5,9 +5,19 @@ export type ExpenseType = {
     id: string
     title: string
     amount: number
-    payerId: string
+    date?: string
     payer: BasicUser
-    date: string
+    items: Item[]
+    final?: boolean
+}
+
+export type BasicExpenseType = {
+    id: string
+    title: string
+    amount: number
+    date?: string
+    payer: BasicUser
     received: BasicUser[]
     items: Item[]
+    final?: boolean
 }
