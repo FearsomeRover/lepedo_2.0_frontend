@@ -1,4 +1,4 @@
-import { Item } from './item'
+import { BasicItem, Item } from './item'
 import { BasicUser, User } from './user'
 
 export type ExpenseType = {
@@ -18,6 +18,6 @@ export type BasicExpenseType = {
     date?: string
     payer: BasicUser
     received: BasicUser[]
-    items: Item[]
+    items: BasicItem[]
     final?: boolean
 }

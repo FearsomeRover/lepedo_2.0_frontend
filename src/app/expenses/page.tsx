@@ -1,11 +1,11 @@
 'use client'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { ExpenseType } from '@/types/expenseType'
+import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { BasicUser } from '@/types/user'
-import { Item } from '@/types/item'
+import { BasicItem, Item } from '@/types/item'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -26,59 +26,52 @@ const dummyUser3: BasicUser = {
     color: '#c013a4',
 }
 
-const dummyItem: Item = {
+const dummyItem: BasicItem = {
     id: 'asdf',
     name: 'Milk',
     price: 123,
     participated: [dummyUser],
-    participations: [],
 }
 
-const dummyItem2: Item = {
+const dummyItem2: BasicItem = {
     id: 'ww',
     name: 'finom kaja',
     price: 123423,
     participated: [dummyUser2, dummyUser3, dummyUser],
-    participations: [],
 }
 
-const dummyItem3: Item = {
+const dummyItem3: BasicItem = {
     id: 'wwfds',
     name: 'kakao',
     price: 123423,
     participated: [dummyUser2, dummyUser3, dummyUser],
-    participations: [],
 }
 
-const dummyItem4: Item = {
+const dummyItem4: BasicItem = {
     id: 'wwasd',
     name: 'PS5',
     price: 123423,
     participated: [dummyUser3, dummyUser],
-    participations: [],
 }
 
-const dummyItem5: Item = {
+const dummyItem5: BasicItem = {
     id: 'wwadfsafsd',
     name: 'Katjes ofc',
     price: 534,
     participated: [dummyUser2, dummyUser],
-    participations: [],
 }
 
-const dummyItem6: Item = {
+const dummyItem6: BasicItem = {
     id: 'Valami',
     name: 'Valami random termek',
     price: 123423,
     participated: [dummyUser2, dummyUser3],
-    participations: [],
 }
 
-const dummyExpense: ExpenseType = {
+const dummyExpense: BasicExpenseType = {
     id: 'adsf',
     title: 'Shopping',
     amount: 12343,
-    payerId: 'asdf',
     date: '2022-10-10',
     received: [dummyUser, dummyUser2, dummyUser3],
     payer: dummyUser,
@@ -86,7 +79,7 @@ const dummyExpense: ExpenseType = {
 }
 
 export default function Page() {
-    const [expenses, setExpenses] = useState<ExpenseType[]>([])
+    const [expenses, setExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
 
     const handleRefresh = () => {
@@ -110,7 +103,7 @@ export default function Page() {
         handleRefresh()
     }, [])
 
-    const filter = (expense: ExpenseType, filterPhrase: string) => {
+    const filter = (expense: BasicExpenseType, filterPhrase: string) => {
         if (filterPhrase === '') return true
         if (expense.title.toLowerCase().includes(filterPhrase.toLowerCase())) return true
         if (expense.payer.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true

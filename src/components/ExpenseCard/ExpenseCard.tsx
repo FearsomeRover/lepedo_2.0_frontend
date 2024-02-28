@@ -1,4 +1,4 @@
-import { ExpenseType } from '@/types/expenseType'
+import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
 import styles from './expensecard.module.css'
 import ExpenseItemRow from '@/components/ExpenseCard/ExpenseItemRow'
 import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
@@ -6,11 +6,8 @@ import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { formatAmount } from 'utils/formatAmount'
 import { ParticipationStatus } from '@/types/participation'
 
-export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
+export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) {
     const total = expense.items.reduce((acc, item) => acc + item.price, 0)
-    const isAcceptedTottaly = expense.items.every((item) =>
-        item.participations.every((part) => part.status === ParticipationStatus.ACCEPTED),
-    )
 
     return (
         <div className={styles.expensecard}>
@@ -30,7 +27,6 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
                                 name={item.name}
                                 price={item.price}
                                 participated={item.participated}
-                                participations={item.participations}
                             />
                         ))}
                     </tbody>
@@ -41,12 +37,12 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
 
             <HorizontalLine />
             <div className={'flex-row-space-between'}>
-                <h5 className={'bold fs18'}>Te:</h5>
-                <p className={'right fs18'}>{formatAmount(total)} Ft</p>
-            </div>
-            <div className={'flex-row-space-between m8top'}>
                 <h5 className={'bold '}>Összesen:</h5>
                 <p className={'right '}>{formatAmount(total)} Ft</p>
+            </div>
+            <div className={'flex-row-space-between m8top'}>
+                <h5 className={'bold fs18'}>Te:</h5>
+                <p className={'right fs18'}>{formatAmount(total)} Ft</p>
             </div>
 
             {/*todo if not participation status is none*/}
@@ -54,9 +50,10 @@ export default function ExpenseCard({ expense }: { expense: ExpenseType }) {
                 <HorizontalLine />
                 <div className={'flex-row-space-around nomargininside'}>
                     <button className={'sbtn fs14'} style={{ marginRight: '16px' }}>
-                        Approve
+                        {' '}
+                        Decline
                     </button>
-                    <button className={'sbtn fs14'}> Decline</button>
+                    <button className={'sbtn fs14'}>Approve</button>
                 </div>
             </div>
         </div>
