@@ -6,6 +6,7 @@ import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { BasicUser } from '@/types/user'
 import { BasicItem, Item } from '@/types/item'
+import SearchField from '@/components/MainSearch/SearchField'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -80,7 +81,12 @@ const dummyExpense: BasicExpenseType = {
 
 export default function Page() {
     const [expenses, setExpenses] = useState<BasicExpenseType[]>([])
+    const [filteredExpenses, setFilteredExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
+
+    useEffect(() => {
+        setFilteredExpenses(expenses.filter((expense) => filter(expense, filterPhrase)))
+    }, [expenses, filterPhrase])
 
     const handleRefresh = () => {
         const fetchData = async () => {
@@ -113,14 +119,11 @@ export default function Page() {
 
     return (
         <>
-            <div className={'h3'}>
-                <input
-                    className={'w50-desktop floatright right searchinput nomargin'}
-                    type="text"
-                    placeholder="Keresés..."
-                    onChange={(s) => setFilterPhrase(s.target.value)}
-                />
-            </div>
+            <SearchField
+                filterPhrase={filterPhrase}
+                setFilterPhrase={setFilterPhrase}
+                red={filteredExpenses.length === 0}
+            />
             <div>
                 {expenses.length === 0 && (
                     <>
@@ -131,11 +134,9 @@ export default function Page() {
                         </div>
                     </>
                 )}
-                {expenses
-                    .filter((expense) => filter(expense, filterPhrase))
-                    .map((expense, index) => (
-                        <ExpenseCard key={index} expense={expense} />
-                    ))}
+                {filteredExpenses.map((expense, index) => (
+                    <ExpenseCard key={index} expense={expense} />
+                ))}
             </div>
         </>
     )

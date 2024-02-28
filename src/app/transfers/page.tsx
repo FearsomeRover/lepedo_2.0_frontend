@@ -8,6 +8,7 @@ import { BasicUser } from '@/types/user'
 import { Item } from '@/types/item'
 import { TransferType } from '@/types/transferType'
 import TransferCard from '@/components/TransferCard/TransferCard'
+import SearchField from '@/components/MainSearch/SearchField'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -58,6 +59,7 @@ export default function Page() {
 
     const filter = (transfer: TransferType, filterPhrase: string) => {
         if (filterPhrase === '') return true
+        if (transfer.title.toLowerCase().includes(filterPhrase.toLowerCase())) return true
         if (transfer.userFrom.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
         if (transfer.userTo.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
         if (transfer.date && transfer.date.toLowerCase().includes(filterPhrase.toLowerCase())) return true
@@ -68,14 +70,7 @@ export default function Page() {
     // @ts-ignore
     return (
         <>
-            <div className={'h3'}>
-                <input
-                    className={'w50-desktop floatright right searchinput nomargin'}
-                    type="text"
-                    placeholder="Keresés..."
-                    onChange={(s) => setFilterPhrase(s.target.value)}
-                />
-            </div>
+            <SearchField filterPhrase={filterPhrase} setFilterPhrase={setFilterPhrase} />
             <div>
                 {transfers.length === 0 && (
                     <>

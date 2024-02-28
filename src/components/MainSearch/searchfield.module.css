@@ -1,0 +1,23 @@
+.searchfieldcontainer {
+    float: right;
+    width: 100%;
+    display: inline-block;
+    z-index: 2;
+    padding-right: 16px;
+}
+
+.searchfield {
+    float: right;
+    width: 300px;
+    max-width: 100%;
+    text-align: right;
+    margin: 0;
+}
+
+.red,
+.red:hover,
+.red:focus {
+    transition: 0.3s;
+    color: red;
+    border-color: red;
+}
