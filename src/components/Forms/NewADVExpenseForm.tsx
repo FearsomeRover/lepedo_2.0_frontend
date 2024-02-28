@@ -59,13 +59,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
 
     useKeyboardShortcut(keyboardShortcuts, (index) => {
         if (selectedItem !== -1 && index !== undefined && index > -1) {
-            setItems((prevItems) => {
-                const newItems = prevItems.map((item, _index) => {
-                    /*todo*/
-                    return item
-                })
-                return newItems
-            })
+            updateItemParticipation(items[selectedItem].id, selectedUsers[index])
         }
     })
 
