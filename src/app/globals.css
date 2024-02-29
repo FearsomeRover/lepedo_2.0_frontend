@@ -431,6 +431,13 @@ textarea {
     margin-top: 0;
 }
 
+.spookydetails::-webkit-details-marker {
+    display: none;
+}
+.spookydetails > summary::-webkit-details-marker {
+    display: none;
+}
+
 @media (max-width: 700px) {
     h1 {
         font-size: 56px;
