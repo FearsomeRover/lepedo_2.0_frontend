@@ -1,0 +1,33 @@
+.qrcard {
+    min-width: 16rem;
+    max-width: 100%;
+    margin: 12px;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 16px;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.righttop {
+    text-align: right;
+    float: right;
+    position: absolute;
+    z-index: 2;
+    right: 8px;
+    top: 16px;
+    margin: 0;
+}
+
+.qrcard details {
+    width: 100%;
+}
+
+.qrcard summary {
+    width: 100%;
+}
+
+.qrcard > details > summary::-webkit-details-marker {
+    display: none;
+}
