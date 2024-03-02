@@ -1,0 +1,32 @@
+.qrcard {
+    min-width: 16rem;
+    max-width: 100%;
+    margin: 12px;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 16px;
+    padding-top: 12px;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.qrcard details {
+    width: 100%;
+}
+
+.qrcard summary {
+    width: 100%;
+}
+
+.qrcard > details > summary.spookydetails::-webkit-details-marker {
+    display: none;
+}
+
+.qrcard > details > summary {
+    list-style: none;
+}
+
+.qrcard > details[open] {
+    z-index: 2;
+}

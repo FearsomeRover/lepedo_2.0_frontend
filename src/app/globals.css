@@ -38,68 +38,9 @@ h2 {
 }
 
 h2:hover {
-    /*    color: var(--black);
-    transition: 0.2s ease-in-out;*/
-    animation: color-box 1s;
     color: var(--black);
-}
-@keyframes gradient-animation-color {
-    0% {
-        color: var(--black);
-        background: linear-gradient(
-            90deg,
-            rgba(217, 81, 94, 1) 10%,
-            rgba(255, 190, 39, 1) 36%,
-            rgba(164, 185, 80, 1) 66%,
-            rgba(56, 184, 188, 1) 90%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    100% {
-        color: black;
-    }
-}
-
-@keyframes color-box {
-    0% {
-        color: var(--white);
-        background-color: rgba(217, 81, 94, 1);
-    }
-    20% {
-        background-color: rgba(255, 190, 39, 1);
-    }
-    40% {
-        background-color: rgba(164, 185, 80, 1);
-    }
-    60% {
-        background-color: rgba(56, 184, 188, 1);
-    }
-    80% {
-        color: var(--white);
-        background-color: rgb(19, 19, 19, 1);
-    }
-    100% {
-        background-color: rgba(255, 255, 255, 0);
-    }
-}
-
-@keyframes color-text {
-    0% {
-        color: rgba(217, 81, 94, 1);
-    }
-    20% {
-        color: rgba(255, 190, 39, 1);
-    }
-    40% {
-        color: rgba(164, 185, 80, 1);
-    }
-    60% {
-        color: rgba(56, 184, 188, 1);
-    }
-    80% {
-        color: rgb(19, 19, 19, 1);
-    }
+    transition: 0.2s ease-in-out;
+    /*animation: color-box 1s;*/
 }
 
 .activeheader {
@@ -138,7 +79,7 @@ h4 {
 h5 {
     font-family: Inter, serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px;
     margin: 24px 8px 0px;
     color: var(--black);
     width: fit-content;
@@ -149,7 +90,7 @@ h6 {
     font-family: Inter, serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     margin: 16px 0 0;
     color: var(--black);
 }
@@ -161,7 +102,7 @@ form h6 {
 /*Numbers, Amounts*/
 p {
     font-family: 'Podkova Medium', serif;
-    font-size: 18px;
+    font-size: 14px;
     margin: 12px;
     width: fit-content;
     color: var(--black);
@@ -281,11 +222,11 @@ button {
     text-decoration: underline;
 }
 
-/*Images (arrow)*/
+/*!*Images (arrow)*!
 img {
     margin: 0 5px;
     display: inline-block;
-}
+}*/
 
 /*Input Fields*/
 input,
@@ -351,6 +292,65 @@ input:focus {
     }
 }
 
+@keyframes gradient-animation-color {
+    0% {
+        color: var(--black);
+        background: linear-gradient(
+            90deg,
+            rgba(217, 81, 94, 1) 10%,
+            rgba(255, 190, 39, 1) 36%,
+            rgba(164, 185, 80, 1) 66%,
+            rgba(56, 184, 188, 1) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    100% {
+        color: black;
+    }
+}
+
+@keyframes color-box {
+    0% {
+        color: var(--white);
+        background-color: rgba(217, 81, 94, 1);
+    }
+    20% {
+        background-color: rgba(255, 190, 39, 1);
+    }
+    40% {
+        background-color: rgba(164, 185, 80, 1);
+    }
+    60% {
+        background-color: rgba(56, 184, 188, 1);
+    }
+    80% {
+        color: var(--white);
+        background-color: rgb(19, 19, 19, 1);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes color-text {
+    0% {
+        color: rgba(217, 81, 94, 1);
+    }
+    20% {
+        color: rgba(255, 190, 39, 1);
+    }
+    40% {
+        color: rgba(164, 185, 80, 1);
+    }
+    60% {
+        color: rgba(56, 184, 188, 1);
+    }
+    80% {
+        color: rgb(19, 19, 19, 1);
+    }
+}
+
 summary {
     margin-bottom: 12px;
 }
@@ -392,6 +392,10 @@ textarea {
     outline: none;
 }
 
+.relativecontainer {
+    position: relative;
+}
+
 /*Radio Buttons*/
 .radio {
     width: auto;
@@ -427,8 +431,15 @@ textarea {
 }
 
 .headerrow {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     margin-top: 0;
+}
+
+.spookydetails::-webkit-details-marker {
+    display: none;
+}
+.spookydetails > summary::-webkit-details-marker {
+    display: none;
 }
 
 @media (max-width: 700px) {
@@ -469,6 +480,9 @@ textarea {
 @media (min-width: 700px) {
     .w50-desktop {
         width: 50%;
+    }
+    .w200px-desktop {
+        width: 200px;
     }
     .w500px-desktop {
         width: 500px;
@@ -555,6 +569,10 @@ textarea {
     width: 50%;
 }
 
+.w80 {
+    width: 80%;
+}
+
 .w90 {
     width: 90%;
 }
@@ -623,6 +641,18 @@ textarea {
     max-width: 700px;
 }
 
+.fs14 {
+    font-size: 14px;
+}
+
+.fs18 {
+    font-size: 18px;
+}
+
+.fs24 {
+    font-size: 24px;
+}
+
 .fs36 {
     font-size: 36px;
 }
@@ -678,6 +708,14 @@ textarea {
     margin-right: 4px;
 }
 
+.m4left {
+    margin-left: 4px;
+}
+
+.nopadding {
+    padding: 0;
+}
+
 .p4 {
     padding: 4px;
 }
@@ -692,6 +730,10 @@ textarea {
 
 .p48 {
     padding: 4px 8px;
+}
+
+.hunset {
+    height: fit-content;
 }
 
 .middleinside {
@@ -717,6 +759,10 @@ textarea {
     font-size: 24px;
 }
 
+.inter {
+    font-family: Inter, serif;
+}
+
 .min-width {
     width: min-content;
     padding: 0;
@@ -737,6 +783,13 @@ textarea {
     align-items: center;
 }
 
+.flex-row-space-around {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .flex-row-space-between * {
     margin: 0;
 }
@@ -744,6 +797,8 @@ textarea {
 .imageContainer {
     position: relative;
     height: 30px;
+    margin: 4px;
+    min-width: 30px;
     flex: 1;
     max-width: 10%;
 }

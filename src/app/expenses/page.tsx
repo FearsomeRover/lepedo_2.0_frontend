@@ -1,11 +1,12 @@
 'use client'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { ExpenseType } from '@/types/expense'
+import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { BasicUser } from '@/types/user'
-import { Item } from '@/types/item'
+import { BasicItem, Item } from '@/types/item'
+import SearchField from '@/components/MainSearch/SearchField'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -26,53 +27,52 @@ const dummyUser3: BasicUser = {
     color: '#c013a4',
 }
 
-const dummyItem: Item = {
+const dummyItem: BasicItem = {
     id: 'asdf',
     name: 'Milk',
     price: 123,
     participated: [dummyUser],
 }
 
-const dummyItem2: Item = {
+const dummyItem2: BasicItem = {
     id: 'ww',
     name: 'finom kaja',
     price: 123423,
     participated: [dummyUser2, dummyUser3, dummyUser],
 }
 
-const dummyItem3: Item = {
+const dummyItem3: BasicItem = {
     id: 'wwfds',
     name: 'kakao',
     price: 123423,
     participated: [dummyUser2, dummyUser3, dummyUser],
 }
 
-const dummyItem4: Item = {
+const dummyItem4: BasicItem = {
     id: 'wwasd',
     name: 'PS5',
     price: 123423,
     participated: [dummyUser3, dummyUser],
 }
 
-const dummyItem5: Item = {
+const dummyItem5: BasicItem = {
     id: 'wwadfsafsd',
     name: 'Katjes ofc',
     price: 534,
     participated: [dummyUser2, dummyUser],
 }
 
-const dummyItem6: Item = {
+const dummyItem6: BasicItem = {
     id: 'Valami',
     name: 'Valami random termek',
     price: 123423,
     participated: [dummyUser2, dummyUser3],
 }
 
-const dummyExpense: ExpenseType = {
+const dummyExpense: BasicExpenseType = {
     id: 'adsf',
     title: 'Shopping',
     amount: 12343,
-    payerId: 'asdf',
     date: '2022-10-10',
     received: [dummyUser, dummyUser2, dummyUser3],
     payer: dummyUser,
@@ -80,8 +80,13 @@ const dummyExpense: ExpenseType = {
 }
 
 export default function Page() {
-    const [expenses, setExpenses] = useState<ExpenseType[]>([])
+    const [expenses, setExpenses] = useState<BasicExpenseType[]>([])
+    const [filteredExpenses, setFilteredExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
+
+    useEffect(() => {
+        setFilteredExpenses(expenses.filter((expense) => filter(expense, filterPhrase)))
+    }, [expenses, filterPhrase])
 
     const handleRefresh = () => {
         const fetchData = async () => {
@@ -97,14 +102,14 @@ export default function Page() {
         }
 
         //fetchData()
-        setExpenses([dummyExpense, dummyExpense, dummyExpense, dummyExpense, dummyExpense, dummyExpense])
+        setExpenses([dummyExpense])
     }
 
     useEffect(() => {
         handleRefresh()
     }, [])
 
-    const filter = (expense: ExpenseType, filterPhrase: string) => {
+    const filter = (expense: BasicExpenseType, filterPhrase: string) => {
         if (filterPhrase === '') return true
         if (expense.title.toLowerCase().includes(filterPhrase.toLowerCase())) return true
         if (expense.payer.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
@@ -114,14 +119,11 @@ export default function Page() {
 
     return (
         <>
-            <div className={'h3'}>
-                <input
-                    className={'w50-desktop floatright right searchinput nomargin'}
-                    type="text"
-                    placeholder="Keresés..."
-                    onChange={(s) => setFilterPhrase(s.target.value)}
-                />
-            </div>
+            <SearchField
+                filterPhrase={filterPhrase}
+                setFilterPhrase={setFilterPhrase}
+                red={filteredExpenses.length === 0}
+            />
             <div>
                 {expenses.length === 0 && (
                     <>
@@ -132,11 +134,9 @@ export default function Page() {
                         </div>
                     </>
                 )}
-                {expenses
-                    .filter((expense) => filter(expense, filterPhrase))
-                    .map((expense, index) => (
-                        <ExpenseCard key={index} expense={expense} />
-                    ))}
+                {filteredExpenses.map((expense, index) => (
+                    <ExpenseCard key={index} expense={expense} />
+                ))}
             </div>
         </>
     )

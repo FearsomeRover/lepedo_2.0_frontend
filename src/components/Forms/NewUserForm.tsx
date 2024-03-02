@@ -62,7 +62,11 @@ export default function NewUserForm(props: NewUserFormProps) {
         }
     }
     return (
-        <div className={styles.popup}>
+        <div
+            className={styles.popup}
+            onClick={(event) => {
+                if (event.target === event.currentTarget) props.abort()
+            }}>
             <form method="post" onSubmit={checkSubmit} className={styles.popupform} autoComplete="off">
                 <h3>Saját profil</h3>
                 <div className="h3"></div>

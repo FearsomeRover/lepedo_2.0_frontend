@@ -2,7 +2,7 @@ import styles from '../list.module.css'
 import ExpenseRow from './ExpenseRow'
 import { useEffect, useState } from 'react'
 import NewSMPExpenseForm from '@/components/Forms/NewSMPExpenseForm'
-import { ExpenseType } from '@/types/expense'
+import { ExpenseType } from '@/types/expenseType'
 import axios from 'axios'
 export default function Expense() {
     const [expenses, setExpenses] = useState<ExpenseType[] | null>()
@@ -11,9 +11,7 @@ export default function Expense() {
     const [expenseId, setExpenseId] = useState<string | null>()
     const refresh = () => {
         const getExpenses = async () => {
-            const response = await axios.get(
-                process.env.NEXT_PUBLIC_BASE_URL + '/expense',
-            )
+            const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/expense')
             const data = await response.data
             if (data.length === 0) setNoExpense(true)
             setExpenses(data)
@@ -42,12 +40,7 @@ export default function Expense() {
                     className="sbtn">
                     <h4> + Új költés </h4>
                 </button>
-                {visibleNewExpense && (
-                    <NewSMPExpenseForm
-                        abort={() => setVisibleNewExpense(false)}
-                        refresh={refresh}
-                    />
-                )}
+                {visibleNewExpense && <NewSMPExpenseForm abort={() => setVisibleNewExpense(false)} refresh={refresh} />}
             </div>
         )
     }
@@ -57,9 +50,7 @@ export default function Expense() {
                 <NewSMPExpenseForm
                     abort={() => setVisibleNewExpense(false)}
                     refresh={refresh}
-                    expense={expenses.find(
-                        (expense) => expense.id === expenseId,
-                    )}
+                    expense={expenses.find((expense) => expense.id === expenseId)}
                 />
             )}
             <div className={styles.new_area}>
