@@ -12,14 +12,6 @@ export default function page() {
         <>
             <QRCard title={'beer'} id={'fdsa'} userTo={dummyUser} amount={400} />
             <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
-            <QRCard title={'sajt'} id={'23'} userTo={dummyUser} amount={1200} />
         </>
     )
 }

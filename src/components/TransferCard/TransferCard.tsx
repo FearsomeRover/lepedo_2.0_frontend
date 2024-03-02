@@ -8,7 +8,6 @@ import { ParticipationStatus } from '@/types/participation'
 import { TransferType } from '@/types/transferType'
 import React from 'react'
 import Image from 'next/image'
-import { Button } from 'react-native'
 
 export default function TransferCard({ transfer }: { transfer: TransferType }) {
     return (

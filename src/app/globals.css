@@ -392,6 +392,10 @@ textarea {
     outline: none;
 }
 
+.relativecontainer {
+    position: relative;
+}
+
 /*Radio Buttons*/
 .radio {
     width: auto;
@@ -708,6 +712,10 @@ textarea {
     margin-left: 4px;
 }
 
+.nopadding {
+    padding: 0;
+}
+
 .p4 {
     padding: 4px;
 }
@@ -722,6 +730,10 @@ textarea {
 
 .p48 {
     padding: 4px 8px;
+}
+
+.hunset {
+    height: fit-content;
 }
 
 .middleinside {

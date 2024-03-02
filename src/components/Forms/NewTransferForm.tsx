@@ -54,7 +54,11 @@ export default function NewTransferForm(props: TransferFormProps) {
         }
     }
     return (
-        <div className={styles.popup}>
+        <div
+            className={styles.popup}
+            onClick={(event) => {
+                if (event.target === event.currentTarget) props.abort()
+            }}>
             {users ? (
                 <form onSubmit={handleFormSubmit} className={`w500px-desktop ${styles.popupform}`}>
                     <div>

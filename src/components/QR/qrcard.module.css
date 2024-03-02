@@ -5,18 +5,20 @@
     border: 2px solid black;
     border-radius: 12px;
     padding: 16px;
+    padding-top: 12px;
     display: inline-block;
     position: relative;
     box-sizing: border-box;
 }
 
 .righttop {
+    width: fit-content;
     text-align: right;
     float: right;
     position: absolute;
     z-index: 2;
     right: 8px;
-    top: 16px;
+    top: 8px;
     margin: 0;
 }
 
@@ -28,6 +30,14 @@
     width: 100%;
 }
 
-.qrcard > details > summary::-webkit-details-marker {
+.qrcard > details > summary.spookydetails::-webkit-details-marker {
     display: none;
+}
+
+.qrcard > details > summary {
+    list-style: none;
+}
+
+.qrcard > details[open] {
+    z-index: 2;
 }
