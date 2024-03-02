@@ -5,26 +5,24 @@ import LinkButton from '@/components/Button/LinkButton'
 import NewUserForm from '@/components/Forms/NewUserForm'
 import axios from 'axios'
 import { User } from '@/types/user'
+import { GlobalStateContext } from '@/components/context/context'
 
 export default function Cards(props: any) {
     const [visibleUserForm, setvisibleUserForm] = useState(false)
     const { user, error, isLoading } = useUser()
     const [curdbUser, setCurdbUser] = useState<User | null>(null)
     const [users, setUsers] = useState<User[]>([])
+    const context = React.useContext(GlobalStateContext)
 
     const getUser = async () => {
         if (!user) return
-        const response = await axios.get(
-            process.env.NEXT_PUBLIC_BASE_URL + '/user',
-        )
-        for (const u of response.data) {
-            if (u.auth0sub === user.sub) {
-                setCurdbUser(u)
-                return
-            }
+        const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user/auth0/' + user.sub)
+        console.log(response.data)
+        if (response.data !== undefined) {
+            const curdbUser = response.data
+            context.setOwnUser(curdbUser)
+            return
         }
-
-        /*if the user has not been seen before, create a database user for them*/
         const data = {
             name: user.name,
             revTag: user.name,
@@ -32,13 +30,15 @@ export default function Cards(props: any) {
             auth0sub: user.sub,
         }
         await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', data)
+        if (user && user.name && curdbUser && curdbUser.id)
+            context.setOwnUser({ id: curdbUser?.id, name: user.name, revTag: user.name, color: '#000000' })
+
+        console.log('user created')
+        //todo this code is terryfying
     }
 
     useEffect(() => {
         getUser()
-
-        /*        // @ts-ignore
-        setContextUsers(users)*/
     }, [user])
 
     function deleteUsers() {
@@ -47,9 +47,7 @@ export default function Cards(props: any) {
             .then((response) => setUsers(response.data))
             .then(() => {
                 for (const u of users) {
-                    axios.delete(
-                        process.env.NEXT_PUBLIC_BASE_URL + `/user/${u.id}`,
-                    )
+                    axios.delete(process.env.NEXT_PUBLIC_BASE_URL + `/user/${u.id}`)
                 }
             })
     }
@@ -59,19 +57,13 @@ export default function Cards(props: any) {
             <>
                 <div className="floating-top">
                     {user == undefined ? (
-                        <LinkButton
-                            text={'Bejelentkezés'}
-                            href={'/api/auth/login'}
-                        />
+                        <LinkButton text={'Bejelentkezés'} href={'/api/auth/login'} />
                     ) : (
                         <>
                             <button onClick={deleteUsers} className="sbtn">
                                 [drop users]
                             </button>
-                            <LinkButton
-                                href={'/api/auth/logout'}
-                                text={'[logout]'}
-                            />
+                            <LinkButton href={'/api/auth/logout'} text={'[logout]'} />
 
                             <button
                                 className="sbtn"

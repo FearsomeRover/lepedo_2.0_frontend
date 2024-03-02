@@ -5,6 +5,9 @@ import { User } from '@/types/user'
 import { QrType } from '@/types/qr'
 import { Simulate } from 'react-dom/test-utils'
 import abort = Simulate.abort
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { useContext } from 'react'
+import { GlobalStateContext } from '@/components/context/context'
 
 type QrFormProps = {
     qr?: QrType
@@ -15,6 +18,7 @@ type Response = {
     data: User[]
 }
 export default function NewQrForm(props: QrFormProps) {
+    const userId = useContext(GlobalStateContext).ownUser.id
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
         const formData = new FormData(event.target)
@@ -28,13 +32,14 @@ export default function NewQrForm(props: QrFormProps) {
             }
         }
         const data = {
+            payToId: userId,
+            title: name,
             amount,
-            name,
         }
         if (props.qr) {
-            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + props.qr.id, data)
+            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + props.qr.id, data)
         } else {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', data)
+            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr', data)
         }
         props.abort()
         props.refresh()
