@@ -164,7 +164,11 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
     }
 
     return (
-        <div className={styles.popup}>
+        <div
+            className={styles.popup}
+            onClick={(event) => {
+                if (event.target === event.currentTarget) props.abort()
+            }}>
             {users ? (
                 <form onSubmit={handleFormSubmit} className={`w700px-desktop ${styles.popupform} `}>
                     <div>

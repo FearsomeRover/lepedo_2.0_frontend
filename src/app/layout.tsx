@@ -10,6 +10,7 @@ import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 import ShortcutsPopUp from '@/components/Forms/shortcutsPopUp'
 import GlobalContext from '@/components/context/context'
+import NewQrForm from '@/components/Forms/NewQrForm'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,50 +19,34 @@ const inter = Inter({ subsets: ['latin'] })
     description: 'Lepedo',
 }*/
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     const [shortcutsPopUpRevealed, setShortcutsPopUpRevealed] = useState(false)
     const [SIMexpenseFormRevealed, setSIMExpenseFormRevealed] = useState(false)
     const [ADVexpenseFormRevealed, setADVExpenseFormRevealed] = useState(false)
     const [tranfserFormRevealed, setTranfserFormRevealed] = useState(false)
+    const [qrFormRevealed, setqrFormRevealed] = useState(false)
+
+    const anyFormRevealed = SIMexpenseFormRevealed || ADVexpenseFormRevealed || tranfserFormRevealed || qrFormRevealed
 
     useKeyboardShortcut(['e'], () => {
-        if (
-            !(
-                tranfserFormRevealed ||
-                SIMexpenseFormRevealed ||
-                ADVexpenseFormRevealed
-            )
-        )
-            setSIMExpenseFormRevealed(true)
+        if (!anyFormRevealed) setSIMExpenseFormRevealed(true)
     })
     useKeyboardShortcut(['r'], () => {
-        if (
-            !(
-                tranfserFormRevealed ||
-                SIMexpenseFormRevealed ||
-                ADVexpenseFormRevealed
-            )
-        )
-            setADVExpenseFormRevealed(true)
+        if (!anyFormRevealed) setADVExpenseFormRevealed(true)
     })
     useKeyboardShortcut(['t'], () => {
-        if (
-            !(
-                tranfserFormRevealed ||
-                SIMexpenseFormRevealed ||
-                ADVexpenseFormRevealed
-            )
-        )
-            setTranfserFormRevealed(true)
+        if (!anyFormRevealed) setTranfserFormRevealed(true)
+    })
+
+    useKeyboardShortcut(['q'], () => {
+        if (!anyFormRevealed) setqrFormRevealed(true)
     })
 
     useKeyboardShortcut(['esc'], () => {
         setTranfserFormRevealed(false)
         setSIMExpenseFormRevealed(false)
+        setADVExpenseFormRevealed(false)
+        setqrFormRevealed(false)
     })
 
     return (
@@ -90,6 +75,14 @@ export default function RootLayout({
                             <NewTransferForm
                                 abort={() => {
                                     setTranfserFormRevealed(false)
+                                }}
+                                refresh={() => {}}
+                            />
+                        )}
+                        {qrFormRevealed && (
+                            <NewQrForm
+                                abort={() => {
+                                    setqrFormRevealed(false)
                                 }}
                                 refresh={() => {}}
                             />

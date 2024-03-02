@@ -5,6 +5,7 @@
     border: 2px solid black;
     border-radius: 12px;
     padding: 16px;
+    padding-top: 12px;
     display: inline-block;
     position: relative;
     box-sizing: border-box;
