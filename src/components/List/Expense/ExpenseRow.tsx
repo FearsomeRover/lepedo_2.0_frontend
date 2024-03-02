@@ -30,11 +30,7 @@ export default function ExpenseRow(props: ExpenseRowProps) {
             <td className={styles.center}>
                 <Image src="/images/arrow-right.svg" alt="arrow-right" width={29} height={24} />
             </td>
-            <td className={styles.center}>
-                {props.expense.received.map((user) => (
-                    <UserCard user={user} key={user.id} />
-                ))}
-            </td>
+            <td className={styles.center}>IDE JÖN A USERCARD</td>
             <td>
                 <p className={styles.center}> {props.expense.date} </p>
             </td>

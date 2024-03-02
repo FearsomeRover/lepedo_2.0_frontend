@@ -1,6 +1,6 @@
 'use client'
 import QRCard from '@/components/QR/QRCard'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { QrType } from '@/types/qr'
 import NewQrForm from '@/components/Forms/NewQrForm'
@@ -12,9 +12,9 @@ const dummyUser = {
     id: '1234',
 }
 
-export default function page() {
-    const [formRevealed, setFormRevealed] = React.useState<QrType | null>(null)
-    const [qrs, setQrs] = React.useState<QrType[]>([])
+export default function Page() {
+    const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
+    const [qrs, setQrs] = useState<QrType[]>([])
     const handleRefresh = () => {
         const fetchData = async () => {
             try {
@@ -46,7 +46,7 @@ export default function page() {
         <>
             {formRevealed && <NewQrForm abort={() => setFormRevealed(null)} refresh={() => {}} qr={formRevealed} />}
             {qrs.map((qr) => (
-                <QRCard qr={qr} onEdit={onEdit} onDelete={onDelete} />
+                <QRCard key={qr.id} qr={qr} onEdit={onEdit} onDelete={onDelete} />
             ))}
         </>
     )
