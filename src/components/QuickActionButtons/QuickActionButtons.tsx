@@ -17,7 +17,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
 
     return (
         <>
-            <div className={styles.actionrow}>
+            <div className={styles.quickactions}>
                 {(!props.revealed || props.revealed[0]) && (
                     <button
                         className="sbtn"

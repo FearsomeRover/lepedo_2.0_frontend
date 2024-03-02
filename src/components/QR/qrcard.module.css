@@ -11,17 +11,6 @@
     box-sizing: border-box;
 }
 
-.righttop {
-    width: fit-content;
-    text-align: right;
-    float: right;
-    position: absolute;
-    z-index: 2;
-    right: 8px;
-    top: 8px;
-    margin: 0;
-}
-
 .qrcard details {
     width: 100%;
 }

@@ -4,5 +4,5 @@ export type QrType = {
     id: string
     title: string
     amount: number
-    userTo: BasicUser
+    payTo: BasicUser
 }
