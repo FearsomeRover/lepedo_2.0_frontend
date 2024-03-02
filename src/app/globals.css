@@ -676,6 +676,11 @@ textarea {
     display: inline-block;
 }
 
+.inline {
+    display: inline;
+    vertical-align: top;
+}
+
 .left {
     text-align: left;
 }
