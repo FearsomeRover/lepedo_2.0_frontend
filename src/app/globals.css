@@ -749,6 +749,12 @@ textarea {
     margin: 0 auto;
 }
 
+.border {
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 16px;
+}
+
 .bold {
     font-weight: bold;
 }

@@ -40,7 +40,9 @@ export default function Page() {
     return (
         <>
             {formRevealed && <NewQrForm abort={() => setFormRevealed(null)} refresh={() => {}} qr={formRevealed} />}
-            {qrPopUpRevealed !== null && <QrCodePopUp qr={qrPopUpRevealed} abort={() => setQrPopUpRevealed(null)} />}
+            {qrPopUpRevealed !== null && (
+                <QrCodePopUp qrText={qrPopUpRevealed} abort={() => setQrPopUpRevealed(null)} />
+            )}
             {qrs.map((qr) => (
                 <QRCard handleOnQrClick={setQrPopUpRevealed} key={qr.id} qr={qr} onEdit={onEdit} onDelete={onDelete} />
             ))}

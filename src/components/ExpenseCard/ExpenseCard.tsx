@@ -1,10 +1,9 @@
-import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
+import { BasicExpenseType } from '@/types/expenseType'
 import styles from './expensecard.module.css'
 import ExpenseItemRow from '@/components/ExpenseCard/ExpenseItemRow'
 import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { formatAmount } from 'utils/formatAmount'
-import { ParticipationStatus } from '@/types/participation'
 
 export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) {
     const total = expense.items.reduce((acc, item) => acc + item.price, 0)
@@ -50,7 +49,6 @@ export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) 
                 <HorizontalLine />
                 <div className={'flex-row-space-around nomargininside'}>
                     <button className={'sbtn fs14'} style={{ marginRight: '16px' }}>
-                        {' '}
                         Decline
                     </button>
                     <button className={'sbtn fs14'}>Approve</button>

@@ -7,7 +7,7 @@ export default function QRImage(props: { text: string; size?: number }) {
 
     return (
         <Canvas
-            text="https://lepedo.live/qr/"
+            text={props.text}
             options={{
                 errorCorrectionLevel: 'M',
                 margin: 3,

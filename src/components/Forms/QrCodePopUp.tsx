@@ -4,7 +4,7 @@ import QRImage from '@/components/QR/QRImage'
 import React from 'react'
 
 type QrCodePopUpProps = {
-    qr: string
+    qrText: string
     abort: () => void
 }
 export default function QrCodePopUp(props: QrCodePopUpProps) {
@@ -16,7 +16,7 @@ export default function QrCodePopUp(props: QrCodePopUpProps) {
             }}>
             <div className={`w500px-desktop ${styles.popupform} hunset`}>
                 <div className={'middleinside'}>
-                    <QRImage text={process.env['QR_REDIRECT_BASE_URL '] + '/qr/' + props.qr} size={10} />
+                    <QRImage text={props.qrText} size={10} />
                 </div>
                 <button className={'sbtn'} onClick={() => props.abort()}>
                     Bezárás

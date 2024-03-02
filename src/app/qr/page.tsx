@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import { QrType } from '@/types/qr'
 import UserRelationRow from '@/components/UserCard/UserRelationRow'
 import { GlobalStateContext } from '@/components/context/context'
+import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
 
 export default function Page() {
     const searchParams = useSearchParams()
@@ -44,7 +45,9 @@ export default function Page() {
         handleRefresh()
     }, [])
 
-    function handleAccept() {}
+    function handleAccept() {
+        axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + searchParams.get('id') + '/accept', {})
+    }
 
     return (
         <>
@@ -58,15 +61,25 @@ export default function Page() {
             )}
             {qr && (
                 <>
-                    <div className={''}>
+                    <div className={'middleinside'}>
+                        <h6 className={'w300px middleself'}>
+                            Elfogadod az alábbi költést? Ha jóváhagyod, automatikusan bekerül egy költés, mely szerint
+                            tartozol {qr.payTo.name}-nak/nek egy {qr.title}-val/vel.
+                        </h6>
+                    </div>
+                    <div className={'h5'}></div>
+                    <div className={'wfitcontent middleself border'}>
+                        <h4>{qr.title}</h4>
                         <div className={'h1'}></div>
                         <p className={'fs24 nomargin w100 middleinside'}>{formatAmount(qr.amount)} Ft</p>
                         <div className={'h1'}></div>
                         <UserRelationRow user1={user} user2={qr.payTo} />
-                        <div className={'h5'}></div>
-                        <div className={'middleinside'}>
-                            <button className={'sbtn'}>Jóváhagyás</button>
-                            <button className={'sbtn'}>Mégse</button>
+                        <HorizontalLine />
+                        <div className={'middleinside nomargininside'}>
+                            <button className={'sbtn fs14'} style={{ marginRight: '16px' }} onClick={handleAccept}>
+                                Jóváhagyás
+                            </button>
+                            <button className={'sbtn fs14'}>Mégse</button>
                         </div>
                     </div>
                 </>
