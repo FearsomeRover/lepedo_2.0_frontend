@@ -16,6 +16,10 @@
     margin: 0;
 }
 
+.qrcard:hover > .righttop{
+    opacity: 1;
+}
+
 @media (max-width: 900px) {
     .quickactions {
         overflow-x: scroll;

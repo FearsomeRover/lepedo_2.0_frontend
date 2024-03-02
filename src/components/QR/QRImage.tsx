@@ -4,6 +4,7 @@ import { useQRCode } from 'next-qrcode'
 
 export default function QRImage(props: { text: string; size?: number }) {
     const { Canvas } = useQRCode()
+
     return (
         <Canvas
             text="https://lepedo.live/qr/"

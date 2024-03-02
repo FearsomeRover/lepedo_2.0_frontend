@@ -4,16 +4,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { QrType } from '@/types/qr'
 import NewQrForm from '@/components/Forms/NewQrForm'
-
-const dummyUser = {
-    name: 'John Doe',
-    color: 'coral',
-    revTag: '1234',
-    id: '1234',
-}
+import QrCodePopUp from '@/components/Forms/QrCodePopUp'
 
 export default function Page() {
     const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
+    const [qrPopUpRevealed, setQrPopUpRevealed] = useState<string | null>(null)
     const [qrs, setQrs] = useState<QrType[]>([])
     const handleRefresh = () => {
         const fetchData = async () => {
@@ -45,8 +40,9 @@ export default function Page() {
     return (
         <>
             {formRevealed && <NewQrForm abort={() => setFormRevealed(null)} refresh={() => {}} qr={formRevealed} />}
+            {qrPopUpRevealed !== null && <QrCodePopUp qr={qrPopUpRevealed} abort={() => setQrPopUpRevealed(null)} />}
             {qrs.map((qr) => (
-                <QRCard key={qr.id} qr={qr} onEdit={onEdit} onDelete={onDelete} />
+                <QRCard handleOnQrClick={setQrPopUpRevealed} key={qr.id} qr={qr} onEdit={onEdit} onDelete={onDelete} />
             ))}
         </>
     )

@@ -605,6 +605,10 @@ textarea {
     width: 700px;
 }
 
+.wfitcontent {
+    width: fit-content;
+}
+
 .h1 {
     height: 1rem;
 }

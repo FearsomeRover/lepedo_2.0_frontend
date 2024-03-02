@@ -1,9 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import styles from './forms.module.css'
-import UserCard from '@/components/UserCard/UserCard'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
-import LinkButton from '@/components/Button/LinkButton'
 import { User } from '@/types/user'
 
 type NewUserFormProps = {
@@ -129,7 +127,7 @@ export default function NewUserForm(props: NewUserFormProps) {
                             Mégse
                         </button>
                     )}
-                    <a href="/api/auth/logout">Kijelentkezés</a>
+                    <a href="/src/api/auth/logout">Kijelentkezés</a>
                 </div>
             </form>
         </div>
