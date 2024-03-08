@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { experimental_useOptimistic as useOptimistic, useEffect, useState } from 'react'
 import { BasicExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
@@ -81,6 +81,7 @@ const dummyExpense: BasicExpenseType = {
 
 export default function Page() {
     const [expenses, setExpenses] = useState<BasicExpenseType[]>([])
+    const [optimisticExpenses, setOptimisticExpenses] = useOptimistic(expenses)
     const [filteredExpenses, setFilteredExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
 
@@ -95,14 +96,24 @@ export default function Page() {
                 if (response.status === 404) {
                     return
                 }
-                const data = await response.data
+                const data = response.data
             } catch (error: any) {
                 console.error('Error fetching data:', error.request.status)
             }
         }
 
-        //fetchData()
+        fetchData()
         setExpenses([dummyExpense])
+    }
+
+    const submitExpenseForm = async (curnew: BasicExpenseType) => {
+        setOptimisticExpenses((prev) => [...prev, curnew])
+        try {
+            const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', curnew)
+        } catch (error: any) {
+            console.error('Error fetching data:', error.request.status)
+        }
+        setExpenses((prev) => [...prev, curnew])
     }
 
     useEffect(() => {
@@ -125,20 +136,12 @@ export default function Page() {
                 red={expenses.length > 0 && filteredExpenses.length === 0}
             />
             <div>
-                {expenses.length === 0 && (
+                {filteredExpenses.length === 0 && (
                     <>
                         <div className={'h5'}></div>
                         <div className={'middleinside'}>
-                            <h3>Még nem veszel részt egyetlen költségben sem</h3>
-                            <QuickActionButtons revealed={[true, true, false, false]} />
-                        </div>
-                    </>
-                )}
-                {expenses.length > 0 && filteredExpenses.length === 0 && (
-                    <>
-                        <div className={'h5'}></div>
-                        <div className={'middleinside'}>
-                            <h3>Nincs a keresésednek megfelelő költés :(</h3>
+                            {expenses.length === 0 && <h3>Még nem veszel részt egyetlen költségben sem</h3>}
+                            {expenses.length > 0 && <h3>Nincs a keresésednek megfelelő költés :(</h3>}
                             <QuickActionButtons revealed={[true, true, false, false]} />
                         </div>
                     </>

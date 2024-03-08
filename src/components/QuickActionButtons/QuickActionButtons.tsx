@@ -6,6 +6,7 @@ import NewTransferForm from '@/components/Forms/NewTransferForm'
 
 type QuickActionButtonProps = {
     revealed?: boolean[]
+    refreshes?: () => void[]
 }
 
 export default function QuickActionButtons(props: QuickActionButtonProps) {
