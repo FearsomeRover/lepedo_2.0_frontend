@@ -1,11 +1,8 @@
 'use client'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { ExpenseType } from '@/types/expenseType'
-import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { BasicUser } from '@/types/user'
-import { Item } from '@/types/item'
 import { TransferType } from '@/types/transferType'
 import TransferCard from '@/components/TransferCard/TransferCard'
 import SearchField from '@/components/MainSearch/SearchField'
@@ -34,8 +31,12 @@ const dummyTransfer: TransferType = {
 
 export default function Page() {
     const [transfers, setTransfers] = useState<TransferType[]>([])
+    const [filteredTransfers, setFilteredTransfers] = useState<TransferType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
 
+    useEffect(() => {
+        setFilteredTransfers(transfers.filter((transfer) => filter(transfer, filterPhrase)))
+    }, [transfers, filterPhrase])
     const handleRefresh = () => {
         const fetchData = async () => {
             try {
@@ -67,10 +68,13 @@ export default function Page() {
         return false
     }
 
-    // @ts-ignore
     return (
         <>
-            <SearchField filterPhrase={filterPhrase} setFilterPhrase={setFilterPhrase} />
+            <SearchField
+                filterPhrase={filterPhrase}
+                setFilterPhrase={setFilterPhrase}
+                red={transfers.length > 0 && filteredTransfers.length === 0}
+            />
             <div>
                 {transfers.length === 0 && (
                     <>
@@ -81,11 +85,18 @@ export default function Page() {
                         </div>
                     </>
                 )}
-                {transfers
-                    .filter((transfer) => filter(transfer, filterPhrase))
-                    .map((transfer, index) => (
-                        <TransferCard transfer={transfer} key={transfer.id} />
-                    ))}
+                {transfers.length > 0 && filteredTransfers.length === 0 && (
+                    <>
+                        <div className={'h5'}></div>
+                        <div className={'middleinside'}>
+                            <h3>Nincs a keresésednek megfelelő utalás :(</h3>
+                            <QuickActionButtons revealed={[false, false, true, false]} />
+                        </div>
+                    </>
+                )}
+                {filteredTransfers.map((transfer, index) => (
+                    <TransferCard transfer={transfer} key={transfer.id} />
+                ))}
             </div>
         </>
     )

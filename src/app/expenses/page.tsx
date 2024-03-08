@@ -1,11 +1,11 @@
 'use client'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
+import { BasicExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { BasicUser } from '@/types/user'
-import { BasicItem, Item } from '@/types/item'
+import { BasicItem } from '@/types/item'
 import SearchField from '@/components/MainSearch/SearchField'
 
 const dummyUser: BasicUser = {
@@ -122,7 +122,7 @@ export default function Page() {
             <SearchField
                 filterPhrase={filterPhrase}
                 setFilterPhrase={setFilterPhrase}
-                red={filteredExpenses.length === 0}
+                red={expenses.length > 0 && filteredExpenses.length === 0}
             />
             <div>
                 {expenses.length === 0 && (
@@ -134,8 +134,17 @@ export default function Page() {
                         </div>
                     </>
                 )}
+                {expenses.length > 0 && filteredExpenses.length === 0 && (
+                    <>
+                        <div className={'h5'}></div>
+                        <div className={'middleinside'}>
+                            <h3>Nincs a keresésednek megfelelő költés :(</h3>
+                            <QuickActionButtons revealed={[true, true, false, false]} />
+                        </div>
+                    </>
+                )}
                 {filteredExpenses.map((expense, index) => (
-                    <ExpenseCard key={index} expense={expense} />
+                    <ExpenseCard key={expense.id} expense={expense} />
                 ))}
             </div>
         </>

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { QrType } from '@/types/qr'
 import NewQrForm from '@/components/Forms/NewQrForm'
 import QrCodePopUp from '@/components/Forms/QrCodePopUp'
+import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 
 export default function Page() {
     const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
@@ -35,7 +36,14 @@ export default function Page() {
         setFormRevealed(cur)
     }
 
-    function onDelete() {}
+    async function onDelete(cur: QrType) {
+        try {
+            await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + cur.id)
+            handleRefresh()
+        } catch (error: any) {
+            console.error('Error deleting data:', error.request.status)
+        }
+    }
 
     return (
         <>
@@ -43,9 +51,25 @@ export default function Page() {
             {qrPopUpRevealed !== null && (
                 <QrCodePopUp qrText={qrPopUpRevealed} abort={() => setQrPopUpRevealed(null)} />
             )}
-            {qrs.map((qr) => (
-                <QRCard handleOnQrClick={setQrPopUpRevealed} key={qr.id} qr={qr} onEdit={onEdit} onDelete={onDelete} />
-            ))}
+            {qrs.length === 0 && (
+                <>
+                    <div className={'h5'}></div>
+                    <div className={'middleinside'}>
+                        <h3>Itt fognak lakni a QR kódjaid</h3>
+                        <QuickActionButtons revealed={[false, false, false, true]} />
+                    </div>
+                </>
+            )}
+            {qrs.length === 0 ||
+                qrs.map((qr) => (
+                    <QRCard
+                        handleOnQrClick={setQrPopUpRevealed}
+                        key={qr.id}
+                        qr={qr}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                    />
+                ))}
         </>
     )
 }
