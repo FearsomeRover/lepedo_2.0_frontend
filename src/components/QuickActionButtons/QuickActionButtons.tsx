@@ -3,10 +3,11 @@ import { useState } from 'react'
 import NewSMPExpenseForm from '@/components/Forms/NewSMPExpenseForm'
 import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
+import { BasicExpenseType } from '@/types/expenseType'
 
 type QuickActionButtonProps = {
     revealed?: boolean[]
-    refreshes?: () => void[]
+    refreshes?: ((curnew: BasicExpenseType) => Promise<void>)[]
 }
 
 export default function QuickActionButtons(props: QuickActionButtonProps) {

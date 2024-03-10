@@ -20,6 +20,7 @@ const inter = Inter({ subsets: ['latin'] })
 }*/
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+    //todo maybe move this to the quick action buttons
     const [shortcutsPopUpRevealed, setShortcutsPopUpRevealed] = useState(false)
     const [SIMexpenseFormRevealed, setSIMExpenseFormRevealed] = useState(false)
     const [ADVexpenseFormRevealed, setADVExpenseFormRevealed] = useState(false)
