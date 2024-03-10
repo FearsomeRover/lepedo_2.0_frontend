@@ -3,10 +3,10 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { BasicExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
-import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import { BasicUser } from '@/types/user'
 import { BasicItem } from '@/types/item'
 import SearchField from '@/components/MainSearch/SearchField'
+import QuickActionButtonSideBar from '@/components/QuickActionButtons/QuickActionButtonSideBar'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -100,7 +100,7 @@ export default function Page() {
                     return
                 }
                 const data = response.data
-                setExpenses(data)
+                //setExpenses(data)
             } catch (error: any) {
                 console.error('Error fetching data:', error.request.status)
             }
@@ -146,20 +146,22 @@ export default function Page() {
                 setFilterPhrase={setFilterPhrase}
                 red={expenses.length > 0 && filteredExpenses.length === 0}
             />
-            <div>
-                {filteredExpenses.length === 0 && (
-                    <>
-                        <div className={'h5'}></div>
-                        <div className={'middleinside'}>
-                            {expenses.length === 0 && <h3>Még nem veszel részt egyetlen költségben sem</h3>}
-                            {expenses.length > 0 && <h3>Nincs a keresésednek megfelelő költés :(</h3>}
-                            <QuickActionButtons revealed={[true, true, false, false]} />
-                        </div>
-                    </>
-                )}
-                {filteredExpenses.map((expense, index) => (
-                    <ExpenseCard key={expense.id} expense={expense} />
-                ))}
+            <div className={'flex-row-desktop'}>
+                <QuickActionButtonSideBar revealed={[true, true, false, false]} refreshes={[handleRefresh]} />
+                <div className={'w100'}>
+                    {filteredExpenses.length === 0 && (
+                        <>
+                            <div className={'h5'}></div>
+                            <div className={'middleinside'}>
+                                {expenses.length === 0 && <h3>Még nem veszel részt egyetlen költségben sem</h3>}
+                                {expenses.length > 0 && <h3>Nincs a keresésednek megfelelő költés :(</h3>}
+                            </div>
+                        </>
+                    )}
+                    {filteredExpenses.map((expense, index) => (
+                        <ExpenseCard key={expense.id} expense={expense} />
+                    ))}
+                </div>
             </div>
         </>
     )

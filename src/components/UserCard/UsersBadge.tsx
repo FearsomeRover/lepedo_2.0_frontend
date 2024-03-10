@@ -1,13 +1,13 @@
 'use client'
-import { BasicUser, User } from '@/types/user'
+import { BasicUser } from '@/types/user'
 import styles from './usercard.module.css'
-import { useEffect } from 'react'
 
 type UsersBadgeProps = {
     users: BasicUser[]
 }
 
 export default function UsersBagde(props: UsersBadgeProps) {
+    if (props.users === undefined || props.users.length === 0) return <></>
     let userNames = props.users.map((user) => ' ' + user.name)
 
     return (

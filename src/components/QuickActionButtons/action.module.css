@@ -5,6 +5,25 @@
     justify-content: center;
 }
 
+.quickactionssidebar {
+    text-align: left;
+    width: 200px;
+}
+
+.quickactionssidebar * {
+    margin: 8px;
+    margin-top: 16px;
+}
+
+@media (max-width: 700px) {
+    .quickactionssidebar {
+        width: 100%;
+    }
+    .quickactionssidebar button {
+        margin: 16px 0;
+    }
+}
+
 .righttop {
     width: fit-content;
     text-align: right;
@@ -16,7 +35,7 @@
     margin: 0;
 }
 
-.qrcard:hover > .righttop{
+.qrcard:hover > .righttop {
     opacity: 1;
 }
 

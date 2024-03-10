@@ -9,49 +9,52 @@ type QuickActionButtonProps = {
     refreshes?: (() => void)[]
 }
 
-export default function QuickActionButtons(props: QuickActionButtonProps) {
+export default function QuickActionButtonSideBar(props: QuickActionButtonProps) {
     const [SMPExpensePopup, setSMPExpensePopup] = useState(false)
     const [ADVExpensePopup, setADVExpensePopup] = useState(false)
     const [transferPopup, setTransferPopup] = useState(false)
+    const [qrPopUp, setQrPopUp] = useState(false)
 
     const refresh = () => {}
 
     return (
         <>
-            <div className={styles.quickactions}>
+            <div className={styles.quickactionssidebar}>
                 {(!props.revealed || props.revealed[0]) && (
-                    <button
-                        className="sbtn"
-                        onClick={() => {
-                            setSMPExpensePopup(true)
-                        }}>
-                        Új tétel felvétele
-                    </button>
+                    <>
+                        <button
+                            className="sbtn"
+                            onClick={() => {
+                                setSMPExpensePopup(true)
+                            }}>
+                            + Új tétel
+                        </button>
+                    </>
                 )}
 
                 {(!props.revealed || props.revealed[1]) && (
                     <button
-                        className="sbtn"
+                        className="sbtn m8"
                         onClick={() => {
                             setADVExpensePopup(true)
                         }}>
-                        Új számla felvétele [haladó]
+                        + Új számla
                     </button>
                 )}
 
                 {(!props.revealed || props.revealed[2]) && (
                     <button
-                        className="sbtn"
+                        className="sbtn m8"
                         onClick={() => {
                             setTransferPopup(true)
                         }}>
-                        Új utalás rögzítése
+                        + Új utalás
                     </button>
                 )}
 
                 {(!props.revealed || props.revealed[3]) && (
-                    <button className="sbtn" onClick={() => {}}>
-                        Új QR kód generálása
+                    <button className="sbtn m8" onClick={() => {}}>
+                        + Új QR kód
                     </button>
                 )}
             </div>

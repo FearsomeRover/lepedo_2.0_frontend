@@ -243,7 +243,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
                         </table>
                     </div>
                     <div>
-                        <input className="sbtn_with_h4" type="submit" value="Mentés" />
+                        <input className="sbtn" type="submit" value="Mentés" />
                         <button
                             className="sbtn"
                             onClick={() => {

@@ -247,7 +247,7 @@ input,
     transition: 0.1s ease-in-out;
 }
 
-input:hover {
+input:hover :not(.sbtn) {
     border-width: 0 0 3px 0;
     /*
     border-image: linear-gradient(
@@ -261,7 +261,7 @@ input:hover {
     /*box-shadow: 0 2px 4px lightgray;*/
 }
 
-input:focus {
+input:focus :not(.sbtn) {
     border-width: 0 0 4px 0;
     border-color: var(--black);
     /*
@@ -609,6 +609,10 @@ textarea {
     width: fit-content;
 }
 
+.w {
+    width: unset;
+}
+
 .h1 {
     height: 1rem;
 }
@@ -791,6 +795,21 @@ textarea {
     margin: 0;
 }
 
+@media (min-width: 700px) {
+    .flex-row-desktop {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+    }
+}
+@media (max-width: 700px) {
+    .flex-row-desktop button {
+        margin: 8px 8px;
+        width: 100%;
+        text-align: center;
+    }
+}
 .flex-row-space-between {
     display: flex;
     flex-direction: row;
