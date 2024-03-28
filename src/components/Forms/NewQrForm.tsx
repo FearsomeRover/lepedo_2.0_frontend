@@ -4,8 +4,6 @@ import styles from './forms.module.css'
 import { User } from '@/types/user'
 import { QrType } from '@/types/qr'
 import { Simulate } from 'react-dom/test-utils'
-import abort = Simulate.abort
-import { useUser } from '@auth0/nextjs-auth0/client'
 import { useContext } from 'react'
 import { GlobalStateContext } from '@/components/context/context'
 
@@ -19,6 +17,7 @@ type Response = {
 }
 export default function NewQrForm(props: QrFormProps) {
     const userId = useContext(GlobalStateContext).ownUser.id
+    if (userId === null) return null
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
         const formData = new FormData(event.target)

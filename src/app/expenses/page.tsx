@@ -1,5 +1,4 @@
 'use client'
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { BasicExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
@@ -7,6 +6,7 @@ import { BasicUser } from '@/types/user'
 import { BasicItem } from '@/types/item'
 import SearchField from '@/components/MainSearch/SearchField'
 import QuickActionButtonSideBar from '@/components/QuickActionButtons/QuickActionButtonSideBar'
+import axios from 'axios'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -81,10 +81,7 @@ const dummyExpense: BasicExpenseType = {
 
 export default function Page() {
     const [expenses, setExpenses] = useState<BasicExpenseType[]>([])
-    /*    const [optimisticExpenses, setOptimisticExpenses] = experimental_useOptimistic(
-        expenses,
-        (state, newExpense: BasicExpenseType) => [...state, newExpense],
-    )*/
+
     const [filteredExpenses, setFilteredExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
 
@@ -100,7 +97,7 @@ export default function Page() {
                     return
                 }
                 const data = response.data
-                //setExpenses(data)
+                setExpenses(data)
             } catch (error: any) {
                 console.error('Error fetching data:', error.request.status)
             }

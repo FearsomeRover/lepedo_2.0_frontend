@@ -1,36 +1,18 @@
 'use client'
 import QRCard from '@/components/QR/QRCard'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { QrType } from '@/types/qr'
 import NewQrForm from '@/components/Forms/NewQrForm'
 import QrCodePopUp from '@/components/Forms/QrCodePopUp'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
+import useSWR from 'swr'
 
 export default function Page() {
     const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
     const [qrPopUpRevealed, setQrPopUpRevealed] = useState<string | null>(null)
-    const [qrs, setQrs] = useState<QrType[]>([])
-    const handleRefresh = () => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/qr')
-                if (response.status === 404) {
-                    return
-                }
-                const data = await response.data
-                setQrs(data)
-            } catch (error: any) {
-                console.error('Error fetching data:', error.request.status)
-            }
-        }
 
-        fetchData()
-    }
-
-    useEffect(() => {
-        handleRefresh()
-    }, [])
+    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/qr')
 
     const onEdit = (cur: QrType) => {
         setFormRevealed(cur)
@@ -39,7 +21,6 @@ export default function Page() {
     async function onDelete(cur: QrType) {
         try {
             await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + cur.id)
-            handleRefresh()
         } catch (error: any) {
             console.error('Error deleting data:', error.request.status)
         }
@@ -51,7 +32,7 @@ export default function Page() {
             {qrPopUpRevealed !== null && (
                 <QrCodePopUp qrText={qrPopUpRevealed} abort={() => setQrPopUpRevealed(null)} />
             )}
-            {qrs.length === 0 && (
+            {data && data.length === 0 && (
                 <>
                     <div className={'h5'}></div>
                     <div className={'middleinside'}>
@@ -60,8 +41,19 @@ export default function Page() {
                     </div>
                 </>
             )}
-            {qrs.length === 0 ||
-                qrs.map((qr) => (
+            {isLoading && <p>loading...</p>}
+            {error && (
+                <>
+                    <div className={'h5'}></div>
+                    <div className={'middleinside red'}>
+                        <h3>Hupsz! Hiba csúszott a gépezetbe!</h3>
+                        <p>{error}</p>
+                    </div>
+                </>
+            )}
+            {data &&
+                data.length > 0 &&
+                data.map((qr: QrType) => (
                     <QRCard
                         handleOnQrClick={setQrPopUpRevealed}
                         key={qr.id}

@@ -18,7 +18,7 @@ export default function Cards(props: any) {
         if (!user) return
         const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/user/auth0/' + user.sub)
         console.log(response.data)
-        if (response.data !== undefined) {
+        if (response.data !== undefined && response.data !== null && response.data.id !== undefined) {
             const curdbUser = response.data
             context.setOwnUser(curdbUser)
             return

@@ -11,6 +11,8 @@ import NewTransferForm from '@/components/Forms/NewTransferForm'
 import ShortcutsPopUp from '@/components/Forms/shortcutsPopUp'
 import GlobalContext from '@/components/context/context'
 import NewQrForm from '@/components/Forms/NewQrForm'
+import { SWRConfig } from 'swr'
+import axios from 'axios'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -54,43 +56,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="hu">
             <UserProvider>
                 <GlobalContext>
-                    <body className={inter.className}>
-                        <Header />
-                        {SIMexpenseFormRevealed && (
-                            <NewSMPExpenseForm
-                                abort={() => {
-                                    setSIMExpenseFormRevealed(false)
-                                }}
-                                refresh={() => {}}
-                            />
-                        )}
-                        {ADVexpenseFormRevealed && (
-                            <NewADVExpenseForm
-                                abort={() => {
-                                    setADVExpenseFormRevealed(false)
-                                }}
-                                refresh={() => {}}
-                            />
-                        )}
-                        {tranfserFormRevealed && (
-                            <NewTransferForm
-                                abort={() => {
-                                    setTranfserFormRevealed(false)
-                                }}
-                                refresh={() => {}}
-                            />
-                        )}
-                        {qrFormRevealed && (
-                            <NewQrForm
-                                abort={() => {
-                                    setqrFormRevealed(false)
-                                }}
-                                refresh={() => {}}
-                            />
-                        )}
-                        {shortcutsPopUpRevealed && <ShortcutsPopUp />}
-                        {children}
-                    </body>
+                    <SWRConfig value={{ fetcher: (resource) => axios.get(resource).then((res) => res.data) }}>
+                        <body className={inter.className}>
+                            <Header />
+                            {SIMexpenseFormRevealed && (
+                                <NewSMPExpenseForm
+                                    abort={() => {
+                                        setSIMExpenseFormRevealed(false)
+                                    }}
+                                    refresh={() => {}}
+                                />
+                            )}
+                            {ADVexpenseFormRevealed && (
+                                <NewADVExpenseForm
+                                    abort={() => {
+                                        setADVExpenseFormRevealed(false)
+                                    }}
+                                    refresh={() => {}}
+                                />
+                            )}
+                            {tranfserFormRevealed && (
+                                <NewTransferForm
+                                    abort={() => {
+                                        setTranfserFormRevealed(false)
+                                    }}
+                                    refresh={() => {}}
+                                />
+                            )}
+                            {qrFormRevealed && (
+                                <NewQrForm
+                                    abort={() => {
+                                        setqrFormRevealed(false)
+                                    }}
+                                    refresh={() => {}}
+                                />
+                            )}
+                            {shortcutsPopUpRevealed && <ShortcutsPopUp />}
+                            {children}
+                        </body>
+                    </SWRConfig>
                 </GlobalContext>
             </UserProvider>
         </html>
