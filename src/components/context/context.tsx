@@ -1,5 +1,6 @@
+'use client'
 import { BasicUser } from '@/types/user'
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
 type GlobalContextItems = {
     ownUser: BasicUser
@@ -34,8 +35,7 @@ export default function GlobalContext({ children }: { children?: ReactNode }) {
             .then((data) => setUsers(data))
     }, [])
     return (
-        <GlobalStateContext.Provider
-            value={{ ownUser, setOwnUser, users, setUsers }}>
+        <GlobalStateContext.Provider value={{ ownUser, setOwnUser, users, setUsers }}>
             {children}
         </GlobalStateContext.Provider>
     )

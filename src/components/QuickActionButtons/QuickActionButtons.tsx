@@ -1,18 +1,45 @@
 import styles from './action.module.css'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import NewSMPExpenseForm from '@/components/Forms/NewSMPExpenseForm'
 import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
+import NewQrForm from '@/components/Forms/NewQrForm'
+import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 
 type QuickActionButtonProps = {
     revealed?: boolean[]
     refreshes?: (() => void)[]
+    isVertical?: boolean
 }
 
 export default function QuickActionButtons(props: QuickActionButtonProps) {
     const [SMPExpensePopup, setSMPExpensePopup] = useState(false)
     const [ADVExpensePopup, setADVExpensePopup] = useState(false)
     const [transferPopup, setTransferPopup] = useState(false)
+    const [qrPopup, setqrPopup] = useState(false)
+
+    const anyFormRevealed = SMPExpensePopup || ADVExpensePopup || transferPopup || qrPopup
+
+    useKeyboardShortcut(['e'], () => {
+        if (!anyFormRevealed) setSMPExpensePopup(true)
+    })
+    useKeyboardShortcut(['r'], () => {
+        if (!anyFormRevealed) setADVExpensePopup(true)
+    })
+    useKeyboardShortcut(['t'], () => {
+        if (!anyFormRevealed) setTransferPopup(true)
+    })
+
+    useKeyboardShortcut(['q'], () => {
+        if (!anyFormRevealed) setqrPopup(true)
+    })
+
+    useKeyboardShortcut(['esc'], () => {
+        setTransferPopup(false)
+        setSMPExpensePopup(false)
+        setADVExpensePopup(false)
+        setqrPopup(false)
+    })
 
     const refresh = () => {}
 
@@ -56,6 +83,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                 )}
             </div>
 
+            {/*form components*/}
             {SMPExpensePopup && (
                 <NewSMPExpenseForm
                     abort={() => setSMPExpensePopup(false)}
@@ -66,6 +94,15 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
             {ADVExpensePopup && <NewADVExpenseForm abort={() => setADVExpensePopup(false)} refresh={refresh} />}
 
             {transferPopup && <NewTransferForm abort={() => setTransferPopup(false)} refresh={refresh} />}
+
+            {qrPopup && (
+                <NewQrForm
+                    abort={() => {
+                        setqrPopup(false)
+                    }}
+                    refresh={() => {}}
+                />
+            )}
         </>
     )
 }
