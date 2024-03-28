@@ -12,7 +12,8 @@ export default function Page() {
     const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
     const [qrPopUpRevealed, setQrPopUpRevealed] = useState<string | null>(null)
 
-    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/qr')
+    const fetcher = (url: string) => axios.get(url).then((res) => res.data)
+    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/qr', fetcher)
 
     const onEdit = (cur: QrType) => {
         setFormRevealed(cur)
