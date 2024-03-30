@@ -21,9 +21,16 @@ export default function Page() {
 
     async function onDelete(cur: QrType) {
         try {
+            // @ts-ignore
+            mutate((data) => {
+                // @ts-ignore
+                return data.filter((item) => item.id !== cur.id)
+            }, false)
+
             await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + cur.id)
         } catch (error: any) {
             console.error('Error deleting data:', error.request.status)
+            mutate()
         }
     }
 
