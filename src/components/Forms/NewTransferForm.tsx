@@ -45,7 +45,7 @@ export default function NewTransferForm(props: TransferFormProps) {
             await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', data)
         }
         props.abort()
-        props.refresh()
+        //props.refresh()
     }
     const validateDate = (event: any) => {
         if (new Date(event.target.value) > new Date()) {
