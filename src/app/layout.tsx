@@ -4,13 +4,15 @@ import { Inter } from 'next/font/google'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import React from 'react'
 import GlobalContext from '@/components/context/context'
+import { Toaster } from 'react-hot-toast'
+import { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 
-/*export const metadata: Metadata = {
+export const metadata: Metadata = {
     title: 'Lepedo',
     description: 'Lepedo',
-}*/
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -20,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     {/*<SWRConfig
                         value={{ fetcher: (resource, init) => axios.get(resource, init).then((res) => res.data) }}>*/}
                     <body className={inter.className}>
+                        <Toaster />
                         <Header />
                         {children}
                     </body>

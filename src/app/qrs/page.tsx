@@ -6,6 +6,7 @@ import { QrType } from '@/types/qr'
 import QrCodePopUp from '@/components/Forms/QrCodePopUp'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import useSWR from 'swr'
+import toast from 'react-hot-toast'
 
 export default function Page() {
     //const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
@@ -63,8 +64,9 @@ export default function Page() {
                                     populateCache: true,
                                     revalidate: false,
                                 })
+                                toast('QR kód sikeresen mentve', { icon: '🎉' })
                             } catch (e) {
-                                //Toast('Hiba történt a QR kód mentése közben', 'error')
+                                toast('Hiba történt a QR kód mentése közben', { icon: '❌' })
                             }
                         }}
                         isVertical={true}
