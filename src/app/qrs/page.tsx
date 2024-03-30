@@ -13,18 +13,17 @@ export default function Page() {
     const [qrPopUpRevealed, setQrPopUpRevealed] = useState<string | null>(null)
 
     const fetcher = (url: string) => axios.get(url).then((res) => res.data)
-    const { data, error, isLoading, mutate } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/qr', fetcher)
+    const { data, error, isLoading, mutate } = useSWR<QrType[]>(process.env.NEXT_PUBLIC_BASE_URL + '/qr', fetcher)
 
     const onEdit = (cur: QrType) => {
         //setFormRevealed(cur)
     }
 
     async function onDelete(cur: QrType) {
+        if (data === undefined) return
         try {
-            // @ts-ignore
             mutate((data) => {
-                // @ts-ignore
-                return data.filter((item) => item.id !== cur.id)
+                return data!.filter((item) => item.id !== cur.id)
             }, false)
 
             await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + cur.id)
