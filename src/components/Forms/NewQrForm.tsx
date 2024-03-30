@@ -3,14 +3,13 @@ import axios from 'axios'
 import styles from './forms.module.css'
 import { User } from '@/types/user'
 import { QrType } from '@/types/qr'
-import { Simulate } from 'react-dom/test-utils'
 import { useContext } from 'react'
 import { GlobalStateContext } from '@/components/context/context'
 
 type QrFormProps = {
     qr?: QrType
     abort: () => void
-    refresh: () => void
+    refresh: (Qr: QrType) => void
 }
 type Response = {
     data: User[]
@@ -21,7 +20,7 @@ export default function NewQrForm(props: QrFormProps) {
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
         const formData = new FormData(event.target)
-        const name = formData.get('name') ?? ''
+        const name = formData.get('name')?.toString() ?? ''
         const amountValue: FormDataEntryValue | null = formData.get('amount')
         let amount = 0
         if (amountValue !== null && typeof amountValue === 'string') {
@@ -30,6 +29,7 @@ export default function NewQrForm(props: QrFormProps) {
                 amount = intValue
             }
         }
+
         const data = {
             payToId: userId,
             title: name,
@@ -40,8 +40,21 @@ export default function NewQrForm(props: QrFormProps) {
         } else {
             await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr', data)
         }
+
+        const curQR: QrType = {
+            id: props.qr ? props.qr.id : '',
+            payTo: {
+                id: userId,
+                color: 'red',
+                revTag: 'Te',
+                name: 'Te',
+            },
+            title: name,
+            amount: amount,
+        }
+
         props.abort()
-        props.refresh()
+        props.refresh(curQR)
     }
     const validateDate = (event: any) => {
         if (new Date(event.target.value) > new Date()) {

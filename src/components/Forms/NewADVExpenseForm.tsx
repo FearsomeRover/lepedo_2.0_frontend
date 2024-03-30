@@ -1,7 +1,7 @@
 'use client'
 import { useContext, useState } from 'react'
 import styles from './forms.module.css'
-import { ExpenseType } from '@/types/expenseType'
+import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { BasicUser, User } from '@/types/user'
 import { Item } from '@/types/item'
@@ -13,7 +13,7 @@ import axios from 'axios'
 
 type ExpenseFormProps = {
     abort: () => void
-    refresh: () => void
+    refresh: (Expense: BasicExpenseType) => void
     expense?: ExpenseType
 }
 type Response = {
@@ -87,7 +87,7 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
             await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', data)
         }
         props.abort()
-        props.refresh()
+        //props.refresh()
     }
     const validateDate = (event: any) => {
         /*        if (new Date(event.target.value) > new Date()) {

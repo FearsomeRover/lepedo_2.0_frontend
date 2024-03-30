@@ -8,6 +8,7 @@
 .quickactionssidebar {
     text-align: left;
     width: 200px;
+    min-height: 100%;
 }
 
 .quickactionssidebar * {

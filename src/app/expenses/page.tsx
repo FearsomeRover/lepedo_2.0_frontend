@@ -5,8 +5,8 @@ import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import { BasicUser } from '@/types/user'
 import { BasicItem } from '@/types/item'
 import SearchField from '@/components/MainSearch/SearchField'
-import QuickActionButtonSideBar from '@/components/QuickActionButtons/QuickActionButtonSideBar'
 import axios from 'axios'
+import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -144,7 +144,7 @@ export default function Page() {
                 red={expenses.length > 0 && filteredExpenses.length === 0}
             />
             <div className={'flex-row-desktop'}>
-                <QuickActionButtonSideBar revealed={[true, true, false, false]} refreshes={[handleRefresh]} />
+                <QuickActionButtons revealed={[true, true, false, false]} isVertical={true} />
                 <div className={'w100'}>
                     {filteredExpenses.length === 0 && (
                         <>

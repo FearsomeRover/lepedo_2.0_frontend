@@ -5,10 +5,16 @@ import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 import NewQrForm from '@/components/Forms/NewQrForm'
 import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
+import { QrType } from '@/types/qr'
+import { BasicExpenseType } from '@/types/expenseType'
+import { TransferType } from '@/types/transferType'
 
 type QuickActionButtonProps = {
     revealed?: boolean[]
-    refreshes?: (() => void)[]
+    SMPExpenseRefresh?: (Expense: BasicExpenseType) => void
+    ADVExpenseRefresh?: (Expense: BasicExpenseType) => void
+    TransferRefresh?: (Transfer: TransferType) => void
+    QrRefresh?: (Qr: QrType) => void
     isVertical?: boolean
 }
 
@@ -45,14 +51,14 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
 
     return (
         <>
-            <div className={styles.quickactions}>
+            <div className={props.isVertical ? styles.quickactionssidebar : styles.quickactions}>
                 {(!props.revealed || props.revealed[0]) && (
                     <button
                         className="sbtn"
                         onClick={() => {
                             setSMPExpensePopup(true)
                         }}>
-                        Új tétel felvétele
+                        + Új tétel
                     </button>
                 )}
 
@@ -62,7 +68,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                         onClick={() => {
                             setADVExpensePopup(true)
                         }}>
-                        Új számla felvétele [haladó]
+                        + Új számla
                     </button>
                 )}
 
@@ -72,13 +78,17 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                         onClick={() => {
                             setTransferPopup(true)
                         }}>
-                        Új utalás rögzítése
+                        + Új utalás
                     </button>
                 )}
 
                 {(!props.revealed || props.revealed[3]) && (
-                    <button className="sbtn" onClick={() => {}}>
-                        Új QR kód generálása
+                    <button
+                        className="sbtn"
+                        onClick={() => {
+                            setqrPopup(true)
+                        }}>
+                        + Új QR kód
                     </button>
                 )}
             </div>
@@ -87,20 +97,30 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
             {SMPExpensePopup && (
                 <NewSMPExpenseForm
                     abort={() => setSMPExpensePopup(false)}
-                    refresh={props.refreshes ? props.refreshes[0] : refresh}
+                    refresh={props.SMPExpenseRefresh ? props.SMPExpenseRefresh : refresh}
                 />
             )}
 
-            {ADVExpensePopup && <NewADVExpenseForm abort={() => setADVExpensePopup(false)} refresh={refresh} />}
+            {ADVExpensePopup && (
+                <NewADVExpenseForm
+                    abort={() => setADVExpensePopup(false)}
+                    refresh={props.ADVExpenseRefresh ? props.ADVExpenseRefresh : refresh}
+                />
+            )}
 
-            {transferPopup && <NewTransferForm abort={() => setTransferPopup(false)} refresh={refresh} />}
+            {transferPopup && (
+                <NewTransferForm
+                    abort={() => setTransferPopup(false)}
+                    refresh={props.TransferRefresh ? props.TransferRefresh : refresh}
+                />
+            )}
 
             {qrPopup && (
                 <NewQrForm
                     abort={() => {
                         setqrPopup(false)
                     }}
-                    refresh={() => {}}
+                    refresh={props.QrRefresh ? props.QrRefresh : refresh}
                 />
             )}
         </>

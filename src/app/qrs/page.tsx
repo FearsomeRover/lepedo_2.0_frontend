@@ -3,20 +3,19 @@ import QRCard from '@/components/QR/QRCard'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { QrType } from '@/types/qr'
-import NewQrForm from '@/components/Forms/NewQrForm'
 import QrCodePopUp from '@/components/Forms/QrCodePopUp'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import useSWR from 'swr'
 
 export default function Page() {
-    const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
+    //const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
     const [qrPopUpRevealed, setQrPopUpRevealed] = useState<string | null>(null)
 
     const fetcher = (url: string) => axios.get(url).then((res) => res.data)
-    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/qr', fetcher)
+    const { data, error, isLoading, mutate } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/qr', fetcher)
 
     const onEdit = (cur: QrType) => {
-        setFormRevealed(cur)
+        //setFormRevealed(cur)
     }
 
     async function onDelete(cur: QrType) {
@@ -29,7 +28,7 @@ export default function Page() {
 
     return (
         <>
-            {formRevealed && <NewQrForm abort={() => setFormRevealed(null)} refresh={() => {}} qr={formRevealed} />}
+            {/*{formRevealed && <NewQrForm abort={() => setFormRevealed(null)} refresh={() => {}} qr={formRevealed} />}*/}
             {qrPopUpRevealed !== null && (
                 <QrCodePopUp qrText={qrPopUpRevealed} abort={() => setQrPopUpRevealed(null)} />
             )}
@@ -52,17 +51,37 @@ export default function Page() {
                     </div>
                 </>
             )}
-            {data &&
-                data.length > 0 &&
-                data.map((qr: QrType) => (
-                    <QRCard
-                        handleOnQrClick={setQrPopUpRevealed}
-                        key={qr.id}
-                        qr={qr}
-                        onEdit={onEdit}
-                        onDelete={onDelete}
+            {data && data.length > 0 && (
+                <div className={'flex-row-desktop'}>
+                    <QuickActionButtons
+                        revealed={[false, false, false, true]}
+                        QrRefresh={async (newQr: QrType) => {
+                            try {
+                                await mutate([...data, newQr], {
+                                    optimisticData: [...data, newQr],
+                                    rollbackOnError: true,
+                                    populateCache: true,
+                                    revalidate: false,
+                                })
+                            } catch (e) {
+                                //Toast('Hiba történt a QR kód mentése közben', 'error')
+                            }
+                        }}
+                        isVertical={true}
                     />
-                ))}
+                    <div className={'w100'}>
+                        {data.map((qr: QrType) => (
+                            <QRCard
+                                handleOnQrClick={setQrPopUpRevealed}
+                                key={qr.id}
+                                qr={qr}
+                                onEdit={onEdit}
+                                onDelete={onDelete}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
         </>
     )
 }

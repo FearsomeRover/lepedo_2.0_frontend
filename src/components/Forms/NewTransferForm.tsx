@@ -1,18 +1,17 @@
 'use client'
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
-import UserCard from '@/components/UserCard/UserCard'
+import { useContext } from 'react'
 import styles from './forms.module.css'
 import { TransferType } from '@/types/transferType'
 import Image from 'next/image'
 import { User } from '@/types/user'
-import GlobalContext, { GlobalStateContext } from '../context/context'
+import { GlobalStateContext } from '../context/context'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 
 type TransferFormProps = {
     transfer?: TransferType
     abort: () => void
-    refresh: () => void
+    refresh: (Transfer: TransferType) => void
 }
 type Response = {
     data: User[]

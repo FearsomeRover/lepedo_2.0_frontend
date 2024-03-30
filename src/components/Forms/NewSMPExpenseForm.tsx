@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import styles from './forms.module.css'
-import { ExpenseType } from '@/types/expenseType'
+import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
 import Image from 'next/image'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { BasicUser, User } from '@/types/user'
@@ -11,7 +11,7 @@ import { Participation, ParticipationStatus } from '@/types/participation'
 
 type ExpenseFormProps = {
     abort: () => void
-    refresh: () => void
+    refresh: (Expense: BasicExpenseType) => void
     expense?: ExpenseType
 }
 type Response = {
@@ -48,20 +48,39 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             items: [
                 {
                     price: amount,
-                    name: formData.get('name') ?? 'nincs név',
+                    name: formData.get('name')?.toString() ?? 'nincs név',
                     participants: participants,
                 },
             ],
-            title: formData.get('name') ?? 'nincs név',
+            title: formData.get('name')?.toString() ?? 'nincs név',
             amount: amount,
             payerId: formData.get('payed'),
-            date: formData.get('date'),
+            date: formData.get('date')?.toString() ?? '1970-01-01',
         }
 
         await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', data)
 
+        const newBasicExpense: BasicExpenseType = {
+            id: 'NA',
+            title: data.title,
+            amount: data.amount,
+            date: data.date,
+            payer: users.filter((user) => user.id === data.payerId)[0],
+            received: selectedUsers,
+            items: [],
+            final: false,
+        }
+        for (let i = 0; i < data.items.length; i++) {
+            newBasicExpense.items.push({
+                id: 'NA',
+                name: data.items[i].name ?? 'nincs név',
+                price: data.items[i].price,
+                participated: selectedUsers,
+            })
+        }
+
+        props.refresh(newBasicExpense)
         props.abort()
-        props.refresh()
     }
     const validateDate = (event: any) => {
         if (new Date(event.target.value) > new Date()) {
