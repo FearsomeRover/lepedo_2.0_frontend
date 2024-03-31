@@ -1,0 +1,16 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\r\n.env\r\n\r\n# dependencies\r\n/node_modules\r\n/.pnp\r\n.pnp.js\r\n\r\n# testing\r\n/coverage\r\n\r\n# production\r\n/build\r\n\r\n/old_src\r\n.next\r\n# misc\r\n.DS_Store\r\n.env.local\r\n.env.development.local\r\n.env.test.local\r\n.env.production.local\r\n\r\nnpm-debug.log*\r\nyarn-debug.log*\r\nyarn-error.log*\r\n\r\nyarn.lock!/.env\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision b5c2adb21927d730569101331e15300e92099082)
++++ b/.gitignore	(date 1711901901751)
+@@ -26,3 +26,5 @@
+ yarn-error.log*
+ 
+ yarn.lock!/.env
++
++yarn.lock

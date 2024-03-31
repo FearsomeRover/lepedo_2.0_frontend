@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="keycaps in buttons">
+      <change afterPath="$PROJECT_DIR$/src/utils/postRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/validateDate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/qrs/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/qrs/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/transfers/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/transfers/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyCap/keycap.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyCap/keycap.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/QR/QRCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QR/QRCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/QuickActionButtons/action.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickActionButtons/action.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TransferCard/TransferCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TransferCard/TransferCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TransferCard/transfercard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TransferCard/transfercard.module.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="everything-into-context" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2d8iaZnAubushMkX55cI8YqSwu0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Shell Script.npm run dev.executor&quot;: &quot;Run&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Mate_web/lepedo_2.0_frontend/src/components/QuickActionButtons&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\components\QuickActionButtons" />
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\components\Forms" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\src" />
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\app\qr" />
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\app\qr\[id]" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="npm run dev" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="npm run dev" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="powershell.exe" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="error fixings" />
+      <created>1709396173798</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709396173798</updated>
+      <workItem from="1709396176450" duration="5800000" />
+      <workItem from="1709832753843" duration="339000" />
+      <workItem from="1709887927518" duration="7035000" />
+      <workItem from="1710001218339" duration="651000" />
+      <workItem from="1710002125558" duration="2776000" />
+      <workItem from="1710072595644" duration="3848000" />
+      <workItem from="1710437862085" duration="113000" />
+      <workItem from="1710781796293" duration="22000" />
+      <workItem from="1710781841736" duration="92000" />
+      <workItem from="1711543090876" duration="761000" />
+      <workItem from="1711543866423" duration="3738000" />
+      <workItem from="1711644308335" duration="2367000" />
+      <workItem from="1711799014622" duration="5159000" />
+      <workItem from="1711880199634" duration="8710000" />
+    </task>
+    <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
+      <option name="closed" value="true" />
+      <created>1709399796077</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709399796077</updated>
+    </task>
+    <task id="LOCAL-00002" summary="qr linking works">
+      <option name="closed" value="true" />
+      <created>1709401113300</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709401113300</updated>
+    </task>
+    <task id="LOCAL-00003" summary="everything but nothing">
+      <option name="closed" value="true" />
+      <created>1709401416813</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709401416813</updated>
+    </task>
+    <task id="LOCAL-00004" summary="empty state texts">
+      <option name="closed" value="true" />
+      <created>1709889256371</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709889256371</updated>
+    </task>
+    <task id="LOCAL-00005" summary="quick action buttons callback">
+      <option name="closed" value="true" />
+      <created>1709897884108</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709897884108</updated>
+    </task>
+    <task id="LOCAL-00006" summary="useOptimistic rollback">
+      <option name="closed" value="true" />
+      <created>1710076317413</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710076317413</updated>
+    </task>
+    <task id="LOCAL-00007" summary="quick action button side bar">
+      <option name="closed" value="true" />
+      <created>1710078771957</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1710078771957</updated>
+    </task>
+    <task id="LOCAL-00008" summary="swr">
+      <option name="closed" value="true" />
+      <created>1711645497213</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711645497213</updated>
+    </task>
+    <task id="LOCAL-00009" summary="moving the keyboard shortcuts from layout to actionButtons">
+      <option name="closed" value="true" />
+      <created>1711645968782</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711645968782</updated>
+    </task>
+    <task id="LOCAL-00010" summary="layout is now a server component">
+      <option name="closed" value="true" />
+      <created>1711646164330</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711646164330</updated>
+    </task>
+    <task id="LOCAL-00011" summary="optimistic update on QRs!!">
+      <option name="closed" value="true" />
+      <created>1711805062224</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1711805062224</updated>
+    </task>
+    <task id="LOCAL-00012" summary="toast">
+      <option name="closed" value="true" />
+      <created>1711805277726</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1711805277726</updated>
+    </task>
+    <task id="LOCAL-00013" summary="delete optimistic">
+      <option name="closed" value="true" />
+      <created>1711805732036</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1711805732036</updated>
+    </task>
+    <task id="LOCAL-00014" summary="now with types">
+      <option name="closed" value="true" />
+      <created>1711805950121</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1711805950121</updated>
+    </task>
+    <task id="LOCAL-00015" summary="builds i hope">
+      <option name="closed" value="true" />
+      <created>1711806045942</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1711806045942</updated>
+    </task>
+    <task id="LOCAL-00016" summary="utils moved in, fetcher refactored, pages updated">
+      <option name="closed" value="true" />
+      <created>1711881478266</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1711881478266</updated>
+    </task>
+    <task id="LOCAL-00017" summary="optimistic updates on expenses">
+      <option name="closed" value="true" />
+      <created>1711881927157</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1711881927157</updated>
+    </task>
+    <task id="LOCAL-00018" summary="dashed borders">
+      <option name="closed" value="true" />
+      <created>1711882582097</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1711882582097</updated>
+    </task>
+    <task id="LOCAL-00019" summary="transfer swr init">
+      <option name="closed" value="true" />
+      <created>1711896864377</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1711896864377</updated>
+    </task>
+    <task id="LOCAL-00020" summary="keycaps in buttons">
+      <option name="closed" value="true" />
+      <created>1711898353010</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1711898353010</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image" />
+    <MESSAGE value="qr linking works" />
+    <MESSAGE value="everything but nothing" />
+    <MESSAGE value="empty state texts" />
+    <MESSAGE value="quick action buttons callback" />
+    <MESSAGE value="useOptimistic rollback" />
+    <MESSAGE value="quick action button side bar" />
+    <MESSAGE value="swr" />
+    <MESSAGE value="moving the keyboard shortcuts from layout to actionButtons" />
+    <MESSAGE value="layout is now a server component" />
+    <MESSAGE value="optimistic update on QRs!!" />
+    <MESSAGE value="toast" />
+    <MESSAGE value="delete optimistic" />
+    <MESSAGE value="now with types" />
+    <MESSAGE value="builds i hope" />
+    <MESSAGE value="utils moved in, fetcher refactored, pages updated" />
+    <MESSAGE value="optimistic updates on expenses" />
+    <MESSAGE value="dashed borders" />
+    <MESSAGE value="transfer swr init" />
+    <MESSAGE value="keycaps in buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="keycaps in buttons" />
+  </component>
+</project>
