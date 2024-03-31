@@ -1,14 +1,14 @@
 'use client'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BasicExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import { BasicUser } from '@/types/user'
 import { BasicItem } from '@/types/item'
 import SearchField from '@/components/MainSearch/SearchField'
-import axios from 'axios'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
+import toast from 'react-hot-toast'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -91,29 +91,9 @@ export default function Page() {
     const [filterPhrase, setFilterPhrase] = useState<string>('')
 
     useEffect(() => {
-        setFilteredExpenses(expenses.filter((expense) => filter(expense, filterPhrase)))
-    }, [expenses, filterPhrase])
-
-    const handleRefresh = () => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/expense')
-                if (response.status === 404) {
-                    return
-                }
-                const data = response.data
-                setExpenses(data)
-            } catch (error: any) {
-                console.error('Error fetching data:', error.request.status)
-            }
-        }
-
-        fetchData()
-    }
-
-    useEffect(() => {
-        handleRefresh()
-    }, [])
+        if (data === undefined) return
+        setFilteredExpenses(data.filter((expense) => filter(expense, filterPhrase)))
+    }, [data, filterPhrase])
 
     const filter = (expense: BasicExpenseType, filterPhrase: string) => {
         if (filterPhrase === '') return true
@@ -128,29 +108,62 @@ export default function Page() {
             <SearchField
                 filterPhrase={filterPhrase}
                 setFilterPhrase={setFilterPhrase}
-                red={expenses.length > 0 && filteredExpenses.length === 0}
+                red={filteredExpenses.length > 0 && filteredExpenses.length === 0}
             />
-            <div className={'flex-row-desktop'}>
-                <QuickActionButtons
-                    revealed={[true, true, false, false]}
-                    isVertical={true}
-                    SMPExpenseRefresh={handleRefresh}
-                />
-                <div className={'w100'}>
-                    {filteredExpenses.length === 0 && (
-                        <>
-                            <div className={'h5'}></div>
-                            <div className={'middleinside'}>
-                                {expenses.length === 0 && <h3>Még nem veszel részt egyetlen költségben sem</h3>}
-                                {expenses.length > 0 && <h3>Nincs a keresésednek megfelelő költés :(</h3>}
-                            </div>
-                        </>
-                    )}
-                    {filteredExpenses.map((expense, index) => (
-                        <ExpenseCard key={expense.id} expense={expense} />
-                    ))}
+            {data && data.length === 0 && (
+                <>
+                    <div className={'h5'}></div>
+                    <div className={'middleinside'}>
+                        <h3>Itt fognak lakni a költéseid</h3>
+                        <QuickActionButtons revealed={[true, true, false, false]} />
+                    </div>
+                </>
+            )}
+            {isLoading && <p>loading...</p>}
+            {error && (
+                <>
+                    <div className={'h5'}></div>
+                    <div className={'middleinside red'}>
+                        <h3>Hupsz! Hiba csúszott a gépezetbe!</h3>
+                        <p>{error}</p>
+                    </div>
+                </>
+            )}
+            {data && data.length > 0 && (
+                <div className={'flex-row-desktop'}>
+                    <QuickActionButtons
+                        revealed={[true, true, false, false]}
+                        isVertical={true}
+                        SMPExpenseRefresh={async (newExpense: BasicExpenseType) => {
+                            try {
+                                await mutate([...data, newExpense], {
+                                    optimisticData: [...data, newExpense],
+                                    rollbackOnError: true,
+                                    populateCache: true,
+                                    revalidate: true,
+                                })
+                                toast('Költés sikeresen mentve', { icon: '🎉' })
+                            } catch (e) {
+                                toast('Hiba történt a költés mentése közben', { icon: '❌' })
+                            }
+                        }}
+                    />
+                    <div className={'w100'}>
+                        {filteredExpenses.length === 0 && (
+                            <>
+                                <div className={'h5'}></div>
+                                <div className={'middleinside'}>
+                                    {data.length === 0 && <h3>Még nem veszel részt egyetlen költségben sem</h3>}
+                                    {data.length > 0 && <h3>Nincs a keresésednek megfelelő költés :(</h3>}
+                                </div>
+                            </>
+                        )}
+                        {filteredExpenses.map((expense, index) => (
+                            <ExpenseCard key={expense.id} expense={expense} />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </>
     )
 }
