@@ -69,6 +69,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             received: selectedUsers,
             items: [],
             final: false,
+            optimisticPending: true,
         }
         for (let i = 0; i < dataSent.items.length; i++) {
             dataUI.items.push({
@@ -79,8 +80,8 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             })
         }
 
-        props.refresh(dataUI)
         props.abort()
+        props.refresh(dataUI)
     }
     const validateDate = (event: any) => {
         if (new Date(event.target.value) > new Date()) {

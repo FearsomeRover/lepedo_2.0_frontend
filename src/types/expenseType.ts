@@ -1,5 +1,5 @@
 import { BasicItem, Item } from './item'
-import { BasicUser, User } from './user'
+import { BasicUser } from './user'
 
 export type ExpenseType = {
     id: string
@@ -20,4 +20,5 @@ export type BasicExpenseType = {
     received: BasicUser[]
     items: BasicItem[]
     final?: boolean
+    optimisticPending?: boolean
 }

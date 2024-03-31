@@ -9,7 +9,7 @@ export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) 
     const total = expense.items.reduce((acc, item) => acc + item.price, 0)
 
     return (
-        <div className={styles.expensecard}>
+        <div className={expense.optimisticPending ? '$styles.expensecard dashed' : styles.expensecard}>
             <h4>{expense.title}</h4>
             <h6 className={'nomargin'}>{expense.date}</h6>
             <div className={styles.righttop}>

@@ -108,7 +108,7 @@ export default function Page() {
             <SearchField
                 filterPhrase={filterPhrase}
                 setFilterPhrase={setFilterPhrase}
-                red={filteredExpenses.length > 0 && filteredExpenses.length === 0}
+                red={data && filteredExpenses.length === 0}
             />
             {data && data.length === 0 && (
                 <>
