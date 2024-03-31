@@ -2,84 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import { BasicExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
-import { BasicUser } from '@/types/user'
-import { BasicItem } from '@/types/item'
 import SearchField from '@/components/MainSearch/SearchField'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
 import toast from 'react-hot-toast'
-
-const dummyUser: BasicUser = {
-    id: 'sdfffa',
-    revTag: 'rte',
-    name: 'Test User',
-    color: '#123456',
-}
-const dummyUser2: BasicUser = {
-    id: 'sdsdaafada',
-    revTag: 'rtdfe',
-    name: 'Test User2',
-    color: '#51af2d',
-}
-const dummyUser3: BasicUser = {
-    id: 'sdffwwsda',
-    revTag: 'rxte',
-    name: 'Test User3',
-    color: '#c013a4',
-}
-
-const dummyItem: BasicItem = {
-    id: 'asdf',
-    name: 'Milk',
-    price: 123,
-    participated: [dummyUser],
-}
-
-const dummyItem2: BasicItem = {
-    id: 'ww',
-    name: 'finom kaja',
-    price: 123423,
-    participated: [dummyUser2, dummyUser3, dummyUser],
-}
-
-const dummyItem3: BasicItem = {
-    id: 'wwfds',
-    name: 'kakao',
-    price: 123423,
-    participated: [dummyUser2, dummyUser3, dummyUser],
-}
-
-const dummyItem4: BasicItem = {
-    id: 'wwasd',
-    name: 'PS5',
-    price: 123423,
-    participated: [dummyUser3, dummyUser],
-}
-
-const dummyItem5: BasicItem = {
-    id: 'wwadfsafsd',
-    name: 'Katjes ofc',
-    price: 534,
-    participated: [dummyUser2, dummyUser],
-}
-
-const dummyItem6: BasicItem = {
-    id: 'Valami',
-    name: 'Valami random termek',
-    price: 123423,
-    participated: [dummyUser2, dummyUser3],
-}
-
-const dummyExpense: BasicExpenseType = {
-    id: 'adsf',
-    title: 'Shopping',
-    amount: 12343,
-    date: '2022-10-10',
-    received: [dummyUser, dummyUser2, dummyUser3],
-    payer: dummyUser,
-    items: [dummyItem, dummyItem2, dummyItem3, dummyItem4, dummyItem5, dummyItem6],
-}
 
 export default function Page() {
     const { data, error, isLoading, mutate } = useSWR<BasicExpenseType[]>(
