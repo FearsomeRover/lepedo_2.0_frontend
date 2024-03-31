@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './expensecard.module.css'
 import UsersBagde from '@/components/UserCard/UsersBadge'
-import { BasicItem, Item } from '@/types/item'
-import { formatAmount } from 'utils/formatAmount'
+import { BasicItem } from '@/types/item'
+import { formatAmount } from '@/utils/formatAmount'
 
 export default function ExpenseItemRow(item: BasicItem) {
     return (

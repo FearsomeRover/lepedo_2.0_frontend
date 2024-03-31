@@ -1,7 +1,7 @@
 'use client'
 import { QrType } from '@/types/qr'
 import styles from './qrcard.module.css'
-import { formatAmount } from '../../../utils/formatAmount'
+import { formatAmount } from '@/utils/formatAmount'
 import React from 'react'
 import ItemActionRow from '@/components/QuickActionButtons/ItemActionRow'
 import UserRelationRow from '@/components/UserCard/UserRelationRow'

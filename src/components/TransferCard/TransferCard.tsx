@@ -1,5 +1,5 @@
 import styles from './transfercard.module.css'
-import { formatAmount } from 'utils/formatAmount'
+import { formatAmount } from '@/utils/formatAmount'
 import { TransferType } from '@/types/transferType'
 import React from 'react'
 import UserRelationRow from '@/components/UserCard/UserRelationRow'

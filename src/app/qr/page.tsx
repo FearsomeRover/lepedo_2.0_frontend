@@ -1,6 +1,6 @@
 'use client'
 import { BasicUser } from '@/types/user'
-import { formatAmount } from '../../../utils/formatAmount'
+import { formatAmount } from '@/utils/formatAmount'
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSearchParams } from 'next/navigation'

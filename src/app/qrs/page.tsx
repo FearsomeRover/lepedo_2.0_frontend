@@ -68,7 +68,7 @@ export default function Page() {
                                     optimisticData: [...data, newQr],
                                     rollbackOnError: true,
                                     populateCache: true,
-                                    revalidate: false,
+                                    revalidate: true,
                                 })
                                 toast('QR kód sikeresen mentve', { icon: '🎉' })
                             } catch (e) {

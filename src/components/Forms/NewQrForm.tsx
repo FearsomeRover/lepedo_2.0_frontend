@@ -30,18 +30,12 @@ export default function NewQrForm(props: QrFormProps) {
             }
         }
 
-        const data = {
+        const dataSent = {
             payToId: userId,
             title: name,
             amount,
         }
-        if (props.qr) {
-            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + props.qr.id, data)
-        } else {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr', data)
-        }
-
-        const curQR: QrType = {
+        const dataUI: QrType = {
             id: props.qr ? props.qr.id : '',
             payTo: {
                 id: userId,
@@ -53,8 +47,14 @@ export default function NewQrForm(props: QrFormProps) {
             amount: amount,
         }
 
+        if (props.qr) {
+            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + props.qr.id, dataSent)
+        } else {
+            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr', dataSent)
+        }
+
         props.abort()
-        props.refresh(curQR)
+        props.refresh(dataUI)
     }
     const validateDate = (event: any) => {
         if (new Date(event.target.value) > new Date()) {

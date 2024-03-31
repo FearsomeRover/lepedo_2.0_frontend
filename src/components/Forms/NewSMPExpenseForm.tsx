@@ -44,7 +44,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
         })
         console.log(participants)
 
-        const data = {
+        const dataSent = {
             items: [
                 {
                     price: amount,
@@ -58,28 +58,28 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             date: formData.get('date')?.toString() ?? '1970-01-01',
         }
 
-        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', data)
+        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', dataSent)
 
-        const newBasicExpense: BasicExpenseType = {
+        const dataUI: BasicExpenseType = {
             id: 'NA',
-            title: data.title,
-            amount: data.amount,
-            date: data.date,
-            payer: users.filter((user) => user.id === data.payerId)[0],
+            title: dataSent.title,
+            amount: dataSent.amount,
+            date: dataSent.date,
+            payer: users.filter((user) => user.id === dataSent.payerId)[0],
             received: selectedUsers,
             items: [],
             final: false,
         }
-        for (let i = 0; i < data.items.length; i++) {
-            newBasicExpense.items.push({
+        for (let i = 0; i < dataSent.items.length; i++) {
+            dataUI.items.push({
                 id: 'NA',
-                name: data.items[i].name ?? 'nincs név',
-                price: data.items[i].price,
+                name: dataSent.items[i].name ?? 'nincs név',
+                price: dataSent.items[i].price,
                 participated: selectedUsers,
             })
         }
 
-        props.refresh(newBasicExpense)
+        props.refresh(dataUI)
         props.abort()
     }
     const validateDate = (event: any) => {

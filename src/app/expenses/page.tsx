@@ -7,6 +7,8 @@ import { BasicItem } from '@/types/item'
 import SearchField from '@/components/MainSearch/SearchField'
 import axios from 'axios'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
+import useSWR from 'swr'
+import { fetcher } from '@/utils/fetcher'
 
 const dummyUser: BasicUser = {
     id: 'sdfffa',
@@ -80,7 +82,10 @@ const dummyExpense: BasicExpenseType = {
 }
 
 export default function Page() {
-    const [expenses, setExpenses] = useState<BasicExpenseType[]>([])
+    const { data, error, isLoading, mutate } = useSWR<BasicExpenseType[]>(
+        process.env.NEXT_PUBLIC_BASE_URL + '/expense',
+        fetcher,
+    )
 
     const [filteredExpenses, setFilteredExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
@@ -106,24 +111,6 @@ export default function Page() {
         fetchData()
     }
 
-    /*    const submitExpenseForm = async (curnew: BasicExpenseType) => {
-        // Optimistically update the expenses state
-        setExpenses((prevExpenses) => [...prevExpenses, curnew])
-
-        try {
-            // Make the actual server call
-            const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', curnew)
-
-            // Update the expenses state with the response data
-            setExpenses((prevExpenses) => [...prevExpenses, response.data])
-        } catch (error: any) {
-            console.error('Error submitting new expense:', error)
-            // Optionally handle errors and revert the optimistic update
-            // For example:
-            // setExpenses((prevExpenses) => prevExpenses.filter((expense) => expense.id !== curnew.id));
-        }
-    }*/
-
     useEffect(() => {
         handleRefresh()
     }, [])
@@ -144,7 +131,11 @@ export default function Page() {
                 red={expenses.length > 0 && filteredExpenses.length === 0}
             />
             <div className={'flex-row-desktop'}>
-                <QuickActionButtons revealed={[true, true, false, false]} isVertical={true} />
+                <QuickActionButtons
+                    revealed={[true, true, false, false]}
+                    isVertical={true}
+                    SMPExpenseRefresh={handleRefresh}
+                />
                 <div className={'w100'}>
                     {filteredExpenses.length === 0 && (
                         <>
