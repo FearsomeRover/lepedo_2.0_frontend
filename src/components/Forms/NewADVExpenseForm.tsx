@@ -317,13 +317,13 @@ export default function NewExpenseForm(props: ExpenseFormProps) {
                                                             <td key={user.id}>
                                                                 <div className={'m4'}>
                                                                     {/*<KeyCap keya={'Ctrl'} />*/}
-                                                                    <KeyCap
-                                                                        keya={keyboardShortcuts[_index].toUpperCase()}
-                                                                    />
                                                                     <UserCardSimple
                                                                         name={user.name}
                                                                         color={user.color}
                                                                         onClick={() => {}}
+                                                                    />
+                                                                    <KeyCap
+                                                                        keya={keyboardShortcuts[_index].toUpperCase()}
                                                                     />
                                                                 </div>
                                                             </td>

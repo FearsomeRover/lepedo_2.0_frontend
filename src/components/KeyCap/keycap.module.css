@@ -1,22 +1,22 @@
 .cap {
     display: inline-block;
-    padding: 0 4px;
-    border: solid #000;
-    /*    border-width: 1px 3px 3px 1px;*/
-    border-width: 1px;
-    border-radius: 0.25em;
+    padding: 0 6px;
+    border: 1px solid #000;
+    border-radius: 4px;
     text-align: center;
-    line-height: 1.5em;
-    font-size: 0.75em;
-    margin: 0.25em;
+    font-size: 12px;
+    margin: 4px -12px 0 12px;
     background-color: #fff;
     user-select: none;
     transition: 0.3s;
+    box-sizing: content-box;
+    vertical-align: top;
+    line-height: 20px;
 }
 
 /*.cap:hover {
-    transform: translate(2px, 2px);
-    border-width: 1px;
+    border-width: 1px 1px 1px 1px;
+    transform: translate(0px, 1px);
 }*/
 
 @media (max-width: 700px) {

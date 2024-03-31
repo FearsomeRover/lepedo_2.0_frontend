@@ -56,7 +56,7 @@ export default function Page() {
             )}
             {data && data.length > 0 && (
                 <div className={'flex-row-desktop'}>
-                    <QuickActionButtons revealed={[true, true, false, false]} isVertical={true} />
+                    <QuickActionButtons revealed={[false, false, true, false]} isVertical={true} />
                     <div className={'w100'}>
                         {filteredTransfers.length === 0 && (
                             <>

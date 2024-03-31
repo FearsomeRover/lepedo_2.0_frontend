@@ -202,6 +202,7 @@ th > h5 {
     color: var(--black);
     outline: none;
     text-decoration: none;
+    vertical-align: center;
 }
 
 .sbtn:hover {

@@ -8,6 +8,7 @@ import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import { QrType } from '@/types/qr'
 import { BasicExpenseType } from '@/types/expenseType'
 import { TransferType } from '@/types/transferType'
+import KeyCap from '@/components/KeyCap/KeyCap'
 
 type QuickActionButtonProps = {
     revealed?: boolean[]
@@ -59,6 +60,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                             setSMPExpensePopup(true)
                         }}>
                         + Új tétel
+                        <KeyCap keya={'E'} />
                     </button>
                 )}
 
@@ -69,6 +71,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                             setADVExpensePopup(true)
                         }}>
                         + Új számla
+                        <KeyCap keya={'R'} />
                     </button>
                 )}
 
@@ -79,6 +82,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                             setTransferPopup(true)
                         }}>
                         + Új utalás
+                        <KeyCap keya={'T'} />
                     </button>
                 )}
 
@@ -89,6 +93,7 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
                             setqrPopup(true)
                         }}>
                         + Új QR kód
+                        <KeyCap keya={'Q'} />
                     </button>
                 )}
             </div>
