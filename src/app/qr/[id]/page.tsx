@@ -3,14 +3,12 @@ import { BasicUser } from '@/types/user'
 import { formatAmount } from '@/utils/formatAmount'
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import { useSearchParams } from 'next/navigation'
 import { QrType } from '@/types/qr'
 import UserRelationRow from '@/components/UserCard/UserRelationRow'
 import { GlobalStateContext } from '@/components/context/context'
 import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
 
-export default function Page() {
-    const searchParams = useSearchParams()
+export default function Page({ params }: { params: { id: string } }) {
     const [qr, setQr] = useState<QrType | null | undefined>(null)
     const user = useContext(GlobalStateContext).ownUser
 
@@ -24,7 +22,7 @@ export default function Page() {
     const handleRefresh = () => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + searchParams.get('id'))
+                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + params.id)
                 if (response.status === 404) {
                     setQr(undefined)
                     return
@@ -46,7 +44,7 @@ export default function Page() {
     }, [])
 
     function handleAccept() {
-        axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + searchParams.get('id') + '/accept', {})
+        axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + params + '/accept', {})
     }
 
     return (

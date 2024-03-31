@@ -12,7 +12,7 @@ export type ItemActionRowProps = {
     visible?: boolean
 }
 export default function ItemActionRow(props: ItemActionRowProps) {
-    const text = props.qr ? process.env['NEXT_PUBLIC_QR_REDIRECT_BASE_URL'] + '/qr?id=' + props.qr.id : 'na'
+    const text = props.qr ? process.env['NEXT_PUBLIC_QR_REDIRECT_BASE_URL'] + '/qr/' + props.qr.id : 'na'
 
     return (
         <div className={styles.righttop}>
