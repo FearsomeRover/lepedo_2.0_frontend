@@ -29,7 +29,20 @@ export default function Page() {
             await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + cur.id)
         } catch (error: any) {
             console.error('Error deleting data:', error.request.status)
-            mutate()
+        }
+    }
+
+    async function optimisticRefresh(newQr: QrType) {
+        try {
+            await mutate(data ? [...data, newQr] : [newQr], {
+                optimisticData: data ? [...data, newQr] : [newQr],
+                rollbackOnError: true,
+                populateCache: true,
+                revalidate: true,
+            })
+            toast('QR kód sikeresen mentve', { icon: '🎉' })
+        } catch (e) {
+            toast('Hiba történt a QR kód mentése közben', { icon: '❌' })
         }
     }
 
@@ -44,7 +57,7 @@ export default function Page() {
                     <div className={'h5'}></div>
                     <div className={'middleinside'}>
                         <h3>Itt fognak lakni a QR kódjaid</h3>
-                        <QuickActionButtons revealed={[false, false, false, true]} />
+                        <QuickActionButtons revealed={[false, false, false, true]} QrRefresh={optimisticRefresh} />
                     </div>
                 </>
             )}
@@ -62,19 +75,7 @@ export default function Page() {
                 <div className={'flex-row-desktop'}>
                     <QuickActionButtons
                         revealed={[false, false, false, true]}
-                        QrRefresh={async (newQr: QrType) => {
-                            try {
-                                await mutate([...data, newQr], {
-                                    optimisticData: [...data, newQr],
-                                    rollbackOnError: true,
-                                    populateCache: true,
-                                    revalidate: true,
-                                })
-                                toast('QR kód sikeresen mentve', { icon: '🎉' })
-                            } catch (e) {
-                                toast('Hiba történt a QR kód mentése közben', { icon: '❌' })
-                            }
-                        }}
+                        QrRefresh={optimisticRefresh}
                         isVertical={true}
                     />
                     <div className={'w100'}>

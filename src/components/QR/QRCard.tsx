@@ -17,7 +17,7 @@ export default function QRCard(props: QRCardProps) {
     const [hover, setHover] = React.useState(false)
 
     return (
-        <div className={styles.qrcard} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+        <div className={styles.qrcard} onMouseOver={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <h4>{props.qr.title}</h4>
 
             <ItemActionRow

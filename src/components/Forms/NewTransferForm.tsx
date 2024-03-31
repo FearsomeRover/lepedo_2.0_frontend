@@ -1,5 +1,4 @@
 'use client'
-import axios from 'axios'
 import { useContext } from 'react'
 import styles from './forms.module.css'
 import { TransferType } from '@/types/transferType'
@@ -7,6 +6,8 @@ import Image from 'next/image'
 import { User } from '@/types/user'
 import { GlobalStateContext } from '../context/context'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
+import axios from 'axios'
+import { validateDate } from '@/utils/validateDate'
 
 type TransferFormProps = {
     transfer?: TransferType
@@ -19,12 +20,9 @@ type Response = {
 export default function NewTransferForm(props: TransferFormProps) {
     const currentDate = new Date().toISOString().split('T')[0]
     const { users } = useContext(GlobalStateContext)
-    const handleFormSubmit = async (event: any) => {
-        event.preventDefault()
-        const formData = new FormData(event.target)
-        const name = formData.get('name') ?? ''
-        const amountValue: FormDataEntryValue | null = formData.get('amount')
-        const title = formData.get('comment') ?? ''
+
+    function extractFormData(formData: FormData) {
+        const amountValue = formData.get('amount')?.toString().toString() ?? ''
         let amount = 0
         if (amountValue !== null && typeof amountValue === 'string') {
             const intValue: number = parseInt(amountValue)
@@ -34,23 +32,31 @@ export default function NewTransferForm(props: TransferFormProps) {
         }
         const data = {
             amount,
-            title,
-            userFromId: formData.get('payed'),
-            userToId: formData.get('payedto'),
-            date: formData.get('date'),
+            title: formData.get('comment')?.toString() ?? 'untitled',
+            userFromId: formData.get('payed')?.toString() ?? '',
+            userToId: formData.get('payedto')?.toString() ?? '',
+            date: formData.get('date')?.toString() ?? '',
         }
-        if (props.transfer) {
-            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + props.transfer.id, data)
-        } else {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', data)
-        }
-        props.abort()
-        //props.refresh()
+        return data
     }
-    const validateDate = (event: any) => {
-        if (new Date(event.target.value) > new Date()) {
-            ;(event.target as HTMLInputElement).setCustomValidity('Really bro?')
+
+    const handleFormSubmit = async (event: any) => {
+        event.preventDefault()
+        const formData = new FormData(event.target)
+        const dataSent = extractFormData(formData)
+        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', dataSent)
+
+        const dataUI: TransferType = {
+            id: props.transfer ? props.transfer.id : 'a',
+            amount: dataSent.amount,
+            title: dataSent.title,
+            userFrom: users.filter((user) => user.id === dataSent.userFromId)[0],
+            userTo: users.filter((user) => user.id === dataSent.userToId)[0],
+            date: dataSent.date,
         }
+
+        props.abort()
+        props.refresh(dataUI)
     }
     return (
         <div

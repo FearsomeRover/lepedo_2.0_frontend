@@ -7,21 +7,24 @@
 
 .quickactionssidebar {
     text-align: left;
-    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
     min-height: 100%;
 }
 
 .quickactionssidebar * {
     margin: 8px;
-    margin-top: 16px;
+    margin-top: 12px;
 }
 
 @media (max-width: 700px) {
     .quickactionssidebar {
         width: 100%;
+        max-width: 100%;
+        min-width: 100%;
     }
     .quickactionssidebar button {
-        margin: 16px 0;
+        margin: 8px 0;
     }
 }
 

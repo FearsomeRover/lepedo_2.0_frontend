@@ -6,9 +6,14 @@ import TransferCard from '@/components/TransferCard/TransferCard'
 import SearchField from '@/components/MainSearch/SearchField'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
+import toast from 'react-hot-toast'
+import axios from 'axios'
 
 export default function Page() {
-    const { data, error, isLoading } = useSWR<TransferType[]>(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', fetcher)
+    const { data, error, isLoading, mutate } = useSWR<TransferType[]>(
+        process.env.NEXT_PUBLIC_BASE_URL + '/transfer',
+        fetcher,
+    )
 
     const [filteredTransfers, setFilteredTransfers] = useState<TransferType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
@@ -28,6 +33,33 @@ export default function Page() {
         return false
     }
 
+    async function optimisticRefresh(newTransfer: TransferType) {
+        try {
+            await mutate(data ? [...data, newTransfer] : [newTransfer], {
+                rollbackOnError: true,
+                populateCache: true,
+                revalidate: true,
+            })
+            toast('QR kód sikeresen mentve', { icon: '🎉' })
+        } catch (e) {
+            toast('Hiba történt a QR kód mentése közben', { icon: '❌' })
+        }
+    }
+
+    const onEdit = (cur: TransferType) => {}
+
+    async function onDelete(cur: TransferType) {
+        if (data === undefined) return
+        try {
+            mutate((data) => {
+                return data!.filter((item) => item.id !== cur.id)
+            }, false)
+            await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + cur.id)
+        } catch (error: any) {
+            console.error('Error deleting data:', error.request.status)
+        }
+    }
+
     return (
         <>
             <SearchField
@@ -40,7 +72,10 @@ export default function Page() {
                     <div className={'h5'}></div>
                     <div className={'middleinside'}>
                         <h3>Még nem veszel részt egyetlen utalásban sem</h3>
-                        <QuickActionButtons revealed={[true, true, false, false]} />
+                        <QuickActionButtons
+                            revealed={[false, false, true, false]}
+                            TransferRefresh={optimisticRefresh}
+                        />
                     </div>
                 </>
             )}
@@ -56,7 +91,11 @@ export default function Page() {
             )}
             {data && data.length > 0 && (
                 <div className={'flex-row-desktop'}>
-                    <QuickActionButtons revealed={[false, false, true, false]} isVertical={true} />
+                    <QuickActionButtons
+                        revealed={[false, false, true, false]}
+                        isVertical={true}
+                        TransferRefresh={optimisticRefresh}
+                    />
                     <div className={'w100'}>
                         {filteredTransfers.length === 0 && (
                             <>
@@ -68,7 +107,7 @@ export default function Page() {
                             </>
                         )}
                         {filteredTransfers.map((transfer, index) => (
-                            <TransferCard key={transfer.id} transfer={transfer} />
+                            <TransferCard key={transfer.id} transfer={transfer} onEdit={onEdit} onDelete={onDelete} />
                         ))}
                     </div>
                 </div>

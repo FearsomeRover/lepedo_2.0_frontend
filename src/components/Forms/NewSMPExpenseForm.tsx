@@ -8,6 +8,7 @@ import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { BasicUser, User } from '@/types/user'
 import { GlobalStateContext } from '../context/context'
 import { Participation, ParticipationStatus } from '@/types/participation'
+import { validateDate } from '@/utils/validateDate'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -23,9 +24,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
     const [searchPhrase, setSearchPhrase] = useState<string>('')
     const { users } = useContext(GlobalStateContext)
 
-    const handleFormSubmit = async (event: any) => {
-        event.preventDefault()
-        const formData = new FormData(event.target)
+    function extractFormData(formData: FormData) {
         const amountValue: FormDataEntryValue | null = formData.get('amount')
         let amount: number = 0
         if (amountValue !== null && typeof amountValue === 'string') {
@@ -57,6 +56,13 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             payerId: formData.get('payed'),
             date: formData.get('date')?.toString() ?? '1970-01-01',
         }
+        return dataSent
+    }
+
+    const handleFormSubmit = async (event: any) => {
+        event.preventDefault()
+        const formData = new FormData(event.target)
+        const dataSent = extractFormData(formData)
 
         await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', dataSent)
 
@@ -67,7 +73,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             date: dataSent.date,
             payer: users.filter((user) => user.id === dataSent.payerId)[0],
             received: selectedUsers,
-            items: [],
+            items: [], //will be added later
             final: false,
             optimisticPending: true,
         }
@@ -83,11 +89,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
         props.abort()
         props.refresh(dataUI)
     }
-    const validateDate = (event: any) => {
-        if (new Date(event.target.value) > new Date()) {
-            ;(event.target as HTMLInputElement).setCustomValidity('Really bro?')
-        }
-    }
+
     return (
         <div
             className={styles.popup}
