@@ -18,6 +18,8 @@ export default function Header() {
     const dontShowAt = ['/login', '/api/auth/login', '/qr']
     const curPathname = usePathname()
 
+    if (dontShowAt.includes(curPathname)) return null
+
     return (
         <div>
             <h1>Lepedő</h1>
@@ -26,14 +28,7 @@ export default function Header() {
                 {!dontShowAt.includes(curPathname) &&
                     headerLinks.map((link, index) => (
                         <Link key={index} href={link.address}>
-                            <h2
-                                className={
-                                    curPathname === link.address
-                                        ? 'activeheader'
-                                        : ''
-                                }>
-                                {link.title}
-                            </h2>
+                            <h2 className={curPathname === link.address ? 'activeheader' : ''}>{link.title}</h2>
                         </Link>
                     ))}
             </div>

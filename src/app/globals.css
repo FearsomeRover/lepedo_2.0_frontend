@@ -439,6 +439,7 @@ textarea {
 .spookydetails::-webkit-details-marker {
     display: none;
 }
+
 .spookydetails > summary::-webkit-details-marker {
     display: none;
 }
@@ -482,12 +483,15 @@ textarea {
     .w50-desktop {
         width: 50%;
     }
+
     .w200px-desktop {
         width: 200px;
     }
+
     .w500px-desktop {
         width: 500px;
     }
+
     .w700px-desktop {
         width: 700px;
     }
@@ -666,6 +670,10 @@ textarea {
     font-size: 36px;
 }
 
+.fs72 {
+    font-size: 72px;
+}
+
 .right {
     text-align: right;
     align-content: end;
@@ -686,12 +694,20 @@ textarea {
     vertical-align: top;
 }
 
+.centerText {
+    text-align: center;
+}
+
 .left {
     text-align: left;
 }
 
 .m20sides {
     margin: 0 20px;
+}
+
+.m36sides {
+    margin: 0 36px;
 }
 
 .m16topdown {
@@ -808,6 +824,7 @@ textarea {
         align-content: center;
     }
 }
+
 @media (max-width: 700px) {
     .flex-row-desktop button {
         margin: 8px 8px;
@@ -815,6 +832,7 @@ textarea {
         text-align: center;
     }
 }
+
 .flex-row-space-between {
     display: flex;
     flex-direction: row;
@@ -869,4 +887,25 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
     -moz-appearance: textfield;
+}
+
+.landing-page {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.herobackground {
+    padding: 0;
+    margin: 0 -20px;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+}
+
+.dots {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
 }
