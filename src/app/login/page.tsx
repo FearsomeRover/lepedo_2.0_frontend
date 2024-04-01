@@ -16,8 +16,8 @@ export default function LandingPage() {
                     <h3>
                         A folyatatáshoz bejelentkezni nem kell félnetek jó lesz ha mindenki egyetért én nem ellenzem.
                     </h3>
-                    <LinkButton href={'/'} text={'Zsatar'} textOnHover={'Leccagó'}></LinkButton>
-                    <LinkButton href={'/'} text={'Leccagó'} textOnHover={'Zsatar'}></LinkButton>
+                    <LinkButton href={'/'} text={'Zsatar'} textOnHover={'Nyomod'}></LinkButton>
+                    <LinkButton href={'/'} text={'Leccagó'} textOnHover={'Hang vagy'}></LinkButton>
                     <svg
                         className="dots"
                         id="bce54b46-d99b-406f-8462-6ee05f0f1c7f"
