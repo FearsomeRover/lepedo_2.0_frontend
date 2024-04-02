@@ -23,7 +23,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         value={{ fetcher: (resource, init) => axios.get(resource, init).then((res) => res.data) }}>*/}
                     <body className={inter.className}>
                         <Header />
-                        <Toaster />
+                        <Toaster
+                            position="bottom-right"
+                            toastOptions={{
+                                style: {
+                                    border: '2px solid black',
+                                },
+                            }}
+                        />
                         {children}
                     </body>
                     {/*</SWRConfig>*/}

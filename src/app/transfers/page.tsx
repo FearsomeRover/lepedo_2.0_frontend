@@ -6,8 +6,8 @@ import TransferCard from '@/components/TransferCard/TransferCard'
 import SearchField from '@/components/MainSearch/SearchField'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
-import toast from 'react-hot-toast'
 import axios from 'axios'
+import { createToast } from '@/utils/createToast'
 
 export default function Page() {
     const { data, error, isLoading, mutate } = useSWR<TransferType[]>(
@@ -40,9 +40,9 @@ export default function Page() {
                 populateCache: true,
                 revalidate: true,
             })
-            toast('QR kód sikeresen mentve', { icon: '🎉' })
+            createToast('Sikeres mentés', true)
         } catch (e) {
-            toast('Hiba történt a QR kód mentése közben', { icon: '❌' })
+            createToast('Nem sikerült a mentés', false)
         }
     }
 
