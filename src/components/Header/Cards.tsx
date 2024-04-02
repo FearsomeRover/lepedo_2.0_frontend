@@ -29,7 +29,11 @@ export default function Cards(props: any) {
             color: '#000000',
             auth0sub: user.sub,
         }
-        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', data)
+        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/user', data, {
+            headers: {
+                Authorization: `Bearer ${user.sub}`, // Assumes sub contains the JWT token
+            },
+        })
         if (user && user.name && curdbUser && curdbUser.id)
             context.setOwnUser({ id: curdbUser?.id, name: user.name, revTag: user.name, color: '#000000' })
 

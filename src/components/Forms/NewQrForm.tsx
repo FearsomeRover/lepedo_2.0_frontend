@@ -5,6 +5,7 @@ import { User } from '@/types/user'
 import { QrType } from '@/types/qr'
 import { useContext } from 'react'
 import { GlobalStateContext } from '@/components/context/context'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 type QrFormProps = {
     qr?: QrType
@@ -15,7 +16,9 @@ type Response = {
     data: User[]
 }
 export default function NewQrForm(props: QrFormProps) {
+    const user = useUser()
     const userId = useContext(GlobalStateContext).ownUser.id
+
     if (userId === null) return null
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
@@ -50,7 +53,11 @@ export default function NewQrForm(props: QrFormProps) {
         if (props.qr) {
             await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/qr/' + props.qr.id, dataSent)
         } else {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr', dataSent)
+            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qr', dataSent, {
+                headers: {
+                    Authorization: `Bearer ${user.user?.sub}`, // Assumes sub contains the JWT token
+                },
+            })
         }
 
         props.abort()
