@@ -16,23 +16,25 @@ export default function TransferCard(props: TransferCardProps) {
     return (
         <div className={styles.transfercard} onMouseOver={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <h4>{props.transfer.title}</h4>
-            <ItemActionRow
-                visible={hover}
-                onDelete={
-                    props.onDelete
-                        ? () => {
-                              props.onDelete!(props.transfer)
-                          }
-                        : undefined
-                }
-                onEdit={
-                    props.onDelete
-                        ? () => {
-                              props.onEdit!(props.transfer)
-                          }
-                        : undefined
-                }
-            />
+            <div className={'righttop'}>
+                <ItemActionRow
+                    visible={hover}
+                    onDelete={
+                        props.onDelete
+                            ? () => {
+                                  props.onDelete!(props.transfer)
+                              }
+                            : undefined
+                    }
+                    onEdit={
+                        props.onDelete
+                            ? () => {
+                                  props.onEdit!(props.transfer)
+                              }
+                            : undefined
+                    }
+                />
+            </div>
             <h6 className={'nomargin'}>{props.transfer.date}</h6>
             <div className={'h1'}></div>
             <p className={'fs24 nomargin w100 middleinside'}>{formatAmount(props.transfer.amount)} Ft</p>

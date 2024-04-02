@@ -12,6 +12,7 @@
     box-sizing: content-box;
     vertical-align: top;
     line-height: 20px;
+    float: right;
 }
 
 /*.cap:hover {

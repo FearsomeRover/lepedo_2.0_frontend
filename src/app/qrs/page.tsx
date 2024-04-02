@@ -9,7 +9,7 @@ import useSWR from 'swr'
 import toast from 'react-hot-toast'
 
 export default function Page() {
-    //const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
+    const [formRevealed, setFormRevealed] = useState<QrType | null>(null)
     const [qrPopUpRevealed, setQrPopUpRevealed] = useState<string | null>(null)
 
     const fetcher = (url: string) => axios.get(url).then((res) => res.data)
@@ -48,7 +48,6 @@ export default function Page() {
 
     return (
         <>
-            {/*{formRevealed && <NewQrForm abort={() => setFormRevealed(null)} refresh={() => {}} qr={formRevealed} />}*/}
             {qrPopUpRevealed !== null && (
                 <QrCodePopUp qrText={qrPopUpRevealed} abort={() => setQrPopUpRevealed(null)} />
             )}

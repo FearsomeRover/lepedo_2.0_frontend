@@ -431,6 +431,17 @@ textarea {
     flex-direction: row;
 }
 
+.righttop {
+    width: fit-content;
+    text-align: right;
+    float: right;
+    position: absolute;
+    z-index: 2;
+    right: 8px;
+    top: 8px;
+    margin: 0;
+}
+
 .headerrow {
     margin-bottom: 2rem;
     margin-top: 0;
@@ -700,6 +711,10 @@ textarea {
 
 .left {
     text-align: left;
+}
+
+.absolute {
+    position: absolute;
 }
 
 .m20sides {

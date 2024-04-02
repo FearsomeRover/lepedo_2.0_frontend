@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="keycaps in buttons">
-      <change afterPath="$PROJECT_DIR$/src/utils/postRequest.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/validateDate.ts" afterDir="false" />
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="all forms same height">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/qrs/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/qrs/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/transfers/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/transfers/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ExpenseCard/ExpenseCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ExpenseCard/ExpenseCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/KeyCap/keycap.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyCap/keycap.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/QR/QRCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QR/QRCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/QuickActionButtons/ItemActionRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickActionButtons/ItemActionRow.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/QuickActionButtons/action.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickActionButtons/action.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TransferCard/TransferCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TransferCard/TransferCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TransferCard/transfercard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TransferCard/transfercard.module.css" afterDir="false" />
@@ -55,35 +55,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Shell Script.npm run dev.executor&quot;: &quot;Run&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Mate_web/lepedo_2.0_frontend/src/components/QuickActionButtons&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Shell Script.npm run dev.executor": "Run",
+    "code.cleanup.on.save": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Mate_web/lepedo_2.0_frontend/public/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "ts.external.directory.path": "C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\public\images" />
       <recent name="C:\Mate_web\lepedo_2.0_frontend\src\components\QuickActionButtons" />
       <recent name="C:\Mate_web\lepedo_2.0_frontend\src\components\Forms" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\app\qr\[id]" />
       <recent name="C:\Mate_web\lepedo_2.0_frontend\src" />
       <recent name="C:\Mate_web\lepedo_2.0_frontend\src\app\qr" />
-      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\app\qr\[id]" />
     </key>
   </component>
   <component name="RunManager">
@@ -125,6 +126,9 @@
       <workItem from="1711644308335" duration="2367000" />
       <workItem from="1711799014622" duration="5159000" />
       <workItem from="1711880199634" duration="8710000" />
+      <workItem from="1711907346911" duration="3556000" />
+      <workItem from="1711917814737" duration="1019000" />
+      <workItem from="1711971780124" duration="11161000" />
     </task>
     <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
       <option name="closed" value="true" />
@@ -286,7 +290,63 @@
       <option name="project" value="LOCAL" />
       <updated>1711898353010</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="qr link Path Parameters">
+      <option name="closed" value="true" />
+      <created>1711907677040</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1711907677040</updated>
+    </task>
+    <task id="LOCAL-00022" summary="commit">
+      <option name="closed" value="true" />
+      <created>1711909855649</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1711909855649</updated>
+    </task>
+    <task id="LOCAL-00023" summary="avoid using layout on spec pages">
+      <option name="closed" value="true" />
+      <created>1711978171825</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1711978171825</updated>
+    </task>
+    <task id="LOCAL-00024" summary="images">
+      <option name="closed" value="true" />
+      <created>1711978178515</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1711978178515</updated>
+    </task>
+    <task id="LOCAL-00025" summary="landing page">
+      <option name="closed" value="true" />
+      <created>1711978186065</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1711978186065</updated>
+    </task>
+    <task id="LOCAL-00026" summary="useless commit">
+      <option name="closed" value="true" />
+      <created>1711978334268</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1711978334268</updated>
+    </task>
+    <task id="LOCAL-00027" summary="all forms same height">
+      <option name="closed" value="true" />
+      <created>1712046654870</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1712046654870</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,8 +364,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image" />
-    <MESSAGE value="qr linking works" />
     <MESSAGE value="everything but nothing" />
     <MESSAGE value="empty state texts" />
     <MESSAGE value="quick action buttons callback" />
@@ -324,6 +382,13 @@
     <MESSAGE value="dashed borders" />
     <MESSAGE value="transfer swr init" />
     <MESSAGE value="keycaps in buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="keycaps in buttons" />
+    <MESSAGE value="qr link Path Parameters" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="avoid using layout on spec pages" />
+    <MESSAGE value="images" />
+    <MESSAGE value="landing page" />
+    <MESSAGE value="useless commit" />
+    <MESSAGE value="all forms same height" />
+    <option name="LAST_COMMIT_MESSAGE" value="all forms same height" />
   </component>
 </project>

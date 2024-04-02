@@ -4,17 +4,25 @@ import ExpenseItemRow from '@/components/ExpenseCard/ExpenseItemRow'
 import HorizontalLine from '@/components/HorizontalLine/HorizontalLine'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
 import { formatAmount } from '@/utils/formatAmount'
+import { useState } from 'react'
+import ItemActionRow from '@/components/QuickActionButtons/ItemActionRow'
 
 export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) {
     const total = expense.items.reduce((acc, item) => acc + item.price, 0)
+    const [hover, setHover] = useState(false)
 
     return (
-        <div className={expense.optimisticPending ? '$styles.expensecard dashed' : styles.expensecard}>
+        <div
+            className={expense.optimisticPending ? '$styles.expensecard dashed' : styles.expensecard}
+            onMouseOver={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}>
             <h4>{expense.title}</h4>
             <h6 className={'nomargin'}>{expense.date}</h6>
+
             <div className={styles.righttop}>
                 <UserCardSimple name={expense.payer.name} color={expense.payer.color} onClick={() => {}} />
             </div>
+
             <div className={'h1'}></div>
             <div className={styles.itemsplayground}>
                 <table>
@@ -52,6 +60,9 @@ export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) 
                         Decline
                     </button>
                     <button className={'sbtn fs14'}>Approve</button>
+                </div>
+                <div className={'middleinside nomargin'}>
+                    <ItemActionRow visible={hover} onEdit={() => {}} onDelete={() => {}} />
                 </div>
             </div>
         </div>
