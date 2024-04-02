@@ -213,6 +213,13 @@ th > h5 {
     box-shadow: 4px 4px 4px lightgray;
 }
 
+.sbtn:active {
+    transform: translate(2px, 2px);
+    transform: scale(0.95);
+    box-shadow: 2px 2px 2px lightgray;
+    transition-duration: 0.1s;
+}
+
 /*Links*/
 button {
     background-color: transparent;
