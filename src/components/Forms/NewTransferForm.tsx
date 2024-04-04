@@ -44,7 +44,11 @@ export default function NewTransferForm(props: TransferFormProps) {
         event.preventDefault()
         const formData = new FormData(event.target)
         const dataSent = extractFormData(formData)
-        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', dataSent)
+        if (props.transfer) {
+            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + props.transfer.id, dataSent)
+        } else {
+            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', dataSent)
+        }
 
         const dataUI: TransferType = {
             id: props.transfer ? props.transfer.id : 'a',
