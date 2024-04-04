@@ -182,17 +182,15 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                             }
                                         />
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan={2}>
-                                        <div className={'w50-desktop middleself'}>
+                                    <td>
+                                        <div>
                                             <h6>Összeg</h6>
                                             <input
                                                 disabled
                                                 name="amount"
-                                                type="number"
+                                                type="text"
                                                 className={'right podkova w90'}
-                                                defaultValue={props.expense ? props.expense.amount : ''}
+                                                defaultValue={props.expense ? props.expense.amount + 'Ft' : '0 Ft'}
                                                 min={50}
                                                 max={1_000_000}
                                                 placeholder={'számított mező'}
@@ -208,7 +206,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={2}>
+                                    <td colSpan={3}>
                                         <details open={true}>
                                             <summary className={'left'}>
                                                 <h6 className={'inline-block'}>Barátok hozzáadása</h6>
@@ -250,7 +248,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={2}>
+                                    <td colSpan={3}>
                                         <details>
                                             <summary className={'left'}>
                                                 <h6 className={'inline-block'}>Ismeretlen résztvevők hozzáadása</h6>
@@ -293,7 +291,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={2}>
+                                    <td colSpan={3}>
                                         <h6 className={'w100 left'}>
                                             Tételek{' '}
                                             <button type={'button'} onClick={addItem}>
