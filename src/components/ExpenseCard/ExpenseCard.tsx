@@ -7,7 +7,13 @@ import { formatAmount } from '@/utils/formatAmount'
 import { useState } from 'react'
 import ItemActionRow from '@/components/QuickActionButtons/ItemActionRow'
 
-export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) {
+type ExpenseCardProps = {
+    expense: BasicExpenseType
+    onEdit?: (cur: BasicExpenseType) => void
+    onDelete?: (cur: BasicExpenseType) => void
+}
+
+export default function ExpenseCard({ expense, onEdit, onDelete }: ExpenseCardProps) {
     const total = expense.items.reduce((acc, item) => acc + item.price, 0)
     const [hover, setHover] = useState(false)
 
@@ -52,8 +58,8 @@ export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) 
                 <p className={'right fs18'}>{formatAmount(total)} Ft</p>
             </div>
 
-            {/*todo if not participation status is none*/}
             <div>
+                {/*todo if not participation status is none*/}
                 <HorizontalLine />
                 <div className={'flex-row-space-around nomargininside'}>
                     <button className={'sbtn fs14'} style={{ marginRight: '16px' }}>
@@ -61,8 +67,13 @@ export default function ExpenseCard({ expense }: { expense: BasicExpenseType }) 
                     </button>
                     <button className={'sbtn fs14'}>Approve</button>
                 </div>
+                {/*todo set visible if is owner*/}
                 <div className={'middleinside nomargin'}>
-                    <ItemActionRow visible={hover} onEdit={() => {}} onDelete={() => {}} />
+                    <ItemActionRow
+                        visible={hover}
+                        onEdit={onEdit ? () => onEdit(expense) : undefined}
+                        onDelete={onDelete ? () => onDelete(expense) : undefined}
+                    />
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ type Response = {
 
 const keyboardShortcuts = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
 
-export default function NewExpenseForm(props: ExpenseFormProps) {
+export default function NewADVExpenseForm(props: ExpenseFormProps) {
     const currentDate = new Date().toISOString().split('T')[0]
     const [selectedUsers, setSelectedUsers] = useState<BasicUser[]>([])
     const [searchPhraseForFriends, setSearchPhraseForFriends] = useState<string>('')

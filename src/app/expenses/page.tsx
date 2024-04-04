@@ -1,15 +1,15 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { BasicExpenseType } from '@/types/expenseType'
+import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
 import ExpenseCard from '@/components/ExpenseCard/ExpenseCard'
 import SearchField from '@/components/MainSearch/SearchField'
 import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButtons'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
-import toast from 'react-hot-toast'
-import { TransferType } from '@/types/transferType'
 import axios from 'axios'
 import { filter } from '@/utils/filter'
+import { createToast } from '@/utils/createToast'
+import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
 
 export default function Page() {
     const { data, error, isLoading, mutate } = useSWR<BasicExpenseType[]>(
@@ -19,26 +19,37 @@ export default function Page() {
 
     const [filteredExpenses, setFilteredExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
+    const [editedExpense, setEditedExpense] = useState<ExpenseType | null>(null)
 
     useEffect(() => {
         if (data === undefined) return
         setFilteredExpenses(data.filter((expense) => filter(expense, filterPhrase)))
     }, [data, filterPhrase])
 
-    async function onDelete(cur: TransferType) {
+    const onEdit = async (cur: BasicExpenseType) => {
+        const expense: ExpenseType = await axios
+            .get(process.env.NEXT_PUBLIC_BASE_URL + '/expense/' + cur.id)
+            .then((res) => res.data)
+        setEditedExpense(expense)
+    }
+
+    async function onDelete(cur: BasicExpenseType) {
         if (data === undefined) return
         try {
             mutate((data) => {
                 return data!.filter((item) => item.id !== cur.id)
             }, false)
-            await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + cur.id)
+            await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/expense/' + cur.id)
         } catch (error: any) {
-            console.error('Error deleting data:', error.request.status)
+            createToast('Nem sikerült törölni a költést', false)
         }
     }
 
     return (
         <>
+            {editedExpense && (
+                <NewADVExpenseForm expense={editedExpense} abort={() => setEditedExpense(null)} refresh={() => {}} />
+            )}
             <SearchField
                 filterPhrase={filterPhrase}
                 setFilterPhrase={setFilterPhrase}
@@ -68,7 +79,7 @@ export default function Page() {
                     <QuickActionButtons
                         revealed={[true, true, false, false]}
                         isVertical={true}
-                        SMPExpenseRefresh={async (newExpense: BasicExpenseType) => {
+                        ExpenseRefresh={async (newExpense: BasicExpenseType) => {
                             try {
                                 await mutate([...data, newExpense], {
                                     optimisticData: [...data, newExpense],
@@ -76,9 +87,9 @@ export default function Page() {
                                     populateCache: true,
                                     revalidate: true,
                                 })
-                                toast('Költés sikeresen mentve', { icon: '🎉' })
+                                createToast('Költség sikeresen hozzáadva', true)
                             } catch (e) {
-                                toast('Hiba történt a költés mentése közben', { icon: '❌' })
+                                createToast('Nem sikerült elmenteni a költést', false)
                             }
                         }}
                     />
@@ -93,7 +104,7 @@ export default function Page() {
                             </>
                         )}
                         {filteredExpenses.map((expense, index) => (
-                            <ExpenseCard key={expense.id} expense={expense} />
+                            <ExpenseCard key={expense.id} expense={expense} onEdit={onEdit} onDelete={onDelete} />
                         ))}
                     </div>
                 </div>

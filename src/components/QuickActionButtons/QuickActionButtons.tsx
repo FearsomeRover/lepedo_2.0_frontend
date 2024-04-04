@@ -12,8 +12,7 @@ import KeyCap from '@/components/KeyCap/KeyCap'
 
 type QuickActionButtonProps = {
     revealed?: boolean[]
-    SMPExpenseRefresh?: (Expense: BasicExpenseType) => void
-    ADVExpenseRefresh?: (Expense: BasicExpenseType) => void
+    ExpenseRefresh?: (Expense: BasicExpenseType) => void
     TransferRefresh?: (Transfer: TransferType) => void
     QrRefresh?: (Qr: QrType) => void
     isVertical?: boolean
@@ -108,14 +107,14 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
             {SMPExpensePopup && (
                 <NewSMPExpenseForm
                     abort={() => setSMPExpensePopup(false)}
-                    refresh={props.SMPExpenseRefresh ? props.SMPExpenseRefresh : refresh}
+                    refresh={props.ExpenseRefresh ? props.ExpenseRefresh : refresh}
                 />
             )}
 
             {ADVExpensePopup && (
                 <NewADVExpenseForm
                     abort={() => setADVExpensePopup(false)}
-                    refresh={props.ADVExpenseRefresh ? props.ADVExpenseRefresh : refresh}
+                    refresh={props.ExpenseRefresh ? props.ExpenseRefresh : refresh}
                 />
             )}
 
