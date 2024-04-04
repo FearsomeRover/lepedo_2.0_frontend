@@ -9,6 +9,7 @@ import { fetcher } from '@/utils/fetcher'
 import axios from 'axios'
 import { createToast } from '@/utils/createToast'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
+import { filter } from '@/utils/filter'
 
 export default function Page() {
     const { data, error, isLoading, mutate } = useSWR<TransferType[]>(
@@ -25,18 +26,9 @@ export default function Page() {
         setFilteredTransfers(data.filter((transfer) => filter(transfer, filterPhrase)))
     }, [data, filterPhrase])
 
-    const filter = (transfer: TransferType, filterPhrase: string) => {
-        if (filterPhrase === '') return true
-        if (transfer.title.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (transfer.userFrom.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (transfer.userTo.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (transfer.date && transfer.date.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (transfer.amount.toString().toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        return false
-    }
-
     async function optimisticRefresh(newTransfer: TransferType) {
         try {
+            if (data === undefined) return
             await mutate(data ? [...data, newTransfer] : [newTransfer], {
                 rollbackOnError: true,
                 populateCache: true,

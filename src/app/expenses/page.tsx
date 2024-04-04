@@ -7,6 +7,9 @@ import QuickActionButtons from '@/components/QuickActionButtons/QuickActionButto
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
 import toast from 'react-hot-toast'
+import { TransferType } from '@/types/transferType'
+import axios from 'axios'
+import { filter } from '@/utils/filter'
 
 export default function Page() {
     const { data, error, isLoading, mutate } = useSWR<BasicExpenseType[]>(
@@ -22,12 +25,16 @@ export default function Page() {
         setFilteredExpenses(data.filter((expense) => filter(expense, filterPhrase)))
     }, [data, filterPhrase])
 
-    const filter = (expense: BasicExpenseType, filterPhrase: string) => {
-        if (filterPhrase === '') return true
-        if (expense.title.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (expense.payer.name.toLowerCase().includes(filterPhrase.toLowerCase())) return true
-        if (expense.items.some((item) => item.name.toLowerCase().includes(filterPhrase.toLowerCase()))) return true
-        return false
+    async function onDelete(cur: TransferType) {
+        if (data === undefined) return
+        try {
+            mutate((data) => {
+                return data!.filter((item) => item.id !== cur.id)
+            }, false)
+            await axios.delete(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + cur.id)
+        } catch (error: any) {
+            console.error('Error deleting data:', error.request.status)
+        }
     }
 
     return (
