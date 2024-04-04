@@ -48,6 +48,12 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
         setqrPopup(false)
     })
 
+    /*    useEffect(() => {
+        setADVExpensePopup(props.editedExpense !== undefined && typeof props.editedExpense !== null)
+        setTransferPopup(props.editedTransfer !== undefined && typeof props.editedTransfer !== null)
+        setqrPopup(props.editedQr !== undefined && typeof props.editedQr !== null)
+    }, [props.editedExpense, props.editedTransfer, props.editedQr])*/
+
     const refresh = () => {}
 
     return (

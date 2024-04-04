@@ -8,6 +8,7 @@ import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
 import axios from 'axios'
 import { createToast } from '@/utils/createToast'
+import NewTransferForm from '@/components/Forms/NewTransferForm'
 
 export default function Page() {
     const { data, error, isLoading, mutate } = useSWR<TransferType[]>(
@@ -17,6 +18,7 @@ export default function Page() {
 
     const [filteredTransfers, setFilteredTransfers] = useState<TransferType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
+    const [editedTransfer, setEditedTransfer] = useState<TransferType | null>(null)
 
     useEffect(() => {
         if (data === undefined) return
@@ -42,11 +44,13 @@ export default function Page() {
             })
             createToast('Sikeres mentés', true)
         } catch (e) {
-            createToast('Nem sikerült a mentés', false)
+            createToast('Sikertelen mentés', false)
         }
     }
 
-    const onEdit = (cur: TransferType) => {}
+    const onEdit = (cur: TransferType) => {
+        setEditedTransfer(cur)
+    }
 
     async function onDelete(cur: TransferType) {
         if (data === undefined) return
@@ -62,6 +66,13 @@ export default function Page() {
 
     return (
         <>
+            {editedTransfer && (
+                <NewTransferForm
+                    abort={() => setEditedTransfer(null)}
+                    refresh={optimisticRefresh}
+                    transfer={editedTransfer || undefined}
+                />
+            )}
             <SearchField
                 filterPhrase={filterPhrase}
                 setFilterPhrase={setFilterPhrase}
@@ -101,8 +112,8 @@ export default function Page() {
                             <>
                                 <div className={'h5'}></div>
                                 <div className={'middleinside'}>
-                                    {data.length === 0 && <h3>Még nem veszel részt egyetlen költségben sem</h3>}
-                                    {data.length > 0 && <h3>Nincs a keresésednek megfelelő költés :(</h3>}
+                                    {data.length === 0 && <h3>Még nem veszel részt egyetlen utalas sem</h3>}
+                                    {data.length > 0 && <h3>Nincs a keresésednek megfelelő utalas :(</h3>}
                                 </div>
                             </>
                         )}
