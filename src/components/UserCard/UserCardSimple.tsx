@@ -38,6 +38,16 @@ export default function UserCardSimple(simple: SimpleUserProps) {
     const handleMouseLeave = () => {
         setIsHovered(false)
     }
+
+    const isDarkColor = (color: string) => {
+        const hex = color.replace('#', '')
+        const r = parseInt(hex.substring(0, 2), 16)
+        const g = parseInt(hex.substring(2, 4), 16)
+        const b = parseInt(hex.substring(4, 6), 16)
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000
+        return brightness < 75
+    }
+
     return (
         <div
             style={{ minWidth: Math.max(nameWidth, revTagWidth) }}
@@ -48,7 +58,13 @@ export default function UserCardSimple(simple: SimpleUserProps) {
                 <div
                     ref={revTagRef}
                     style={{ backgroundColor: simple.color }}
-                    className={simple.isSelected ? 'usertag unselectable outlined ' : 'usertag unselectable'}
+                    className={
+                        simple.isSelected
+                            ? isDarkColor(simple.color)
+                                ? 'usertag unselectable lightoutlined'
+                                : 'usertag unselectable outlined '
+                            : 'usertag unselectable'
+                    }
                     onClick={simple.onClick ? simple.onClick : () => {}}>
                     @{simple.revTag}
                 </div>
@@ -56,7 +72,13 @@ export default function UserCardSimple(simple: SimpleUserProps) {
                 <div
                     ref={nameRef}
                     style={{ backgroundColor: simple.color }}
-                    className={simple.isSelected ? 'usertag unselectable outlined ' : 'usertag unselectable'}
+                    className={
+                        simple.isSelected
+                            ? isDarkColor(simple.color)
+                                ? 'usertag unselectable lightoutlined'
+                                : 'usertag unselectable outlined '
+                            : 'usertag unselectable'
+                    }
                     onClick={simple.onClick ? simple.onClick : () => {}}>
                     {simple.name === '' ? '-' : simple.name}
                 </div>

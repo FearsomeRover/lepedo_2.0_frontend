@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="adv expense tick form recreated">
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="auto width table looks much better">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/forms.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/forms.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UserCard/UserCardSimple.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserCard/UserCardSimple.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UserCard/usercard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserCard/usercard.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +125,7 @@
       <workItem from="1711971780124" duration="15601000" />
       <workItem from="1712246606812" duration="6304000" />
       <workItem from="1712258133708" duration="8000" />
-      <workItem from="1713357135271" duration="4226000" />
+      <workItem from="1713357135271" duration="4720000" />
     </task>
     <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
       <option name="closed" value="true" />
@@ -421,7 +423,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713360916372</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="auto width table looks much better">
+      <option name="closed" value="true" />
+      <created>1713361424066</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1713361424066</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,7 +449,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="delete optimistic" />
     <MESSAGE value="now with types" />
     <MESSAGE value="builds i hope" />
     <MESSAGE value="utils moved in, fetcher refactored, pages updated" />
@@ -464,6 +473,7 @@
     <MESSAGE value="ADVform updates" />
     <MESSAGE value="flexrow on top" />
     <MESSAGE value="adv expense tick form recreated" />
-    <option name="LAST_COMMIT_MESSAGE" value="adv expense tick form recreated" />
+    <MESSAGE value="auto width table looks much better" />
+    <option name="LAST_COMMIT_MESSAGE" value="auto width table looks much better" />
   </component>
 </project>

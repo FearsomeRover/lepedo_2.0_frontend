@@ -291,7 +291,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                             id={_index.toString()}
                                                             className={selectedItem === _index ? 'highlight' : ''}>
                                                             <td className={'w200px inline-block'}>
-                                                                <div className={'flex-row-space-between'}>
+                                                                <div className={'flex-row-space-between m8right'}>
                                                                     <input
                                                                         type={'text'}
                                                                         className={'searchinput left m8right'}
