@@ -274,8 +274,8 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                 <div className={'m4 inline-block overflow-hidden'}>
                                                                     <UserCardSimple
                                                                         name={
-                                                                            user.name.length > 8
-                                                                                ? user.name.slice(0, 6) + '...'
+                                                                            user.name.length > 12
+                                                                                ? user.name.slice(0, 10) + '...'
                                                                                 : user.name
                                                                         }
                                                                         color={user.color}
@@ -326,76 +326,49 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                             </td>
                                                             {selectedUsers.map((user) => (
                                                                 <td key={user.id} className={''}>
-                                                                    <div
-                                                                        className={
-                                                                            item.participations.some(
-                                                                                (p) => p.userId === user.id,
-                                                                            )
-                                                                                ? styles.checkbigboxselected
-                                                                                : styles.checkbigbox
-                                                                        }
-                                                                        onClick={() => toggleParticipation(item, user)}>
-                                                                        <label htmlFor={user.id + '/' + item.id}>
-                                                                            {item.participations.some(
-                                                                                (p) => p.userId === user.id,
-                                                                            ) ? (
-                                                                                <div
-                                                                                    className={
-                                                                                        'flex-row-space-between p48'
-                                                                                    }>
-                                                                                    <input
-                                                                                        type={'number'}
-                                                                                        value={
-                                                                                            item.participations.find(
-                                                                                                (p) =>
-                                                                                                    p.userId ===
-                                                                                                    user.id,
-                                                                                            )?.amount
-                                                                                        }
-                                                                                        onClick={(e) =>
-                                                                                            e.stopPropagation()
-                                                                                        }
-                                                                                        onChange={(e) => {
-                                                                                            const newValue = parseInt(
-                                                                                                e.target.value,
-                                                                                            )
-                                                                                            if (!isNaN(newValue)) {
-                                                                                                const updatedItems = [
-                                                                                                    ...items,
-                                                                                                ]
-                                                                                                const itemIndex =
-                                                                                                    updatedItems.findIndex(
-                                                                                                        (i) =>
-                                                                                                            i.id ===
-                                                                                                            item.id,
-                                                                                                    )
-                                                                                                if (itemIndex !== -1) {
-                                                                                                    updatedItems[
-                                                                                                        itemIndex
-                                                                                                    ].participations.find(
-                                                                                                        (p) =>
-                                                                                                            p.userId ===
-                                                                                                            user.id,
-                                                                                                    )!.amount = newValue
-                                                                                                    setItems(
-                                                                                                        updatedItems,
-                                                                                                    )
-                                                                                                }
-                                                                                            }
-                                                                                        }}
-                                                                                        contentEditable={true}
-                                                                                        className={'right podkova'}
-                                                                                    />{' '}
-                                                                                    <span
-                                                                                        className={styles.currencytext}>
-                                                                                        Ft
-                                                                                    </span>
-                                                                                </div>
-                                                                            ) : (
-                                                                                <></>
-                                                                            )}
-                                                                        </label>
-                                                                    </div>
+                                                                    {item.participations.some(
+                                                                        (p) => p.userId === user.id,
+                                                                    ) ? (
+                                                                        <div
+                                                                            className={styles.checkbigboxselected}
+                                                                            onClick={() =>
+                                                                                toggleParticipation(item, user)
+                                                                            }>
+                                                                            <div className={'flex-row-space-between'}>
+                                                                                <input
+                                                                                    type={'number'}
+                                                                                    value={
+                                                                                        item.participations.find(
+                                                                                            (p) => p.userId === user.id,
+                                                                                        )?.amount
+                                                                                    }
+                                                                                    onClick={(e) => e.stopPropagation()}
+                                                                                    onChange={(e) => {
+                                                                                        const newValue = parseInt(
+                                                                                            e.target.value,
+                                                                                        )
+                                                                                        if (isNaN(newValue)) return
+                                                                                        updateParticipation(
+                                                                                            item,
+                                                                                            user,
+                                                                                            newValue,
+                                                                                        )
+                                                                                    }}
+                                                                                    contentEditable={true}
+                                                                                    className={'right podkova'}
+                                                                                />{' '}
+                                                                                <span className={styles.currencytext}>
+                                                                                    Ft
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div
+                                                                            className={styles.checkbigbox}
+                                                                            onClick={() =>
+                                                                                toggleParticipation(item, user)
+                                                                            }></div>
+                                                                    )}
                                                                 </td>
                                                             ))}
                                                         </tr>

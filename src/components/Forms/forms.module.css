@@ -87,13 +87,16 @@
     width: 120px;
     height: 40px;
     box-sizing: border-box;
-    box-shadow: 0px 0px 2px 2px rgba(255, 0, 0, 0.2) inset;
+    border: 1px dashed gray;
+    margin: 2px;
 }
 .checkbigboxselected {
     display: inline-block;
     width: 120px;
     height: 40px;
-    box-shadow: 0px 0px 2px 2px rgba(0, 255, 0, 0.4) inset;
+    border: 1px solid black;
+    margin: 2px;
+    padding: 0 8px;
 }
 
 .payed {
@@ -156,8 +159,8 @@
 }
 
 .itemtable {
-    width: unset;
-    min-width: 100%;
+    width: auto;
+    max-width: 100%;
 }
 
 .itemtable input {
