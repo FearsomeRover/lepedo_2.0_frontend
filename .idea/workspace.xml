@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="ADVform updates">
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="flexrow on top">
+      <change afterPath="$PROJECT_DIR$/src/components/playrounds/UserPlayground.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/lepedo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/lepedo.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/forms.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/forms.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -124,7 +125,7 @@
       <workItem from="1711971780124" duration="15601000" />
       <workItem from="1712246606812" duration="6304000" />
       <workItem from="1712258133708" duration="8000" />
-      <workItem from="1713357135271" duration="685000" />
+      <workItem from="1713357135271" duration="3731000" />
     </task>
     <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
       <option name="closed" value="true" />
@@ -406,7 +407,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712251756888</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="flexrow on top">
+      <option name="closed" value="true" />
+      <created>1713358017099</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1713358017099</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +433,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="optimistic update on QRs!!" />
     <MESSAGE value="toast" />
     <MESSAGE value="delete optimistic" />
     <MESSAGE value="now with types" />
@@ -449,6 +457,7 @@
     <MESSAGE value="transferForm HTTP patch if edit" />
     <MESSAGE value="edit Expenses, but not works" />
     <MESSAGE value="ADVform updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADVform updates" />
+    <MESSAGE value="flexrow on top" />
+    <option name="LAST_COMMIT_MESSAGE" value="flexrow on top" />
   </component>
 </project>

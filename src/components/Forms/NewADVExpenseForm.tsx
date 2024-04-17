@@ -7,9 +7,9 @@ import { BasicUser, User } from '@/types/user'
 import { Item } from '@/types/item'
 import { GlobalStateContext } from '../context/context'
 import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
-import KeyCap from '@/components/KeyCap/KeyCap'
 import { Participation, ParticipationStatus } from '@/types/participation'
 import axios from 'axios'
+import UserPlayground from '@/components/playrounds/UserPlayground'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -58,7 +58,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
 
     useKeyboardShortcut(keyboardShortcuts, (index) => {
         if (selectedItem !== -1 && index !== undefined && index > -1 && selectedUsers[index] !== undefined) {
-            updateItemParticipation(items[selectedItem], selectedUsers[index])
+            toggleParticipation(items[selectedItem], selectedUsers[index])
         }
     })
 
@@ -124,7 +124,11 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
         })
     }
 
-    const updateItemParticipation = (item: Item, user: BasicUser) => {
+    const updateParticipation = (item: Item, user: BasicUser, amount: number) => {
+        item.participations.find((p) => p.userId === user.id)!.amount = amount
+    }
+
+    const toggleParticipation = (item: Item, user: BasicUser) => {
         const updatedParticipations = item.participations.slice() // create a copy of participations array
         const participationIndex = updatedParticipations.findIndex((p) => p.userId === user.id)
 
@@ -150,7 +154,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 if (event.target === event.currentTarget) props.abort()
             }}>
             {users ? (
-                <form onSubmit={handleFormSubmit} className={`w700px-desktop ${styles.popupform} `}>
+                <form onSubmit={handleFormSubmit} className={`w700px-desktop ${styles.popupform} ${styles.wideform} `}>
                     <div>
                         <div className={'middleinside m16topdown'}>
                             <h2>Új számla hozzáadása</h2>
@@ -215,39 +219,17 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                             <summary className={'left'}>
                                                 <h6 className={'inline-block'}>Barátok hozzáadása</h6>
                                             </summary>
-                                            <input
-                                                className={'w50-desktop floatright right     searchinput'}
-                                                type="text"
-                                                placeholder="Keresés..."
-                                                onChange={(s) => setSearchPhraseForFriends(s.target.value)}
-                                            />
-                                            <div className={styles.userbucket}>
-                                                {users
-                                                    .filter((user) =>
-                                                        user.name
-                                                            .toLowerCase()
-                                                            .includes(searchPhraseForFriends.toLowerCase()),
+                                            <UserPlayground
+                                                selectedUsers={selectedUsers}
+                                                users={users}
+                                                onClickCallback={(user) =>
+                                                    setSelectedUsers((prevSelectedUsers) =>
+                                                        prevSelectedUsers.includes(user)
+                                                            ? prevSelectedUsers.filter((u) => u !== user)
+                                                            : [...prevSelectedUsers, user],
                                                     )
-                                                    .map((user) => (
-                                                        <div key={user.id} className={'inline-block m4top m4right'}>
-                                                            <UserCardSimple
-                                                                name={user.name}
-                                                                color={user.color}
-                                                                revTag={user.revTag}
-                                                                isSelected={selectedUsers.includes(user)}
-                                                                onClick={() => {
-                                                                    setSelectedUsers((prevSelectedUsers) =>
-                                                                        prevSelectedUsers.includes(user)
-                                                                            ? prevSelectedUsers.filter(
-                                                                                  (u) => u !== user,
-                                                                              )
-                                                                            : [...prevSelectedUsers, user],
-                                                                    )
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    ))}
-                                            </div>
+                                                }
+                                            />
                                         </details>
                                     </td>
                                 </tr>
@@ -257,76 +239,47 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                             <summary className={'left'}>
                                                 <h6 className={'inline-block'}>Ismeretlen résztvevők hozzáadása</h6>
                                             </summary>
-                                            <input
-                                                className={'w50-desktop floatright right searchinput'}
-                                                type="text"
-                                                placeholder="Keresés..."
-                                                onChange={(s) => setSearchPhraseForAll(s.target.value)}
-                                            />
-                                            <div className={styles.userbucket}>
-                                                {users
-                                                    .filter((user) =>
-                                                        user.name
-                                                            .toLowerCase()
-                                                            .includes(searchPhraseForAll.toLowerCase()),
+                                            <UserPlayground
+                                                selectedUsers={selectedUsers}
+                                                users={users}
+                                                onClickCallback={(user) =>
+                                                    setSelectedUsers((prevSelectedUsers) =>
+                                                        prevSelectedUsers.includes(user)
+                                                            ? prevSelectedUsers.filter((u) => u !== user)
+                                                            : [...prevSelectedUsers, user],
                                                     )
-                                                    .map((user) => (
-                                                        <div key={user.id} className={'inline-block m4top m4right'}>
-                                                            <UserCardSimple
-                                                                name={user.name}
-                                                                color={user.color}
-                                                                revTag={user.revTag}
-                                                                isSelected={selectedUsers.includes(user)}
-                                                                isHoverable={false}
-                                                                onClick={() => {
-                                                                    setSelectedUsers((prevSelectedUsers) =>
-                                                                        prevSelectedUsers.includes(user)
-                                                                            ? prevSelectedUsers.filter(
-                                                                                  (u) => u !== user,
-                                                                              )
-                                                                            : [...prevSelectedUsers, user],
-                                                                    )
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    ))}
-                                            </div>
+                                                }
+                                            />
                                         </details>
                                     </td>
                                 </tr>
                                 <div className={'h3'}></div>
                                 <tr>
                                     <td>
-                                        <h6 className={'w100 left'}>
-                                            Tételek{' '}
-                                            <button type={'button'} onClick={addItem}>
-                                                Új tétel
-                                            </button>
-                                        </h6>
-                                        <div className={'w100 left m8top'}></div>
+                                        <h6 className={'m16topdown'}>Tételek</h6>
                                         <div className={styles.itemtablecontainer}>
                                             <table className={styles.itemtable}>
                                                 <tbody>
                                                     <tr>
                                                         <td className={'w200px-desktop'}>
-                                                            {/*                                                        <button
-                                                            className={'sbtn nomargin p48 w100'}
-                                                            type={'button'}
-                                                            onClick={addItem}>
-                                                            +
-                                                        </button>*/}
+                                                            <button
+                                                                className={'sbtn nomargin p48 w100 nomargin'}
+                                                                type={'button'}
+                                                                onClick={addItem}>
+                                                                + Tétel
+                                                            </button>
                                                         </td>
                                                         {selectedUsers.map((user, _index) => (
-                                                            <td key={user.id}>
-                                                                <div className={'m4'}>
-                                                                    {/*<KeyCap keya={'Ctrl'} />*/}
+                                                            <td key={user.id} className={'wfitcontent'}>
+                                                                <div className={'m4 inline-block overflow-hidden'}>
                                                                     <UserCardSimple
-                                                                        name={user.name}
+                                                                        name={
+                                                                            user.name.length > 8
+                                                                                ? user.name.slice(0, 6) + '...'
+                                                                                : user.name
+                                                                        }
                                                                         color={user.color}
                                                                         onClick={() => {}}
-                                                                    />
-                                                                    <KeyCap
-                                                                        keya={keyboardShortcuts[_index].toUpperCase()}
                                                                     />
                                                                 </div>
                                                             </td>
@@ -337,7 +290,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                             key={item.id}
                                                             id={_index.toString()}
                                                             className={selectedItem === _index ? 'highlight' : ''}>
-                                                            <td className={'p8right w300px inline-block'}>
+                                                            <td className={'w200px inline-block'}>
                                                                 <div className={'flex-row-space-between'}>
                                                                     <input
                                                                         type={'text'}
@@ -354,7 +307,6 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                         }
                                                                     />
                                                                     <div>/</div>
-
                                                                     <input
                                                                         className={'searchinput right podkova'}
                                                                         type={'number'}
@@ -373,63 +325,77 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                 </div>
                                                             </td>
                                                             {selectedUsers.map((user) => (
-                                                                <td key={user.id}>
-                                                                    <label htmlFor={user.id + '/' + item.id}>
-                                                                        <input
-                                                                            id={user.id + '/' + item.id}
-                                                                            type="checkbox"
-                                                                            name="participated"
-                                                                            className={'w20px'}
-                                                                            checked={item.participations.some(
+                                                                <td key={user.id} className={''}>
+                                                                    <div
+                                                                        className={
+                                                                            item.participations.some(
                                                                                 (p) => p.userId === user.id,
-                                                                            )}
-                                                                            onChange={() =>
-                                                                                updateItemParticipation(item, user)
-                                                                            }
-                                                                            style={{ accentColor: user.color }}
-                                                                        />
-
-                                                                        {item.participations.some(
-                                                                            (p) => p.userId === user.id,
-                                                                        ) ? (
-                                                                            <input
-                                                                                type={'number'}
-                                                                                value={
-                                                                                    item.participations.find(
-                                                                                        (p) => p.userId === user.id,
-                                                                                    )?.amount
-                                                                                }
-                                                                                onChange={(e) => {
-                                                                                    const newValue = parseInt(
-                                                                                        e.target.value,
-                                                                                    )
-                                                                                    if (!isNaN(newValue)) {
-                                                                                        const updatedItems = [...items]
-                                                                                        const itemIndex =
-                                                                                            updatedItems.findIndex(
-                                                                                                (i) => i.id === item.id,
-                                                                                            )
-                                                                                        if (itemIndex !== -1) {
-                                                                                            updatedItems[
-                                                                                                itemIndex
-                                                                                            ].participations.find(
+                                                                            )
+                                                                                ? styles.checkbigboxselected
+                                                                                : styles.checkbigbox
+                                                                        }
+                                                                        onClick={() => toggleParticipation(item, user)}>
+                                                                        <label htmlFor={user.id + '/' + item.id}>
+                                                                            {item.participations.some(
+                                                                                (p) => p.userId === user.id,
+                                                                            ) ? (
+                                                                                <div
+                                                                                    className={
+                                                                                        'flex-row-space-between p48'
+                                                                                    }>
+                                                                                    <input
+                                                                                        type={'number'}
+                                                                                        value={
+                                                                                            item.participations.find(
                                                                                                 (p) =>
                                                                                                     p.userId ===
                                                                                                     user.id,
-                                                                                            )!.amount = newValue
-                                                                                            setItems(updatedItems)
+                                                                                            )?.amount
                                                                                         }
-                                                                                    }
-                                                                                }}
-                                                                                contentEditable={true}
-                                                                                className={
-                                                                                    'searchinput w60px right podkova'
-                                                                                }
-                                                                            />
-                                                                        ) : (
-                                                                            <div className={'w60px inline-block'}></div>
-                                                                        )}
-                                                                    </label>
+                                                                                        onClick={(e) =>
+                                                                                            e.stopPropagation()
+                                                                                        }
+                                                                                        onChange={(e) => {
+                                                                                            const newValue = parseInt(
+                                                                                                e.target.value,
+                                                                                            )
+                                                                                            if (!isNaN(newValue)) {
+                                                                                                const updatedItems = [
+                                                                                                    ...items,
+                                                                                                ]
+                                                                                                const itemIndex =
+                                                                                                    updatedItems.findIndex(
+                                                                                                        (i) =>
+                                                                                                            i.id ===
+                                                                                                            item.id,
+                                                                                                    )
+                                                                                                if (itemIndex !== -1) {
+                                                                                                    updatedItems[
+                                                                                                        itemIndex
+                                                                                                    ].participations.find(
+                                                                                                        (p) =>
+                                                                                                            p.userId ===
+                                                                                                            user.id,
+                                                                                                    )!.amount = newValue
+                                                                                                    setItems(
+                                                                                                        updatedItems,
+                                                                                                    )
+                                                                                                }
+                                                                                            }
+                                                                                        }}
+                                                                                        contentEditable={true}
+                                                                                        className={'right podkova'}
+                                                                                    />{' '}
+                                                                                    <span
+                                                                                        className={styles.currencytext}>
+                                                                                        Ft
+                                                                                    </span>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                        </label>
+                                                                    </div>
                                                                 </td>
                                                             ))}
                                                         </tr>
