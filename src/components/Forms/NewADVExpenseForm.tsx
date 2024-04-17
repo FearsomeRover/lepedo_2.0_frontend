@@ -155,58 +155,62 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                         <div className={'middleinside m16topdown'}>
                             <h2>Új számla hozzáadása</h2>
                         </div>
+                        <div className={'h3'}></div>
                         <table>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <h6>Név</h6>
-                                        <input
-                                            name="name"
-                                            defaultValue={props.expense ? props.expense.title : ''}
-                                            minLength={3}
-                                            maxLength={15}
-                                            required
-                                        />
-                                    </td>
-                                    <td>
-                                        <h6>Dátum</h6>
-                                        <input
-                                            name="date"
-                                            type="date"
-                                            defaultValue={props.expense ? props.expense.date : currentDate}
-                                            onChange={validateDate}
-                                            onInvalid={(e) =>
-                                                (e.target as HTMLInputElement).setCustomValidity(
-                                                    'Normális dátumot írj be!',
-                                                )
-                                            }
-                                        />
-                                    </td>
-                                    <td>
+                                    <td className={'flex-row-space-between gap8 flex1-inside'}>
                                         <div>
-                                            <h6>Összeg</h6>
+                                            <h6>Név</h6>
                                             <input
-                                                disabled
-                                                name="amount"
-                                                type="text"
-                                                className={'right podkova w90'}
-                                                defaultValue={props.expense ? props.expense.amount + 'Ft' : '0 Ft'}
-                                                min={50}
-                                                max={1_000_000}
-                                                placeholder={'számított mező'}
+                                                name="name"
+                                                defaultValue={props.expense ? props.expense.title : ''}
+                                                minLength={3}
+                                                maxLength={15}
                                                 required
+                                            />
+                                        </div>
+                                        <div>
+                                            <h6>Dátum</h6>
+                                            <input
+                                                name="date"
+                                                type="date"
+                                                defaultValue={props.expense ? props.expense.date : currentDate}
+                                                onChange={validateDate}
                                                 onInvalid={(e) =>
                                                     (e.target as HTMLInputElement).setCustomValidity(
-                                                        'Csak 50Ft és 1000000Ft közti érték lehet',
+                                                        'Normális dátumot írj be!',
                                                     )
                                                 }
                                             />
-                                            <span className={styles.currencytext}>Ft</span>
+                                        </div>
+                                        <div>
+                                            <h6>Összeg</h6>
+                                            <div className={'flex-row-space-between'}>
+                                                <input
+                                                    disabled
+                                                    name="amount"
+                                                    type="amount"
+                                                    className={'right podkova w90'}
+                                                    defaultValue={props.expense ? props.expense.amount : 0}
+                                                    min={50}
+                                                    max={1_000_000}
+                                                    placeholder={'számított mező'}
+                                                    required
+                                                    onInvalid={(e) =>
+                                                        (e.target as HTMLInputElement).setCustomValidity(
+                                                            'Csak 50Ft és 1000000Ft közti érték lehet',
+                                                        )
+                                                    }
+                                                />
+                                                <span className={styles.currencytext}>Ft</span>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
+                                <div className={'h3'}></div>
                                 <tr>
-                                    <td colSpan={3}>
+                                    <td>
                                         <details open={true}>
                                             <summary className={'left'}>
                                                 <h6 className={'inline-block'}>Barátok hozzáadása</h6>
@@ -248,7 +252,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={3}>
+                                    <td>
                                         <details>
                                             <summary className={'left'}>
                                                 <h6 className={'inline-block'}>Ismeretlen résztvevők hozzáadása</h6>
@@ -290,8 +294,9 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                         </details>
                                     </td>
                                 </tr>
+                                <div className={'h3'}></div>
                                 <tr>
-                                    <td colSpan={3}>
+                                    <td>
                                         <h6 className={'w100 left'}>
                                             Tételek{' '}
                                             <button type={'button'} onClick={addItem}>

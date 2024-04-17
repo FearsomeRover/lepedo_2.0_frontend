@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="transferForm HTTP patch if edit">
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="ADVform updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/expenses/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/expenses/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ExpenseCard/ExpenseCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ExpenseCard/ExpenseCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/lepedo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/lepedo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/QuickActionButtons/QuickActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickActionButtons/QuickActionButtons.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,26 +48,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Shell Script.npm run dev.executor": "Run",
-    "code.cleanup.on.save": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Mate_web/lepedo_2.0_frontend/public/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\prettier",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.TypeScript",
-    "ts.external.directory.path": "C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Shell Script.npm run dev.executor&quot;: &quot;Run&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Mate_web/lepedo_2.0_frontend/public/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.TypeScript&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Mate_web\lepedo_2.0_frontend\public\images" />
@@ -123,7 +122,9 @@
       <workItem from="1711907346911" duration="3556000" />
       <workItem from="1711917814737" duration="1019000" />
       <workItem from="1711971780124" duration="15601000" />
-      <workItem from="1712246606812" duration="4067000" />
+      <workItem from="1712246606812" duration="6304000" />
+      <workItem from="1712258133708" duration="8000" />
+      <workItem from="1713357135271" duration="685000" />
     </task>
     <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
       <option name="closed" value="true" />
@@ -389,7 +390,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712248889131</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="edit Expenses, but not works">
+      <option name="closed" value="true" />
+      <created>1712250778715</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1712250778715</updated>
+    </task>
+    <task id="LOCAL-00035" summary="ADVform updates">
+      <option name="closed" value="true" />
+      <created>1712251756888</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1712251756888</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,8 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="moving the keyboard shortcuts from layout to actionButtons" />
-    <MESSAGE value="layout is now a server component" />
     <MESSAGE value="optimistic update on QRs!!" />
     <MESSAGE value="toast" />
     <MESSAGE value="delete optimistic" />
@@ -432,6 +447,8 @@
     <MESSAGE value="edit transfers" />
     <MESSAGE value="filter function overload and refactor" />
     <MESSAGE value="transferForm HTTP patch if edit" />
-    <option name="LAST_COMMIT_MESSAGE" value="transferForm HTTP patch if edit" />
+    <MESSAGE value="edit Expenses, but not works" />
+    <MESSAGE value="ADVform updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADVform updates" />
   </component>
 </project>

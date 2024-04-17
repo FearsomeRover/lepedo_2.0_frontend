@@ -873,6 +873,14 @@ textarea {
     margin: 0;
 }
 
+.flex1-inside > * {
+    flex: 1;
+}
+
+.gap8 {
+    gap: 16px;
+}
+
 .imageContainer {
     position: relative;
     height: 30px;
