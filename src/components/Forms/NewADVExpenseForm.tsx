@@ -128,7 +128,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                         if (p.userId === user.id) {
                             return {
                                 userId: user.id,
-                                amount, // Update the amount with the new value
+                                amount,
                                 status: ParticipationStatus.NONE,
                             }
                         }
@@ -146,10 +146,40 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
         console.log('updateParticipation> ', editedItem.participations)
     }
 
+    const recalculateParticipationAmounts = (item: Item) => {
+        const updatedParticipations = item.participations.slice()
+        const manualAmounts = updatedParticipations.some(
+            (p) => p.updatedManually !== undefined && p.updatedManually > 0,
+        )
+        if (manualAmounts) {
+            const amountRemaining = item.price - updatedParticipations.reduce((acc, p) => acc + p.amount, 0)
+            let leastPrio: Participation = updatedParticipations[0]
+            leastPrio.updatedManually = 0
+            updatedParticipations.forEach((p) => {
+                if (
+                    p.updatedManually === undefined ||
+                    leastPrio.updatedManually === undefined ||
+                    p.updatedManually > leastPrio.updatedManually
+                ) {
+                    leastPrio = p
+                }
+            })
+            leastPrio.amount += amountRemaining
+        } else {
+            //update all prices
+            updatedParticipations.map((p) => {
+                p.amount = Math.round(item.price / updatedParticipations.length)
+            })
+        }
+
+        return updatedParticipations
+    }
+
     const toggleParticipation = (item: Item, user: BasicUser) => {
         const updatedParticipations = item.participations.slice()
         const participationIndex = updatedParticipations.findIndex((p) => p.userId === user.id)
 
+        //if torles
         if (participationIndex !== -1) {
             updatedParticipations.splice(participationIndex, 1)
         } else {
@@ -159,8 +189,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 status: ParticipationStatus.NONE,
             })
         }
-
-        updateItem(item.id, item.name, item.price, updatedParticipations)
+        updateItem(item.id, item.name, item.price, recalculateParticipationAmounts(item))
     }
 
     return (
