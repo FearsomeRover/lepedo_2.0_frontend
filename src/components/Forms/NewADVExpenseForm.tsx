@@ -110,7 +110,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                         id,
                         name,
                         price,
-                        participations,
+                        participations: recalculateParticipationAmounts({ id, name, price, participations }),
                     }
                 }
                 return item
@@ -121,29 +121,24 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
     }
 
     const updateParticipation = (editedItem: Item, user: BasicUser, amount: number) => {
-        setItems((prevItems) => {
-            const newItems = prevItems.map((item) => {
-                if (item.id === editedItem.id) {
-                    const newParticipations = item.participations.map((p) => {
-                        if (p.userId === user.id) {
-                            return {
-                                userId: user.id,
-                                amount,
-                                status: ParticipationStatus.NONE,
-                            }
-                        }
-                        return p
-                    })
-                    return {
-                        ...item,
-                        participations: newParticipations, // Update the participations array
-                    }
+        const newParticipations = editedItem.participations.map((p) => {
+            if (p.userId === user.id) {
+                return {
+                    userId: user.id,
+                    amount,
+                    status: ParticipationStatus.NONE,
+                    updatedManually: 1,
                 }
-                return item
-            })
-            return newItems
+            } else {
+                return {
+                    userId: p.userId,
+                    amount: p.amount,
+                    status: p.status,
+                    updatedManually: p.updatedManually ? p.updatedManually + 1 : undefined,
+                }
+            }
         })
-        console.log('updateParticipation> ', editedItem.participations)
+        updateItem(editedItem.id, editedItem.name, editedItem.price, newParticipations)
     }
 
     const recalculateParticipationAmounts = (item: Item) => {
@@ -152,21 +147,33 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
             (p) => p.updatedManually !== undefined && p.updatedManually > 0,
         )
         if (manualAmounts) {
-            const amountRemaining = item.price - updatedParticipations.reduce((acc, p) => acc + p.amount, 0)
-            let leastPrio: Participation = updatedParticipations[0]
-            leastPrio.updatedManually = 0
+            let leastPrio: Participation[] = []
+            let leastPrioValue: number = 0
             updatedParticipations.forEach((p) => {
-                if (
-                    p.updatedManually === undefined ||
-                    leastPrio.updatedManually === undefined ||
-                    p.updatedManually > leastPrio.updatedManually
-                ) {
-                    leastPrio = p
+                if (p.updatedManually === undefined) {
+                    leastPrio.push(p)
                 }
             })
-            leastPrio.amount += amountRemaining
+            if (leastPrio.length === 0) {
+                updatedParticipations.forEach((p) => {
+                    if (p.updatedManually === leastPrioValue) {
+                        leastPrio.push(p)
+                    } else if (p.updatedManually! > leastPrioValue) {
+                        leastPrio = [p]
+                        leastPrioValue = p.updatedManually!
+                    }
+                })
+            }
+
+            console.log('leastPrio', leastPrio)
+            let amountRemaining = item.price
+            updatedParticipations.map((p) => {
+                if (!leastPrio.includes(p)) amountRemaining -= p.amount
+            })
+            updatedParticipations.map((p) => {
+                if (leastPrio.includes(p)) p.amount = Math.round(amountRemaining / leastPrio.length)
+            })
         } else {
-            //update all prices
             updatedParticipations.map((p) => {
                 p.amount = Math.round(item.price / updatedParticipations.length)
             })
@@ -181,15 +188,16 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
 
         //if torles
         if (participationIndex !== -1) {
-            updatedParticipations.splice(participationIndex, 1)
+            item.participations.splice(participationIndex, 1)
         } else {
-            updatedParticipations.push({
+            item.participations.push({
                 userId: user.id,
                 amount: 0,
                 status: ParticipationStatus.NONE,
             })
         }
-        updateItem(item.id, item.name, item.price, recalculateParticipationAmounts(item))
+        //updateItem(item.id, item.name, item.price, recalculateParticipationAmounts(item))
+        updateItem(item.id, item.name, item.price, item.participations)
     }
 
     return (
@@ -380,6 +388,13 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                                 toggleParticipation(item, user)
                                                                             }>
                                                                             <div className={'flex-row-space-between'}>
+                                                                                <h6>
+                                                                                    {
+                                                                                        item.participations.find(
+                                                                                            (p) => p.userId === user.id,
+                                                                                        )?.updatedManually
+                                                                                    }
+                                                                                </h6>
                                                                                 <input
                                                                                     type={'number'}
                                                                                     value={
@@ -389,9 +404,12 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                                     }
                                                                                     onClick={(e) => e.stopPropagation()}
                                                                                     onChange={(e) => {
-                                                                                        const newValue = parseInt(
-                                                                                            e.target.value,
-                                                                                        )
+                                                                                        let newValue = 0
+                                                                                        if (e.target.value !== '') {
+                                                                                            newValue = parseInt(
+                                                                                                e.target.value,
+                                                                                            )
+                                                                                        }
                                                                                         if (isNaN(newValue)) return
                                                                                         updateParticipation(
                                                                                             item,
