@@ -83,7 +83,6 @@
     width: 100%;
 }
 .checkbigbox {
-    display: inline-block;
     width: 120px;
     height: 40px;
     box-sizing: border-box;
@@ -91,12 +90,12 @@
     margin: 2px;
 }
 .checkbigboxselected {
-    display: inline-block;
     width: 120px;
     height: 40px;
     border: 1px solid black;
     margin: 2px;
     padding: 0 8px;
+    box-sizing: border-box;
 }
 
 .payed {

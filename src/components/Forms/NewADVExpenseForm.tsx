@@ -87,13 +87,8 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
             await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', data)
         }
         props.abort()
-        //props.refresh()
     }
-    const validateDate = (event: any) => {
-        /*        if (new Date(event.target.value) > new Date()) {
-            ;(event.target as HTMLInputElement).setCustomValidity('Really bro?')
-        }*/
-    }
+    const validateDate = (event: any) => {}
 
     const addItem = () => {
         setItems((prevItems) => [
@@ -120,31 +115,52 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 }
                 return item
             })
+            console.log('update> ', newItems)
             return newItems
         })
     }
 
-    const updateParticipation = (item: Item, user: BasicUser, amount: number) => {
-        item.participations.find((p) => p.userId === user.id)!.amount = amount
+    const updateParticipation = (editedItem: Item, user: BasicUser, amount: number) => {
+        setItems((prevItems) => {
+            const newItems = prevItems.map((item) => {
+                if (item.id === editedItem.id) {
+                    const newParticipations = item.participations.map((p) => {
+                        if (p.userId === user.id) {
+                            return {
+                                userId: user.id,
+                                amount, // Update the amount with the new value
+                                status: ParticipationStatus.NONE,
+                            }
+                        }
+                        return p
+                    })
+                    return {
+                        ...item,
+                        participations: newParticipations, // Update the participations array
+                    }
+                }
+                return item
+            })
+            return newItems
+        })
+        console.log('updateParticipation> ', editedItem.participations)
     }
 
     const toggleParticipation = (item: Item, user: BasicUser) => {
-        const updatedParticipations = item.participations.slice() // create a copy of participations array
+        const updatedParticipations = item.participations.slice()
         const participationIndex = updatedParticipations.findIndex((p) => p.userId === user.id)
 
         if (participationIndex !== -1) {
-            // If the user already participated, remove their participation
             updatedParticipations.splice(participationIndex, 1)
         } else {
-            // If the user didn't participate, add their participation
             updatedParticipations.push({
                 userId: user.id,
-                amount: 0, // Set appropriate default value
-                status: ParticipationStatus.NONE, // Set appropriate default value
+                amount: 0,
+                status: ParticipationStatus.NONE,
             })
         }
 
-        updateItem(item.id, item.name, item.price, updatedParticipations) // Update
+        updateItem(item.id, item.name, item.price, updatedParticipations)
     }
 
     return (
@@ -275,7 +291,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                     <UserCardSimple
                                                                         name={
                                                                             user.name.length > 12
-                                                                                ? user.name.slice(0, 10) + '...'
+                                                                                ? user.name.slice(0, 9) + '...'
                                                                                 : user.name
                                                                         }
                                                                         color={user.color}
