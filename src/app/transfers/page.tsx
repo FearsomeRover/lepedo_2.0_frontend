@@ -28,7 +28,6 @@ export default function Page() {
 
     async function optimisticRefresh(newTransfer: TransferType) {
         try {
-            if (data === undefined) return
             await mutate(data ? [...data, newTransfer] : [newTransfer], {
                 rollbackOnError: true,
                 populateCache: false,

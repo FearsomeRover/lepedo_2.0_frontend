@@ -19,7 +19,7 @@ export default function ExpenseCard({ expense, onEdit, onDelete }: ExpenseCardPr
 
     return (
         <div
-            className={expense.optimisticPending ? '$styles.expensecard dashed' : styles.expensecard}
+            className={expense.optimisticPending ? `${styles.expensecard} ${styles.dashed}` : styles.expensecard}
             onMouseOver={() => setHover(true)}
             onMouseLeave={() => setHover(false)}>
             <h4>{expense.title}</h4>

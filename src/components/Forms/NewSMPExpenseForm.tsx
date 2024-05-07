@@ -1,5 +1,4 @@
 'use client'
-import axios from 'axios'
 import { useContext, useState } from 'react'
 import styles from './forms.module.css'
 import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
@@ -9,6 +8,9 @@ import { BasicUser, User } from '@/types/user'
 import { GlobalStateContext } from '../context/context'
 import { Participation, ParticipationStatus } from '@/types/participation'
 import { validateDate } from '@/utils/validateDate'
+import { fetcher, postExpense } from '@/utils/fetcher'
+import useSWR from 'swr'
+import { createToast } from '@/utils/createToast'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -23,6 +25,8 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
     const [selectedUsers, setSelectedUsers] = useState<BasicUser[]>([])
     const [searchPhrase, setSearchPhrase] = useState<string>('')
     const { users } = useContext(GlobalStateContext)
+
+    const { data, mutate } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/expense', fetcher)
 
     function extractFormData(formData: FormData) {
         const amountValue: FormDataEntryValue | null = formData.get('amount')
@@ -64,8 +68,6 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
         const formData = new FormData(event.target)
         const dataSent = extractFormData(formData)
 
-        await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', dataSent)
-
         const dataUI: BasicExpenseType = {
             id: 'NA',
             title: dataSent.title,
@@ -86,8 +88,18 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             })
         }
 
+        try {
+            mutate(postExpense(dataSent), {
+                optimisticData: [...data, dataUI],
+                rollbackOnError: true,
+                revalidate: true,
+            })
+            createToast('Költség sikeresen hozzáadva', true)
+        } catch (e) {
+            createToast('Nem sikerült elmenteni a költést', false)
+        }
+
         props.abort()
-        props.refresh(dataUI)
     }
 
     return (
