@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './forms.module.css'
 import { BasicExpenseType, ExpenseType } from '@/types/expenseType'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
@@ -39,6 +39,18 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
         },
     ])
     const [selectedItem, setSelectedItem] = useState<number>(-1)
+
+    useEffect(() => {
+        if (props.expense && props.expense.items[0].participations) {
+            setSelectedUsers(
+                props.expense.items
+                    .map((item) => item.participations.map((p) => p.userId))
+                    .flat()
+                    .map((id) => users.find((u) => u.id === id)!),
+            )
+            setItems(props.expense.items)
+        }
+    }, [])
 
     useKeyboardShortcut(['ctrl', 'arrowdown'], () => {
         setSelectedItem((selectedItem + 1) % items.length)
@@ -374,7 +386,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                     <input
                                                                         className={'searchinput right podkova'}
                                                                         type={'number'}
-                                                                        defaultValue={item.name}
+                                                                        defaultValue={item.price}
                                                                         placeholder={'Ára'}
                                                                         onBlur={(n) =>
                                                                             updateItem(
