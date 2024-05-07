@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="auto width table looks much better">
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="working editing prio$$">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/transfers/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/transfers/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UserCard/UserCardSimple.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserCard/UserCardSimple.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UserCard/usercard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserCard/usercard.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/fetcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/fetcher.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +125,7 @@
       <workItem from="1712246606812" duration="6304000" />
       <workItem from="1712258133708" duration="8000" />
       <workItem from="1713357135271" duration="4720000" />
+      <workItem from="1715074422662" duration="1951000" />
     </task>
     <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
       <option name="closed" value="true" />
@@ -431,7 +431,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713361424066</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="working editing prio$$">
+      <option name="closed" value="true" />
+      <created>1715072855039</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1715072855039</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,7 +457,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="now with types" />
     <MESSAGE value="builds i hope" />
     <MESSAGE value="utils moved in, fetcher refactored, pages updated" />
     <MESSAGE value="optimistic updates on expenses" />
@@ -474,6 +481,7 @@
     <MESSAGE value="flexrow on top" />
     <MESSAGE value="adv expense tick form recreated" />
     <MESSAGE value="auto width table looks much better" />
-    <option name="LAST_COMMIT_MESSAGE" value="auto width table looks much better" />
+    <MESSAGE value="working editing prio$$" />
+    <option name="LAST_COMMIT_MESSAGE" value="working editing prio$$" />
   </component>
 </project>

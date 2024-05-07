@@ -28,6 +28,8 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
     const [searchPhraseForFriends, setSearchPhraseForFriends] = useState<string>('')
     const [searchPhraseForAll, setSearchPhraseForAll] = useState<string>('')
     const { users } = useContext(GlobalStateContext)
+    const ownUser = useContext(GlobalStateContext).ownUser
+    const [calculatedAmount, setCalculatedAmount] = useState<number>(0)
     const [items, setItems] = useState<Item[]>([
         {
             id: '0',
@@ -76,10 +78,21 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
         }
         const data = {
             title: formData.get('name'),
-            payerId: formData.get('payed'),
-            amount,
-            received: formData.getAll('payedto'),
+            payerId: ownUser.id,
+            amount: calculatedAmount,
             date: formData.get('date'),
+            items: items.map((item) => {
+                return {
+                    name: item.name,
+                    price: item.price,
+                    participants: item.participations.map((p) => {
+                        return {
+                            userId: p.userId,
+                            amount: p.amount,
+                        }
+                    }),
+                }
+            }),
         }
         if (props.expense) {
             await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/expense/' + props.expense.id, data)
@@ -117,6 +130,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
             })
             return newItems
         })
+        setCalculatedAmount(items.reduce((acc, item) => acc + item.price, 0))
     }
 
     const updateParticipation = (editedItem: Item, user: BasicUser, amount: number) => {
@@ -246,6 +260,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                     type="amount"
                                                     className={'right podkova w90'}
                                                     defaultValue={props.expense ? props.expense.amount : 0}
+                                                    value={calculatedAmount}
                                                     min={50}
                                                     max={1_000_000}
                                                     placeholder={'számított mező'}
