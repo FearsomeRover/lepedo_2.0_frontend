@@ -115,12 +115,12 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 }
                 return item
             })
-            console.log('update> ', newItems)
             return newItems
         })
     }
 
     const updateParticipation = (editedItem: Item, user: BasicUser, amount: number) => {
+        if (amount > editedItem.price) return
         const newParticipations = editedItem.participations.map((p) => {
             if (p.userId === user.id) {
                 return {
@@ -165,7 +165,6 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 })
             }
 
-            console.log('leastPrio', leastPrio)
             let amountRemaining = item.price
             updatedParticipations.map((p) => {
                 if (!leastPrio.includes(p)) amountRemaining -= p.amount
@@ -183,10 +182,8 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
     }
 
     const toggleParticipation = (item: Item, user: BasicUser) => {
-        const updatedParticipations = item.participations.slice()
-        const participationIndex = updatedParticipations.findIndex((p) => p.userId === user.id)
+        const participationIndex = item.participations.findIndex((p) => p.userId === user.id)
 
-        //if torles
         if (participationIndex !== -1) {
             item.participations.splice(participationIndex, 1)
         } else {
@@ -196,7 +193,6 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 status: ParticipationStatus.NONE,
             })
         }
-        //updateItem(item.id, item.name, item.price, recalculateParticipationAmounts(item))
         updateItem(item.id, item.name, item.price, item.participations)
     }
 
@@ -384,17 +380,13 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                                                                     ) ? (
                                                                         <div
                                                                             className={styles.checkbigboxselected}
+                                                                            style={{
+                                                                                borderColor: user.color,
+                                                                            }}
                                                                             onClick={() =>
                                                                                 toggleParticipation(item, user)
                                                                             }>
                                                                             <div className={'flex-row-space-between'}>
-                                                                                <h6>
-                                                                                    {
-                                                                                        item.participations.find(
-                                                                                            (p) => p.userId === user.id,
-                                                                                        )?.updatedManually
-                                                                                    }
-                                                                                </h6>
                                                                                 <input
                                                                                     type={'number'}
                                                                                     value={
