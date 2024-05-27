@@ -8,8 +8,10 @@ import { Item } from '@/types/item'
 import { GlobalStateContext } from '../context/context'
 import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import { Participation, ParticipationStatus } from '@/types/participation'
-import axios from 'axios'
 import UserPlayground from '@/components/playrounds/UserPlayground'
+import { fetcher, postExpense } from '@/utils/fetcher'
+import { createToast } from '@/utils/createToast'
+import useSWR from 'swr'
 
 type ExpenseFormProps = {
     abort: () => void
@@ -23,6 +25,8 @@ type Response = {
 const keyboardShortcuts = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
 
 export default function NewADVExpenseForm(props: ExpenseFormProps) {
+    const { data, mutate } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/expense', fetcher)
+
     const currentDate = new Date().toISOString().split('T')[0]
     const [selectedUsers, setSelectedUsers] = useState<BasicUser[]>([])
     const [searchPhraseForFriends, setSearchPhraseForFriends] = useState<string>('')
@@ -58,17 +62,6 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
     useKeyboardShortcut(['ctrl', 'arrowup'], () => {
         setSelectedItem((selectedItem + items.length - 1) % items.length)
     })
-    /*    useEffect(() => {
-        if (selectedItem !== -1) {
-            const tableRow = document.getElementById(`${selectedItem}`)
-            if (tableRow) {
-                const inputField = tableRow.querySelector('input[type="text"]') as HTMLInputElement | null
-                if (inputField) {
-                    inputField.focus()
-                }
-            }
-        }
-    }, [selectedItem])*/
 
     useKeyboardShortcut(keyboardShortcuts, (index) => {
         if (selectedItem !== -1 && index !== undefined && index > -1 && selectedUsers[index] !== undefined) {
@@ -76,9 +69,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
         }
     })
 
-    const handleFormSubmit = async (event: any) => {
-        event.preventDefault()
-        const formData = new FormData(event.target)
+    function extractFormData(formData: FormData) {
         const name = formData.get('name') ?? ''
         const amountValue: FormDataEntryValue | null = formData.get('amount')
         let amount = 0
@@ -88,11 +79,11 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 amount = intValue
             }
         }
-        const data = {
-            title: formData.get('name'),
+        const dataSent = {
+            title: formData.get('name')?.toString() ?? 'nincs név',
             payerId: ownUser.id,
             amount: calculatedAmount,
-            date: formData.get('date'),
+            date: formData.get('date')?.toString() ?? '1970-01-01',
             items: items.map((item) => {
                 return {
                     name: item.name,
@@ -106,11 +97,43 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
                 }
             }),
         }
-        if (props.expense) {
-            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/expense/' + props.expense.id, data)
-        } else {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', data)
+        return dataSent
+    }
+    const handleFormSubmit = async (event: any) => {
+        event.preventDefault()
+        const formData = new FormData(event.target)
+        const dataSent = extractFormData(formData)
+        const dataUI: BasicExpenseType = {
+            id: 'NA',
+            title: dataSent.title,
+            amount: dataSent.amount,
+            date: dataSent.date,
+            payer: ownUser,
+            items: [],
+            received: selectedUsers,
+            final: false,
+            optimisticPending: true,
         }
+        for (let i = 0; i < dataSent.items.length; i++) {
+            dataUI.items.push({
+                id: 'NA',
+                name: dataSent.items[i].name ?? 'nincs név',
+                price: dataSent.items[i].price,
+                participated: selectedUsers,
+            })
+        }
+
+        try {
+            mutate(postExpense(dataSent), {
+                optimisticData: props.expense ? [data] : [...data, dataUI],
+                rollbackOnError: true,
+                revalidate: true,
+            })
+            createToast('Költség sikeresen hozzáadva', true)
+        } catch (e) {
+            createToast('Nem sikerült elmenteni a költést', false)
+        }
+
         props.abort()
     }
     const validateDate = (event: any) => {}

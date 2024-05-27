@@ -75,7 +75,7 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
             date: dataSent.date,
             payer: users.filter((user) => user.id === dataSent.payerId)[0],
             received: selectedUsers,
-            items: [], //will be added later
+            items: [],
             final: false,
             optimisticPending: true,
         }
