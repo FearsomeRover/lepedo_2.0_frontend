@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { User } from '@/types/user'
-import { TransferType } from '@/types/transferType'
 import { QrType } from '@/types/qr'
 import * as process from 'process'
 
@@ -10,7 +9,7 @@ export const shortFetcher = (url: string) => axios.get(process.env.NEXT_PUBLIC_B
 export const postUser = (url: string, arg: User) => axios.post(url, arg).then((res) => res.data)
 export const postExpense = (arg: any) =>
     axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/expense', arg).then(() => shortFetcher('/expense'))
-export const postTransfer = (arg: TransferType) =>
+export const postTransfer = (arg: any) =>
     axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', arg).then(() => shortFetcher('/transfer'))
 export const postQR = (arg: QrType) =>
     axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/qrs', arg).then(() => shortFetcher('/qrs'))

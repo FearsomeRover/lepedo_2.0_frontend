@@ -6,8 +6,10 @@ import Image from 'next/image'
 import { User } from '@/types/user'
 import { GlobalStateContext } from '../context/context'
 import UserCardSimple from '@/components/UserCard/UserCardSimple'
-import axios from 'axios'
 import { validateDate } from '@/utils/validateDate'
+import { fetcher, postTransfer } from '@/utils/fetcher'
+import { createToast } from '@/utils/createToast'
+import useSWR from 'swr'
 
 type TransferFormProps = {
     transfer?: TransferType
@@ -20,6 +22,7 @@ type Response = {
 export default function NewTransferForm(props: TransferFormProps) {
     const currentDate = new Date().toISOString().split('T')[0]
     const { users } = useContext(GlobalStateContext)
+    const { data, mutate } = useSWR(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', fetcher)
 
     function extractFormData(formData: FormData) {
         const amountValue = formData.get('amount')?.toString().toString() ?? ''
@@ -44,11 +47,6 @@ export default function NewTransferForm(props: TransferFormProps) {
         event.preventDefault()
         const formData = new FormData(event.target)
         const dataSent = extractFormData(formData)
-        if (props.transfer) {
-            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + '/transfer/' + props.transfer.id, dataSent)
-        } else {
-            await axios.post(process.env.NEXT_PUBLIC_BASE_URL + '/transfer', dataSent)
-        }
 
         const dataUI: TransferType = {
             id: props.transfer ? props.transfer.id : 'a',
@@ -59,8 +57,17 @@ export default function NewTransferForm(props: TransferFormProps) {
             date: dataSent.date,
         }
 
+        try {
+            mutate(postTransfer(dataSent), {
+                optimisticData: [...data, dataUI],
+                rollbackOnError: true,
+                revalidate: true,
+            })
+            createToast('Utalás sikeresen hozzáadva', true)
+        } catch (e) {
+            createToast('Nem sikerült elmenteni a utalást', false)
+        }
         props.abort()
-        props.refresh(dataUI)
     }
     return (
         <div
