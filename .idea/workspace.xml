@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="transfer form opt updates">
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="optimistic edits on expenses and transfers">
+      <change afterPath="$PROJECT_DIR$/src/components/Forms/ExpenseDeclineForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/transfers/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/transfers/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/QuickActionButtons/QuickActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickActionButtons/QuickActionButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/fetcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/fetcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/expenses/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/expenses/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ExpenseCard/ExpenseCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ExpenseCard/ExpenseCard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,31 +48,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Shell Script.npm run dev.executor&quot;: &quot;Run&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Mate_web/lepedo_2.0_frontend/public/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.TypeScript&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Shell Script.npm run dev.executor": "Run",
+    "code.cleanup.on.save": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Mate_web/lepedo_2.0_frontend/src/components/Forms",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.TypeScript",
+    "ts.external.directory.path": "C:\\Mate_web\\lepedo_2.0_frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\components\Forms" />
       <recent name="C:\Mate_web\lepedo_2.0_frontend\public\images" />
       <recent name="C:\Mate_web\lepedo_2.0_frontend\src\components\QuickActionButtons" />
-      <recent name="C:\Mate_web\lepedo_2.0_frontend\src\components\Forms" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Mate_web\lepedo_2.0_frontend\src\app\qr\[id]" />
@@ -130,7 +127,7 @@
       <workItem from="1713357135271" duration="4720000" />
       <workItem from="1715074422662" duration="6432000" />
       <workItem from="1715767819351" duration="100000" />
-      <workItem from="1716810862924" duration="5059000" />
+      <workItem from="1716810862924" duration="6754000" />
     </task>
     <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
       <option name="closed" value="true" />
@@ -484,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716815778911</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="optimistic edits on expenses and transfers">
+      <option name="closed" value="true" />
+      <created>1716817611403</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1716817611403</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="keycaps in buttons" />
     <MESSAGE value="qr link Path Parameters" />
     <MESSAGE value="commit" />
     <MESSAGE value="avoid using layout on spec pages" />
@@ -527,6 +531,7 @@
     <MESSAGE value="editExpenses waiting for backend to handle participations" />
     <MESSAGE value="optimistic updates on adv expenses done right" />
     <MESSAGE value="transfer form opt updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="transfer form opt updates" />
+    <MESSAGE value="optimistic edits on expenses and transfers" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimistic edits on expenses and transfers" />
   </component>
 </project>

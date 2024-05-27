@@ -11,10 +11,12 @@ type ExpenseCardProps = {
     expense: BasicExpenseType
     onEdit?: (cur: BasicExpenseType) => void
     onDelete?: (cur: BasicExpenseType) => void
+    onDecline?: (cur: BasicExpenseType) => void
+    onAccept?: (cur: BasicExpenseType) => void
 }
 
-export default function ExpenseCard({ expense, onEdit, onDelete }: ExpenseCardProps) {
-    const total = expense.items.reduce((acc, item) => acc + item.price, 0)
+export default function ExpenseCard({ expense, onEdit, onDelete, onDecline, onAccept }: ExpenseCardProps) {
+    const total = expense.items ? expense.items.reduce((acc, item) => acc + item.price, 0) : 0
     const [hover, setHover] = useState(false)
 
     return (
@@ -62,10 +64,15 @@ export default function ExpenseCard({ expense, onEdit, onDelete }: ExpenseCardPr
                 {/*todo if not participation status is none*/}
                 <HorizontalLine />
                 <div className={'flex-row-space-around nomargininside'}>
-                    <button className={'sbtn fs14'} style={{ marginRight: '16px' }}>
+                    <button
+                        className={'sbtn fs14'}
+                        style={{ marginRight: '16px' }}
+                        onClick={onDecline ? () => onDecline(expense) : undefined}>
                         Decline
                     </button>
-                    <button className={'sbtn fs14'}>Approve</button>
+                    <button className={'sbtn fs14'} onClick={onAccept ? () => onAccept(expense) : undefined}>
+                        Approve
+                    </button>
                 </div>
                 {/*todo set visible if is owner*/}
                 <div className={'middleinside nomargin'}>

@@ -10,6 +10,7 @@ import axios from 'axios'
 import { filter } from '@/utils/filter'
 import { createToast } from '@/utils/createToast'
 import NewADVExpenseForm from '@/components/Forms/NewADVExpenseForm'
+import ExpenseDeclineForm from '@/components/Forms/ExpenseDeclineForm'
 
 export default function Page() {
     const { data, error, isLoading, mutate } = useSWR<BasicExpenseType[]>(
@@ -20,6 +21,7 @@ export default function Page() {
     const [filteredExpenses, setFilteredExpenses] = useState<BasicExpenseType[]>([])
     const [filterPhrase, setFilterPhrase] = useState<string>('')
     const [editedExpense, setEditedExpense] = useState<ExpenseType | null>(null)
+    const [declinedExpense, setDeclinedExpense] = useState<ExpenseType | null>(null)
 
     useEffect(() => {
         if (data === undefined) return
@@ -32,6 +34,15 @@ export default function Page() {
             .then((res) => res.data)
         setEditedExpense(expense)
     }
+
+    const onDecline = async (cur: BasicExpenseType) => {
+        const expense: ExpenseType = await axios
+            .get(process.env.NEXT_PUBLIC_BASE_URL + '/expense/' + cur.id)
+            .then((res) => res.data)
+        setDeclinedExpense(expense)
+    }
+
+    const onAccept = async (cur: BasicExpenseType) => {}
 
     async function onDelete(cur: BasicExpenseType) {
         if (data === undefined) return
@@ -47,9 +58,8 @@ export default function Page() {
 
     return (
         <>
-            {editedExpense && (
-                <NewADVExpenseForm expense={editedExpense} abort={() => setEditedExpense(null)} refresh={() => {}} />
-            )}
+            {editedExpense && <NewADVExpenseForm expense={editedExpense} abort={() => setEditedExpense(null)} />}
+            {declinedExpense && <ExpenseDeclineForm abort={() => {}} expense={declinedExpense} />}
             <SearchField
                 filterPhrase={filterPhrase}
                 setFilterPhrase={setFilterPhrase}
@@ -76,23 +86,7 @@ export default function Page() {
             )}
             {data && data.length > 0 && (
                 <div className={'flex-row-desktop'}>
-                    <QuickActionButtons
-                        revealed={[true, true, false, false]}
-                        isVertical={true}
-                        ExpenseRefresh={async (newExpense: BasicExpenseType) => {
-                            try {
-                                await mutate([...data, newExpense], {
-                                    optimisticData: [...data, newExpense],
-                                    rollbackOnError: true,
-                                    populateCache: true,
-                                    revalidate: true,
-                                })
-                                createToast('Költség sikeresen hozzáadva', true)
-                            } catch (e) {
-                                createToast('Nem sikerült elmenteni a költést', false)
-                            }
-                        }}
-                    />
+                    <QuickActionButtons revealed={[true, true, false, false]} isVertical={true} />
                     <div className={'w100'}>
                         {filteredExpenses.length === 0 && (
                             <>
@@ -104,7 +98,14 @@ export default function Page() {
                             </>
                         )}
                         {filteredExpenses.map((expense, index) => (
-                            <ExpenseCard key={expense.id} expense={expense} onEdit={onEdit} onDelete={onDelete} />
+                            <ExpenseCard
+                                key={expense.id}
+                                expense={expense}
+                                onEdit={onEdit}
+                                onDelete={onDelete}
+                                onDecline={onDecline}
+                                onAccept={onAccept}
+                            />
                         ))}
                     </div>
                 </div>
