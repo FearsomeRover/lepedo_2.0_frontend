@@ -6,14 +6,10 @@ import NewTransferForm from '@/components/Forms/NewTransferForm'
 import NewQrForm from '@/components/Forms/NewQrForm'
 import { useKeyboardShortcut } from '../../../hooks/useKeyboardShorcut'
 import { QrType } from '@/types/qr'
-import { BasicExpenseType } from '@/types/expenseType'
-import { TransferType } from '@/types/transferType'
 import KeyCap from '@/components/KeyCap/KeyCap'
 
 type QuickActionButtonProps = {
     revealed?: boolean[]
-    ExpenseRefresh?: (Expense: BasicExpenseType) => void
-    TransferRefresh?: (Transfer: TransferType) => void
     QrRefresh?: (Qr: QrType) => void
     isVertical?: boolean
 }
@@ -104,26 +100,11 @@ export default function QuickActionButtons(props: QuickActionButtonProps) {
             </div>
 
             {/*form components*/}
-            {SMPExpensePopup && (
-                <NewSMPExpenseForm
-                    abort={() => setSMPExpensePopup(false)}
-                    refresh={props.ExpenseRefresh ? props.ExpenseRefresh : refresh}
-                />
-            )}
+            {SMPExpensePopup && <NewSMPExpenseForm abort={() => setSMPExpensePopup(false)} />}
 
-            {ADVExpensePopup && (
-                <NewADVExpenseForm
-                    abort={() => setADVExpensePopup(false)}
-                    refresh={props.ExpenseRefresh ? props.ExpenseRefresh : refresh}
-                />
-            )}
+            {ADVExpensePopup && <NewADVExpenseForm abort={() => setADVExpensePopup(false)} />}
 
-            {transferPopup && (
-                <NewTransferForm
-                    abort={() => setTransferPopup(false)}
-                    refresh={props.TransferRefresh ? props.TransferRefresh : refresh}
-                />
-            )}
+            {transferPopup && <NewTransferForm abort={() => setTransferPopup(false)} />}
 
             {qrPopup && (
                 <NewQrForm

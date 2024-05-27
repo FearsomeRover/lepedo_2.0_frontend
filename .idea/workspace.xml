@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="optimistic updates on adv expenses done right">
+    <list default="true" id="1b7932e6-d673-4e9a-8529-39252dcdb165" name="Changes" comment="transfer form opt updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/transfers/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/transfers/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewADVExpenseForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewSMPExpenseForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Forms/NewTransferForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/QuickActionButtons/QuickActionButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/QuickActionButtons/QuickActionButtons.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/fetcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/fetcher.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +130,7 @@
       <workItem from="1713357135271" duration="4720000" />
       <workItem from="1715074422662" duration="6432000" />
       <workItem from="1715767819351" duration="100000" />
-      <workItem from="1716810862924" duration="3189000" />
+      <workItem from="1716810862924" duration="5059000" />
     </task>
     <task id="LOCAL-00001" summary="minden is&#10;qr page&#10;user relation row&#10;prettier&#10;qr image">
       <option name="closed" value="true" />
@@ -472,7 +476,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716815159123</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="transfer form opt updates">
+      <option name="closed" value="true" />
+      <created>1716815778911</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1716815778911</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="transfer swr init" />
     <MESSAGE value="keycaps in buttons" />
     <MESSAGE value="qr link Path Parameters" />
     <MESSAGE value="commit" />
@@ -515,6 +526,7 @@
     <MESSAGE value="genericMutation works without callback functions" />
     <MESSAGE value="editExpenses waiting for backend to handle participations" />
     <MESSAGE value="optimistic updates on adv expenses done right" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimistic updates on adv expenses done right" />
+    <MESSAGE value="transfer form opt updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="transfer form opt updates" />
   </component>
 </project>

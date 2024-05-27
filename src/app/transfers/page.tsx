@@ -7,7 +7,6 @@ import SearchField from '@/components/MainSearch/SearchField'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
 import axios from 'axios'
-import { createToast } from '@/utils/createToast'
 import NewTransferForm from '@/components/Forms/NewTransferForm'
 import { filter } from '@/utils/filter'
 
@@ -25,19 +24,6 @@ export default function Page() {
         if (data === undefined) return
         setFilteredTransfers(data.filter((transfer) => filter(transfer, filterPhrase)))
     }, [data, filterPhrase])
-
-    async function optimisticRefresh(newTransfer: TransferType) {
-        try {
-            await mutate(data ? [...data, newTransfer] : [newTransfer], {
-                rollbackOnError: true,
-                populateCache: false,
-                revalidate: true,
-            })
-            createToast('Sikeres mentés', true)
-        } catch (e) {
-            createToast('Sikertelen mentés', false)
-        }
-    }
 
     const onEdit = (cur: TransferType) => {
         setEditedTransfer(cur)
@@ -58,11 +44,7 @@ export default function Page() {
     return (
         <>
             {editedTransfer && (
-                <NewTransferForm
-                    abort={() => setEditedTransfer(null)}
-                    refresh={optimisticRefresh}
-                    transfer={editedTransfer || undefined}
-                />
+                <NewTransferForm abort={() => setEditedTransfer(null)} transfer={editedTransfer || undefined} />
             )}
             <SearchField
                 filterPhrase={filterPhrase}
@@ -74,10 +56,7 @@ export default function Page() {
                     <div className={'h5'}></div>
                     <div className={'middleinside'}>
                         <h3>Még nem veszel részt egyetlen utalásban sem</h3>
-                        <QuickActionButtons
-                            revealed={[false, false, true, false]}
-                            TransferRefresh={optimisticRefresh}
-                        />
+                        <QuickActionButtons revealed={[false, false, true, false]} />
                     </div>
                 </>
             )}
@@ -93,11 +72,7 @@ export default function Page() {
             )}
             {data && data.length > 0 && (
                 <div className={'flex-row-desktop'}>
-                    <QuickActionButtons
-                        revealed={[false, false, true, false]}
-                        isVertical={true}
-                        TransferRefresh={optimisticRefresh}
-                    />
+                    <QuickActionButtons revealed={[false, false, true, false]} isVertical={true} />
                     <div className={'w100'}>
                         {filteredTransfers.length === 0 && (
                             <>

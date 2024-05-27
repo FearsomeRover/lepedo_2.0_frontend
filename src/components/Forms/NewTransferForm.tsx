@@ -14,7 +14,6 @@ import useSWR from 'swr'
 type TransferFormProps = {
     transfer?: TransferType
     abort: () => void
-    refresh: (Transfer: TransferType) => void
 }
 type Response = {
     data: User[]
@@ -49,7 +48,7 @@ export default function NewTransferForm(props: TransferFormProps) {
         const dataSent = extractFormData(formData)
 
         const dataUI: TransferType = {
-            id: props.transfer ? props.transfer.id : 'a',
+            id: props.transfer ? props.transfer.id : 'NA',
             amount: dataSent.amount,
             title: dataSent.title,
             userFrom: users.filter((user) => user.id === dataSent.userFromId)[0],
@@ -58,8 +57,10 @@ export default function NewTransferForm(props: TransferFormProps) {
         }
 
         try {
-            mutate(postTransfer(dataSent), {
-                optimisticData: [...data, dataUI],
+            await mutate(postTransfer(dataSent, props.transfer ? props.transfer.id : undefined), {
+                optimisticData: props.transfer
+                    ? data.map((p: any) => (p.id === props.transfer!.id ? dataUI : p))
+                    : [...data, dataUI],
                 rollbackOnError: true,
                 revalidate: true,
             })

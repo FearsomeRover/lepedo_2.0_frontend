@@ -14,7 +14,6 @@ import { createToast } from '@/utils/createToast'
 
 type ExpenseFormProps = {
     abort: () => void
-    refresh: (Expense: BasicExpenseType) => void
     expense?: ExpenseType
 }
 type Response = {
@@ -89,8 +88,10 @@ export default function NewSMPExpenseForm(props: ExpenseFormProps) {
         }
 
         try {
-            mutate(postExpense(dataSent), {
-                optimisticData: [...data, dataUI],
+            mutate(postExpense(dataSent, props.expense?.id), {
+                optimisticData: props.expense
+                    ? [data].map((p: any) => (p.id === props.expense!.id ? dataUI : p))
+                    : [...data, dataUI],
                 rollbackOnError: true,
                 revalidate: true,
             })

@@ -15,7 +15,6 @@ import useSWR from 'swr'
 
 type ExpenseFormProps = {
     abort: () => void
-    refresh: (Expense: BasicExpenseType) => void
     expense?: ExpenseType
 }
 type Response = {
@@ -99,6 +98,7 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
         }
         return dataSent
     }
+
     const handleFormSubmit = async (event: any) => {
         event.preventDefault()
         const formData = new FormData(event.target)
@@ -124,8 +124,10 @@ export default function NewADVExpenseForm(props: ExpenseFormProps) {
         }
 
         try {
-            mutate(postExpense(dataSent), {
-                optimisticData: props.expense ? [data] : [...data, dataUI],
+            mutate(postExpense(dataSent, props.expense?.id), {
+                optimisticData: props.expense
+                    ? [data].map((p: any) => (p.id === props.expense!.id ? dataUI : p))
+                    : [...data, dataUI],
                 rollbackOnError: true,
                 revalidate: true,
             })
