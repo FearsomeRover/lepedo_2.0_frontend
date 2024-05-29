@@ -18,3 +18,9 @@ export type BasicUser = {
     color: string
     revTag: string
 }
+export type PatchUser = {
+    revTag?: string
+    name?: string
+    color?: string
+    email?: string
+}

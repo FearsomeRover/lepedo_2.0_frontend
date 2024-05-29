@@ -3,8 +3,15 @@ import { User } from '@/types/user'
 import { QrType } from '@/types/qr'
 import * as process from 'process'
 
-export const fetcher = (url: string) => axios.get(url).then((res) => res.data)
+export function fetcher<T>(url: string): Promise<T> {
+    return axios.get(url).then((res) => res.data)
+}
 export const shortFetcher = (url: string) => axios.get(process.env.NEXT_PUBLIC_BASE_URL + url).then((res) => res.data)
+
+export async function axiosPatchFetcher<T, U>(url: string, { arg }: { arg: U }): Promise<T> {
+    const response = await axios.patch(url, arg)
+    return response.data
+}
 
 export const postUser = (url: string, arg: User, patch?: boolean) => axios.post(url, arg).then((res) => res.data)
 export const postExpense = (arg: any, patch?: string): any => {

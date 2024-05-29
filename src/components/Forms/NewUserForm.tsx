@@ -39,11 +39,10 @@ export default function NewUserForm(props: NewUserFormProps) {
     const checkSubmit = async (event: any) => {
         event.preventDefault()
         if (user) {
-            await axios.patch(process.env.NEXT_PUBLIC_BASE_URL + `/user/${props.user?.id}`, {
+            await axios.patch('/api/profile', {
                 name,
                 revTag,
                 color,
-                auth0sub: user!.auth0sub,
             })
         } else {
             return

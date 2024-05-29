@@ -1,5 +1,3 @@
-'use client'
-
 /*https://www.reddit.com/r/learnjavascript/comments/gp2t2h/how_to_add_gravity_to_elements/*/
 
 import LinkButton from '@/components/Button/LinkButton'
