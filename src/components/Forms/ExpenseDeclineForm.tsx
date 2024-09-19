@@ -111,7 +111,7 @@ export default function ExpenseDeclineForm(props: ExpenseFormProps) {
             mutate(postExpense(dataSent, props.expense?.id), {
                 optimisticData: props.expense
                     ? [data].map((p: any) => (p.id === props.expense!.id ? dataUI : p))
-                    : [...data, dataUI],
+                    : [data, dataUI],
                 rollbackOnError: true,
                 revalidate: true,
             })

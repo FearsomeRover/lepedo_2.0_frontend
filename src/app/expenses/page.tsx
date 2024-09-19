@@ -55,6 +55,17 @@ export default function Page() {
             createToast('Nem sikerült törölni a költést', false)
         }
     }
+    if (isLoading) {
+        return (
+            <>
+                <div className={'h5'}></div>
+                <div className={'middleinside'}>
+                    <h3>Adatok betöltése...</h3>
+                </div>
+            </>
+        )
+    }
+    console.log(data)
 
     return (
         <>
@@ -74,13 +85,12 @@ export default function Page() {
                     </div>
                 </>
             )}
-            {isLoading && <p>loading...</p>}
+
             {error && (
                 <>
                     <div className={'h5'}></div>
                     <div className={'middleinside red'}>
-                        <h3>Hupsz! Hiba csúszott a gépezetbe!</h3>
-                        <p>{error}</p>
+                        <h3>{error.message}</h3>
                     </div>
                 </>
             )}
